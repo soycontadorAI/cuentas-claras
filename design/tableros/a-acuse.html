@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A · Acuse · Cuentas Claras</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tablero.css">
+<style>
+  :root {
+    --papel: #F1E6CF;
+    --papel-claro: #FBF7EE;
+    --tinta: #1D1B18;
+    --rosa: #E4007C;
+    --gris: #8C8475;
+    --renglon: rgba(140,132,117,.24);
+    --display: "Archivo", "Arial Narrow", sans-serif;
+    --mono: "DM Mono", ui-monospace, monospace;
+  }
+  .papel { background: repeating-linear-gradient(to bottom, transparent 0 47px, var(--renglon) 47px 48px), var(--papel); }
+  .cond { font-family: var(--display); font-variation-settings: "wdth" 66; font-weight: 900; text-transform: uppercase; line-height: .86; letter-spacing: .005em; }
+  .mono { font-family: var(--mono); font-weight: 500; letter-spacing: .1em; text-transform: uppercase; }
+  .abs { position: absolute; }
+
+  /* El sello: doble filete y tinta gastada (filtro #tinta). Rosa, nunca rojo. */
+  .sello {
+    display: inline-block; color: var(--rosa); border: .085em solid currentColor;
+    outline: .03em solid currentColor; outline-offset: .06em; padding: .1em .22em .04em;
+    filter: url(#tinta); mix-blend-mode: multiply;
+  }
+  .sello.cond { line-height: .9; }
+
+  .logoA { display: inline-flex; flex-direction: column; align-items: center; color: var(--rosa);
+    border: .075em solid currentColor; outline: .028em solid currentColor; outline-offset: .055em;
+    padding: .14em .3em .12em; transform: rotate(-4deg); filter: url(#tinta); }
+  .logoA b { font-family: var(--display); font-variation-settings: "wdth" 64; font-weight: 900; font-size: 1em; line-height: .84; text-transform: uppercase; }
+  .logoA small { font-family: var(--mono); font-weight: 500; font-size: .15em; letter-spacing: .14em; text-transform: uppercase;
+    border-top: .12em solid currentColor; padding-top: .45em; margin-top: .5em; }
+  .logoA.mult { mix-blend-mode: multiply; }
+
+  .talon { background: var(--papel-claro); box-shadow: 0 14px 34px rgba(29,27,24,.22);
+    background-image: radial-gradient(circle at 10px -2px, var(--papel) 7px, transparent 8px);
+    background-size: 26px 20px; background-repeat: repeat-x; }
+  .fila-t { display: flex; justify-content: space-between; gap: 18px; font-family: var(--mono); font-size: 30px; color: var(--tinta);
+    border-bottom: 2px dotted var(--gris); padding: 12px 0; }
+  .fila-t b { font-weight: 500; color: var(--rosa); }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="tinta" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency=".55" numOctaves="2" seed="7" result="ruido"/>
+    <feColorMatrix in="ruido" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -4.5 0 0 0 3.55" result="mascara"/>
+    <feComposite in="SourceGraphic" in2="mascara" operator="in"/>
+  </filter>
+</svg>
+
+<!-- ============ PIEZAS (tamaño nativo) ============ -->
+
+<template id="t-logo">
+  <div class="papel" style="position:absolute;inset:0;display:grid;place-items:center">
+    <span class="logoA mult" style="font-size:150px"><b>Cuentas</b><b>Claras</b><small>Nº 0001 · Resuelto</small></span>
+  </div>
+</template>
+
+<template id="t-logo-osc">
+  <div style="position:absolute;inset:0;display:grid;place-items:center;background:var(--tinta)">
+    <span class="logoA" style="font-size:150px"><b>Cuentas</b><b>Claras</b><small>Nº 0001 · Resuelto</small></span>
+  </div>
+</template>
+
+<template id="t-avatar">
+  <div class="papel" style="position:absolute;inset:0;display:grid;place-items:center">
+    <div style="width:600px;height:600px;border-radius:50%;border:34px solid var(--rosa);outline:12px solid var(--rosa);outline-offset:-78px;display:grid;place-items:center;color:var(--rosa);filter:url(#tinta);mix-blend-mode:multiply;transform:rotate(-6deg)">
+      <span class="cond" style="font-size:330px;line-height:.8;margin-top:30px">CC</span>
+    </div>
+  </div>
+</template>
+
+<template id="t-th1">
+  <div class="papel" style="position:absolute;inset:0">
+    <div class="abs mono" style="left:60px;top:52px;font-size:26px;color:var(--gris)"><span style="color:var(--rosa)">■</span> Trámite IMSS · paso a paso</div>
+    <div class="abs cond" style="left:56px;top:122px;font-size:118px;color:var(--tinta)">Alta en</div>
+    <div class="abs cond" style="left:50px;top:214px;font-size:272px;color:var(--tinta)">SIPARE</div>
+    <div class="abs" style="left:60px;top:470px;font-family:var(--display);font-weight:800;font-variation-settings:'wdth' 80;font-size:62px;color:var(--rosa)">y tu línea de pago</div>
+    <span class="abs sello cond" style="left:60px;top:568px;font-size:84px;transform:rotate(-5deg)">2026</span>
+    <img class="abs" src="../assets/israel-senala-abajo.webp" alt="" style="height:820px;right:-80px;bottom:-130px">
+  </div>
+</template>
+
+<template id="t-th2">
+  <div class="papel" style="position:absolute;inset:0">
+    <div class="abs cond" style="left:56px;top:54px;font-size:134px;color:var(--tinta)">¿Sin privilegios?</div>
+    <div class="abs dlg" style="left:60px;top:248px;transform:rotate(-2deg)">
+      <div class="bar">Mensaje</div>
+      <div class="cuerpo"><div class="ico">!</div><div class="msg">El usuario (RFC) no tiene privilegios para acceder al aplicativo.</div></div>
+      <div class="pie"><span class="btn">Aceptar</span></div>
+    </div>
+    <img class="abs" src="../assets/israel-duda.webp" alt="" style="height:700px;right:-110px;bottom:-90px">
+    <span class="abs sello cond" style="left:150px;top:478px;font-size:132px;transform:rotate(-9deg);z-index:3">Resuelto</span>
+  </div>
+</template>
+
+<template id="t-th3">
+  <div class="papel" style="position:absolute;inset:0">
+    <div class="abs cond" style="left:56px;top:46px;font-size:150px;color:var(--tinta)">Tu aguinaldo</div>
+    <div class="abs talon" style="left:66px;top:222px;width:600px;padding:40px 36px 30px;transform:rotate(1.5deg)">
+      <div class="mono" style="font-size:22px;color:var(--gris);margin-bottom:8px">Recibo · aguinaldo 2026</div>
+      <div class="fila-t"><span>Mínimo de ley</span><b>15 días</b></div>
+      <div class="fila-t"><span>Se paga antes del</span><b>20 dic</b></div>
+      <div class="fila-t" style="border:0"><span>Sin ISR hasta</span><b>30 UMA</b></div>
+    </div>
+    <img class="abs" src="../assets/israel-cruzado.webp" alt="" style="height:740px;right:-60px;bottom:-110px">
+    <span class="abs sello cond" style="left:110px;top:556px;font-size:98px;transform:rotate(-6deg);z-index:3">¿Completo?</span>
+  </div>
+</template>
+
+<template id="t-short">
+  <div class="video" style="position:absolute;inset:0">
+    <img src="../assets/israel-duda.webp" alt="" style="height:1380px">
+    <div class="abs papel" style="left:60px;right:60px;top:150px;padding:40px 46px 46px;box-shadow:0 16px 40px rgba(0,0,0,.3)">
+      <div class="mono" style="font-size:28px;color:var(--gris);margin-bottom:18px"><span style="color:var(--rosa)">■</span> Saldo a favor · ISR</div>
+      <div class="cond" style="font-size:126px;color:var(--tinta)">¿Cuánto tarda tu saldo a favor?</div>
+    </div>
+    <div class="abs" style="left:60px;right:230px;top:1180px;text-align:left">
+      <span style="font-family:var(--display);font-weight:800;font-variation-settings:'wdth' 78;font-size:76px;line-height:1.18;color:var(--tinta);background:var(--papel-claro);box-decoration-break:clone;-webkit-box-decoration-break:clone;padding:2px 16px">Depende de <span style="background:var(--rosa);color:#fff;padding:0 10px">un solo dato</span></span>
+    </div>
+    <div class="ui-short der"><span>UI</span></div>
+    <div class="ui-short abajo"><span>Título y botones de YouTube</span></div>
+  </div>
+</template>
+
+<template id="t-rotulo">
+  <div class="video" style="position:absolute;inset:0">
+    <img src="../assets/israel-apoyado-hoodie.webp" alt="" style="height:1000px">
+    <div class="abs" style="left:96px;bottom:110px;background:var(--papel-claro);padding:30px 44px 32px;box-shadow:0 14px 36px rgba(0,0,0,.3);transform:rotate(-1deg)">
+      <div class="cond" style="font-size:82px;color:var(--tinta)">Israel Castro</div>
+      <div class="mono" style="font-size:24px;color:var(--gris);margin-top:14px">Contador público · S &amp; I Castro Consultores</div>
+      <span class="abs sello cond" style="right:-34px;top:-38px;font-size:54px;transform:rotate(8deg)">CC</span>
+    </div>
+  </div>
+</template>
+
+<template id="t-banner">
+  <div class="papel" style="position:absolute;inset:0">
+    <span class="abs sello cond" style="font-size:260px;left:-40px;top:90px;opacity:.14;transform:rotate(-7deg)">Recibido</span>
+    <span class="abs sello cond" style="font-size:300px;right:-60px;top:980px;opacity:.14;transform:rotate(-9deg)">Resuelto</span>
+    <div class="abs" style="left:507px;top:508px;width:1546px;height:423px;display:flex;align-items:center;gap:80px;padding:0 60px">
+      <span class="logoA mult" style="font-size:118px;flex:none"><b>Cuentas</b><b>Claras</b><small>Nº 0001 · Resuelto</small></span>
+      <div>
+        <div class="cond" style="font-size:98px;color:var(--tinta)">SAT, IMSS<br>y tu dinero.</div>
+        <div class="cond" style="font-size:98px;color:var(--rosa);margin-top:6px">Sin rodeos.</div>
+        <div class="mono" style="font-size:22px;color:var(--gris);margin-top:28px">Hazlo tú, o te lo hacemos · Un canal de S &amp; I Castro Consultores</div>
+      </div>
+    </div>
+    <div class="seguro"></div>
+  </div>
+</template>
+
+<!-- ============ TABLERO ============ -->
+
+<main class="tablero">
+  <header class="cab">
+    <div>
+      <div class="letra">Cuentas Claras · dirección A</div>
+      <h1>Acuse</h1>
+    </div>
+    <div>
+      <p>El trámite ya terminado. El papel que te dan cuando por fin quedó: el acuse, el folio, el sello de recibido. Cada video es el comprobante de que se resolvió.</p>
+      <p><b>Con el rosa:</b> el sello rojo pasó a rosa mexicano. Ganó dos veces: el rojo de sello es el de los trámites rechazados, y el rosa deja de decir "negado" para decir "Cuentas Claras".</p>
+      <a class="volver" href="index.html">← Las tres direcciones</a>
+    </div>
+  </header>
+
+  <section>
+    <h2>Logotipo e ícono del canal</h2>
+    <div class="fila">
+      <div class="pieza"><div class="frame" style="--w:1200;--h:600;--s:.38" data-tpl="t-logo"></div><p class="nota">Sobre papel.</p></div>
+      <div class="pieza"><div class="frame" style="--w:1200;--h:600;--s:.38" data-tpl="t-logo-osc"></div><p class="nota">Sobre tinta.</p></div>
+      <div class="pieza"><div class="frame redondo" style="--w:800;--h:800;--s:.285" data-tpl="t-avatar"></div><p class="nota">Ícono del canal.</p></div>
+      <div class="pieza" style="justify-content:flex-end">
+        <div class="avatar-com"><div class="frame redondo" style="--w:800;--h:800;--s:.05" data-tpl="t-avatar"></div><span><b>@cuentasclaras_mx</b> · así se ve junto a un comentario (40 px)</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Paleta y tipografía</h2>
+    <div class="chips">
+      <div class="chip"><div class="muestra" style="background:#F1E6CF"></div><div class="dato"><b>Papel</b><br><code>#F1E6CF</code><br>Fondo, con renglones de formato.</div></div>
+      <div class="chip"><div class="muestra" style="background:#FBF7EE"></div><div class="dato"><b>Papel claro</b><br><code>#FBF7EE</code><br>Talones, tarjetas, rótulos.</div></div>
+      <div class="chip"><div class="muestra" style="background:#1D1B18"></div><div class="dato"><b>Tinta</b><br><code>#1D1B18</code><br>Texto y títulos.</div></div>
+      <div class="chip"><div class="muestra" style="background:#E4007C"></div><div class="dato"><b>Rosa sello</b><br><code>#E4007C</code><br>La marca. Sello, lo resuelto, lo importante.</div></div>
+      <div class="chip"><div class="muestra" style="background:#8C8475"></div><div class="dato"><b>Gris formato</b><br><code>#8C8475</code><br>Folios, renglones, datos secundarios.</div></div>
+    </div>
+    <div class="tipos">
+      <div class="tipo"><div class="quien">Archivo · ancho 64-80 · peso 800-900 · títulos</div><div class="cond" style="font-size:74px;color:var(--tinta)">Alta en SIPARE</div></div>
+      <div class="tipo"><div class="quien">DM Mono · 500 · folios, fechas y montos</div><div class="mono" style="font-size:24px;color:var(--tinta);line-height:1.6">Folio CC-0412 · 24/10/2026<br><span style="color:var(--rosa)">Mínimo de ley · 15 días</span></div></div>
+    </div>
+<pre class="tokens">--color-bg: #F1E6CF;        /* papel */
+--color-surface: #FBF7EE;   /* papel claro */
+--color-ink: #1D1B18;       /* tinta */
+--color-accent: #E4007C;    /* rosa sello */
+--color-muted: #8C8475;     /* gris formato */
+--font-display: "Archivo";  /* wdth 64-80, wght 800-900 */
+--font-mono: "DM Mono";</pre>
+  </section>
+
+  <section>
+    <h2>Miniaturas</h2>
+    <div class="fila">
+      <div class="pieza"><div class="frame" style="--w:1280;--h:720;--s:.48" data-tpl="t-th1"></div><p class="nota">Trámite del patrón: SIPARE.</p></div>
+      <div class="pieza"><div class="frame" style="--w:1280;--h:720;--s:.48" data-tpl="t-th2"></div><p class="nota">Error del portal: el sello cae sobre la captura.</p></div>
+      <div class="pieza"><div class="frame" style="--w:1280;--h:720;--s:.48" data-tpl="t-th3"></div><p class="nota">Finanzas personales: el aguinaldo como talón.</p></div>
+      <div class="pieza">
+        <div class="tel">
+          <div class="res"><div class="frame" style="--w:1280;--h:720;--s:.13125" data-tpl="t-th1"><span class="duracion">4:12</span></div><div><div class="res-t">Alta en SIPARE y tu línea de pago (2026)</div><div class="res-c">Cuentas Claras</div></div></div>
+          <div class="res"><div class="frame" style="--w:1280;--h:720;--s:.13125" data-tpl="t-th2"><span class="duracion">2:48</span></div><div><div class="res-t">"El usuario no tiene privilegios para acceder al aplicativo": así se arregla</div><div class="res-c">Cuentas Claras</div></div></div>
+          <div class="res"><div class="frame" style="--w:1280;--h:720;--s:.13125" data-tpl="t-th3"><span class="duracion">6:05</span></div><div><div class="res-t">Aguinaldo 2026: ¿te lo pagaron completo?</div><div class="res-c">Cuentas Claras</div></div></div>
+        </div>
+        <p class="nota">Así se ven en la búsqueda del teléfono (168 px). Es la prueba que importa.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Short y rótulo inferior</h2>
+    <div class="fila">
+      <div class="pieza"><div class="frame" style="--w:1080;--h:1920;--s:.3" data-tpl="t-short"></div><p class="nota">Lo sombreado lo tapa YouTube.</p></div>
+      <div class="pieza"><div class="frame" style="--w:1920;--h:1080;--s:.42" data-tpl="t-rotulo"></div><p class="nota">Rótulo dentro del video largo.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Banner del canal</h2>
+    <div class="frame" style="--w:2560;--h:1440;--s:.5" data-tpl="t-banner"></div>
+    <p class="nota" style="margin-top:10px">Solo la caja punteada se ve en todos los dispositivos. Lo de afuera es decoración que se puede perder.</p>
+  </section>
+</main>
+<script src="tablero.js"></script>
+</body>
+</html>

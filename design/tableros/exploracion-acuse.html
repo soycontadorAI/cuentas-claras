@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Exploración Acuse · Cuentas Claras</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tablero.css">
+<style>
+  /* Tres pieles de la misma dirección. Las plantillas son UNA sola; cada sección cambia estas
+     variables y las piezas se repintan solas. */
+  /* A4 · Rosa de acento: el Acuse de los tableros. El rosa SOLO en el sello, más chico y un poco
+     translúcido; todo lo demás es tinta, incluidas las cifras del talón. */
+  .v-rosa {
+    --fondo: #EFE2C6; --superficie: #FBF7EE; --titulo: #1D1B18; --gris: #6F6555;
+    --renglon: rgba(140,132,117,.26); --sello: #E4007C; --sello-card: #E4007C; --acento: #1D1B18;
+    --mezcla: multiply; --mezcla-card: multiply; --halo: transparent;
+  }
+  .v-rosa .sello { scale: .8; opacity: .9; }
+  .v-rosa .fila-t b { color: var(--titulo); }
+  .v-ventanilla {
+    --fondo: #F1E6CF; --superficie: #FBF7EE; --titulo: #1D1B18; --gris: #776D5E;
+    --renglon: rgba(140,132,117,.24); --sello: #5B2A9E; --sello-card: #5B2A9E; --acento: #5B2A9E;
+    --mezcla: multiply; --mezcla-card: multiply; --halo: transparent;
+  }
+  .v-carbon {
+    --fondo: #1C1A17; --superficie: #F4EBD9; --titulo: #F4EBD9; --gris: #A79E8E;
+    --renglon: rgba(255,255,255,.05); --sello: #FF6B1A; --sello-card: #FF6B1A; --acento: #FF6B1A;
+    --mezcla: normal; --mezcla-card: normal; --halo: radial-gradient(closest-side, rgba(244,235,217,.28), transparent);
+  }
+  .v-expediente {
+    --fondo: #C9A06A; --superficie: #FFFDF7; --titulo: #1D1B18; --gris: #4F3D25;
+    --renglon: rgba(79,61,37,.16); --sello: #2A211A; --sello-card: #C2321B; --acento: #6E1A0C;
+    --mezcla: multiply; --mezcla-card: multiply; --halo: transparent;
+  }
+
+  .fondo { background: repeating-linear-gradient(to bottom, transparent 0 47px, var(--renglon) 47px 48px), var(--fondo); }
+  .cond { font-family: "Archivo", "Arial Narrow", sans-serif; font-variation-settings: "wdth" 66; font-weight: 900;
+    text-transform: uppercase; line-height: .86; letter-spacing: .005em; }
+  .mono { font-family: "DM Mono", ui-monospace, monospace; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; }
+  .abs { position: absolute; }
+  .sello { display: inline-block; color: var(--sello); border: .085em solid currentColor; outline: .03em solid currentColor;
+    outline-offset: .06em; padding: .1em .22em .04em; line-height: .9; filter: url(#tinta); mix-blend-mode: var(--mezcla); }
+  .sello.card { color: var(--sello-card); mix-blend-mode: var(--mezcla-card); }
+  .logoA { display: inline-flex; flex-direction: column; align-items: center; color: var(--sello);
+    border: .075em solid currentColor; outline: .028em solid currentColor; outline-offset: .055em;
+    padding: .14em .3em .12em; transform: rotate(-4deg); filter: url(#tinta); mix-blend-mode: var(--mezcla); }
+  .logoA b { font-family: "Archivo", sans-serif; font-variation-settings: "wdth" 64; font-weight: 900; line-height: .84; text-transform: uppercase; }
+  .logoA small { font-family: "DM Mono", monospace; font-weight: 500; font-size: .15em; letter-spacing: .14em; text-transform: uppercase;
+    border-top: .12em solid currentColor; padding-top: .45em; margin-top: .5em; }
+  /* Casillas del formato: los pasos de B, con forma de trámite. La actual va llena. */
+  .casilla { width: 96px; height: 96px; border: 7px solid var(--titulo); display: grid; place-items: center; flex: none;
+    font-family: "Archivo", sans-serif; font-variation-settings: "wdth" 70; font-weight: 900; font-size: 62px; color: var(--titulo); }
+  .casilla.actual { background: var(--acento); border-color: var(--acento); color: var(--fondo); }
+  .casillas { display: flex; align-items: center; gap: 12px; }
+  .casillas i { width: 34px; border-top: 7px dotted var(--titulo); }
+  .talon { background: var(--superficie); box-shadow: 0 14px 34px rgba(0,0,0,.28); }
+  .fila-t { display: flex; justify-content: space-between; gap: 18px; font-family: "DM Mono", monospace; font-size: 30px; color: #1D1B18;
+    border-bottom: 2px dotted #8C8475; padding: 12px 0; }
+  .fila-t b { font-weight: 500; color: var(--sello-card); }
+  .halo { position: absolute; width: 900px; height: 900px; right: -220px; top: -40px; background: var(--halo); }
+
+  .variante { margin-top: 72px; padding-top: 40px; border-top: 1px solid var(--b-line); }
+  .variante h2.nombre { font-size: 30px; letter-spacing: 0; text-transform: none; color: var(--b-ink); font-weight: 700; margin: 0 0 6px; }
+  .variante .idea { max-width: 76ch; color: #333; margin: 0 0 22px; }
+  .mini-chips { display: flex; gap: 8px; margin: 0 0 22px; flex-wrap: wrap; }
+  .mini-chips span { display: inline-flex; align-items: center; gap: 8px; background: #fff; border: 1px solid var(--b-line); border-radius: 999px; padding: 4px 12px 4px 4px; font-size: 12px; }
+  .mini-chips span::before { content: ""; width: 22px; height: 22px; border-radius: 50%; background: var(--c); border: 1px solid rgba(0,0,0,.12); }
+  table.cmp { border-collapse: collapse; width: 100%; background: #fff; border-radius: 12px; overflow: hidden; margin-top: 14px; }
+  table.cmp td, table.cmp th { text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--b-line); font-size: 14px; vertical-align: top; }
+  table.cmp th { font-size: 12px; color: var(--b-mute); letter-spacing: .08em; text-transform: uppercase; font-weight: 600; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="tinta" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency=".55" numOctaves="2" seed="7" result="ruido"/>
+    <feColorMatrix in="ruido" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -4.5 0 0 0 3.55" result="mascara"/>
+    <feComposite in="SourceGraphic" in2="mascara" operator="in"/>
+  </filter>
+</svg>
+
+<!-- ============ PIEZAS: una sola versión, tres pieles ============ -->
+
+<template id="t-logo">
+  <div class="fondo" style="position:absolute;inset:0;display:grid;place-items:center">
+    <span class="logoA" style="font-size:150px"><b>Cuentas</b><b>Claras</b><small>Nº 0001 · Resuelto</small></span>
+  </div>
+</template>
+
+<template id="t-avatar">
+  <div class="fondo" style="position:absolute;inset:0;display:grid;place-items:center">
+    <div style="width:600px;height:600px;border-radius:50%;border:34px solid var(--sello);outline:12px solid var(--sello);outline-offset:-78px;display:grid;place-items:center;color:var(--sello);filter:url(#tinta);mix-blend-mode:var(--mezcla);transform:rotate(-6deg)">
+      <span class="cond" style="font-size:330px;line-height:.8;margin-top:30px">CC</span>
+    </div>
+  </div>
+</template>
+
+<template id="t-tramite">
+  <div class="fondo" style="position:absolute;inset:0">
+    <div class="halo"></div>
+    <img class="abs" src="../assets/israel-senala-abajo.webp" alt="" style="height:820px;right:-80px;bottom:-130px">
+    <div class="abs mono" style="left:60px;top:52px;font-size:26px;color:var(--gris)"><span style="color:var(--acento)">■</span> Trámite IMSS · paso a paso</div>
+    <div class="abs cond" style="left:56px;top:118px;font-size:112px;color:var(--titulo)">Alta en</div>
+    <div class="abs cond" style="left:50px;top:206px;font-size:262px;color:var(--titulo)">SIPARE</div>
+    <div class="abs casillas" style="left:60px;top:462px">
+      <span class="casilla">1</span><i></i><span class="casilla">2</span><i></i><span class="casilla actual">3</span>
+    </div>
+    <div class="abs" style="left:60px;top:600px;font-family:Archivo,sans-serif;font-weight:800;font-variation-settings:'wdth' 80;font-size:56px;color:var(--acento)">y tu línea de pago</div>
+    <span class="abs sello cond" style="left:420px;top:120px;font-size:76px;transform:rotate(-7deg)">2026</span>
+  </div>
+</template>
+
+<template id="t-error">
+  <div class="fondo" style="position:absolute;inset:0">
+    <div class="halo"></div>
+    <div class="abs cond" style="left:56px;top:54px;font-size:134px;color:var(--titulo)">¿Sin privilegios?</div>
+    <div class="abs dlg" style="left:60px;top:248px;transform:rotate(-2deg)">
+      <div class="bar">Mensaje</div>
+      <div class="cuerpo"><div class="ico">!</div><div class="msg">El usuario (RFC) no tiene privilegios para acceder al aplicativo.</div></div>
+      <div class="pie"><span class="btn">Aceptar</span></div>
+    </div>
+    <img class="abs" src="../assets/israel-duda.webp" alt="" style="height:700px;right:-110px;bottom:-90px">
+    <span class="abs sello card cond" style="left:150px;top:470px;font-size:132px;transform:rotate(-9deg);z-index:3;background:rgba(255,255,255,.0)">Resuelto</span>
+  </div>
+</template>
+
+<template id="t-dinero">
+  <div class="fondo" style="position:absolute;inset:0">
+    <div class="halo"></div>
+    <div class="abs cond" style="left:56px;top:52px;font-size:136px;color:var(--titulo)">Tu aguinaldo</div>
+    <div class="abs talon" style="left:66px;top:222px;width:600px;padding:40px 36px 30px;transform:rotate(1.5deg)">
+      <div class="mono" style="font-size:22px;color:#8C8475;margin-bottom:8px">Recibo · aguinaldo 2026</div>
+      <div class="fila-t"><span>Mínimo de ley</span><b>15 días</b></div>
+      <div class="fila-t"><span>Se paga antes del</span><b>20 dic</b></div>
+      <div class="fila-t" style="border:0"><span>Sin ISR hasta</span><b>30 UMA</b></div>
+    </div>
+    <img class="abs" src="../assets/israel-cruzado.webp" alt="" style="height:740px;right:-60px;bottom:-110px">
+    <span class="abs sello card cond" style="left:110px;top:556px;font-size:98px;transform:rotate(-6deg);z-index:3">¿Completo?</span>
+  </div>
+</template>
+
+<!-- ============ TABLERO ============ -->
+
+<main class="tablero">
+  <header class="cab">
+    <div>
+      <div class="letra">Cuentas Claras · exploración · 2026-10-24</div>
+      <h1>Acuse, en cuatro pieles</h1>
+    </div>
+    <div>
+      <p>El rosa con el rotulado se leyó "a chisme". Acuse va al revés: se ve como lo que el público busca, un trámite que ya quedó. Aquí se resuelve su punto débil, que se perdía en el teléfono por ser papel claro.</p>
+      <p><b>Lo fijo:</b> Archivo condensada, DM Mono, el sello con tinta gastada y la disciplina de B (plantillas trámite, error y dinero; pasos como casillas del formato; prueba de 168 px). <b>Lo que cambia:</b> la superficie y la tinta. Sin rosa.</p>
+      <a class="volver" href="identidad.html">← Identidad v1 (rosa)</a>
+    </div>
+  </header>
+
+  <section class="variante v-rosa">
+    <h2 class="nombre">A4 · Rosa de acento</h2>
+    <p class="idea">El Acuse de los tableros, con el rosa bajado de volumen. Papel manila y tinta mandan; el rosa es el único color y vive solo en el sello (más chico y un poco translúcido). Títulos, casillas, textos y las cifras del talón van en tinta. Sin rotulado: el "chisme" venía del rosa de fondo con la letra a mano, no del rosa en sí. El papel es un tono más oscuro que en la primera ronda, para que no se pierda contra el fondo blanco de YouTube.</p>
+    <div class="mini-chips"><span style="--c:#EFE2C6">Papel #EFE2C6</span><span style="--c:#1D1B18">Tinta #1D1B18</span><span style="--c:#E4007C">Sello rosa #E4007C · solo en el sello, nunca en texto chico</span></div>
+    <div class="fila">
+      <div class="frame" style="--w:1200;--h:600;--s:.3" data-tpl="t-logo"></div>
+      <div class="frame redondo" style="--w:800;--h:800;--s:.225" data-tpl="t-avatar"></div>
+      <div class="tel" style="width:360px">
+        <div class="res"><div class="frame" style="--w:1280;--h:720;--s:.13125" data-tpl="t-tramite"><span class="duracion">4:12</span></div><div><div class="res-t">Alta en SIPARE y tu línea de pago (2026)</div></div></div>
+        <div class="res"><div class="frame" style="--w:1280;--h:720;--s:.13125" data-tpl="t-error"><span class="duracion">2:48</span></div><div><div class="res-t">"No tiene privilegios": así se arregla</div></div></div>
+        <div class="res"><div class="frame" style="--w:1280;--h:720;--s:.13125" data-tpl="t-dinero"><span class="duracion">6:05</span></div><div><div class="res-t">Aguinaldo 2026: ¿completo?</div></div></div>
+      </div>
+    </div>
+    <div class="fila" style="margin-top:24px">
+      <div class="frame" style="--w:1280;--h:720;--s:.32" data-tpl="t-tramite"></div>
+      <div class="frame" style="--w:1280;--h:720;--s:.32" data-tpl="t-error"></div>
+      <div class="frame" style="--w:1280;--h:720;--s:.32" data-tpl="t-dinero"></div>
+    </div>
+  </section>
+
+  <section class="variante v-ventanilla">
+    <h2 class="nombre">A1 · Ventanilla</h2>
+    <p class="idea">El papel manila de siempre con la tinta de cojín morada de las oficinas mexicanas: el sello que de verdad te ponen en la ventanilla. Es la versión más fiel a la idea original.</p>
+    <div class="mini-chips"><span style="--c:#F1E6CF">Papel #F1E6CF</span><span style="--c:#1D1B18">Tinta #1D1B18</span><span style="--c:#5B2A9E">Sello violeta #5B2A9E · 7.5:1 sobre papel</span></div>
+    <div class="fila">
+      <div class="frame" style="--w:1200;--h:600;--s:.3" data-tpl="t-logo"></div>
+      <div class="frame redondo" style="--w:800;--h:800;--s:.225" data-tpl="t-avatar"></div>
+      <div class="tel" style="width:360px">
+        <div class="res"><div class="frame" style="--w:1280;--h:720;--s:.13125" data-tpl="t-tramite"><span class="duracion">4:12</span></div><div><div class="res-t">Alta en SIPARE y tu línea de pago (2026)</div></div></div>
+        <div class="res"><div class="frame" style="--w:1280;--h:720;--s:.13125" data-tpl="t-error"><span class="duracion">2:48</span></div><div><div class="res-t">"No tiene privilegios": así se arregla</div></div></div>
+        <div class="res"><div class="frame" style="--w:1280;--h:720;--s:.13125" data-tpl="t-dinero"><span class="duracion">6:05</span></div><div><div class="res-t">Aguinaldo 2026: ¿completo?</div></div></div>
+      </div>
+    </div>
+    <div class="fila" style="margin-top:24px">
+      <div class="frame" style="--w:1280;--h:720;--s:.32" data-tpl="t-tramite"></div>
+      <div class="frame" style="--w:1280;--h:720;--s:.32" data-tpl="t-error"></div>
+      <div class="frame" style="--w:1280;--h:720;--s:.32" data-tpl="t-dinero"></div>
+    </div>
+  </section>
+
+  <section class="variante v-carbon">
+    <h2 class="nombre">A2 · Carbón</h2>
+    <p class="idea">Fondo oscuro, como el papel carbón, con el acuse claro encima y el sello en naranja. Resuelve lo de 168 px: entre miniaturas claras, una oscura con un sello encendido se ve primero.</p>
+    <div class="mini-chips"><span style="--c:#1C1A17">Carbón #1C1A17</span><span style="--c:#F4EBD9">Papel #F4EBD9</span><span style="--c:#FF6B1A">Sello naranja #FF6B1A · 6.1:1 sobre carbón</span></div>
+    <div class="fila">
+      <div class="frame" style="--w:1200;--h:600;--s:.3" data-tpl="t-logo"></div>
+      <div class="frame redondo" style="--w:800;--h:800;--s:.225" data-tpl="t-avatar"></div>
+      <div class="tel" style="width:360px">
+        <div class="res"><div class="frame" style="--w:1280;--h:720;--s:.13125" data-tpl="t-tramite"><span class="duracion">4:12</span></div><div><div class="res-t">Alta en SIPARE y tu línea de pago (2026)</div></div></div>
+        <div class="res"><div class="frame" style="--w:1280;--h:720;--s:.13125" data-tpl="t-error"><span class="duracion">2:48</span></div><div><div class="res-t">"No tiene privilegios": así se arregla</div></div></div>
+        <div class="res"><div class="frame" style="--w:1280;--h:720;--s:.13125" data-tpl="t-dinero"><span class="duracion">6:05</span></div><div><div class="res-t">Aguinaldo 2026: ¿completo?</div></div></div>
+      </div>
+    </div>
+    <div class="fila" style="margin-top:24px">
+      <div class="frame" style="--w:1280;--h:720;--s:.32" data-tpl="t-tramite"></div>
+      <div class="frame" style="--w:1280;--h:720;--s:.32" data-tpl="t-error"></div>
+      <div class="frame" style="--w:1280;--h:720;--s:.32" data-tpl="t-dinero"></div>
+    </div>
+  </section>
+
+  <section class="variante v-expediente">
+    <h2 class="nombre">A3 · Expediente</h2>
+    <p class="idea">El fólder kraft donde vive el expediente: hojas blancas encima, sello negro sobre el fólder y bermellón sobre la hoja. El más cálido de los tres, y el que mejor cuenta "aquí guardamos tus papeles en orden".</p>
+    <div class="mini-chips"><span style="--c:#C9A06A">Kraft #C9A06A</span><span style="--c:#FFFDF7">Hoja #FFFDF7</span><span style="--c:#2A211A">Sello negro (sobre kraft)</span><span style="--c:#C2321B">Bermellón #C2321B · solo sobre la hoja (5.5:1)</span></div>
+    <div class="fila">
+      <div class="frame" style="--w:1200;--h:600;--s:.3" data-tpl="t-logo"></div>
+      <div class="frame redondo" style="--w:800;--h:800;--s:.225" data-tpl="t-avatar"></div>
+      <div class="tel" style="width:360px">
+        <div class="res"><div class="frame" style="--w:1280;--h:720;--s:.13125" data-tpl="t-tramite"><span class="duracion">4:12</span></div><div><div class="res-t">Alta en SIPARE y tu línea de pago (2026)</div></div></div>
+        <div class="res"><div class="frame" style="--w:1280;--h:720;--s:.13125" data-tpl="t-error"><span class="duracion">2:48</span></div><div><div class="res-t">"No tiene privilegios": así se arregla</div></div></div>
+        <div class="res"><div class="frame" style="--w:1280;--h:720;--s:.13125" data-tpl="t-dinero"><span class="duracion">6:05</span></div><div><div class="res-t">Aguinaldo 2026: ¿completo?</div></div></div>
+      </div>
+    </div>
+    <div class="fila" style="margin-top:24px">
+      <div class="frame" style="--w:1280;--h:720;--s:.32" data-tpl="t-tramite"></div>
+      <div class="frame" style="--w:1280;--h:720;--s:.32" data-tpl="t-error"></div>
+      <div class="frame" style="--w:1280;--h:720;--s:.32" data-tpl="t-dinero"></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Cómo se comparan</h2>
+    <table class="cmp">
+      <tr><th></th><th>A4 · Rosa de acento</th><th>A1 · Ventanilla</th><th>A2 · Carbón</th><th>A3 · Expediente</th></tr>
+      <tr><td>Se distingue a 168 px</td><td>Media: el título en tinta hace el trabajo</td><td>Media</td><td><b>Alta</b></td><td>Media-alta</td></tr>
+      <tr><td>Seriedad (lejos del "chisme")</td><td><b>Alta</b></td><td>Alta</td><td>Alta</td><td><b>Alta</b></td></tr>
+      <tr><td>Calidez</td><td>Media</td><td>Media</td><td>Baja</td><td><b>Alta</b></td></tr>
+      <tr><td>Aguanta finanzas personales</td><td>Media-alta: el talón es el recurso del dinero</td><td>Media</td><td>Media</td><td><b>Alta</b>: el expediente sirve igual para tu dinero</td></tr>
+      <tr><td>Riesgo</td><td>Que el rosa vuelva a crecer: si pasa del sello al fondo o al título, regresa el "chisme"</td><td>El violeta se acerca al de Nu, una fintech</td><td>Oscuro y naranja puede leerse "de tecnología"</td><td>Poco contraste del sello sobre el kraft: el color va solo sobre la hoja</td></tr>
+    </table>
+  </section>
+</main>
+<script src="tablero.js"></script>
+</body>
+</html>

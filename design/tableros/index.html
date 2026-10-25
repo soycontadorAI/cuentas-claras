@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Identidad · Cuentas Claras</title>
+<link rel="stylesheet" href="tablero.css">
+<style>
+  .tres { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 40px; }
+  .dir { background: var(--b-card); border: 1px solid var(--b-line); border-radius: 14px; overflow: hidden; text-decoration: none; display: flex; flex-direction: column; }
+  .dir img { width: 100%; display: block; border-bottom: 1px solid var(--b-line); }
+  .dir .t { padding: 18px 20px 22px; }
+  .dir h3 { margin: 0 0 6px; font-size: 22px; }
+  .dir p { margin: 0; color: #444; font-size: 14px; }
+  table { border-collapse: collapse; width: 100%; background: var(--b-card); border-radius: 12px; overflow: hidden; margin-top: 14px; }
+  th, td { text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--b-line); font-size: 14px; }
+  th { font-weight: 600; color: var(--b-mute); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+  @media (max-width: 900px) { .tres { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<main class="tablero">
+  <header class="cab">
+    <div>
+      <div class="letra">Cuentas Claras · identidad · 2026-10-24</div>
+      <h1>Tres direcciones, las tres con rosa mexicano</h1>
+      <p style="margin-top:14px"><b>Elegida:</b> C con la disciplina de B. <a href="identidad.html">Ver la identidad v1 →</a></p>
+    </div>
+    <div>
+      <p>Para un público de 25 a 44 años que llega por primera vez, buscando un trámite o un error del SAT o del IMSS, y que el canal quiere llevar hacia sus finanzas personales. Se prueban donde vive el canal: miniatura a 168 px, Short, banner, ícono y rótulo.</p>
+      <p>Ninguna comparte tipografía ni color con soycontador.ai, TodoConta ni sicastro.com, y ninguna se parece a lo oficial (guinda, dorado, logos del SAT o del IMSS).</p>
+    </div>
+  </header>
+
+  <div class="tres">
+    <a class="dir" href="a-acuse.html"><img src="../salidas/a-acuse-miniaturas.png" alt="Miniaturas de la dirección A"><div class="t"><h3>A · Acuse</h3><p>El trámite ya resuelto: papel, folio y el sello rosa de "resuelto". La que más certeza transmite.</p></div></a>
+    <a class="dir" href="b-senaletica.html"><img src="../salidas/b-senaletica-miniaturas.png" alt="Miniaturas de la dirección B"><div class="t"><h3>B · Señalética</h3><p>Letreros de carretera en rosa y negro: pasos, flechas y el error en amarillo. La que más se distingue en el teléfono.</p></div></a>
+    <a class="dir" href="c-amistades-largas.html"><img src="../salidas/c-amistades-largas-miniaturas.png" alt="Miniaturas de la dirección C"><div class="t"><h3>C · Amistades largas</h3><p>El dicho y la libreta de la tienda: rosa, maíz y una palabra rotulada. La más cálida y la que mejor salta a finanzas personales.</p></div></a>
+  </div>
+
+  <section>
+    <h2>Cómo se comparan</h2>
+    <table>
+      <tr><th></th><th>A · Acuse</th><th>B · Señalética</th><th>C · Amistades largas</th></tr>
+      <tr><td>Se distingue a 168 px</td><td>Media: el papel claro se confunde con otros</td><td><b>Alta</b></td><td>Alta</td></tr>
+      <tr><td>Transmite certeza</td><td><b>Alta</b></td><td>Alta</td><td>Media</td></tr>
+      <tr><td>Calidez</td><td>Baja</td><td>Media</td><td><b>Alta</b></td></tr>
+      <tr><td>Aguanta finanzas personales</td><td>Media: el talón sí, el resto huele a trámite</td><td>Media: la carretera es de trámites</td><td><b>Alta</b></td></tr>
+      <tr><td>Aguanta un sitio web después</td><td>Alta</td><td>Media</td><td>Alta</td></tr>
+      <tr><td>Esfuerzo por miniatura</td><td>Medio (sello y talón)</td><td>Bajo (placa y pasos, muy plantillable)</td><td>Medio (la palabra rotulada se escoge cada vez)</td></tr>
+    </table>
+  </section>
+</main>
+</body>
+</html>

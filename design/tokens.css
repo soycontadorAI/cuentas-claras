@@ -1,0 +1,29 @@
+/* Cuentas Claras · identidad v2 (2026-10-24): la C con la libreta siempre de fondo y el rosa y el
+   maíz como acentos. Símbolo: el billete palomeado (simbolo.svg).
+   ÚNICO lugar donde viven los colores y las fuentes. Las piezas y, el día que exista, el sitio,
+   usan los nombres semánticos de abajo, nunca los hex.
+   Reglas y contrastes en DESIGN.md. */
+:root {
+  /* Paleta */
+  --rosa: #E4007C;        /* rosa mexicano: el acento de la marca, nunca fondo */
+  --rosa-hondo: #B0005F;  /* fondos de segundo plano sobre rosa, y texto chico sobre rosa */
+  --maiz: #F6C343;        /* amarillo maíz: dosis chicas (estampa, resaltado, ícono oscuro) */
+  --cacao: #3B2418;       /* texto */
+  --crema: #FFF6E8;       /* fondo claro, la libreta */
+
+  /* Semántica */
+  --color-bg: var(--crema);
+  --color-ink: var(--cacao);
+  --color-accent: var(--rosa);
+  --color-accent-deep: var(--rosa-hondo);
+  --color-on-accent: var(--crema);
+
+  /* Tipografía (Google Fonts, licencia OFL) */
+  --font-display: "Bricolage Grotesque", system-ui, sans-serif;  /* wdth 92, wght 800 en títulos */
+  --font-rotulo: "Shrikhand", "Bricolage Grotesque", cursive;    /* logotipo y UNA palabra por pieza */
+
+  /* La placa (herencia de B) */
+  --placa-radio: 26px;
+  --placa-borde: 9px;     /* el color de la placa antes del filete */
+  --placa-filete: 6px;    /* la línea crema de adentro */
+}

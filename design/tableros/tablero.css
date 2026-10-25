@@ -1,0 +1,120 @@
+/* Andamio neutro de los tableros. No es identidad de nada: gris, sistema y sin color,
+   para que lo único con carácter en la página sea la dirección que se está viendo. */
+:root {
+  --b-bg: #F3F3F1;
+  --b-ink: #1E1E1E;
+  --b-mute: #6B6B6B;
+  --b-line: #DADAD6;
+  --b-card: #FFFFFF;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--b-bg);
+  color: var(--b-ink);
+  font: 15px/1.5 ui-sans-serif, -apple-system, "Segoe UI", system-ui, sans-serif;
+}
+a { color: inherit; }
+.tablero { max-width: 1360px; margin: 0 auto; padding: 48px 32px 120px; }
+
+.cab {
+  display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: end;
+  border-bottom: 1px solid var(--b-line); padding-bottom: 32px;
+}
+.cab .letra { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--b-mute); }
+.cab h1 { font-size: 46px; line-height: 1.04; margin: 6px 0 0; font-weight: 700; letter-spacing: -.01em; }
+.cab p { margin: 0 0 10px; color: #333; max-width: 62ch; }
+.cab .volver { font-size: 13px; color: var(--b-mute); }
+
+section { margin: 64px 0 0; }
+h2 {
+  font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--b-mute);
+  font-weight: 600; margin: 0 0 18px;
+}
+.fila { display: flex; flex-wrap: wrap; gap: 28px; align-items: flex-start; }
+.pieza { display: flex; flex-direction: column; gap: 10px; }
+.nota { font-size: 13px; color: var(--b-mute); max-width: 56ch; margin: 0; }
+
+/* Marco que muestra una pieza a su tamaño real escalado: --w y --h en px nativos, --s la escala. */
+.frame {
+  position: relative; flex: none; overflow: hidden; border-radius: 10px;
+  width: calc(var(--w) * var(--s) * 1px); height: calc(var(--h) * var(--s) * 1px);
+  box-shadow: 0 1px 2px rgba(0,0,0,.08), 0 10px 28px rgba(0,0,0,.08);
+}
+.frame > .native {
+  position: absolute; top: 0; left: 0; overflow: hidden;
+  width: calc(var(--w) * 1px); height: calc(var(--h) * 1px);
+  transform: scale(var(--s)); transform-origin: 0 0;
+}
+.frame.redondo { border-radius: 50%; }
+.frame.plano { box-shadow: none; border-radius: 0; }
+
+/* Lista de resultados de búsqueda en el teléfono: miniatura de 168 px y su título. */
+.tel {
+  width: 390px; background: #fff; border-radius: 28px; padding: 18px 14px;
+  box-shadow: 0 1px 2px rgba(0,0,0,.08), 0 10px 28px rgba(0,0,0,.08);
+  display: flex; flex-direction: column; gap: 14px;
+}
+.tel .res { display: flex; gap: 10px; }
+.tel .frame { border-radius: 6px; box-shadow: none; }
+.tel .res-t { font-size: 13px; line-height: 1.3; color: #0F0F0F; }
+.tel .res-c { font-size: 11px; color: #606060; margin-top: 4px; }
+.duracion {
+  position: absolute; right: 4px; bottom: 4px; z-index: 5;
+  background: rgba(0,0,0,.8); color: #fff; font: 600 10px/1 system-ui; padding: 3px 4px; border-radius: 3px;
+}
+.avatar-com { display: flex; gap: 10px; align-items: center; font-size: 13px; }
+
+/* Paleta y tipografía */
+.chips { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 14px; flex: 1; }
+.chip { background: var(--b-card); border-radius: 10px; overflow: hidden; border: 1px solid var(--b-line); }
+.chip .muestra { height: 92px; }
+.chip .dato { padding: 10px 12px; font-size: 13px; }
+.chip code { font: 12px ui-monospace, Menlo, monospace; color: var(--b-mute); }
+.tipos { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+.tipo { background: var(--b-card); border: 1px solid var(--b-line); border-radius: 10px; padding: 22px 24px; }
+.tipo .quien { font-size: 12px; color: var(--b-mute); margin-bottom: 10px; }
+pre.tokens {
+  background: #1E1E1E; color: #EDEDED; border-radius: 10px; padding: 18px 20px; margin: 14px 0 0;
+  font: 12.5px/1.6 ui-monospace, Menlo, monospace; overflow: auto;
+}
+
+/* Caja segura del banner (1546×423 centrada en 2560×1440) y zonas del Short que tapa YouTube. */
+.seguro {
+  position: absolute; left: 507px; top: 508.5px; width: 1546px; height: 423px; z-index: 50;
+  outline: 5px dashed rgba(0,170,255,.95); pointer-events: none;
+}
+.seguro::after {
+  content: "caja segura 1546 × 423"; position: absolute; left: 0; top: -54px;
+  font: 600 30px/1 system-ui; color: rgba(0,140,220,1); background: rgba(255,255,255,.85); padding: 6px 10px;
+}
+.ui-short { position: absolute; z-index: 50; background: rgba(0,0,0,.18); outline: 3px dashed rgba(255,255,255,.7); }
+.ui-short.der { right: 0; bottom: 380px; width: 170px; height: 820px; }
+.ui-short.abajo { left: 0; right: 0; bottom: 0; height: 380px; }
+.ui-short span { position: absolute; left: 16px; top: 14px; font: 600 26px/1 system-ui; color: #fff; }
+
+/* Cuadro de video simulado (para el Short y el rótulo inferior). */
+.video { background: radial-gradient(circle at 50% 32%, #9AA0A6 0%, #5A5F66 55%, #34373C 100%); }
+.video img { position: absolute; left: 50%; transform: translateX(-50%); bottom: 0; }
+
+/* Captura simulada del error del portal: neutra a propósito, sin logos ni colores oficiales. */
+.dlg {
+  width: 640px; background: #fff; border: 1px solid #BDBDBD; border-radius: 8px;
+  box-shadow: 0 12px 40px rgba(0,0,0,.28); font-family: Arial, Helvetica, sans-serif; color: #222;
+}
+.dlg .bar { background: #E9E9E9; border-bottom: 1px solid #CFCFCF; padding: 12px 18px; font-size: 22px; font-weight: 700; border-radius: 8px 8px 0 0; }
+.dlg .cuerpo { display: flex; gap: 22px; padding: 28px 26px 18px; align-items: flex-start; }
+.dlg .ico {
+  flex: none; width: 64px; height: 64px; border-radius: 50%; background: #F2B705; color: #fff;
+  font: 700 44px/64px Arial, sans-serif; text-align: center;
+}
+.dlg .msg { font-size: 30px; line-height: 1.3; }
+.dlg .pie { padding: 0 26px 24px; text-align: right; }
+.dlg .btn { display: inline-block; background: #555; color: #fff; font-size: 22px; padding: 10px 26px; border-radius: 4px; }
+
+@media (max-width: 900px) {
+  .cab, .tipos { grid-template-columns: 1fr; }
+}
+
+/* Exportación (#solo=): sin guías de caja segura ni zonas de YouTube. */
+.solo .seguro, .solo .ui-short { display: none; }

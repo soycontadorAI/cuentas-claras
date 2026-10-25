@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Exploración de símbolo · Cuentas Claras</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Shrikhand&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../componentes.css">
+<link rel="stylesheet" href="tablero.css">
+<style>
+  .simbolo { display: block; }
+  .oscuro { --crema: #3B2418; --cacao: #FFF6E8; --rosa: #F6C343; }
+  .lockup { display: flex; align-items: center; gap: .3em; }
+  .lockup .rot { font-size: .42em; line-height: .95; color: var(--cacao); }
+  .marca { margin-top: 64px; padding-top: 36px; border-top: 1px solid var(--b-line); }
+  .marca h2.nombre { font-size: 28px; letter-spacing: 0; text-transform: none; color: var(--b-ink); font-weight: 700; margin: 0 0 6px; }
+  .marca .idea { max-width: 78ch; color: #333; margin: 0 0 22px; }
+  .chico { display: flex; gap: 14px; align-items: center; font-size: 13px; color: var(--b-mute); }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <!-- 1 · Billete palomeado: el billete con la palomita en el medallón. -->
+  <symbol id="m-billete" viewBox="0 0 200 200">
+    <rect x="14" y="50" width="172" height="100" rx="14" style="fill:var(--crema);stroke:var(--cacao);stroke-width:11"/>
+    <rect x="32" y="66" width="136" height="68" rx="6" style="fill:none;stroke:var(--cacao);stroke-width:4"/>
+    <circle cx="100" cy="100" r="27" style="fill:var(--rosa)"/>
+    <path d="M86 101l10 10 19-21" style="fill:none;stroke:var(--crema);stroke-width:9;stroke-linecap:round;stroke-linejoin:round"/>
+    <circle cx="48" cy="100" r="6" style="fill:var(--cacao)"/><circle cx="152" cy="100" r="6" style="fill:var(--cacao)"/>
+  </symbol>
+  <!-- 2 · Billetes y total: dos billetes sumados y la raya doble del total. -->
+  <symbol id="m-total" viewBox="0 0 200 200">
+    <rect x="38" y="30" width="148" height="84" rx="11" style="fill:var(--crema);stroke:var(--cacao);stroke-width:9"/>
+    <rect x="14" y="54" width="148" height="84" rx="11" style="fill:var(--crema);stroke:var(--cacao);stroke-width:10"/>
+    <rect x="28" y="67" width="120" height="58" rx="5" style="fill:none;stroke:var(--cacao);stroke-width:4"/>
+    <circle cx="88" cy="96" r="14" style="fill:var(--cacao)"/>
+    <rect x="14" y="158" width="172" height="10" rx="5" style="fill:var(--rosa)"/>
+    <rect x="14" y="176" width="172" height="10" rx="5" style="fill:var(--rosa)"/>
+  </symbol>
+  <!-- 3 · La libreta: tres renglones y el total, como la plantilla de dinero. -->
+  <symbol id="m-libreta" viewBox="0 0 200 200">
+    <rect x="42" y="16" width="116" height="168" rx="12" style="fill:var(--crema);stroke:var(--cacao);stroke-width:11"/>
+    <path d="M70 56h40M126 56h12M70 82h40M126 82h12M70 108h40M126 108h12" style="stroke:var(--cacao);stroke-width:8;stroke-linecap:round"/>
+    <path d="M70 134h68M70 150h68" style="stroke:var(--rosa);stroke-width:8;stroke-linecap:round"/>
+  </symbol>
+  <!-- 4 · Palomita con raya: "resuelto" sobre el total. -->
+  <symbol id="m-palomita" viewBox="0 0 200 200">
+    <path d="M38 92l42 42 82-88" style="fill:none;stroke:var(--cacao);stroke-width:28;stroke-linecap:round;stroke-linejoin:round"/>
+    <rect x="30" y="158" width="140" height="11" rx="5.5" style="fill:var(--rosa)"/>
+    <rect x="30" y="178" width="140" height="11" rx="5.5" style="fill:var(--rosa)"/>
+  </symbol>
+</svg>
+
+<main class="tablero">
+  <header class="cab">
+    <div>
+      <div class="letra">Cuentas Claras · símbolo · 2026-10-24</div>
+      <h1>Un símbolo que sobreviva al nombre</h1>
+    </div>
+    <div>
+      <p>"CC" se confunde con Chisme Corporativo y depende del nombre, que puede cambiar si la marca ya está registrada. El tema central del canal es <b>tu dinero en orden</b>: trámites y finanzas que quedan claros. Los cuatro símbolos salen de ahí y no llevan letras.</p>
+      <p>Colores de la C recalibrada: cacao manda, el rosa es un acento chico, el fondo es la libreta. En el ícono oscuro, el cacao se vuelve fondo y el acento pasa a maíz.</p>
+    </div>
+  </header>
+  <div id="marcas"></div>
+</main>
+
+<script>
+  // Cada símbolo genera sus piezas: logotipo completo, ícono claro, ícono oscuro y los dos a 40 px.
+  const MARCAS = [
+    ['m-billete', '1 · Billete palomeado', 'El billete con la palomita en el medallón: dinero que ya quedó en orden. El que más dice "dinero" a primera vista.'],
+    ['m-total', '2 · Billetes y total', 'Dos billetes sumados sobre la raya doble del total, la misma raya que ya firma las miniaturas. Dinero y cuenta hecha.'],
+    ['m-libreta', '3 · La libreta', 'La hoja con tres renglones y el total: la plantilla de dinero hecha símbolo. El más propio, el menos obvio.'],
+    ['m-palomita', '4 · Palomita con raya', 'La palomita de "resuelto" sobre la raya del total. El más simple: se lee a cualquier tamaño, pero dice menos "dinero".'],
+  ];
+  const cont = document.getElementById('marcas');
+  const tpl = (id, html) => { const t = document.createElement('template'); t.id = id; t.innerHTML = html; document.body.append(t); };
+  for (const [id, nombre, idea] of MARCAS) {
+    const uso = `<svg class="simbolo" viewBox="0 0 200 200" width="100%" height="100%"><use href="#${id}"/></svg>`;
+    tpl(`l-${id}`, `<div class="libreta" style="position:absolute;inset:0;display:grid;place-items:center">
+      <span class="lockup" style="font-size:300px"><span style="width:1em;height:1em">${uso}</span><span class="rot">Cuentas<br>Claras</span></span></div>`);
+    tpl(`c-${id}`, `<div class="libreta" style="position:absolute;inset:0;display:grid;place-items:center"><div style="width:560px;height:560px">${uso}</div></div>`);
+    tpl(`o-${id}`, `<div class="oscuro" style="position:absolute;inset:0;display:grid;place-items:center;background:#3B2418"><div style="width:560px;height:560px">${uso}</div></div>`);
+    const s = document.createElement('section');
+    s.className = 'marca';
+    s.innerHTML = `<h2 class="nombre">${nombre}</h2><p class="idea">${idea}</p>
+      <div class="fila">
+        <div class="frame" style="--w:1200;--h:600;--s:.42" data-tpl="l-${id}"></div>
+        <div class="pieza"><div class="frame redondo" style="--w:800;--h:800;--s:.2" data-tpl="c-${id}"></div><p class="nota">Ícono claro</p></div>
+        <div class="pieza"><div class="frame redondo" style="--w:800;--h:800;--s:.2" data-tpl="o-${id}"></div><p class="nota">Ícono oscuro</p></div>
+        <div class="pieza" style="justify-content:center;gap:16px">
+          <div class="chico"><div class="frame redondo" style="--w:800;--h:800;--s:.05" data-tpl="c-${id}"></div><div class="frame redondo" style="--w:800;--h:800;--s:.05" data-tpl="o-${id}"></div>a 40 px, junto a un comentario</div>
+          <div class="chico"><div class="frame redondo" style="--w:800;--h:800;--s:.03" data-tpl="c-${id}"></div><div class="frame redondo" style="--w:800;--h:800;--s:.03" data-tpl="o-${id}"></div>a 24 px</div>
+        </div>
+      </div>`;
+    cont.append(s);
+  }
+</script>
+<script src="tablero.js"></script>
+</body>
+</html>

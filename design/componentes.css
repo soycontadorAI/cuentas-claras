@@ -1,0 +1,62 @@
+/* Componentes de Cuentas Claras. Solo usan variables de tokens.css. */
+
+/* Título: Bricolage 800, ancho 92. Nunca más estrecho: a 78 se apelmaza (probado). */
+.disp { font-family: var(--font-display); font-weight: 800; font-variation-settings: "wdth" 92, "opsz" 96;
+  line-height: .94; letter-spacing: -.012em; }
+
+/* Rotulado: Shrikhand. Una palabra o frase corta por pieza, nunca un párrafo. */
+.rot { font-family: var(--font-rotulo); font-weight: 400; line-height: 1; }
+
+/* La raya del total, doble, como en la libreta de la tienda. --raya cambia su color. */
+.total { --raya: currentColor; padding-bottom: .2em;
+  background: linear-gradient(var(--raya), var(--raya)) left calc(100% - .02em) / 100% .055em no-repeat,
+              linear-gradient(var(--raya), var(--raya)) left calc(100% - .14em) / 100% .055em no-repeat; }
+
+/* La placa (de B): color al borde, filete crema por dentro. Es donde va el remate legible. */
+.placa { background: var(--color-accent); color: var(--color-on-accent); border-radius: var(--placa-radio);
+  box-shadow: inset 0 0 0 var(--placa-borde) var(--color-accent),
+              inset 0 0 0 calc(var(--placa-borde) + var(--placa-filete)) var(--color-on-accent); }
+
+/* Pasos numerados (de B). El paso actual va en maíz. */
+.paso { display: inline-grid; place-items: center; flex: none; width: 1em; height: 1em; border-radius: 50%;
+  background: var(--color-on-accent); color: var(--color-ink);
+  font-family: var(--font-display); font-weight: 800; font-size: 100px; }
+.paso > span { font-size: .62em; line-height: 1; margin-top: .04em; }
+.paso.actual { background: var(--maiz); }
+.paso.pendiente { background: rgba(255, 246, 232, .35); color: var(--color-on-accent); }
+
+/* La libreta: cuadrícula cacao muy tenue sobre crema. */
+.libreta { background: linear-gradient(rgba(59,36,24,.10) 1.5px, transparent 1.5px) 0 0 / 40px 40px,
+                       linear-gradient(90deg, rgba(59,36,24,.10) 1.5px, transparent 1.5px) 0 0 / 40px 40px,
+                       var(--color-bg); }
+
+/* Renglón de cuenta con puntos guía. */
+.renglon { display: flex; align-items: baseline; gap: 12px; font-family: var(--font-display); font-weight: 600;
+  color: var(--color-ink); padding: 6px 0; }
+.renglon i { flex: 1; border-bottom: 4px dotted rgba(59,36,24,.45); transform: translateY(-8px); }
+.renglon b { font-weight: 800; }
+
+/* Estampa redonda (el año, una etiqueta corta). Maíz con texto cacao. */
+.estampa { display: grid; place-items: center; border-radius: 50%; background: var(--maiz); color: var(--color-ink);
+  transform: rotate(10deg); }
+
+/* v1 (solo para el registro en tableros/identidad.html): el logotipo rotulado sin símbolo. */
+.logo { display: inline-flex; flex-direction: column; align-items: flex-start; transform: rotate(-4deg); }
+.logo .rot { line-height: .95; }
+.logo .rot + .rot { margin-left: .5em; }
+
+/* v2 · El logotipo: el símbolo (billete palomeado) + el nombre rotulado en cacao.
+   El símbolo va como <svg class="simb"><use href="#simbolo"/></svg> o desde simbolo.svg. */
+.lockup { display: flex; align-items: center; gap: .3em; }
+.lockup .rot { font-size: .42em; line-height: .95; color: var(--cacao); } /* var(--cacao) y no --color-ink: así .oscuro lo invierte */
+.simb { width: 1em; height: 1em; flex: none; display: block; }
+
+/* Versión oscura: el cacao se vuelve fondo y el acento del símbolo pasa a maíz. */
+.oscuro { --crema: #3B2418; --cacao: #FFF6E8; --rosa: #F6C343; }
+
+/* v2 · El recorte de Israel en miniaturas: directo sobre la libreta, con sombra suave. Nada detrás. */
+.recorte { filter: drop-shadow(0 18px 22px rgba(59,36,24,.30)); }
+
+/* v2 · Etiqueta chica de temas (banner): cacao al 70%, no compite con la frase. */
+.kicker { font-family: var(--font-display); font-weight: 600; font-size: 22px; letter-spacing: .12em; white-space: nowrap;
+  text-transform: uppercase; color: var(--cacao); opacity: .7; margin-bottom: 16px; }

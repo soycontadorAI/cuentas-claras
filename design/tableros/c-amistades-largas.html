@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C · Amistades largas · Cuentas Claras</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Shrikhand&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tablero.css">
+<style>
+  :root {
+    --rosa: #E4007C;
+    --rosa-hondo: #B0005F;
+    --maiz: #F6C343;
+    --cacao: #3B2418;
+    --crema: #FFF6E8;
+    --display: "Bricolage Grotesque", system-ui, sans-serif;
+    --rotulo: "Shrikhand", "Bricolage Grotesque", cursive;
+  }
+  .abs { position: absolute; }
+  .disp { font-family: var(--display); font-weight: 800; font-variation-settings: "wdth" 92, "opsz" 96; line-height: .94; letter-spacing: -.012em; }
+  .rot { font-family: var(--rotulo); font-weight: 400; line-height: 1; }
+
+  /* La raya del total: doble, como en la libreta de la tienda. */
+  .total { padding-bottom: .2em;
+    background: linear-gradient(currentColor, currentColor) left calc(100% - .02em) / 100% .055em no-repeat,
+                linear-gradient(currentColor, currentColor) left calc(100% - .14em) / 100% .055em no-repeat; }
+  .total.otra { background: linear-gradient(var(--raya), var(--raya)) left calc(100% - .02em) / 100% .055em no-repeat,
+                linear-gradient(var(--raya), var(--raya)) left calc(100% - .14em) / 100% .055em no-repeat; }
+
+  .libreta { background: linear-gradient(rgba(59,36,24,.10) 1.5px, transparent 1.5px) 0 0 / 40px 40px,
+                         linear-gradient(90deg, rgba(59,36,24,.10) 1.5px, transparent 1.5px) 0 0 / 40px 40px, var(--crema); }
+
+  .logoC { display: inline-flex; flex-direction: column; align-items: flex-start; transform: rotate(-4deg); }
+  .logoC .rot { font-size: 1em; line-height: .95; }
+  .logoC .rot + .rot { margin-left: .5em; }
+
+  .fila-l { display: flex; align-items: baseline; gap: 12px; font-family: var(--display); font-weight: 600; font-size: 38px; color: var(--cacao); padding: 6px 0; }
+  .fila-l i { flex: 1; border-bottom: 4px dotted rgba(59,36,24,.45); transform: translateY(-8px); }
+  .fila-l b { font-weight: 800; }
+  .estampa { display: grid; place-items: center; border-radius: 50%; background: var(--maiz); color: var(--cacao); transform: rotate(10deg); }
+</style>
+</head>
+<body>
+
+<!-- ============ PIEZAS (tamaño nativo) ============ -->
+
+<template id="t-logo">
+  <div style="position:absolute;inset:0;display:grid;place-items:center;background:var(--crema)">
+    <span class="logoC" style="font-size:170px;color:var(--rosa)"><span class="rot">Cuentas</span><span class="rot total otra" style="--raya:var(--cacao)">Claras</span></span>
+  </div>
+</template>
+
+<template id="t-logo-osc">
+  <div style="position:absolute;inset:0;display:grid;place-items:center;background:var(--rosa)">
+    <span class="logoC" style="font-size:170px;color:var(--crema)"><span class="rot">Cuentas</span><span class="rot total otra" style="--raya:var(--maiz)">Claras</span></span>
+  </div>
+</template>
+
+<template id="t-avatar">
+  <div style="position:absolute;inset:0;display:grid;place-items:center;background:var(--rosa)">
+    <span class="rot total otra" style="font-size:400px;color:var(--crema);--raya:var(--maiz);transform:rotate(-6deg);margin-top:-30px">CC</span>
+  </div>
+</template>
+
+<template id="t-th1">
+  <div style="position:absolute;inset:0;background:var(--rosa)">
+    <img class="abs" src="../assets/israel-senala-abajo.webp" alt="" style="height:830px;right:-110px;bottom:-140px">
+    <div class="abs disp" style="left:60px;top:70px;font-size:112px;color:var(--crema)">Alta en</div>
+    <div class="abs disp" style="left:52px;top:172px;font-size:220px;color:var(--crema)">SIPARE</div>
+    <div class="abs rot total" style="left:70px;top:440px;font-size:96px;color:var(--maiz);transform:rotate(-4deg)">sin batallar</div>
+    <div class="abs estampa disp" style="left:600px;top:70px;width:150px;height:150px;font-size:46px">2026</div>
+  </div>
+</template>
+
+<template id="t-th2">
+  <div style="position:absolute;inset:0;background:var(--maiz)">
+    <div class="abs disp" style="left:56px;top:56px;font-size:108px;color:var(--cacao)">¿Sin privilegios?</div>
+    <div class="abs dlg" style="left:62px;top:220px;width:600px;transform:rotate(-3deg)">
+      <div class="bar">Mensaje</div>
+      <div class="cuerpo"><div class="ico">!</div><div class="msg">El usuario (RFC) no tiene privilegios para acceder al aplicativo.</div></div>
+      <div class="pie"><span class="btn">Aceptar</span></div>
+    </div>
+    <img class="abs" src="../assets/israel-duda.webp" alt="" style="height:700px;right:-120px;bottom:-110px">
+    <div class="abs rot total" style="left:80px;top:532px;font-size:100px;color:var(--rosa);transform:rotate(-4deg)">así se arregla</div>
+  </div>
+</template>
+
+<template id="t-th3">
+  <div class="libreta" style="position:absolute;inset:0">
+    <div class="abs" style="width:760px;height:760px;border-radius:50%;background:var(--rosa);right:-170px;top:40px"></div>
+    <img class="abs" src="../assets/israel-cruzado.webp" alt="" style="height:740px;right:-60px;bottom:-110px">
+    <div class="abs disp" style="left:56px;top:56px;font-size:120px;color:var(--cacao)">Tu aguinaldo</div>
+    <div class="abs" style="left:62px;top:220px;width:560px">
+      <div class="fila-l"><span>Mínimo de ley</span><i></i><b>15 días</b></div>
+      <div class="fila-l"><span>Se paga antes del</span><i></i><b>20 dic</b></div>
+      <div class="fila-l"><span>Sin ISR hasta</span><i></i><b>30 UMA</b></div>
+    </div>
+    <div class="abs rot total" style="left:70px;top:500px;font-size:98px;color:var(--rosa);transform:rotate(-4deg)">¿completo?</div>
+  </div>
+</template>
+
+<template id="t-short">
+  <div class="video" style="position:absolute;inset:0">
+    <img src="../assets/israel-duda.webp" alt="" style="height:1380px">
+    <div class="abs" style="left:56px;right:56px;top:150px;background:var(--rosa);border-radius:44px;padding:44px 52px 50px;transform:rotate(-1.5deg);box-shadow:0 16px 40px rgba(0,0,0,.25)">
+      <div class="rot" style="font-size:44px;color:var(--maiz);margin-bottom:14px">saldo a favor</div>
+      <div class="disp" style="font-size:108px;color:var(--crema)">¿Cuánto tarda tu saldo a favor?</div>
+    </div>
+    <div class="abs" style="left:56px;right:230px;top:1190px">
+      <span class="disp" style="font-size:74px;line-height:1.22;color:var(--cacao);background:var(--crema);border-radius:16px;box-decoration-break:clone;-webkit-box-decoration-break:clone;padding:4px 20px">Depende de <span style="background:var(--maiz);padding:0 10px;border-radius:10px">un solo dato</span></span>
+    </div>
+    <div class="ui-short der"><span>UI</span></div>
+    <div class="ui-short abajo"><span>Título y botones de YouTube</span></div>
+  </div>
+</template>
+
+<template id="t-rotulo">
+  <div class="video" style="position:absolute;inset:0">
+    <img src="../assets/israel-apoyado-hoodie.webp" alt="" style="height:1000px">
+    <div class="abs" style="left:96px;bottom:104px;display:flex;align-items:center;gap:26px;background:var(--crema);border-radius:999px;padding:18px 56px 18px 18px;box-shadow:0 14px 36px rgba(0,0,0,.28)">
+      <span style="width:132px;height:132px;border-radius:50%;background:var(--rosa);display:grid;place-items:center"><span class="rot" style="font-size:66px;color:var(--crema);margin-top:-6px">CC</span></span>
+      <div>
+        <div class="disp total otra" style="font-size:72px;color:var(--cacao);--raya:var(--rosa);display:inline-block">Israel Castro</div>
+        <div style="font-family:var(--display);font-weight:500;font-size:28px;color:var(--cacao);margin-top:8px">Contador público · S &amp; I Castro Consultores</div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template id="t-banner">
+  <div style="position:absolute;inset:0;background:var(--rosa)">
+    <div class="abs rot" style="left:-30px;top:40px;font-size:250px;color:var(--rosa-hondo);white-space:nowrap;transform:rotate(-4deg)">Cuentas claras,</div>
+    <div class="abs rot" style="right:-40px;bottom:30px;font-size:250px;color:var(--rosa-hondo);white-space:nowrap;transform:rotate(-4deg)">amistades largas.</div>
+    <div class="abs" style="left:507px;top:508px;width:1546px;height:423px;display:flex;align-items:center;gap:80px;padding:0 60px">
+      <span class="logoC" style="font-size:150px;color:var(--crema);flex:none"><span class="rot">Cuentas</span><span class="rot total otra" style="--raya:var(--maiz)">Claras</span></span>
+      <div>
+        <div class="disp" style="font-size:76px;color:var(--crema)">SAT, IMSS y tu dinero,</div>
+        <div class="disp" style="font-size:76px;color:var(--maiz);margin-top:6px">con las cuentas claras.</div>
+        <div style="font-family:var(--display);font-weight:500;font-size:26px;color:var(--crema);margin-top:26px">Hazlo tú, o te lo hacemos · Un canal de S &amp; I Castro Consultores</div>
+      </div>
+    </div>
+    <div class="seguro"></div>
+  </div>
+</template>
+
+<!-- ============ TABLERO ============ -->
+
+<main class="tablero">
+  <header class="cab">
+    <div>
+      <div class="letra">Cuentas Claras · dirección C</div>
+      <h1>Cuentas claras,<br>amistades largas</h1>
+    </div>
+    <div>
+      <p>El dicho. El trato derecho de la tiendita y del mercado, donde las cuentas se apuntan a la vista de todos. La única de las tres con calidez: habla como un conocido que sabe, no como una ventanilla.</p>
+      <p><b>Con finanzas personales:</b> es la que mejor aguanta salirse de los trámites. La libreta y la raya del total sirven igual para un aguinaldo, un presupuesto o lo que te queda neto.</p>
+      <a class="volver" href="index.html">← Las tres direcciones</a>
+    </div>
+  </header>
+
+  <section>
+    <h2>Logotipo e ícono del canal</h2>
+    <div class="fila">
+      <div class="pieza"><div class="frame" style="--w:1200;--h:600;--s:.38" data-tpl="t-logo"></div><p class="nota">Sobre crema.</p></div>
+      <div class="pieza"><div class="frame" style="--w:1200;--h:600;--s:.38" data-tpl="t-logo-osc"></div><p class="nota">Sobre rosa.</p></div>
+      <div class="pieza"><div class="frame redondo" style="--w:800;--h:800;--s:.285" data-tpl="t-avatar"></div><p class="nota">Ícono del canal.</p></div>
+      <div class="pieza" style="justify-content:flex-end">
+        <div class="avatar-com"><div class="frame redondo" style="--w:800;--h:800;--s:.05" data-tpl="t-avatar"></div><span><b>@cuentasclaras_mx</b> · así se ve junto a un comentario (40 px)</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Paleta y tipografía</h2>
+    <div class="chips">
+      <div class="chip"><div class="muestra" style="background:#E4007C"></div><div class="dato"><b>Rosa mexicano</b><br><code>#E4007C</code><br>La marca. Fondo de miniaturas y del banner.</div></div>
+      <div class="chip"><div class="muestra" style="background:#F6C343"></div><div class="dato"><b>Amarillo maíz</b><br><code>#F6C343</code><br>Acompaña al rosa: la raya, la palabra rotulada.</div></div>
+      <div class="chip"><div class="muestra" style="background:#3B2418"></div><div class="dato"><b>Cacao</b><br><code>#3B2418</code><br>Texto. Más cálido que el negro.</div></div>
+      <div class="chip"><div class="muestra" style="background:#FFF6E8"></div><div class="dato"><b>Crema</b><br><code>#FFF6E8</code><br>Fondo claro, la libreta.</div></div>
+      <div class="chip"><div class="muestra" style="background:#B0005F"></div><div class="dato"><b>Rosa hondo</b><br><code>#B0005F</code><br>Solo para fondos de segundo plano sobre rosa.</div></div>
+    </div>
+    <div class="tipos">
+      <div class="tipo"><div class="quien">Bricolage Grotesque · ancho 92 · 800 · títulos y texto</div><div class="disp" style="font-size:72px;color:var(--cacao)">Tu aguinaldo, completo</div></div>
+      <div class="tipo"><div class="quien">Shrikhand · rotulación · solo logotipo y UNA palabra por pieza</div><div class="rot total" style="font-size:66px;color:var(--rosa);display:inline-block">así se arregla</div></div>
+    </div>
+<pre class="tokens">--color-bg: #FFF6E8;            /* crema */
+--color-accent: #E4007C;        /* rosa mexicano */
+--color-accent-2: #F6C343;      /* amarillo maíz */
+--color-ink: #3B2418;           /* cacao */
+--color-accent-deep: #B0005F;   /* rosa hondo */
+--font-display: "Bricolage Grotesque";  /* wdth 92, wght 800 */
+--font-rotulo: "Shrikhand";     /* una palabra por pieza, nunca un párrafo */</pre>
+  </section>
+
+  <section>
+    <h2>Miniaturas</h2>
+    <div class="fila">
+      <div class="pieza"><div class="frame" style="--w:1280;--h:720;--s:.48" data-tpl="t-th1"></div><p class="nota">Trámite del patrón: rosa de fondo y la palabra rotulada.</p></div>
+      <div class="pieza"><div class="frame" style="--w:1280;--h:720;--s:.48" data-tpl="t-th2"></div><p class="nota">Error del portal: maíz de fondo para separarlo de los trámites.</p></div>
+      <div class="pieza"><div class="frame" style="--w:1280;--h:720;--s:.48" data-tpl="t-th3"></div><p class="nota">Finanzas personales: la libreta y el total.</p></div>
+      <div class="pieza">
+        <div class="tel">
+          <div class="res"><div class="frame" style="--w:1280;--h:720;--s:.13125" data-tpl="t-th1"><span class="duracion">4:12</span></div><div><div class="res-t">Alta en SIPARE y tu línea de pago (2026)</div><div class="res-c">Cuentas Claras</div></div></div>
+          <div class="res"><div class="frame" style="--w:1280;--h:720;--s:.13125" data-tpl="t-th2"><span class="duracion">2:48</span></div><div><div class="res-t">"El usuario no tiene privilegios para acceder al aplicativo": así se arregla</div><div class="res-c">Cuentas Claras</div></div></div>
+          <div class="res"><div class="frame" style="--w:1280;--h:720;--s:.13125" data-tpl="t-th3"><span class="duracion">6:05</span></div><div><div class="res-t">Aguinaldo 2026: ¿te lo pagaron completo?</div><div class="res-c">Cuentas Claras</div></div></div>
+        </div>
+        <p class="nota">Así se ven en la búsqueda del teléfono (168 px). Es la prueba que importa.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Short y rótulo inferior</h2>
+    <div class="fila">
+      <div class="pieza"><div class="frame" style="--w:1080;--h:1920;--s:.3" data-tpl="t-short"></div><p class="nota">Lo sombreado lo tapa YouTube.</p></div>
+      <div class="pieza"><div class="frame" style="--w:1920;--h:1080;--s:.42" data-tpl="t-rotulo"></div><p class="nota">Rótulo dentro del video largo.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Banner del canal</h2>
+    <div class="frame" style="--w:2560;--h:1440;--s:.5" data-tpl="t-banner"></div>
+    <p class="nota" style="margin-top:10px">Solo la caja punteada se ve en todos los dispositivos. El dicho de fondo es decoración que se puede perder.</p>
+  </section>
+</main>
+<script src="tablero.js"></script>
+</body>
+</html>

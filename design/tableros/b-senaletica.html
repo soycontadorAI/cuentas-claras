@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B · Señalética · Cuentas Claras</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Overpass:wght@700;800;900&family=Atkinson+Hyperlegible+Next:wght@400;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tablero.css">
+<style>
+  :root {
+    --rosa: #E4007C;
+    --negro: #141414;
+    --blanco: #FFFFFF;
+    --amarillo: #FFC21A;
+    --verde: #1F9D55;
+    --gris: #EDEDED;
+    --display: "Overpass", "Arial Black", sans-serif;
+    --texto: "Atkinson Hyperlegible Next", "Atkinson Hyperlegible", system-ui, sans-serif;
+  }
+  .abs { position: absolute; }
+  .disp { font-family: var(--display); font-weight: 900; line-height: .88; letter-spacing: -.015em; text-transform: uppercase; }
+  .txt { font-family: var(--texto); font-weight: 700; }
+
+  /* La placa: como un letrero de carretera, color al borde y un filete blanco por dentro. */
+  .placa { background: var(--rosa); color: var(--blanco); border-radius: 26px; padding: 34px 44px 30px;
+    box-shadow: inset 0 0 0 9px var(--rosa), inset 0 0 0 15px var(--blanco); }
+  .placa.negra { background: var(--negro); box-shadow: inset 0 0 0 9px var(--negro), inset 0 0 0 15px var(--blanco); }
+
+  /* El rombo de señal preventiva. El texto va contrarrotado. */
+  .rombo { width: 1em; height: 1em; display: grid; place-items: center; flex: none; }
+  .rombo::before { content: ""; position: absolute; width: .7071em; height: .7071em; transform: rotate(45deg);
+    background: var(--rosa); border-radius: .07em; box-shadow: inset 0 0 0 .025em var(--rosa), inset 0 0 0 .045em var(--blanco); }
+  .rombo { position: relative; }
+  .rombo > span { position: relative; font-family: var(--display); font-weight: 900; color: var(--blanco); font-size: .3em; letter-spacing: -.03em; margin-top: .12em; }
+  .rombo.alerta::before { background: var(--amarillo); box-shadow: inset 0 0 0 .025em var(--amarillo), inset 0 0 0 .045em var(--negro); }
+  .rombo.alerta > span { color: var(--negro); font-size: .42em; }
+
+  .logoB { display: inline-flex; align-items: center; gap: .18em; }
+  .logoB .rombo { font-size: 1.25em; }
+  .logoB .nombre { font-family: var(--display); font-weight: 900; text-transform: uppercase; line-height: .86; letter-spacing: -.02em; font-size: .5em; }
+
+  .paso { width: 104px; height: 104px; border-radius: 50%; background: var(--blanco); color: var(--negro);
+    font: 900 68px/112px var(--display); text-align: center; flex: none; }
+  .paso.rosa { background: var(--rosa); color: var(--blanco); }
+  .flecha { width: 70px; height: 40px; flex: none; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="flecha" viewBox="0 0 70 40"><path d="M0 14h44V0l26 20-26 20V26H0z" fill="currentColor"/></symbol>
+</svg>
+
+<!-- ============ PIEZAS (tamaño nativo) ============ -->
+
+<template id="t-logo">
+  <div style="position:absolute;inset:0;display:grid;place-items:center;background:var(--blanco)">
+    <span class="logoB" style="font-size:260px;color:var(--negro)"><span class="rombo"><span>CC</span></span><span class="nombre">Cuentas<br>Claras</span></span>
+  </div>
+</template>
+
+<template id="t-logo-osc">
+  <div style="position:absolute;inset:0;display:grid;place-items:center;background:var(--negro)">
+    <span class="logoB" style="font-size:260px;color:var(--blanco)"><span class="rombo"><span>CC</span></span><span class="nombre">Cuentas<br>Claras</span></span>
+  </div>
+</template>
+
+<template id="t-avatar">
+  <div style="position:absolute;inset:0;display:grid;place-items:center;background:var(--negro)">
+    <span class="rombo" style="font-size:760px"><span>CC</span></span>
+  </div>
+</template>
+
+<template id="t-th1">
+  <div style="position:absolute;inset:0;background:var(--negro)">
+    <img class="abs" src="../assets/israel-senala-abajo.webp" alt="" style="height:830px;right:-110px;bottom:-140px">
+    <div class="abs placa" style="left:52px;top:56px">
+      <div class="disp" style="font-size:78px">Alta en</div>
+      <div class="disp" style="font-size:196px;margin-top:6px">SIPARE</div>
+    </div>
+    <div class="abs" style="left:58px;top:440px;display:flex;align-items:center;gap:14px;color:var(--rosa)">
+      <span class="paso">1</span><svg class="flecha"><use href="#flecha"/></svg>
+      <span class="paso">2</span><svg class="flecha"><use href="#flecha"/></svg>
+      <span class="paso rosa">3</span>
+    </div>
+    <div class="abs txt" style="left:60px;top:578px;font-size:50px;color:var(--blanco)">y tu línea de pago <span style="color:var(--amarillo)">2026</span></div>
+  </div>
+</template>
+
+<template id="t-th2">
+  <div style="position:absolute;inset:0;background:var(--amarillo)">
+    <div class="abs disp" style="left:54px;top:54px;font-size:132px;color:var(--negro)">Sin privilegios</div>
+    <div class="abs dlg" style="left:60px;top:220px;width:600px;transform:rotate(-2deg)">
+      <div class="bar">Mensaje</div>
+      <div class="cuerpo"><div class="ico">!</div><div class="msg">El usuario (RFC) no tiene privilegios para acceder al aplicativo.</div></div>
+      <div class="pie"><span class="btn">Aceptar</span></div>
+    </div>
+    <img class="abs" src="../assets/israel-duda.webp" alt="" style="height:700px;right:-120px;bottom:-110px">
+    <div class="abs placa" style="left:60px;top:540px;display:flex;align-items:center;gap:22px;padding:26px 40px 22px">
+      <span class="disp" style="font-size:66px">Así se arregla</span>
+      <svg class="flecha" style="width:84px;height:48px;color:var(--blanco)"><use href="#flecha"/></svg>
+    </div>
+  </div>
+</template>
+
+<template id="t-th3">
+  <div style="position:absolute;inset:0;background:var(--rosa)">
+    <img class="abs" src="../assets/israel-cruzado.webp" alt="" style="height:740px;right:-120px;bottom:-110px">
+    <div class="abs disp" style="left:54px;top:60px;font-size:108px;color:var(--blanco)">Aguinaldo 2026</div>
+    <div class="abs placa negra" style="left:56px;top:210px;width:640px;padding:30px 44px 26px">
+      <div class="txt" style="display:flex;justify-content:space-between;font-size:40px;padding:8px 0"><span>Mínimo de ley</span><span class="disp" style="color:var(--amarillo);font-size:46px">15 días</span></div>
+      <div class="txt" style="display:flex;justify-content:space-between;font-size:40px;padding:8px 0"><span>Se paga antes del</span><span class="disp" style="color:var(--amarillo);font-size:46px">20 dic</span></div>
+      <div class="txt" style="display:flex;justify-content:space-between;font-size:40px;padding:8px 0"><span>Sin ISR hasta</span><span class="disp" style="color:var(--amarillo);font-size:46px">30 UMA</span></div>
+    </div>
+    <div class="abs txt" style="left:60px;top:556px;font-size:62px;font-weight:800;color:var(--blanco);line-height:1.1">¿Te lo pagaron<br>completo?</div>
+  </div>
+</template>
+
+<template id="t-short">
+  <div class="video" style="position:absolute;inset:0">
+    <img src="../assets/israel-duda.webp" alt="" style="height:1380px">
+    <div class="abs placa" style="left:56px;right:56px;top:150px;padding:46px 54px 42px">
+      <div class="txt" style="font-size:32px;margin-bottom:16px;display:flex;align-items:center;gap:14px"><span class="rombo alerta" style="font-size:64px"><span>!</span></span>Saldo a favor · ISR</div>
+      <div class="disp" style="font-size:112px">¿Cuánto tarda tu saldo a favor?</div>
+    </div>
+    <div class="abs" style="left:56px;top:760px;display:flex;flex-direction:column;gap:18px;align-items:center">
+      <span class="paso" style="width:84px;height:84px;font-size:52px;line-height:92px">1</span>
+      <span class="paso rosa" style="width:84px;height:84px;font-size:52px;line-height:92px">2</span>
+      <span class="paso" style="width:84px;height:84px;font-size:52px;line-height:92px;opacity:1;background:rgba(255,255,255,.35);color:var(--blanco)">3</span>
+    </div>
+    <div class="abs" style="left:56px;right:230px;top:1190px">
+      <span class="txt" style="font-size:72px;line-height:1.22;color:var(--blanco);background:var(--negro);box-decoration-break:clone;-webkit-box-decoration-break:clone;padding:4px 18px">Depende de <span style="background:var(--amarillo);color:var(--negro);padding:0 10px">un solo dato</span></span>
+    </div>
+    <div class="ui-short der"><span>UI</span></div>
+    <div class="ui-short abajo"><span>Título y botones de YouTube</span></div>
+  </div>
+</template>
+
+<template id="t-rotulo">
+  <div class="video" style="position:absolute;inset:0">
+    <img src="../assets/israel-apoyado-hoodie.webp" alt="" style="height:1000px">
+    <div class="abs placa" style="left:96px;bottom:104px;display:flex;align-items:center;gap:28px;padding:28px 48px 26px 30px">
+      <span class="rombo" style="font-size:150px;--rosa:#141414"><span>CC</span></span>
+      <div>
+        <div class="disp" style="font-size:76px">Israel Castro</div>
+        <div class="txt" style="font-size:28px;margin-top:10px;font-weight:400">Contador público · S &amp; I Castro Consultores</div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template id="t-banner">
+  <div style="position:absolute;inset:0;background:var(--negro)">
+    <div class="abs" style="left:0;right:0;top:0;height:120px;background:repeating-linear-gradient(-45deg,var(--rosa) 0 60px,var(--negro) 60px 120px)"></div>
+    <div class="abs" style="left:0;right:0;bottom:0;height:120px;background:repeating-linear-gradient(-45deg,var(--rosa) 0 60px,var(--negro) 60px 120px)"></div>
+    <div class="abs" style="left:507px;top:508px;width:1546px;height:423px;display:flex;align-items:center;gap:70px;padding:0 50px">
+      <span class="rombo" style="font-size:400px"><span>CC</span></span>
+      <div>
+        <div class="disp" style="font-size:100px;color:var(--blanco)">Cuentas Claras</div>
+        <div class="txt" style="font-size:52px;color:var(--blanco);margin-top:22px;font-weight:800">SAT, IMSS y tu dinero. <span style="color:var(--rosa)">Sin rodeos.</span></div>
+        <div class="txt" style="font-size:28px;color:#BDBDBD;margin-top:20px;font-weight:400">Hazlo tú, o te lo hacemos · Un canal de S &amp; I Castro Consultores</div>
+      </div>
+    </div>
+    <div class="seguro"></div>
+  </div>
+</template>
+
+<!-- ============ TABLERO ============ -->
+
+<main class="tablero">
+  <header class="cab">
+    <div>
+      <div class="letra">Cuentas Claras · dirección B</div>
+      <h1>Señalética</h1>
+    </div>
+    <div>
+      <p>Los letreros de carretera para moverte en la burocracia: por dónde, en qué paso vas y dónde está el error. Hecha para quien llega con prisa y en el teléfono.</p>
+      <p><b>Con el rosa:</b> el rosa se volvió el color de la señal, y el amarillo bajó a lo que en la carretera ya significa: precaución, es decir, el error. Así el amarillo con negro deja de ser lo primero que se ve, que era su riesgo (es el de todos los tutoriales).</p>
+      <a class="volver" href="index.html">← Las tres direcciones</a>
+    </div>
+  </header>
+
+  <section>
+    <h2>Logotipo e ícono del canal</h2>
+    <div class="fila">
+      <div class="pieza"><div class="frame" style="--w:1200;--h:600;--s:.38" data-tpl="t-logo"></div><p class="nota">Sobre blanco.</p></div>
+      <div class="pieza"><div class="frame" style="--w:1200;--h:600;--s:.38" data-tpl="t-logo-osc"></div><p class="nota">Sobre negro.</p></div>
+      <div class="pieza"><div class="frame redondo" style="--w:800;--h:800;--s:.285" data-tpl="t-avatar"></div><p class="nota">Ícono del canal.</p></div>
+      <div class="pieza" style="justify-content:flex-end">
+        <div class="avatar-com"><div class="frame redondo" style="--w:800;--h:800;--s:.05" data-tpl="t-avatar"></div><span><b>@cuentasclaras_mx</b> · así se ve junto a un comentario (40 px)</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Paleta y tipografía</h2>
+    <div class="chips">
+      <div class="chip"><div class="muestra" style="background:#E4007C"></div><div class="dato"><b>Rosa señal</b><br><code>#E4007C</code><br>La marca. Placas, rombo, paso actual.</div></div>
+      <div class="chip"><div class="muestra" style="background:#141414"></div><div class="dato"><b>Negro</b><br><code>#141414</code><br>Fondo y texto.</div></div>
+      <div class="chip"><div class="muestra" style="background:#FFFFFF"></div><div class="dato"><b>Blanco</b><br><code>#FFFFFF</code><br>Filete de placa, texto sobre color.</div></div>
+      <div class="chip"><div class="muestra" style="background:#FFC21A"></div><div class="dato"><b>Amarillo precaución</b><br><code>#FFC21A</code><br>Solo el error y los datos que hay que ver.</div></div>
+      <div class="chip"><div class="muestra" style="background:#1F9D55"></div><div class="dato"><b>Verde listo</b><br><code>#1F9D55</code><br>Solo el "quedó". Escaso a propósito.</div></div>
+    </div>
+    <div class="tipos">
+      <div class="tipo"><div class="quien">Overpass · 900 · títulos y números (viene de la tipografía de carreteras)</div><div class="disp" style="font-size:70px;color:var(--negro)">Alta en SIPARE</div></div>
+      <div class="tipo"><div class="quien">Atkinson Hyperlegible Next · 400 y 700 · texto, subtítulos y rótulos</div><div class="txt" style="font-size:34px;color:var(--negro);line-height:1.3">El usuario (RFC) no tiene privilegios.<br><span style="font-weight:400">Il1 O0 rn m: se distinguen a cualquier tamaño.</span></div></div>
+    </div>
+<pre class="tokens">--color-bg: #141414;           /* negro */
+--color-surface: #FFFFFF;      /* blanco */
+--color-accent: #E4007C;       /* rosa señal */
+--color-warn: #FFC21A;         /* amarillo precaución: el error */
+--color-ok: #1F9D55;           /* verde listo */
+--font-display: "Overpass";    /* 900 */
+--font-body: "Atkinson Hyperlegible Next";</pre>
+  </section>
+
+  <section>
+    <h2>Miniaturas</h2>
+    <div class="fila">
+      <div class="pieza"><div class="frame" style="--w:1280;--h:720;--s:.48" data-tpl="t-th1"></div><p class="nota">Trámite del patrón: la placa y los pasos.</p></div>
+      <div class="pieza"><div class="frame" style="--w:1280;--h:720;--s:.48" data-tpl="t-th2"></div><p class="nota">Error del portal: fondo de precaución y la salida en rosa.</p></div>
+      <div class="pieza"><div class="frame" style="--w:1280;--h:720;--s:.48" data-tpl="t-th3"></div><p class="nota">Finanzas personales: el aguinaldo como letrero de distancias.</p></div>
+      <div class="pieza">
+        <div class="tel">
+          <div class="res"><div class="frame" style="--w:1280;--h:720;--s:.13125" data-tpl="t-th1"><span class="duracion">4:12</span></div><div><div class="res-t">Alta en SIPARE y tu línea de pago (2026)</div><div class="res-c">Cuentas Claras</div></div></div>
+          <div class="res"><div class="frame" style="--w:1280;--h:720;--s:.13125" data-tpl="t-th2"><span class="duracion">2:48</span></div><div><div class="res-t">"El usuario no tiene privilegios para acceder al aplicativo": así se arregla</div><div class="res-c">Cuentas Claras</div></div></div>
+          <div class="res"><div class="frame" style="--w:1280;--h:720;--s:.13125" data-tpl="t-th3"><span class="duracion">6:05</span></div><div><div class="res-t">Aguinaldo 2026: ¿te lo pagaron completo?</div><div class="res-c">Cuentas Claras</div></div></div>
+        </div>
+        <p class="nota">Así se ven en la búsqueda del teléfono (168 px). Es la prueba que importa.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Short y rótulo inferior</h2>
+    <div class="fila">
+      <div class="pieza"><div class="frame" style="--w:1080;--h:1920;--s:.3" data-tpl="t-short"></div><p class="nota">Lo sombreado lo tapa YouTube. Los pasos a la izquierda dicen en cuál vas.</p></div>
+      <div class="pieza"><div class="frame" style="--w:1920;--h:1080;--s:.42" data-tpl="t-rotulo"></div><p class="nota">Rótulo dentro del video largo.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Banner del canal</h2>
+    <div class="frame" style="--w:2560;--h:1440;--s:.5" data-tpl="t-banner"></div>
+    <p class="nota" style="margin-top:10px">Solo la caja punteada se ve en todos los dispositivos. Las franjas de los bordes son decoración que se puede perder.</p>
+  </section>
+</main>
+<script src="tablero.js"></script>
+</body>
+</html>
