@@ -118,3 +118,5 @@ pre.tokens {
 
 /* Exportación (#solo=): sin guías de caja segura ni zonas de YouTube. */
 .solo .seguro, .solo .ui-short { display: none; }
+.solo .guia { display: none !important; }
+html.solo, html.solo body { background: transparent !important; }

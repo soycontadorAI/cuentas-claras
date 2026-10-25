@@ -33,9 +33,13 @@ if (location.hash === '#miniaturas') {
 // así se exportan el banner y el ícono para subirlos tal cual.
 if (location.hash.startsWith('#solo=')) {
   const id = location.hash.slice(6);
+  // El tamaño sale del marco que la muestra en el tablero; si la pieza no tiene marco (como una
+  // capa transparente que solo se exporta), se usa el tamaño de la ventana.
   const marco = document.querySelector(`.frame[data-tpl="${id}"]`);
+  const w = marco ? marco.style.getPropertyValue('--w') : innerWidth;
+  const h = marco ? marco.style.getPropertyValue('--h') : innerHeight;
   const pieza = document.createElement('div');
-  pieza.style.cssText = `position:relative;overflow:hidden;width:${marco.style.getPropertyValue('--w')}px;height:${marco.style.getPropertyValue('--h')}px`;
+  pieza.style.cssText = `position:relative;overflow:hidden;width:${w}px;height:${h}px`;
   pieza.append(document.getElementById(id).content.cloneNode(true));
   document.documentElement.classList.add('solo');
   document.body.style.margin = '0';

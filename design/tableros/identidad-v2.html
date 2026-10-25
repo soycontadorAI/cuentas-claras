@@ -162,6 +162,57 @@
   </div>
 </template>
 
+
+<!-- Piezas de video: pantalla final, tarjeta de "te lo hacemos" y marca de agua. -->
+<template id="t-final">
+  <div class="libreta" style="position:absolute;inset:0">
+    <span class="abs lockup" style="font-size:80px;left:120px;top:70px"><svg class="simb" viewBox="0 0 200 200"><use href="#simbolo"/></svg><span class="rot">Cuentas<br>Claras</span></span>
+    <div class="abs disp" style="left:120px;top:206px;font-size:58px;color:var(--cacao)">Sigue con este</div>
+    <div class="abs guia" style="left:120px;top:290px;width:960px;height:540px;border-radius:18px;border:5px dashed rgba(59,36,24,.45);display:grid;place-items:center;font:600 30px/1.2 system-ui;color:rgba(59,36,24,.6);text-align:center">Elemento de video<br>(lo pone YouTube)</div>
+    <img class="abs recorte" src="../assets/israel-senala-abajo.webp" alt="" style="height:860px;right:-120px;bottom:-180px">
+    <div class="abs rot total" style="left:1160px;top:630px;font-size:66px;color:var(--rosa);transform:rotate(-4deg)">suscríbete</div>
+    <div class="abs guia" style="left:1265px;top:775px;width:250px;height:250px;border-radius:50%;border:5px dashed rgba(59,36,24,.45);display:grid;place-items:center;font:600 30px/1.2 system-ui;color:rgba(59,36,24,.6);text-align:center">Suscribirse<br>(YouTube)</div>
+  </div>
+</template>
+
+<template id="t-tarjeta">
+  <div style="position:absolute;inset:0">
+    <div class="abs" style="left:96px;bottom:110px;display:flex;align-items:center;gap:26px;background:var(--crema);border-radius:28px;padding:24px 48px 26px 24px;box-shadow:0 14px 36px rgba(0,0,0,.28)">
+      <span class="oscuro" style="width:124px;height:124px;border-radius:50%;background:#3B2418;display:grid;place-items:center;flex:none"><svg viewBox="0 0 200 200" style="width:98px;height:98px"><use href="#simbolo"/></svg></span>
+      <div>
+        <div class="disp" style="font-size:54px;color:var(--cacao)">¿No te salió?</div>
+        <div class="rot total" style="font-size:60px;color:var(--rosa);display:inline-block;margin-top:4px">te lo hacemos</div>
+        <div style="font-family:var(--font-display);font-weight:600;font-size:26px;color:var(--cacao);margin-top:6px">El enlace está en la descripción ↓</div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template id="t-tarjeta-demo">
+  <div class="video" style="position:absolute;inset:0">
+    <img src="../assets/israel-apoyado-hoodie.webp" alt="" style="height:1000px">
+    <div class="abs" style="left:96px;bottom:110px;display:flex;align-items:center;gap:26px;background:var(--crema);border-radius:28px;padding:24px 48px 26px 24px;box-shadow:0 14px 36px rgba(0,0,0,.28)">
+      <span class="oscuro" style="width:124px;height:124px;border-radius:50%;background:#3B2418;display:grid;place-items:center;flex:none"><svg viewBox="0 0 200 200" style="width:98px;height:98px"><use href="#simbolo"/></svg></span>
+      <div>
+        <div class="disp" style="font-size:54px;color:var(--cacao)">¿No te salió?</div>
+        <div class="rot total" style="font-size:60px;color:var(--rosa);display:inline-block;margin-top:4px">te lo hacemos</div>
+        <div style="font-family:var(--font-display);font-weight:600;font-size:26px;color:var(--cacao);margin-top:6px">El enlace está en la descripción ↓</div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template id="t-marca">
+  <div class="oscuro" style="position:absolute;inset:0;border-radius:50%;background:#3B2418;display:grid;place-items:center"><svg viewBox="0 0 200 200" style="width:78%;height:78%"><use href="#simbolo"/></svg></div>
+</template>
+
+<template id="t-marca-demo">
+  <div class="video" style="position:absolute;inset:0">
+    <img src="../assets/israel-apoyado-hoodie.webp" alt="" style="height:1000px">
+    <div class="abs" style="right:36px;bottom:36px;width:78px;height:78px;opacity:.85"><div class="oscuro" style="position:absolute;inset:0;border-radius:50%;background:#3B2418;display:grid;place-items:center"><svg viewBox="0 0 200 200" style="width:78%;height:78%"><use href="#simbolo"/></svg></div></div>
+  </div>
+</template>
+
 <!-- ============ TABLERO ============ -->
 
 <main class="tablero">
@@ -258,6 +309,18 @@
     <div class="fila">
       <div class="pieza"><div class="frame" style="--w:1080;--h:1920;--s:.3" data-tpl="t-short"></div><p class="nota">El título en placa, los pasos a la izquierda. Lo sombreado lo tapa YouTube.</p></div>
       <div class="pieza"><div class="frame" style="--w:1920;--h:1080;--s:.42" data-tpl="t-rotulo"></div><p class="nota">Rótulo dentro del video largo.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Piezas para el video</h2>
+    <div class="fila">
+      <div class="pieza"><div class="frame" style="--w:1920;--h:1080;--s:.42" data-tpl="t-final"></div><p class="nota"><b>Pantalla final</b> (últimos 20 segundos). Las líneas punteadas son guías: muestran dónde acomodar en YouTube Studio el video sugerido y el botón de suscribirse. No salen en la exportación (<code>salidas/pantalla-final.png</code>).</p></div>
+      <div class="pieza"><div class="frame" style="--w:1920;--h:1080;--s:.42" data-tpl="t-tarjeta-demo"></div><p class="nota"><b>Tarjeta "te lo hacemos"</b>, a media explicación, cuando el trámite se complica. Sin precio. Se exporta con fondo transparente para encimarla en la edición (<code>salidas/tarjeta-te-lo-hacemos.png</code>). Usa el mismo lugar que el rótulo del nombre: nunca salen al mismo tiempo.</p></div>
+    </div>
+    <div class="fila" style="margin-top:24px;align-items:flex-end">
+      <div class="pieza"><div class="frame" style="--w:1920;--h:1080;--s:.42" data-tpl="t-marca-demo"></div><p class="nota"><b>Marca de agua</b> de suscripción: así la pinta YouTube en la esquina del video.</p></div>
+      <div class="pieza"><div class="frame redondo plano" style="--w:150;--h:150;--s:1" data-tpl="t-marca"></div><p class="nota">A su tamaño real: 150 × 150, fondo transparente (<code>salidas/marca-de-agua.png</code>).</p></div>
     </div>
   </section>
 

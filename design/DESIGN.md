@@ -93,6 +93,14 @@ rosa no se usa para separar la foto del fondo.
 - **Rótulo:** píldora crema con el símbolo en un círculo cacao, el nombre en Bricolage 800 con la
   raya en rosa y, debajo, "Contador público · S & I Castro Consultores".
 
+## Piezas para el video
+
+| Pieza | Archivo | Cómo se usa |
+|---|---|---|
+| **Pantalla final** | `salidas/pantalla-final.png` (1920 × 1080) | Los últimos 20 segundos de cada video. La libreta, el logotipo chico, "Sigue con este" y "suscríbete" rotulado; Israel señala hacia el botón. En YouTube Studio se acomodan encima el video sugerido (izquierda, el recuadro grande) y el botón de suscribirse (círculo junto a la mano). Las guías de dónde va cada uno se ven en el tablero y no salen en el PNG |
+| **Tarjeta "te lo hacemos"** | `salidas/tarjeta-te-lo-hacemos.png` (1920 × 1080, fondo transparente) | Se enciman en la edición cuando el trámite se complica: "¿No te salió? te lo hacemos · El enlace está en la descripción". **Sin precio.** Usa el lugar del rótulo del nombre (abajo a la izquierda); nunca salen al mismo tiempo. Las tarjetas de YouTube no sirven para esto: los enlaces externos ahí piden el Programa de Socios |
+| **Marca de agua** | `salidas/marca-de-agua.png` (150 × 150, transparente) | En Studio: Personalización, Imagen de marca, Marca de agua del video. El ícono del canal en chico: el círculo cacao con el billete en maíz |
+
 ## Banner
 
 La libreta, el logotipo y una frase en la caja segura (1546 × 423). **"Hazlo tú, o te lo hacemos"
