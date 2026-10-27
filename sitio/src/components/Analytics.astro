@@ -1,0 +1,137 @@
+---
+/**
+ * Medición (GA4 y pixel de Meta). Se monta en Base.astro, así que cubre todas las páginas.
+ * Adaptado de soycontador-ai/src/components/Analytics.astro.
+ *
+ * Tres llaves, las tres tienen que estar:
+ * 1. El ID en MEDICION (lib/sitio.ts). En null, ese tag no existe.
+ * 2. El despliegue de producción: `VERCEL_ENV === 'production'`, que Vercel pone en el build. En
+ *    local y en los previews de rama no sale ni una línea, para que las pruebas propias no
+ *    ensucien el dato desde el primer día.
+ * 3. Con los dos en null, este componente no emite NADA: ni script, ni sessionStorage, ni el
+ *    escucha de clics. El HTML queda idéntico al de antes de la medición.
+ *
+ * Lighthouse 100: los dos scripts de terceros (gtag.js y fbevents.js) no se piden en el <head>
+ * sino hasta después del evento load, en un momento ocioso. Lo que sí corre de inmediato es el
+ * stub (window.gtag y window.fbq hacen cola), así que ningún evento se pierde por llegar antes
+ * que la librería: cuando carga, vacía la cola. El costo es que una visita que se va en el primer
+ * segundo puede no contarse.
+ */
+import { MEDICION } from '../lib/sitio';
+
+const enProduccion = process.env.VERCEL_ENV === 'production';
+const ga = enProduccion ? MEDICION.ga : null;
+const pixel = enProduccion ? MEDICION.metaPixel : null;
+const activo = Boolean(ga || pixel);
+---
+
+{activo && (
+  /*
+    is:inline a propósito: tiene que correr tal cual y definir window.gtag/window.fbq de forma
+    síncrona, ANTES de cualquier script del sitio que quiera medir. Por lo mismo, el eventID del
+    PageView se arma a mano con la receta de nuevoEventId() (lib/medir.ts): aquí no hay import.
+  */
+  <script is:inline define:vars={{ ga, pixel }}>
+    (function (w, d) {
+      var fuentes = [];
+      if (ga) {
+        w.dataLayer = w.dataLayer || [];
+        w.gtag = function () { w.dataLayer.push(arguments); };
+        w.gtag('js', new Date());
+        // En localhost (build de producción servido a mano para probar) va a DebugView.
+        w.gtag('config', ga, /^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? { debug_mode: true } : {});
+        fuentes.push('https://www.googletagmanager.com/gtag/js?id=' + ga);
+      }
+      if (pixel && !w.fbq) {
+        // El stub oficial de Meta, sin la inserción inmediata del script.
+        var n = (w.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments); });
+        if (!w._fbq) w._fbq = n;
+        n.push = n; n.loaded = true; n.version = '2.0'; n.queue = [];
+        w.fbq('init', pixel);
+        var c = w.crypto;
+        w.fbq('track', 'PageView', {}, {
+          eventID: c && c.randomUUID ? c.randomUUID() : Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 12)
+        });
+        fuentes.push('https://connect.facebook.net/en_US/fbevents.js');
+      }
+      function cargar() {
+        fuentes.forEach(function (src) {
+          var s = d.createElement('script');
+          s.async = true;
+          s.src = src;
+          d.head.appendChild(s);
+        });
+      }
+      function ocioso() {
+        if (w.requestIdleCallback) w.requestIdleCallback(cargar, { timeout: 2000 });
+        else setTimeout(cargar, 1);
+      }
+      if (d.readyState === 'complete') ocioso();
+      else w.addEventListener('load', ocioso, { once: true });
+    })(window, document);
+  </script>
+)}
+
+{activo && (
+  <script>
+    import { capturarOrigen, paraMedicion } from '../lib/origen';
+    import { hayPixel, medir, medirMeta, type EventoMeta } from '../lib/medir';
+
+    // El origen se guarda antes que cualquier evento: es lo que liga un alta o un clic a la
+    // agenda con la historia, el video o el sitio que trajo a la persona. Ver lib/origen.ts.
+    capturarOrigen();
+
+    // /listo es a donde regresa Sendy cuando la persona confirma su correo: el alta quedó firme.
+    if (location.pathname.replace(/\/$/, '') === '/listo') medir('guia_confirmada', paraMedicion());
+
+    /** Destino de una liga saliente, como categoría. Null si no es uno de los que se miden. */
+    const destinoDe = (h: string): string | null => {
+      if (h === 'wa.me' || h.endsWith('whatsapp.com')) return 'whatsapp';
+      if (h === 'calendar.app.google' || h === 'calendar.google.com') return 'agenda';
+      if (h === 'youtube.com' || h.endsWith('.youtube.com') || h === 'youtu.be') return 'youtube';
+      if (h === 'sicastro.com' || h === 'www.sicastro.com') return 'sicastro';
+      if (h === 'soycontador.ai' || h.endsWith('.soycontador.ai')) return 'soycontador';
+      if (h === 'todoconta.com' || h.endsWith('.todoconta.com')) return 'todoconta';
+      if (h.endsWith('instagram.com')) return 'instagram';
+      if (h.endsWith('facebook.com')) return 'facebook';
+      return null;
+    };
+
+    // Delegado en el documento: cubre toda liga de toda página (incluidas las que /agendar
+    // arma después de la precalificación) sin tocar cada una.
+    document.addEventListener('click', (e) => {
+      const enlace = (e.target as HTMLElement | null)?.closest?.('a');
+      if (!enlace || e.defaultPrevented) return;
+      let url: URL;
+      try {
+        url = new URL(enlace.href, location.href);
+      } catch {
+        return;
+      }
+      if (url.hostname === location.hostname) return;
+      const destino = destinoDe(url.hostname);
+      if (!destino) return;
+
+      // A GA solo el destino y de qué página salió, más el origen en los dos de intención alta.
+      let meta: EventoMeta | null = null;
+      if (destino === 'agenda') {
+        medir('agenda_abierta', paraMedicion());
+        meta = 'Schedule';
+      } else {
+        medir('clic_saliente', destino === 'whatsapp' ? { destino, ...paraMedicion() } : { destino, pagina: location.pathname });
+        if (destino === 'whatsapp') meta = 'Contact';
+      }
+      if (!meta) return;
+      medirMeta(meta, { content_name: destino === 'agenda' ? 'consulta' : 'whatsapp' });
+
+      // Las ligas abren en la misma pestaña: sin una pausa, la petición del pixel se corta al
+      // navegar. Se detiene el clic 300 ms (como el AddToCart de soycontador.ai). GA no lo
+      // necesita: gtag manda con sendBeacon.
+      const nuevaPestana = enlace.target === '_blank' || e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0;
+      if (hayPixel() && !nuevaPestana) {
+        e.preventDefault();
+        setTimeout(() => location.assign(url.href), 300);
+      }
+    });
+  </script>
+)}

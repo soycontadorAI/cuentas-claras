@@ -5,6 +5,8 @@
  */
 
 import { DESTINOS, salida, type Respuestas } from '../lib/agendar';
+import { medir } from '../lib/medir';
+import { paraMedicion } from '../lib/origen';
 import { whatsappUrl } from '../lib/sitio';
 import { reducido } from './movimiento';
 
@@ -21,6 +23,14 @@ export function iniciarAgendar(): void {
   const error = form.querySelector<HTMLElement>('[data-error]')!;
   const boton = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
   let actual = 0;
+  // Cada paso cuenta una vez por visita (volver atrás no infla el embudo). Va el número, nunca la
+  // respuesta: la respuesta es del caso de la persona.
+  const pasosVistos = new Set<number>();
+  const medirPaso = (n: number) => {
+    if (pasosVistos.has(n)) return;
+    pasosVistos.add(n);
+    medir('agendar_paso', { paso: n + 1, de: pasos.length });
+  };
 
   const respuestas = (): Respuestas => {
     const fd = new FormData(form);
@@ -37,6 +47,7 @@ export function iniciarAgendar(): void {
     pasos.forEach((p, i) => (p.hidden = i !== n));
     puntos.forEach((p, i) => p.classList.toggle('hecho', i <= n));
     numero.textContent = String(n + 1);
+    medirPaso(n);
     form.hidden = false;
     panelSalida.hidden = true;
     panelPasa.hidden = true;
@@ -48,6 +59,8 @@ export function iniciarAgendar(): void {
   };
 
   const mostrarSalida = (s: NonNullable<ReturnType<typeof salida>>) => {
+    // Solo la categoría de la salida (tramite, empresa, paquete-anual...), no las respuestas.
+    medir('agendar_resultado', { resultado: 'salida', salida: s, ...paraMedicion() });
     const d = DESTINOS[s];
     panelSalida.querySelector('[data-titulo]')!.textContent = d.titulo;
     panelSalida.querySelector('[data-texto]')!.textContent = d.texto;
@@ -117,6 +130,7 @@ export function iniciarAgendar(): void {
       panelPasa.querySelector<HTMLAnchorElement>('[data-transferencia]')!.href = whatsappUrl(
         `Hola, soy ${nombre}. Pasé la precalificación de la consulta 1:1 y quiero pagar por transferencia.`,
       );
+      medir('agendar_resultado', { resultado: 'pasa', ...paraMedicion() });
       form.hidden = true;
       panelPasa.hidden = false;
       puntos.forEach((p) => p.classList.add('hecho'));

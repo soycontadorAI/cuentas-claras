@@ -22,6 +22,7 @@ con *Root Directory* `sitio`.
 | `design/assets/` | Recortes de Israel (webp) para miniaturas |
 | `design/landing/` | Bocetos de la landing (2026-10-26). **Elegido: A, libreta viva** (artifact https://claude.ai/artifact/AFnc6JVxVsnX9rWCgqSeYk), con dos cosas de los otros: la calculadora de deducciones de C y los billetes de B, que solo salen al suscribirse (nunca siguiendo al cursor). B y C quedan de registro. Ya construido en `sitio/` |
 | `sitio/` | El sitio en Astro (`cc.sicastro.com`): portada, `/agendar` (precalificación), `/privacidad`, `/sistema` (design system vivo), `llms.txt`. Leer `sitio/README.md` (publicación) y `sitio/DESIGN-SYSTEM.md` |
+| `sitio/src/lib/sitio.ts` (`MEDICION`) | Los IDs de GA4 y del pixel de Meta: en `null` no se mide nada; con ID, solo en producción. Eventos y cómo probar en `sitio/README.md`, "Medición" |
 | `docs/agendar-calendario.md` | Cómo configurar la agenda de Google Calendar con cobro por Stripe para la consulta 1:1 |
 | `design/historias/` | Instagram de @soyisraelcastro: `generar.py` arma `tableros/historias.html` (foto de perfil con sombra maíz o rosa, 5 portadas de destacados y sus historias) y `exportar.sh` saca los PNG a `salidas/historias/` |
 | `docs/instagram-destacadas-guiones.md` | Guiones en video de los destacados (Quién soy a cámara; Servicios, Preguntas y Agenda como consulta). Teleprompter en `social-studio/decks/2026-10-26-destacados-cuentas-claras.json`. Las láminas quedan de respaldo |

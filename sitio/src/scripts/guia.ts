@@ -1,5 +1,7 @@
 /** Formulario de "La guía": valida, manda a /api/guia y celebra con billetes. */
 
+import { medir, medirMeta } from '../lib/medir';
+import { paraMedicion } from '../lib/origen';
 import { lluviaDeBilletes } from './movimiento';
 
 const CORREO = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -41,6 +43,12 @@ export function iniciarGuia(): void {
       });
       const datos = (await resp.json().catch(() => ({}))) as { ok?: boolean; status?: string; error?: string };
       if (!resp.ok || !datos.ok) throw new Error(datos.error || 'No pudimos registrarte en este momento.');
+      // Solo si ya estaba en la lista no cuenta como alta nueva. Sin datos del formulario: solo
+      // si dejó WhatsApp (sí/no) y de dónde llegó.
+      if (datos.status !== 'already') {
+        medir('guia_enviada', { con_whatsapp: Boolean(wa), ...paraMedicion() });
+        medirMeta('Lead', { content_name: 'guia' });
+      }
       lluviaDeBilletes(boton);
       const pila = nombre.value.trim().split(/\s+/)[0];
       listo.querySelector('p')!.textContent =

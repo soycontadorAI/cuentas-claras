@@ -73,3 +73,19 @@ export function conUtm(url: string, medio: 'landing' | 'agendar' | 'guia', lugar
 
 export const whatsappUrl = (texto?: string) =>
   `https://wa.me/${DESPACHO.whatsapp}${texto ? `?text=${encodeURIComponent(texto)}` : ''}`;
+
+/**
+ * Medición: los dos IDs. ESTE es el único lugar donde se ponen; en null, el sitio no carga ni
+ * emite nada (ni una línea de script, ni sessionStorage). Ver "Medición" en README.md.
+ *
+ * Van en código y no en una variable de entorno a propósito: un ID de medición no es secreto
+ * (viaja en el HTML de cada página), y esconderlo solo agrega una falla silenciosa: olvidarlo en
+ * Vercel y quedarse sin datos sin enterarse. Aunque estén puestos, solo cargan en el despliegue
+ * de producción (`VERCEL_ENV === 'production'`), nunca en local ni en los previews de rama.
+ */
+export const MEDICION = {
+  /** GA4, la "ID de medición" del flujo web: "G-XXXXXXXXXX". */
+  ga: null as string | null,
+  /** Pixel de Meta (ID del conjunto de datos, solo dígitos). Coincidencia avanzada APAGADA en el panel. */
+  metaPixel: null as string | null,
+};
