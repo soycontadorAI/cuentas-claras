@@ -39,7 +39,7 @@ YouTube ignora los utm: la visita se ve en YouTube Studio → Alcance → Fuente
 | Historia | Sticker | Enlace |
 |---|---|---|
 | 2/4 · Lo del SAT, de principio a fin | `Ver precios` | `https://sicastro.com/honorarios?utm_source=instagram&utm_medium=social&utm_campaign=cuentas-claras-destacados&utm_content=servicios-02` |
-| 3/4 · Enseño IA a contadores | `soycontador.ai` | `https://soycontador.ai/?utm_source=instagram&utm_medium=social&utm_campaign=cuentas-claras-destacados&utm_content=servicios-03` |
+| 3/4 · Enseño IA a contadores | `Aprende IA conmigo` | `https://soycontador.ai/?utm_source=instagram&utm_medium=social&utm_campaign=cuentas-claras-destacados&utm_content=servicios-03` |
 | 4/4 · Menos portal. Más despacho. | `Probar TodoConta` | `https://todoconta.com/?utm_source=instagram&utm_medium=social&utm_campaign=cuentas-claras-destacados&utm_content=servicios-04` |
 
 ⚠️ **`sicastro.com/honorarios` da 404 hasta que se mergeen los PRs #1 y #2 de `soycontadorAI/sicastro`.**
