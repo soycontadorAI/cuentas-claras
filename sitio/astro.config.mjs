@@ -14,7 +14,7 @@ export default defineConfig({
   trailingSlash: 'never',
   integrations: [
     // /sistema es la hoja del design system: interna, fuera del sitemap y con noindex
-    sitemap({ filter: (url) => !/\/(sistema|404)$/.test(url) }),
+    sitemap({ filter: (url) => !/\/(sistema|404|listo)$/.test(url) }),
   ],
   // El CSS va incrustado: con un solo archivo externo Lighthouse ya marca "render-blocking"
   build: { inlineStylesheets: 'always' },

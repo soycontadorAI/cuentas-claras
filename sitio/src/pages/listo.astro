@@ -1,0 +1,28 @@
+---
+/**
+ * /listo: a donde regresa Sendy después de que la persona confirma su correo (confirm_url y
+ * subscribed_url de la lista "La hoja del año"). noindex: sin el correo no tiene sentido.
+ */
+import Barra from '../components/Barra.astro';
+import Pie from '../components/Pie.astro';
+import Base from '../layouts/Base.astro';
+import { CANAL } from '../lib/sitio';
+---
+<Base titulo="Confirmado" noindex>
+  <Barra />
+  <main id="contenido" class="envoltura listo">
+    <span class="separador">Confirmado</span>
+    <h1 class="disp">Listo, <span class="resaltado">ya va en camino.</span></h1>
+    <p class="intro">Tu guía te llega en otro correo en unos minutos. Si no la ves, busca en Promociones o en Spam y márcala como "no es spam" para que te lleguen las siguientes.</p>
+    <div class="acciones">
+      <a class="btn" href={CANAL.url} rel="noopener">Mientras, ve el canal</a>
+      <a class="btn claro" href="/agendar">¿Tu caso no es tan sencillo?</a>
+    </div>
+  </main>
+  <Pie />
+</Base>
+<style>
+  .listo { padding-block: clamp(48px, 10vw, 140px) 0; }
+  h1 { margin: 22px 0 0; font-size: var(--t-h2); }
+  .acciones { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px; }
+</style>
