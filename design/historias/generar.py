@@ -44,9 +44,9 @@ DESTACADAS = [
     {
         "id": "quien", "nombre": "Quién soy", "icono": "billete", "tono": "maiz",
         "historias": [
-            {"tipo": "foto", "foto": "israel-cruzado.webp", "clase": "texto-largo",
+            {"tipo": "foto", "foto": "israel-cruzado.webp",
              "kicker": "Hola", "titulo": 'Soy <span class="rem">Israel Castro.</span>',
-             "texto": "Contador público. Creo contenido para explicarte, como en una consulta, temas del SAT, de contabilidad y de todo lo que afecta tu bolsillo."},
+             "texto": "Contador público. Creo contenido explicando temas del SAT, contabilidad y lo que afecte tu bolsillo."},
             {"tipo": "fichas", "kicker": "Qué hay aquí", "titulo": "Lo que te preguntas, resuelto.",
              "fichas": [("SAT", "maiz", "RFC, e.firma, constancia, buzón y cartas"),
                         ("Tu declaración", "rosa", "Obligación, deducciones y saldos a favor"),
@@ -289,10 +289,6 @@ PLANTILLA = """<!doctype html>
   .pie-h.tag { align-self: center; gap: 14px; font-size: 38px; letter-spacing: .01em; }
   .pie-h.tag span { color: var(--cacao); }
   .con-foto .enlace { justify-items: start; }
-  /* Quién soy 1/3: el texto es largo (2026-10-27), así que la foto baja y se recorre para que el
-     texto no se encime en el hombro */
-  .con-foto.texto-largo .foto { height: 1180px; right: -260px; }
-  .con-foto.texto-largo .txt { font-size: 40px; max-width: 14ch; }
   /* 7/7 de Preguntas: más grande, y el borde izquierdo del recorte (la manga viene cortada en la
      foto) se desvanece para que no se lea como brazo mocho */
   .con-foto.grande .foto { height: 1580px; right: -330px; -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 14%); mask-image: linear-gradient(90deg, transparent 0, #000 14%); }
