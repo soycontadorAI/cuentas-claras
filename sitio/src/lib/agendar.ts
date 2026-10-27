@@ -101,7 +101,7 @@ export const DESTINOS: Record<Salida, Destino> = {
       'Los trámites tienen precio fijo en el despacho, y casi todos tienen su video paso a paso por si prefieres hacerlo tú.',
     boton: 'Ver trámites y precios',
     url: sicastro('/honorarios#tramites', 'salida-tramite'),
-    otra: { texto: 'O hazlo tú con el video', url: CANAL.url },
+    otra: { texto: 'O aprende con nosotros en el canal', url: CANAL.url },
   },
   empresa: {
     titulo: 'Una empresa se ve con el despacho.',

@@ -45,7 +45,7 @@ confirma (de los saldos a favor se dice "millones", sin número, hasta que esté
 | Quién soy | 1 | (a cámara) | Quién soy y por qué esta cuenta | No |
 | | 2 | (a cámara) | Lo que vas a encontrar: SAT, tu declaración, tus números | No |
 | | 3 | (a cámara) | El canal, cada semana | YouTube |
-| Servicios | 1 | "¿Y tú me lo puedes hacer?" | Hazlo tú o déjalo en nuestras manos | No |
+| Servicios | 1 | "¿Y tú me lo puedes hacer?" | Aprende con nosotros o déjalo en nuestras manos | No |
 | | 2 | "¿Qué tanto hacen?" | La lista, y que los precios están publicados | Honorarios |
 | | 3 | "Mi contador también anda viendo lo de la IA." | soycontador.ai | soycontador.ai |
 | | 4 | "¿Y con qué bajan tantas facturas?" | TodoConta | todoconta.com |
@@ -113,7 +113,7 @@ declaración" y "tus números".
 El menú. Va de lo del despacho a lo que no es del despacho (contadores y app), y se nota que son
 cosas distintas.
 
-### 1. Hazlo tú, o déjalo en nuestras manos
+### 1. Aprende con nosotros, o déjalo en nuestras manos
 
 **Arriba:** "¿Y tú me lo puedes hacer?"
 
@@ -125,7 +125,7 @@ cosas distintas.
 >
 > Todo en línea, desde cualquier parte de México.
 >
-> Hazlo tú, o déjalo en nuestras manos.
+> Aprende con nosotros, o déjalo en nuestras manos.
 
 ### 2. Lo que hacemos, con precio publicado
 

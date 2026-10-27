@@ -181,10 +181,10 @@ le habla a 45-65, que aquí es el 21%: va después.
 Con 96% de espectadores nuevos, **la primera conversión tiene que pasar en el mismo video, en el
 momento del problema**, no "cuando ya nos conozca". El suscriptor no es la métrica.
 
-**"Hazlo tú, o déjalo en nuestras manos"** sigue siendo el gancho (antes "o te lo hacemos"; Israel
+**"Aprende con nosotros, o déjalo en nuestras manos"** sigue siendo el gancho (antes "o te lo hacemos"; Israel
 lo cambió el 2026-10-26), ahora en dos tiempos:
 
-- **En el video:** hazlo tú con el video, o déjalo en nuestras manos (trámite, consulta o la anual).
+- **En el video:** aprende con nosotros, o déjalo en nuestras manos (trámite, consulta o la anual).
 - **En el año:** el Plan del año para el asalariado, el acompañamiento para el que cobra por su
   cuenta, o la iguala.
 

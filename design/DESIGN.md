@@ -103,7 +103,7 @@ rosa no se usa para separar la foto del fondo.
 
 ## Banner
 
-La libreta, el logotipo y una frase en la caja segura (1546 × 423). **"Hazlo tú, o déjalo en nuestras manos"
+La libreta, el logotipo y una frase en la caja segura (1546 × 423). **"Aprende con nosotros, o déjalo en nuestras manos"
 y "Un canal de S & I Castro Consultores" NO van en la imagen** (decisión de Israel, 2026-10-24):
 van en la descripción del canal y en la de cada video. El dicho de la v1 se quitó porque
 dependía del nombre. La frase:

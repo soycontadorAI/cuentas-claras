@@ -45,7 +45,7 @@ con *Root Directory* `sitio`.
   un cliente y lleva los videos que pida (casi siempre tres, no siempre: en el copy público se dice
   "una duda, una serie", nunca "tres videos"). Cada video funciona solo (título = lo que se
   teclea), todos en una lista, la pantalla final al siguiente. Entre series, sueltos de trámite o error del SAT.
-- **Conversión en el mismo video:** "Hazlo tú, o déjalo en nuestras manos" (antes "o te lo
+- **Conversión en el mismo video:** "Aprende con nosotros, o déjalo en nuestras manos" (2026-10-27; antes "Hazlo tú", que invitaba a hacerlo solo; y antes "o te lo
   hacemos", cambiado el 2026-10-26) hacia `cc.sicastro.com/agendar`, con
   utm (`utm_campaign=cuentas-claras&utm_content=<ID>`). Escalera: gratis, trámite a precio fijo,
   consulta, Tu Declaración, Resuelta, Plan del año para el asalariado (noviembre, febrero y la
@@ -99,7 +99,7 @@ con *Root Directory* `sitio`.
 - **La landing capta, no vende:** nombre y correo obligatorios, WhatsApp opcional, a cambio de "La
   guía" (se llamó "La hoja del año" hasta el 2026-10-27). El botón al despacho dice "Ir al despacho" y toda liga saliente lleva utm:
   `utm_source=cuentas-claras&utm_medium=landing|guia&utm_campaign=cuentas-claras&utm_content=<lugar>`.
-- "Hazlo tú, o déjalo en nuestras manos" y "Un canal de S & I Castro Consultores" van en las descripciones,
+- "Aprende con nosotros, o déjalo en nuestras manos" y "Un canal de S & I Castro Consultores" van en las descripciones,
   **no** en el banner ni en las miniaturas.
 
 ## Reglas de copy

@@ -5,6 +5,7 @@ Allow: /
 Disallow: /sistema
 Disallow: /listo
 Disallow: /api/
+Disallow: /descargas/
 
 User-agent: GPTBot
 Allow: /

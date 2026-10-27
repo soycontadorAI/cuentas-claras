@@ -2,7 +2,8 @@
 
 El texto vive en el .md (fuente única); aquí solo el diseño, con el design system "libreta viva".
     python3 design/guia/generar.py
-deja design/guia/guia.html y design/salidas/guia/cuentas-claras-la-guia.pdf (Chrome sin interfaz).
+deja design/guia/guia.html y design/salidas/guia/cuentas-claras-la-guia.pdf (Chrome sin interfaz), y copia
+el PDF a sitio/public/descargas/la-guia.pdf, que es lo que liga el correo de bienvenida de Sendy.
 
 Lo que se toma del .md: de "## Portada" hasta antes de "## Notas internas". Las comillas rectas
 se vuelven curvas, las casillas "- [ ]" se dibujan y las ligas salen con utm.
@@ -257,4 +258,6 @@ if __name__ == "__main__":
          f"--print-to-pdf={PDF}", HTML.as_uri()],
         check=True, capture_output=True,
     )
+    # La copia que se sirve en cc.sicastro.com/descargas/la-guia.pdf (la liga del correo de Sendy)
+    (RAIZ / "sitio" / "public" / "descargas" / "la-guia.pdf").write_bytes(PDF.read_bytes())
     print(PDF)

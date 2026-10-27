@@ -52,23 +52,27 @@ DESTACADAS = [
                         ("Tu declaración", "rosa", "Obligación, deducciones y saldos a favor"),
                         ("Tus números", "cacao", "Ingresos extra, finanzas sanas y estados financieros")]},
             {"tipo": "enlace", "kicker": "Cada semana", "titulo": 'Un video nuevo en <span class="rem">Cuentas Claras.</span>',
-             "texto": "Una duda, una serie. Búscanos en YouTube.", "enlace": "youtube.com/@cuentasclaras_mx"},
+             "texto": "Una duda, una serie. Búscanos en YouTube.", "enlace": True},
         ],
     },
     {
         "id": "servicios", "nombre": "Servicios", "icono": "maletin", "tono": "cacao",
         "historias": [
             {"tipo": "texto", "kicker": "Servicios",
-             "titulo": 'Hazlo tú, o <span class="rem">déjalo en nuestras manos.</span>',
+             "titulo": 'Aprende con nosotros, o <span class="rem">déjalo en nuestras manos.</span>',
              "texto": "Con S & I Castro Consultores, el despacho familiar. 100% en línea en todo México."},
             {"tipo": "lista-enlace", "kicker": "Lo que hacemos", "titulo": "Lo del SAT, de principio a fin.",
              "items": [("Consulta 1:1", ""), ("Tu declaración anual", ""), ("Tu contabilidad cada mes", ""),
                        ("Trámites: RFC, e.firma, 32-D", ""), ("Ponerte al corriente", "")],
-             "enlace": "Precios en el despacho"},
-            {"tipo": "texto", "kicker": "¿Eres contador?", "titulo": 'También enseño a contadores a usar <span class="rem">la IA.</span>',
-             "texto": "Talleres y cursos en soycontador.ai."},
+             "enlace": True},
+            {"tipo": "lista-enlace", "clase": "compacta", "kicker": "¿Eres contador?", "titulo": 'Enseño IA <span class="rem">a contadores.</span>',
+             "items": [("Jueves de ContadorIA", "Clase en vivo y gratis cada jueves"),
+                       ("Talleres en vivo", "Usa y construye con IA sin ser programador"),
+                       ("Capacitación para despachos", "Con tu equipo y tu operación"),
+                       ("Ebook IA para Contadores", "")],
+             "texto": "Todo en soycontador.ai.", "enlace": True},
             {"tipo": "enlace", "kicker": "Para tu despacho", "titulo": 'Tus CFDI del SAT, <span class="res">sin entrar al portal.</span>',
-             "texto": "Eso hace TodoConta, la app que usamos en el despacho.", "enlace": "todoconta.com"},
+             "texto": "Eso hace TodoConta, la app que usamos en el despacho.", "enlace": True},
         ],
     },
     {
@@ -95,9 +99,9 @@ DESTACADAS = [
              "texto": "Casi nunca es trampa. Pidió factura y la pagó con tarjeta. La diferencia es saber qué guardar."},
             {"tipo": "hoja", "kicker": "Gratis", "titulo": 'Las respuestas, <span class="res">en una guía.</span>',
              "texto": "Con el calendario y el checklist."},
-            {"tipo": "foto-enlace", "foto": "israel-senala-abajo.webp", "kicker": "Pídela",
+            {"tipo": "foto-enlace", "foto": "israel-senala-abajo.webp", "clase": "grande", "kicker": "Pídela",
              "titulo": 'Tu nombre, tu correo <span class="rem">y listo.</span>',
-             "texto": "Te llega en un minuto.", "enlace": "La guía gratis"},
+             "texto": "Te llega en un minuto.", "enlace": True},
         ],
     },
     {
@@ -107,27 +111,33 @@ DESTACADAS = [
              "titulo": '¿Tu caso no es <span class="rem">tan sencillo?</span>',
              "texto": "Lo revisamos juntos, con tus números. La consulta tiene costo."},
             {"tipo": "pasos", "kicker": "Cómo se agenda", "titulo": "Tres pasos.",
-             "pasos": ["Da clic en agendar", "Pagas en línea", "Te llega el calendario y escoges tu hora"]},
+             "pasos": ["Toca el enlace", "Escoges tu hora y pagas en línea", "Te llega la invitación"], "enlace": True},
             {"tipo": "enlace", "kicker": "¿Transferencia?", "titulo": 'Escríbeme por <span class="rem">WhatsApp.</span>',
-             "texto": "Ahí te paso los datos y apartamos tu cita.", "enlace": "55 4475 3602"},
+             "texto": "Al 55 4475 3602. Ahí te paso los datos y apartamos tu cita.", "enlace": True},
         ],
     },
 ]
 
 
-def pie() -> str:
-    return (f'<div class="pie-h"><svg viewBox="0 0 200 200"><use href="#simbolo"/></svg>'
-            f'<span>{HANDLE}</span></div>')
+def pie(i: int = 1) -> str:
+    """El handle solo en la primera historia de cada destacada; de ahí en adelante, el billete y
+    #CuentasClaras al centro (Israel, 2026-10-27)."""
+    if i == 1:
+        return (f'<div class="pie-h"><svg viewBox="0 0 200 200"><use href="#simbolo"/></svg>'
+                f'<span>{HANDLE}</span></div>')
+    return ('<div class="pie-h tag"><svg viewBox="0 0 200 200"><use href="#simbolo"/></svg>'
+            '<span>#CuentasClaras</span></div>')
 
 
 def cabeza(kicker: str, extra: str = "") -> str:
     return f'<span class="kick">{escape(kicker)}{extra}</span>'
 
 
-def zona_enlace(texto: str) -> str:
-    return (f'<div class="enlace"><span class="rot">Toca aquí</span>'
-            f'<div class="sticker-falso">{escape(texto)}</div>'
-            f'<div class="guia caja-sticker">Aquí va el sticker de enlace</div></div>')
+def zona_enlace() -> str:
+    """"Toca aquí" y el hueco donde Israel pone el sticker de enlace de Instagram (la caja azul
+    es guía del tablero, no se exporta). Sin enlace dibujado: el de verdad es el sticker."""
+    return ('<div class="enlace"><span class="rot">Toca aquí</span>'
+            '<div class="hueco"><div class="guia caja-sticker">Aquí va el sticker de enlace</div></div></div>')
 
 
 def historia(h: dict, d: dict, i: int, total: int) -> str:
@@ -137,19 +147,19 @@ def historia(h: dict, d: dict, i: int, total: int) -> str:
         return (f'<div class="h libreta preg">{cabeza("Preguntas", f" <b>{h["n"]}/5</b>")}'
                 f'<span class="numerote rot">{h["n"]}</span>'
                 f'<h3 class="disp tit">{escape(h["titulo"])}</h3><p class="txt">{escape(h["texto"])}</p>'
-                f'<p class="remite">La respuesta completa, en <span class="res">la guía gratis.</span></p>{pie()}</div>')
+                f'<p class="remite">La respuesta completa, en <span class="res">la guía gratis.</span></p>{pie(i)}</div>')
     if t == "testimonio":
         return (f'<div class="h libreta testi">{cabeza(h["kicker"])}<span class="comillas rot">“</span>'
                 f'<p class="cita">{escape(h["cita"])}</p><p class="quien">{escape(h["quien"])}</p>'
-                f'<p class="caso">{escape(h["caso"])}</p>{pie()}</div>')
+                f'<p class="caso">{escape(h["caso"])}</p>{pie(i)}</div>')
     cuerpo = ""
     if t in ("foto", "foto-enlace"):
         cuerpo = (f'<img class="recorte foto" src="../landing/img/{h["foto"]}" alt="">'
                   f'<div class="sobre">{cabeza(h["kicker"])}<h3 class="disp tit">{h["titulo"]}</h3>'
                   f'<p class="txt">{escape(h["texto"])}</p></div>')
         if t == "foto-enlace":
-            cuerpo += zona_enlace(h["enlace"])
-        return f'<div class="h libreta con-foto">{cuerpo}{pie()}</div>'
+            cuerpo += zona_enlace()
+        return f'<div class="h libreta con-foto {h.get("clase", "")}">{cuerpo}{pie(i)}</div>'
     cuerpo = f'{cabeza(h["kicker"])}<h3 class="disp tit">{h["titulo"]}</h3>'
     if t == "fichas":
         cuerpo += '<div class="fichas">' + "".join(
@@ -158,7 +168,7 @@ def historia(h: dict, d: dict, i: int, total: int) -> str:
     if t == "hoja":
         meses = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
         clave = {"Feb", "Abr", "Nov", "Dic"}
-        cuerpo += ('<div class="hojita"><div class="hojita-cab"><span class="rot">La hoja del año</span></div><ol>' +
+        cuerpo += ('<div class="hojita"><div class="hojita-cab"><span class="rot">La guía</span></div><ol>' +
                    "".join(f'<li{" class=\"k\"" if m in clave else ""}><i></i>{m}</li>' for m in meses) + '</ol></div>')
         cuerpo += f'<p class="txt">{escape(h["texto"])}</p>'
     if t in ("lista", "lista-enlace"):
@@ -171,11 +181,11 @@ def historia(h: dict, d: dict, i: int, total: int) -> str:
             for k, p in enumerate(h["pasos"])) + '</ol>'
     if t in ("texto", "enlace", "lista-enlace") and h.get("texto"):
         cuerpo += f'<p class="txt">{escape(h["texto"])}</p>'
-    if t in ("enlace", "lista-enlace"):
-        cuerpo += zona_enlace(h["enlace"])
+    if h.get("enlace"):
+        cuerpo += zona_enlace()
     # El tipo va con prefijo: sin él, la clase del contenedor ("enlace", "fichas", "pasos") chocaba con
     # la del bloque interno del mismo nombre y la historia dejaba de medir 1920 (2026-10-26)
-    return f'<div class="h libreta tipo-{t}">{cuerpo}{pie()}</div>'
+    return f'<div class="h libreta tipo-{t} {h.get("clase", "")}">{cuerpo}{pie(i)}</div>'
 
 
 # Las portadas van todas de un solo tono: Instagram reacomoda los destacados cada vez que se
@@ -274,9 +284,21 @@ PLANTILLA = """<!doctype html>
   .enlace + .pie-h { margin-top: 20px; }
   .enlace .rot { font-size: 64px; color: var(--rosa); transform: rotate(-4deg); }
   .enlace .rot::after { content: " ↓"; font-family: var(--font-display); font-weight: 800; }
-  .sticker-falso { padding: 26px 44px; border-radius: 22px; background: #fff; color: #1d6ce0; font: 700 42px/1 -apple-system, system-ui, sans-serif; box-shadow: 0 8px 20px rgba(0,0,0,.12); }
-  .caja-sticker { position: absolute; inset: 70px -20px -10px; border: 6px dashed rgba(0,170,255,.9); border-radius: 30px; display: grid; place-items: end center; padding-bottom: 6px; font: 600 26px/1 system-ui; color: rgba(0,120,200,1); }
+  .hueco { position: relative; width: 520px; height: 110px; }
+  .caja-sticker { position: absolute; inset: -10px; border: 6px dashed rgba(0,170,255,.9); border-radius: 30px; display: grid; place-items: center; font: 600 26px/1 system-ui; color: rgba(0,120,200,1); }
+  .pie-h.tag { align-self: center; gap: 14px; font-size: 38px; letter-spacing: .01em; }
+  .pie-h.tag span { color: var(--cacao); }
   .con-foto .enlace { justify-items: start; }
+  /* 7/7 de Preguntas: más grande, y el borde izquierdo del recorte (la manga viene cortada en la
+     foto) se desvanece para que no se lea como brazo mocho */
+  .con-foto.grande .foto { height: 1580px; right: -330px; -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 14%); mask-image: linear-gradient(90deg, transparent 0, #000 14%); }
+  .con-foto.grande .pie-h.tag { position: absolute; top: 290px; left: 50%; transform: translateX(-36%); margin: 0; }
+  .con-foto.grande .enlace { margin-top: auto; padding-bottom: 0; }
+  .compacta .tit { font-size: 96px; max-width: 12ch; margin-top: 40px; }
+  .compacta .lista { margin-top: 36px; gap: 14px; }
+  .compacta .lista li { font-size: 40px; }
+  .compacta .lista span:not(.bola) { font-size: 34px; margin-top: 4px; }
+  .compacta .txt { margin-top: 26px; }
 
   /* Fichas, lista, pasos, hojita */
   .fichas { display: grid; gap: 50px; margin-top: 76px; width: 100%; }

@@ -3,7 +3,7 @@
 **Fecha:** 2026-10-25 · **Estado:** borrador para que Israel lo recorte.
 
 Aquí viven las líneas que la identidad sacó de las imágenes (decisión de Israel, 2026-10-24):
-"Hazlo tú con el video, o déjalo en nuestras manos" y "Un canal de S & I Castro Consultores" no van en el banner ni en las
+"Aprende con nosotros, o déjalo en nuestras manos" y "Un canal de S & I Castro Consultores" no van en el banner ni en las
 miniaturas, van en estas descripciones.
 
 Reglas de copy para todo lo de aquí: español de México, tuteo, sin raya larga, comillas rectas.
@@ -27,7 +27,7 @@ Soy Israel Castro, contador público. Aquí resolvemos las dudas que más me tra
 - Tu declaración: si tienes que presentarla, deducciones personales, saldo a favor e ingresos por intereses o inversiones.
 - Tus números y tu dinero: estados financieros básicos, RESICO, aguinaldo y cuánto te queda neto.
 
-Hazlo tú con el video, o déjalo en nuestras manos. Si tu caso se complica, el despacho lo resuelve contigo:
+Aprende con nosotros, o déjalo en nuestras manos. Si tu caso se complica, el despacho lo resuelve contigo:
 👉 https://cc.sicastro.com/agendar?utm_source=youtube&utm_medium=canal&utm_campaign=cuentas-claras
 
 Los videos son orientación general: cada caso tiene sus detalles.
@@ -44,7 +44,7 @@ Por qué así:
   por búsqueda (ver `estrategia.md`). El IMSS ya no va: salió del eje del canal (giro del
   2026-10-26).
 - **La segunda línea promete el formato**: la duda, resuelta como en una consulta.
-- **"Hazlo tú, o déjalo en nuestras manos" va antes del despacho**, para que se lea como ayuda y no como anuncio.
+- **"Aprende con nosotros, o déjalo en nuestras manos" va antes del despacho**, para que se lea como ayuda y no como anuncio.
 - **La nota de "orientación general"** cuida dos cosas: no prometer que el video resuelve todos
   los casos y darle una razón honesta a la consulta.
 - **TodoConta va al final y como patrocinio**, con lo que de verdad le sirve a este espectador
@@ -84,7 +84,7 @@ Cinco bloques, siempre en este orden. Los corchetes se llenan; lo demás se qued
 [La respuesta en una frase, con la palabra exacta que se busca.]
 [Para quién es: "Si eres patrón con trabajadores...", "Si trabajas por tu cuenta...".]
 
-¿No te salió o prefieres que lo hagamos nosotros? Hazlo tú, o déjalo en nuestras manos:
+¿No te salió o prefieres que lo hagamos nosotros? Aprende con nosotros, o déjalo en nuestras manos:
 👉 https://cc.sicastro.com/agendar?utm_source=youtube&utm_medium=video&utm_campaign=cuentas-claras&utm_content=[ID del video]
 
 Capítulos:
@@ -132,7 +132,7 @@ busca, y cada uno es la idea de un video.
 Si solo tienes ingresos por sueldo, en algunos casos sí tienes que presentar la declaración anual. Aquí te explico en cuáles, cuándo te sale a pagar y cómo se paga.
 Si trabajas para una empresa y nunca has presentado tu anual, este video es para ti.
 
-¿Tu caso no es tan sencillo o prefieres que lo revisemos? Hazlo tú, o déjalo en nuestras manos:
+¿Tu caso no es tan sencillo o prefieres que lo revisemos? Aprende con nosotros, o déjalo en nuestras manos:
 👉 https://cc.sicastro.com/agendar?utm_source=youtube&utm_medium=video&utm_campaign=cuentas-claras&utm_content=[ID]
 
 Capítulos:
