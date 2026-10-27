@@ -1,0 +1,669 @@
+<title>Cuentas Claras · Libreta viva</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Shrikhand&display=swap">
+<style>
+/* Boceto A · La libreta viva. Fiel a la identidad v2: todo pasa sobre la libreta crema; el rosa y
+   el maíz solo marcan (palomitas, resaltador, estampas, separadores). La animación es la de alguien
+   que va llenando la libreta: palomea, subraya, encierra, pega notas.
+   Layout: columna de libreta con margen rojo a la izquierda; secciones como páginas con separador. */
+:root {
+  --crema: #FFF6E8;
+  --papel: #FFFBF3;
+  --cacao: #3B2418;
+  --cacao-70: rgba(59, 36, 24, .70);
+  --cacao-12: rgba(59, 36, 24, .12);
+  --rosa: #E4007C;
+  --rosa-hondo: #B0005F;
+  --maiz: #F6C343;
+  --margen: #F2A3C7;
+  --display: "Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
+  --rotulo: "Shrikhand", "Bricolage Grotesque", cursive;
+  --ancho: 1180px;
+  --cuadro: 32px;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--crema); color: var(--cacao);
+  font-family: var(--display); font-size: 18px; line-height: 1.55; font-weight: 450;
+  font-variation-settings: "wdth" 100, "opsz" 16;
+  -webkit-font-smoothing: antialiased; overflow-x: clip;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 60; background: var(--crema); }
+/* La libreta: cuadrícula tenue y el margen rosa a la izquierda */
+.hoja-fondo {
+  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    linear-gradient(90deg, transparent calc(max(16px, env(safe-area-inset-left, 0px)) + 34px), var(--margen) calc(max(16px, env(safe-area-inset-left, 0px)) + 34px), var(--margen) calc(max(16px, env(safe-area-inset-left, 0px)) + 36px), transparent calc(max(16px, env(safe-area-inset-left, 0px)) + 36px)),
+    linear-gradient(var(--cacao-12) 1px, transparent 1px) 0 0 / var(--cuadro) var(--cuadro),
+    linear-gradient(90deg, var(--cacao-12) 1px, transparent 1px) 0 0 / var(--cuadro) var(--cuadro),
+    var(--crema);
+}
+@media (max-width: 760px) {
+  /* En el teléfono el margen rosa cruzaría el texto: queda solo la cuadrícula */
+  .hoja-fondo { background: linear-gradient(var(--cacao-12) 1px, transparent 1px) 0 0 / var(--cuadro) var(--cuadro), linear-gradient(90deg, var(--cacao-12) 1px, transparent 1px) 0 0 / var(--cuadro) var(--cuadro), var(--crema); }
+}
+a { color: inherit; }
+img { max-width: 100%; height: auto; display: block; }
+:focus-visible { outline: 3px solid var(--rosa); outline-offset: 3px; border-radius: 4px; }
+.envoltura { width: 100%; max-width: var(--ancho); margin-inline: auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.disp { font-weight: 800; font-variation-settings: "wdth" 92, "opsz" 96; line-height: .94; letter-spacing: -.015em; text-wrap: balance; }
+.rot { font-family: var(--rotulo); font-weight: 400; line-height: 1; }
+.etiqueta { font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--cacao-70); }
+.resaltado { background: linear-gradient(transparent 55%, var(--maiz) 55%, var(--maiz) 92%, transparent 92%) no-repeat 0 0 / var(--r, 100%) 100%; padding-inline: .08em; }
+
+/* ---------- Barra ---------- */
+.barra { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; transition: background-color .3s, box-shadow .3s; }
+.barra.fondo { background: rgba(255, 246, 232, .92); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 1px 0 var(--cacao-12); }
+.barra .envoltura { display: flex; align-items: center; gap: 24px; min-height: 72px; }
+.marca { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; margin-right: auto; }
+.marca svg { width: 46px; height: 46px; transition: transform .6s cubic-bezier(.3, 1.6, .5, 1); }
+.marca:hover svg { transform: rotate(-12deg) scale(1.06); }
+.marca .rot { font-size: 21px; line-height: .9; }
+.nav { display: flex; gap: 26px; font-weight: 600; font-size: 16px; }
+.nav a { text-decoration: none; position: relative; }
+.nav a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 3px; background: var(--rosa); border-radius: 2px; transform: scaleX(0); transform-origin: left; transition: transform .35s cubic-bezier(.6, 0, .2, 1); }
+.nav a:hover::after { transform: scaleX(1); }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 52px; padding: 0 24px; border: 0; border-radius: 999px; cursor: pointer;
+  font: 700 16px/1 var(--display); font-variation-settings: "wdth" 95; text-decoration: none;
+  background: var(--cacao); color: var(--crema);
+  box-shadow: 0 4px 0 var(--rosa-hondo); transition: transform .2s, box-shadow .2s, background-color .2s;
+  will-change: transform;
+}
+.btn:hover { background: var(--rosa); box-shadow: 0 6px 0 var(--rosa-hondo); }
+.btn:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--rosa-hondo); }
+.btn.claro { background: var(--papel); color: var(--cacao); box-shadow: inset 0 0 0 2px var(--cacao), 0 4px 0 var(--cacao); }
+.btn.claro:hover { background: var(--maiz); }
+@media (max-width: 760px) { .nav { display: none; } .barra .btn { min-height: 44px; padding: 0 16px; font-size: 14.5px; } }
+
+/* ---------- Portada ---------- */
+.portada { padding-block: clamp(32px, 6vw, 72px) clamp(40px, 6vw, 80px); }
+.portada .envoltura { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: 32px; align-items: center; }
+.portada h1 { margin: 18px 0 0; font-size: clamp(3rem, 1.6rem + 6.4vw, 7.4rem); }
+.portada h1 .linea { display: block; overflow: hidden; padding-bottom: .06em; margin-bottom: -.06em; }
+.portada h1 .linea > span { display: inline-block; }
+.palomeada { position: relative; white-space: nowrap; }
+.palomeada svg { position: absolute; right: -.58em; top: .06em; width: .5em; height: .5em; overflow: visible; }
+.palomeada path { fill: none; stroke: var(--rosa); stroke-width: 12; stroke-linecap: round; stroke-linejoin: round; }
+.portada h1 .orden { position: relative; display: inline-block; }
+.portada h1 .orden svg { position: absolute; left: -4%; bottom: -.12em; width: 108%; height: .3em; overflow: visible; }
+.portada h1 .orden path { fill: none; stroke: var(--rosa); stroke-width: 7; stroke-linecap: round; }
+.bajada { margin: 26px 0 0; max-width: 34ch; font-size: clamp(1.1rem, 1rem + .5vw, 1.4rem); line-height: 1.45; color: var(--cacao-70); }
+.bajada strong { color: var(--cacao); font-weight: 700; }
+.acciones { display: flex; flex-wrap: wrap; gap: 14px 18px; align-items: center; margin-top: 32px; }
+.yt { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; text-decoration: none; }
+.yt span { border-bottom: 2px solid var(--cacao-12); transition: border-color .3s; }
+.yt:hover span { border-color: var(--rosa); }
+.yt svg { width: 28px; height: 20px; }
+.figura { position: relative; justify-self: center; width: min(100%, 440px); }
+.figura .foto { position: relative; z-index: 2; filter: drop-shadow(0 22px 26px rgba(59, 36, 24, .28)); }
+.provisional { position: absolute; z-index: 4; left: 0; bottom: 18px; padding: 6px 12px; border-radius: 6px; background: var(--cacao); color: var(--crema); font-size: 12.5px; font-weight: 700; letter-spacing: .04em; transform: rotate(-3deg); }
+.nota {
+  position: absolute; z-index: 3; width: 168px; padding: 14px 14px 16px; border-radius: 4px;
+  font-weight: 700; font-size: 15.5px; line-height: 1.25; box-shadow: 0 10px 18px rgba(59, 36, 24, .16);
+  font-variation-settings: "wdth" 92;
+}
+.nota::before { content: ""; position: absolute; top: -10px; left: 50%; width: 64px; height: 20px; margin-left: -32px; background: rgba(255, 255, 255, .55); border-radius: 2px; transform: rotate(-4deg); }
+.nota { translate: var(--fx, 0) var(--fy, 0); }
+.nota.n1 { background: var(--maiz); top: 8%; left: -10%; transform: rotate(-7deg); }
+.nota.n2 { background: var(--papel); top: 40%; right: -8%; transform: rotate(6deg); box-shadow: inset 0 0 0 2px var(--cacao), 0 10px 18px rgba(59, 36, 24, .16); }
+.nota.n3 { background: var(--rosa); color: var(--crema); bottom: 14%; left: -6%; transform: rotate(4deg); }
+.estampa-giro { position: absolute; z-index: 3; top: -4%; right: 2%; width: 118px; height: 118px; }
+.estampa-giro .disco { position: absolute; inset: 14px; border-radius: 50%; background: var(--maiz); display: grid; place-items: center; }
+.estampa-giro .disco svg { width: 58px; height: 58px; }
+.estampa-giro .texto-circular { position: absolute; inset: 0; animation: girar 18s linear infinite; }
+.estampa-giro text { font: 800 12.5px var(--display); letter-spacing: .18em; fill: var(--cacao); text-transform: uppercase; }
+@keyframes girar { to { transform: rotate(360deg); } }
+@media (max-width: 860px) {
+  .portada .envoltura { grid-template-columns: 1fr; }
+  .figura { width: min(84%, 360px); margin-top: 12px; }
+  .nota { width: 136px; font-size: 13.5px; }
+  .nota.n1 { left: -14%; } .nota.n2 { right: -14%; } .nota.n3 { left: -12%; }
+}
+
+/* ---------- Tira de preguntas ---------- */
+.tira { border-block: 2px solid var(--cacao); background: var(--papel); overflow: hidden; padding-block: 18px; transform: rotate(-1.2deg); margin-block: 24px; }
+.tira-pista { display: flex; gap: 38px; width: max-content; animation: correr 40s linear infinite; }
+.tira:hover .tira-pista { animation-play-state: paused; }
+.tira-pista span { display: inline-flex; align-items: center; gap: 38px; font-weight: 800; font-size: clamp(1.25rem, 1rem + 1vw, 1.8rem); font-variation-settings: "wdth" 92; white-space: nowrap; }
+.tira-pista svg { width: 34px; height: 34px; flex: none; }
+@keyframes correr { to { transform: translateX(-50%); } }
+
+/* ---------- Secciones como páginas de la libreta ---------- */
+.pagina { padding-block: clamp(64px, 9vw, 120px); position: relative; }
+.separador { display: inline-flex; align-items: center; gap: 10px; padding: 8px 18px 8px 14px; border-radius: 0 999px 999px 0; background: var(--c, var(--maiz)); color: var(--t, var(--cacao)); font-weight: 800; font-size: 14px; letter-spacing: .1em; text-transform: uppercase; margin-left: calc(-1 * max(16px, env(safe-area-inset-left, 0px))); padding-left: max(16px, env(safe-area-inset-left, 0px)); }
+.pagina h2 { margin: 22px 0 0; font-size: clamp(2.3rem, 1.4rem + 3.6vw, 4.6rem); max-width: 15ch; }
+.pagina .intro { margin: 18px 0 0; max-width: 52ch; font-size: 1.15rem; color: var(--cacao-70); }
+
+/* Lo que encuentras: tres fichas con pestaña */
+.fichas { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; margin-top: 52px; }
+.ficha { position: relative; padding: 30px 26px 28px; background: var(--papel); border: 2px solid var(--cacao); border-radius: 6px 22px 22px 22px; box-shadow: 6px 6px 0 var(--cacao); transition: transform .35s cubic-bezier(.3, 1.4, .5, 1), box-shadow .35s; }
+.ficha:hover { transform: translate(-3px, -6px) rotate(-.6deg); box-shadow: 10px 12px 0 var(--cacao); }
+.ficha .pestana { position: absolute; top: -2px; left: -2px; transform: translateY(-100%); padding: 6px 16px; border: 2px solid var(--cacao); border-bottom: 0; border-radius: 10px 10px 0 0; background: var(--c); color: var(--t, var(--cacao)); font-weight: 800; font-size: 14px; }
+.ficha h3 { margin: 6px 0 10px; font-size: 1.7rem; font-weight: 800; font-variation-settings: "wdth" 92, "opsz" 48; line-height: 1.02; }
+.ficha p { margin: 0; color: var(--cacao-70); }
+.ficha ul { margin: 18px 0 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+.ficha li { display: flex; gap: 10px; align-items: baseline; font-weight: 600; }
+.ficha li::before { content: ""; flex: none; width: 14px; height: 8px; border-left: 3px solid var(--rosa); border-bottom: 3px solid var(--rosa); transform: rotate(-45deg) translate(2px, -2px); }
+@media (max-width: 900px) { .fichas { grid-template-columns: 1fr; gap: 48px; } }
+
+/* Una duda, tres videos: la página que se va llenando */
+.consulta { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 48px; align-items: start; margin-top: 48px; }
+.duda { position: sticky; top: 110px; }
+.globo { position: relative; padding: 26px 28px; background: var(--cacao); color: var(--crema); border-radius: 28px 28px 28px 6px; font-weight: 800; font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.2rem); line-height: 1.12; font-variation-settings: "wdth" 92; }
+.globo small { display: block; margin-bottom: 10px; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--maiz); font-weight: 800; }
+.duda p { margin: 18px 0 0; color: var(--cacao-70); max-width: 38ch; }
+.renglones { list-style: none; margin: 0; padding: 0; display: grid; gap: 18px; }
+.renglon { display: grid; grid-template-columns: 54px minmax(0, 1fr); gap: 18px; align-items: start; padding: 22px 22px 22px 18px; background: var(--papel); border-radius: 16px; box-shadow: inset 0 0 0 2px var(--cacao-12); }
+.renglon .cuadro { width: 54px; height: 54px; border-radius: 12px; border: 3px solid var(--cacao); display: grid; place-items: center; position: relative; background: var(--crema); }
+.renglon .cuadro svg { width: 38px; height: 38px; overflow: visible; }
+.renglon .cuadro path { fill: none; stroke: var(--rosa); stroke-width: 9; stroke-linecap: round; stroke-linejoin: round; }
+.renglon .n { font-size: 13px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--rosa-hondo); }
+.renglon h3 { margin: 4px 0 6px; font-size: 1.35rem; font-weight: 800; line-height: 1.15; font-variation-settings: "wdth" 95, "opsz" 32; }
+.renglon p { margin: 0; color: var(--cacao-70); font-size: 16.5px; }
+.renglon .mas { display: inline-flex; margin-top: 10px; font-weight: 700; font-size: 15px; text-decoration: none; border-bottom: 2px solid var(--maiz); }
+.temporada { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 10px; }
+.chip { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; background: var(--papel); box-shadow: inset 0 0 0 2px var(--cacao); font-weight: 700; font-size: 14.5px; }
+.chip i { width: 10px; height: 10px; border-radius: 50%; background: var(--c, var(--maiz)); }
+@media (max-width: 900px) { .consulta { grid-template-columns: 1fr; } .duda { position: static; } }
+
+/* La guía: la hoja del año y el formulario */
+.guia { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: center; margin-top: 44px; }
+.hoja-anio { position: relative; padding: 30px 28px 26px; background: var(--papel); border-radius: 6px; box-shadow: 0 2px 0 var(--cacao-12), 0 28px 50px -18px rgba(59, 36, 24, .35); transform: rotate(-2.5deg); }
+.hoja-anio::after { content: ""; position: absolute; top: -12px; left: 50%; width: 96px; height: 26px; margin-left: -48px; background: rgba(246, 195, 67, .7); transform: rotate(3deg); }
+.hoja-anio header { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; border-bottom: 3px solid var(--cacao); padding-bottom: 10px; }
+.hoja-anio header .rot { font-size: 1.6rem; color: var(--rosa); }
+.hoja-anio header span:last-child { font-size: 13px; font-weight: 700; color: var(--cacao-70); }
+.meses { list-style: none; margin: 14px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 18px; }
+.meses li { position: relative; padding: 10px 0; border-bottom: 1.5px dashed var(--cacao-12); font-size: 14.5px; line-height: 1.25; }
+.meses b { display: block; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--cacao-70); }
+.meses .clave b { color: var(--rosa-hondo); }
+.meses .clave .circulo { position: absolute; left: -8px; top: 2px; width: calc(100% + 12px); height: calc(100% - 2px); overflow: visible; pointer-events: none; }
+.meses .circulo path { fill: none; stroke: var(--rosa); stroke-width: 2.4; stroke-linecap: round; }
+.formulario { padding: clamp(24px, 4vw, 40px); background: var(--cacao); color: var(--crema); border-radius: 28px; }
+.formulario h3 { margin: 0; font-size: clamp(1.8rem, 1.3rem + 1.6vw, 2.6rem); font-weight: 800; line-height: 1; font-variation-settings: "wdth" 92, "opsz" 72; }
+.formulario h3 .rot { color: var(--maiz); font-size: .9em; }
+.formulario > p { margin: 12px 0 0; color: rgba(255, 246, 232, .78); }
+.campos { display: grid; gap: 14px; margin-top: 24px; }
+.campo label { display: block; margin-bottom: 6px; font-weight: 700; font-size: 15px; }
+.campo label small { font-weight: 500; color: rgba(255, 246, 232, .7); }
+.campo input { width: 100%; min-height: 54px; padding: 0 16px; border: 2px solid transparent; border-radius: 14px; background: var(--crema); color: var(--cacao); font: 600 17px var(--display); transition: border-color .2s, box-shadow .2s; }
+.campo input:focus { outline: none; border-color: var(--maiz); box-shadow: 0 0 0 4px rgba(246, 195, 67, .35); }
+.formulario .btn { width: 100%; background: var(--rosa); box-shadow: 0 5px 0 var(--rosa-hondo); }
+.formulario .btn:hover { background: var(--maiz); color: var(--cacao); box-shadow: 0 7px 0 #B38716; }
+.fino { margin: 12px 0 0; font-size: 13.5px; color: rgba(255, 246, 232, .7); }
+.listo { display: grid; gap: 10px; }
+.listo .rot { font-size: 2.6rem; color: var(--maiz); }
+@media (max-width: 900px) { .guia { grid-template-columns: 1fr; } .hoja-anio { transform: rotate(-1.5deg); } }
+@media (max-width: 460px) { .meses { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* Lo que trae la guía */
+.trae { list-style: none; margin: 22px 0 0; padding: 0; display: grid; gap: 10px; }
+.trae li { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 12px; align-items: start; }
+.trae .num { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--maiz); color: var(--cacao); font-weight: 800; font-size: 15px; }
+.trae b { display: block; font-weight: 800; line-height: 1.2; }
+.trae span { color: var(--cacao-70); font-size: 16px; }
+.meses .caja { display: inline-block; width: 13px; height: 13px; margin-right: 6px; border: 2px solid var(--cacao); border-radius: 3px; vertical-align: -1px; }
+.meses .si { display: block; margin-top: 3px; font-size: 12.5px; color: var(--cacao-70); font-style: italic; }
+.guia-cab { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: end; }
+@media (max-width: 900px) { .guia-cab { grid-template-columns: 1fr; gap: 0; } }
+
+/* Calculadora: cuánto te regresa una deducción, en renglones de libreta */
+.calcu { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: 0; margin-top: 44px; background: var(--papel); border: 3px solid var(--cacao); border-radius: 28px; box-shadow: 8px 8px 0 var(--cacao); overflow: hidden; }
+.calcu .mueve { padding: clamp(22px, 4vw, 40px); border-right: 3px dashed var(--cacao-12); }
+.calcu .cuenta { padding: clamp(22px, 4vw, 40px); display: grid; align-content: center; gap: 4px; background: linear-gradient(var(--cacao-12) 1px, transparent 1px) 0 0 / 100% 36px, var(--crema); }
+.calcu label { display: block; font-weight: 700; color: var(--cacao-70); }
+.calcu .cifra { display: block; margin: 6px 0 10px; font-weight: 800; font-size: clamp(2.2rem, 1.6rem + 2vw, 3.2rem); line-height: 1; font-variant-numeric: tabular-nums; font-variation-settings: "wdth" 92; }
+.calcu input[type="range"] { width: 100%; height: 34px; background: transparent; -webkit-appearance: none; appearance: none; cursor: pointer; }
+.calcu input[type="range"]::-webkit-slider-runnable-track { height: 10px; border-radius: 99px; background: linear-gradient(90deg, var(--rosa) var(--p, 25%), var(--cacao-12) var(--p, 25%)); }
+.calcu input[type="range"]::-moz-range-track { height: 10px; border-radius: 99px; background: var(--cacao-12); }
+.calcu input[type="range"]::-moz-range-progress { height: 10px; border-radius: 99px; background: var(--rosa); }
+.calcu input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 34px; height: 34px; margin-top: -12px; border-radius: 10px; background: var(--maiz); border: 3px solid var(--cacao); box-shadow: 3px 3px 0 var(--cacao); }
+.calcu input[type="range"]::-moz-range-thumb { width: 28px; height: 28px; border-radius: 10px; background: var(--maiz); border: 3px solid var(--cacao); }
+.tasas { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.tasas button { min-height: 42px; padding: 0 14px; border-radius: 999px; border: 2px solid var(--cacao); background: var(--crema); color: var(--cacao); font: 700 15px var(--display); font-variant-numeric: tabular-nums; cursor: pointer; transition: background-color .2s, transform .2s; }
+.tasas button:hover { background: var(--maiz); transform: rotate(-2deg); }
+.tasas button[aria-pressed="true"] { background: var(--cacao); color: var(--crema); }
+.calcu .ayuda { margin: 16px 0 0; font-size: 14px; color: var(--cacao-70); }
+.cuenta .renglon-c { display: flex; align-items: baseline; gap: 10px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.cuenta .renglon-c i { flex: 1; border-bottom: 3px dotted rgba(59, 36, 24, .4); transform: translateY(-6px); }
+.cuenta .te-regresa { margin-top: 18px; font-weight: 700; color: var(--cacao-70); }
+.cuenta .total-c { justify-self: start; font-weight: 800; font-size: clamp(3.4rem, 2rem + 5vw, 6rem); line-height: .95; color: var(--rosa); font-variant-numeric: tabular-nums; font-variation-settings: "wdth" 88; letter-spacing: -.02em; padding-bottom: .18em;
+  background: linear-gradient(var(--rosa), var(--rosa)) left calc(100% - .02em) / 100% .05em no-repeat, linear-gradient(var(--rosa), var(--rosa)) left calc(100% - .12em) / 100% .05em no-repeat; }
+.cuenta .moraleja { margin: 14px 0 0; font-size: 15.5px; color: var(--cacao-70); max-width: 34ch; }
+@media (max-width: 860px) { .calcu { grid-template-columns: 1fr; } .calcu .mueve { border-right: 0; border-bottom: 3px dashed var(--cacao-12); } }
+
+/* Billetes que salen al suscribirse */
+.billetito { position: fixed; z-index: 80; width: 56px; height: 56px; left: 0; top: 0; pointer-events: none; }
+
+/* Quién está detrás */
+.detras { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 40px; align-items: center; margin-top: 40px; }
+.marco { position: relative; aspect-ratio: 4 / 5; max-width: 100%; border-radius: 26px; background: var(--maiz); overflow: hidden; box-shadow: inset 0 0 0 3px var(--cacao); }
+.marco img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; }
+.marco .provisional { left: 14px; bottom: 14px; }
+.detras blockquote { margin: 0; font-weight: 800; font-size: clamp(1.6rem, 1.1rem + 1.8vw, 2.5rem); line-height: 1.12; font-variation-settings: "wdth" 92, "opsz" 72; text-wrap: balance; }
+.detras blockquote::before { content: "“"; display: block; font-family: var(--rotulo); color: var(--rosa); font-size: 4rem; line-height: .7; }
+.firma { margin: 18px 0 0; color: var(--cacao-70); }
+.firma strong { color: var(--cacao); }
+.lo-hacemos { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 18px 28px; align-items: center; margin-top: 30px; padding: 22px 24px; border-radius: 20px; background: var(--papel); box-shadow: inset 0 0 0 2px var(--cacao); }
+.lo-hacemos p { margin: 0; font-weight: 600; }
+.lo-hacemos p .rot { color: var(--rosa); font-size: 1.35em; }
+@media (max-width: 860px) { .detras { grid-template-columns: 1fr; } .marco { max-width: 380px; } .lo-hacemos { grid-template-columns: 1fr; } }
+
+/* Colaboraciones */
+.colabora { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 36px; align-items: end; padding: clamp(28px, 5vw, 56px); border-radius: 34px; background: var(--papel); border: 3px solid var(--cacao); box-shadow: 10px 10px 0 var(--rosa); }
+.colabora h2 { margin: 12px 0 0; font-size: clamp(2rem, 1.3rem + 2.4vw, 3.4rem); }
+.colabora p { margin: 14px 0 0; color: var(--cacao-70); max-width: 46ch; }
+.colabora ul { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 10px; }
+@media (max-width: 860px) { .colabora { grid-template-columns: 1fr; box-shadow: 6px 6px 0 var(--rosa); } }
+
+/* Pie */
+.pie { padding-block: 56px 40px; margin-top: clamp(64px, 9vw, 120px); border-top: 3px solid var(--cacao); }
+.pie .envoltura { display: grid; grid-template-columns: minmax(0, 1.4fr) repeat(2, minmax(0, 1fr)); gap: 28px; }
+.pie h4 { margin: 0 0 10px; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; }
+.pie ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+.pie a { text-decoration: none; border-bottom: 1.5px solid transparent; }
+.pie a:hover { border-color: var(--rosa); }
+.pie .chico { color: var(--cacao-70); font-size: 15px; max-width: 40ch; }
+@media (max-width: 760px) { .pie .envoltura { grid-template-columns: 1fr 1fr; } .pie .envoltura > :first-child { grid-column: 1 / -1; } }
+
+
+/* Entrada de la portada en CSS (no depende de que cargue GSAP) */
+@keyframes subir { from { transform: translateY(110%); } }
+@keyframes trazo { from { stroke-dashoffset: 1; } }
+@keyframes pegar { from { transform: translateY(30px) scale(.8) rotate(0deg); } }
+@keyframes aparecer-estampa { from { transform: scale(0) rotate(-90deg); } }
+.portada h1 .linea > span { animation: subir 1s cubic-bezier(.16, 1, .3, 1) both; }
+.portada h1 .linea:nth-child(2) > span { animation-delay: .12s; }
+.portada h1 .linea:nth-child(3) > span { animation-delay: .24s; }
+.palomeada path, .orden path { stroke-dasharray: 1; stroke-dashoffset: 0; animation: trazo .6s ease-in-out .9s both; }
+.orden path { animation-duration: .9s; animation-delay: 1.3s; }
+.nota { animation: pegar .8s cubic-bezier(.3, 1.6, .5, 1) both; }
+.nota.n1 { animation-delay: .5s; } .nota.n2 { animation-delay: .62s; } .nota.n3 { animation-delay: .74s; }
+.estampa-giro { animation: aparecer-estampa .9s cubic-bezier(.3, 1.6, .5, 1) .7s both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .tira-pista, .estampa-giro .texto-circular, .portada h1 .linea > span, .palomeada path, .orden path, .nota, .estampa-giro { animation: none; }
+  * { scroll-behavior: auto !important; }
+}
+</style>
+
+<div class="hoja-fondo" aria-hidden="true"></div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="billete" viewBox="0 0 200 200">
+    <rect x="14" y="50" width="172" height="100" rx="14" fill="#FFF6E8" stroke="#3B2418" stroke-width="11"/>
+    <rect x="32" y="66" width="136" height="68" rx="6" fill="none" stroke="#3B2418" stroke-width="4"/>
+    <circle cx="100" cy="100" r="27" fill="#E4007C"/>
+    <path d="M86 101l10 10 19-21" fill="none" stroke="#FFF6E8" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="48" cy="100" r="6" fill="#3B2418"/><circle cx="152" cy="100" r="6" fill="#3B2418"/>
+  </symbol>
+  <symbol id="yt" viewBox="0 0 28 20"><rect width="28" height="20" rx="6" fill="#E4007C"/><path d="M11 6l7 4-7 4z" fill="#FFF6E8"/></symbol>
+</svg>
+
+<header class="barra" id="barra">
+  <div class="envoltura">
+    <a class="marca" href="#inicio" aria-label="Cuentas Claras, inicio">
+      <svg aria-hidden="true"><use href="#billete"/></svg>
+      <span class="rot">Cuentas<br>Claras</span>
+    </a>
+    <nav class="nav" aria-label="Secciones">
+      <a href="#encuentras">Qué hay aquí</a>
+      <a href="#calcula">Calcula</a>
+      <a href="#series">Las series</a>
+      <a href="#quien">Quién</a>
+      <a href="#colabora">Colabora</a>
+    </nav>
+    <a class="btn magnetico" href="#guia">La guía gratis</a>
+  </div>
+</header>
+
+<main id="inicio">
+  <section class="portada">
+    <div class="envoltura">
+      <div>
+        <p class="etiqueta">Impuestos · Contabilidad · Finanzas personales</p>
+        <h1 class="disp" id="titular">
+          <span class="linea"><span>El SAT</span></span>
+          <span class="linea"><span>y tu <span class="palomeada">dinero,<svg viewBox="0 0 60 60" aria-hidden="true"><path pathLength="1" d="M6 32 L24 50 L56 8"/></svg></span></span></span>
+          <span class="linea"><span>en <span class="orden">orden.<svg viewBox="0 0 300 30" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M4 18 C 60 8, 160 6, 296 14 M 30 26 C 120 20, 210 20, 280 24"/></svg></span></span></span>
+        </h1>
+        <p class="bajada">Trámites del SAT explicados paso a paso, tu declaración sin sorpresas y tus números claros. <strong>Como en una consulta, pero sin agendar cita.</strong></p>
+        <div class="acciones">
+          <a class="btn magnetico" href="#guia">Quiero la hoja del año</a>
+          <a class="yt" href="https://www.youtube.com/@cuentasclaras_mx" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#yt"/></svg><span>Ver el canal</span></a>
+        </div>
+      </div>
+      <div class="figura" id="figura">
+        <div class="estampa-giro" aria-hidden="true">
+          <svg class="texto-circular" viewBox="0 0 118 118"><defs><path id="circ" d="M59 59 m-48 0 a48 48 0 1 1 96 0 a48 48 0 1 1 -96 0"/></defs><text><textPath href="#circ">un canal · nuevo cada semana · </textPath></text></svg>
+          <div class="disco"><svg><use href="#billete"/></svg></div>
+        </div>
+        <img class="foto" src="img/israel-cruzado.webp" alt="Israel Castro, contador público, con los brazos cruzados" width="720" height="961">
+        <span class="nota n1" data-flota="1.2">¿Tengo que declarar si solo tengo sueldo?</span>
+        <span class="nota n2" data-flota="-0.9">¿Por qué me retuvieron más este año?</span>
+        <span class="nota n3" data-flota="0.7">¿Mi Sofipo cuenta?</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="tira" aria-label="Preguntas que se resuelven en el canal">
+    <div class="tira-pista">
+      <span>¿Qué es la constancia de situación fiscal? <svg aria-hidden="true"><use href="#billete"/></svg> ¿Me toca saldo a favor? <svg aria-hidden="true"><use href="#billete"/></svg> ¿Cómo saco mi e.firma? <svg aria-hidden="true"><use href="#billete"/></svg> Me llegó una carta del SAT <svg aria-hidden="true"><use href="#billete"/></svg> ¿Cuánto me toca de aguinaldo? <svg aria-hidden="true"><use href="#billete"/></svg></span>
+      <span aria-hidden="true">¿Qué es la constancia de situación fiscal? <svg><use href="#billete"/></svg> ¿Me toca saldo a favor? <svg><use href="#billete"/></svg> ¿Cómo saco mi e.firma? <svg><use href="#billete"/></svg> Me llegó una carta del SAT <svg><use href="#billete"/></svg> ¿Cuánto me toca de aguinaldo? <svg><use href="#billete"/></svg></span>
+    </div>
+  </div>
+
+  <section class="pagina" id="encuentras">
+    <div class="envoltura">
+      <span class="separador" style="--c: var(--maiz)">Qué hay aquí</span>
+      <h2 class="disp">Lo que te preguntas, <span class="resaltado" data-resalta>resuelto en un video.</span></h2>
+      <p class="intro">Tres cajones, los mismos de una libreta de cuentas: lo que le debes al SAT, lo que el SAT te debe a ti y lo que te queda.</p>
+      <div class="fichas">
+        <article class="ficha" style="--c: var(--maiz)">
+          <span class="pestana">SAT</span>
+          <h3>Tus trámites, sin perderte en el portal</h3>
+          <p>Paso a paso, con la pantalla real.</p>
+          <ul><li>RFC y e.firma</li><li>Constancia de situación fiscal</li><li>Buzón tributario y cartas</li></ul>
+        </article>
+        <article class="ficha" style="--c: var(--rosa); --t: var(--crema)">
+          <span class="pestana">Tu declaración</span>
+          <h3>La anual, sin sorpresas</h3>
+          <p>Si te toca, qué deducir y cuánto te regresan de verdad.</p>
+          <ul><li>Deducciones personales</li><li>Saldo a favor</li><li>Intereses, Sofipos y casas de bolsa</li></ul>
+        </article>
+        <article class="ficha" style="--c: var(--cacao); --t: var(--crema)">
+          <span class="pestana">Tus números</span>
+          <h3>Tu dinero, en claro</h3>
+          <p>Lo que gana tu negocio y lo que te queda neto.</p>
+          <ul><li>Aguinaldo y sueldo neto</li><li>RESICO</li><li>Estados financieros básicos</li></ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="pagina" id="calcula">
+    <div class="envoltura">
+      <span class="separador" style="--c: var(--maiz)">Pruébalo</span>
+      <h2 class="disp">¿Cuánto te regresa <span class="resaltado" data-resalta>una deducción?</span></h2>
+      <p class="intro">Menos de lo que crees: cada peso que deduces te regresa lo que pagas de impuesto sobre él, no el peso completo. Muévele, no te pedimos nada.</p>
+      <div class="calcu">
+        <div class="mueve">
+          <label for="deduce">Doctor, dentista, seguro de gastos médicos, lentes… lo que deduces en el año</label>
+          <output class="cifra" id="monto" for="deduce">$20,000</output>
+          <input id="deduce" type="range" min="1000" max="80000" step="1000" value="20000" aria-describedby="ayuda-calc">
+          <label style="margin-top:18px" id="tasas-t">Tu tasa más alta (sube con lo que ganas)</label>
+          <div class="tasas" id="tasas" role="group" aria-labelledby="tasas-t">
+            <button type="button" data-t="10.88" aria-pressed="false">10.88%</button>
+            <button type="button" data-t="16" aria-pressed="false">16%</button>
+            <button type="button" data-t="21.36" aria-pressed="true">21.36%</button>
+            <button type="button" data-t="23.52" aria-pressed="false">23.52%</button>
+            <button type="button" data-t="30" aria-pressed="false">30%</button>
+          </div>
+          <p class="ayuda" id="ayuda-calc">Tasas de la tarifa anual del artículo 152 de la LISR. Las deducciones tienen topes y requisitos: es un ejemplo, cada caso tiene sus detalles.</p>
+        </div>
+        <div class="cuenta" aria-live="polite">
+          <div class="renglon-c"><span>Lo que deduces</span><i></i><b id="c-deduce">$20,000</b></div>
+          <div class="renglon-c"><span>× tu tasa</span><i></i><b id="c-tasa">21.36%</b></div>
+          <span class="te-regresa">Te regresa, más o menos</span>
+          <span class="total-c" id="c-regresa">$4,272</span>
+          <p class="moraleja">El video 2 de la serie 1 lo explica con calma, y la hoja del año te dice qué guardar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pagina" id="series">
+    <div class="envoltura">
+      <span class="separador" style="--c: var(--rosa); --t: var(--crema)">Las series</span>
+      <h2 class="disp">Una duda, tres videos.</h2>
+      <p class="intro">Cada serie arranca como empiezan las consultas: con la pregunta tal cual. Y se resuelve en tres partes que también funcionan solas.</p>
+      <div class="consulta">
+        <div class="duda">
+          <div class="globo"><small>Serie 1 · noviembre</small>“Si solo tengo sueldo, ¿tengo que declarar?”</div>
+          <p>Así llega casi siempre. La respuesta corta es “depende”; la larga cabe en tres videos.</p>
+          <div class="temporada" aria-label="Lo que viene">
+            <span class="chip" style="--c: var(--maiz)"><i></i>Aguinaldo · dic</span>
+            <span class="chip" style="--c: var(--rosa)"><i></i>Tus inversiones · feb</span>
+            <span class="chip" style="--c: var(--cacao)"><i></i>Tu anual · mar a abr</span>
+          </div>
+        </div>
+        <ol class="renglones" id="renglones">
+          <li class="renglon">
+            <span class="cuadro"><svg viewBox="0 0 40 40" aria-hidden="true"><path pathLength="1" d="M6 21 L16 31 L35 8"/></svg></span>
+            <div><span class="n">Video 1</span><h3>Cuándo sí estás obligado (y cuándo no)</h3><p>El monto que lo cambia todo, dos patrones en el año y qué pasa si te sale a pagar.</p></div>
+          </li>
+          <li class="renglon">
+            <span class="cuadro"><svg viewBox="0 0 40 40" aria-hidden="true"><path pathLength="1" d="M6 21 L16 31 L35 8"/></svg></span>
+            <div><span class="n">Video 2</span><h3>Deducciones: cuánto te regresan de verdad</h3><p>Cada peso que deduces no te regresa un peso. Lo hacemos con números y qué conviene pagar antes del 31 de diciembre.</p></div>
+          </li>
+          <li class="renglon">
+            <span class="cuadro"><svg viewBox="0 0 40 40" aria-hidden="true"><path pathLength="1" d="M6 21 L16 31 L35 8"/></svg></span>
+            <div><span class="n">Video 3</span><h3>Sueldo y algo más</h3><p>Intereses, Sofipo, casa de bolsa o una herencia: cuándo se suman y cuándo no.</p><a class="mas" href="https://www.youtube.com/@cuentasclaras_mx" target="_blank" rel="noopener">Ver la lista en YouTube</a></div>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="pagina" id="guia">
+    <div class="envoltura">
+      <span class="separador" style="--c: var(--maiz)">Gratis</span>
+      <div class="guia-cab">
+        <div>
+          <h2 class="disp">Tu año con el SAT, <span class="resaltado" data-resalta>en una sola hoja.</span></h2>
+          <p class="intro">Gratis, para pegar en el refri. Te dice qué toca cada mes y qué revisar para que no se te pase nada.</p>
+        </div>
+        <ol class="trae" aria-label="Lo que trae la guía">
+          <li><span class="num">1</span><div><b>Los impuestos sin rodeos</b><span>Por qué pagamos, por qué te retienen, por qué no en efectivo, qué pasa si no presentas y por qué a tu compañero sí le devuelven.</span></div></li>
+          <li><span class="num">2</span><div><b>El calendario de 12 meses</b><span>Lo que toca cada mes y las fechas que no se mueven.</span></div></li>
+          <li><span class="num">3</span><div><b>El checklist para palomear</b><span>“Si tienes inversiones, pide tus constancias.” Mes por mes.</span></div></li>
+        </ol>
+      </div>
+      <div class="guia">
+        <div class="hoja-anio" id="hoja-anio" aria-label="Vista previa de la hoja del año">
+          <header><span class="rot">La hoja del año</span><span>Cuentas Claras</span></header>
+          <ol class="meses">
+            <li><b>Ene</b><i class="caja" aria-hidden="true"></i>Pide las facturas que te falten</li>
+            <li class="clave"><b>Feb</b><i class="caja" aria-hidden="true"></i>Llegan tus constancias<span class="si">Si tienes inversiones: pídelas</span><svg class="circulo" viewBox="0 0 100 50" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M10 8 C 40 -2, 96 2, 97 24 C 98 46, 30 52, 6 38 C -6 28, 6 10, 24 6"/></svg></li>
+            <li><b>Mar</b><i class="caja" aria-hidden="true"></i>Junta tus facturas</li>
+            <li class="clave"><b>Abr</b><i class="caja" aria-hidden="true"></i>Tu anual: vence el 30<span class="si">Si estás obligado: presenta</span><svg class="circulo" viewBox="0 0 100 50" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M10 8 C 40 -2, 96 2, 97 24 C 98 46, 30 52, 6 38 C -6 28, 6 10, 24 6"/></svg></li>
+            <li><b>May</b><i class="caja" aria-hidden="true"></i>Sigue tu saldo a favor</li>
+            <li><b>Jun</b><i class="caja" aria-hidden="true"></i>Revisa tu 32-D</li>
+            <li><b>Jul</b><i class="caja" aria-hidden="true"></i>Abre tu buzón tributario</li>
+            <li><b>Ago</b><i class="caja" aria-hidden="true"></i>¿Cobras por tu cuenta? Alta</li>
+            <li><b>Sep</b><i class="caja" aria-hidden="true"></i>Paquete Económico</li>
+            <li><b>Oct</b><i class="caja" aria-hidden="true"></i>Revisa tu e.firma</li>
+            <li class="clave"><b>Nov</b><i class="caja" aria-hidden="true"></i>Planea qué deducir<svg class="circulo" viewBox="0 0 100 50" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M10 8 C 40 -2, 96 2, 97 24 C 98 46, 30 52, 6 38 C -6 28, 6 10, 24 6"/></svg></li>
+            <li class="clave"><b>Dic</b><i class="caja" aria-hidden="true"></i>Paga antes del 31<span class="si">Si deduces: ¿bien requisitadas?</span><svg class="circulo" viewBox="0 0 100 50" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M10 8 C 40 -2, 96 2, 97 24 C 98 46, 30 52, 6 38 C -6 28, 6 10, 24 6"/></svg></li>
+          </ol>
+        </div>
+        <div class="formulario">
+          <form id="form-guia" novalidate>
+            <h3 class="disp">Te la mandamos <span class="rot">gratis</span></h3>
+            <p>Llega a tu correo en un minuto. Si dejas tu WhatsApp, te avisamos cuando salga cada serie.</p>
+            <div class="campos">
+              <div class="campo"><label for="nombre">Tu nombre</label><input id="nombre" name="nombre" type="text" autocomplete="given-name" placeholder="¿Cómo te llamas?" required></div>
+              <div class="campo"><label for="correo">Tu correo</label><input id="correo" name="correo" type="email" autocomplete="email" placeholder="tu@correo.com" required></div>
+              <div class="campo"><label for="whatsapp">WhatsApp <small>(opcional)</small></label><input id="whatsapp" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" placeholder="10 dígitos"></div>
+              <button class="btn" type="submit">Mándamela</button>
+            </div>
+            <p class="fino">Boceto: el formulario no envía nada todavía. Sin spam; te das de baja cuando quieras.</p>
+          </form>
+          <div class="listo" id="listo-guia" hidden>
+            <span class="rot">¡Listo!</span>
+            <p>Revisa tu correo: ahí va la hoja del año. Si no la ves, busca en Promociones.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pagina" id="quien">
+    <div class="envoltura">
+      <span class="separador" style="--c: var(--cacao); --t: var(--crema)">Quién está detrás</span>
+      <div class="detras">
+        <div class="marco"><img src="img/israel-duda.webp" alt="Israel Castro pensando, con la mano en la barbilla" width="900" height="1205" loading="lazy"></div>
+        <div>
+          <blockquote>Aquí resuelvo las dudas que más me traen mis clientes, para que tú las resuelvas sin pagar una consulta.</blockquote>
+          <p class="firma"><strong>Israel Castro</strong>, contador público y socio de S &amp; I Castro Consultores, el despacho familiar.</p>
+          <div class="lo-hacemos">
+            <p>Hazlo tú con el video… <span class="rot">o déjalo en nuestras manos.</span></p>
+            <a class="btn claro" href="https://sicastro.com/?utm_source=cuentas-claras&amp;utm_medium=landing&amp;utm_campaign=cuentas-claras&amp;utm_content=quien" target="_blank" rel="noopener">Ir al despacho</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pagina" id="colabora">
+    <div class="envoltura">
+      <div class="colabora">
+        <div>
+          <span class="etiqueta">Marcas y creadores</span>
+          <h2 class="disp">¿Hacemos algo juntos?</h2>
+          <p>Videos en colaboración, una charla para tu equipo o tu comunidad. Si le habla a la gente que quiere su SAT y su dinero en orden, platiquemos.</p>
+        </div>
+        <ul>
+          <li class="chip" style="--c: var(--rosa)"><i></i>Colaboraciones</li>
+          <li class="chip" style="--c: var(--maiz)"><i></i>Charlas</li>
+          <li class="chip" style="--c: var(--cacao)"><i></i>Prensa</li>
+          <li><a class="btn magnetico" href="#colabora">Escríbenos</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="pie">
+  <div class="envoltura">
+    <div>
+      <a class="marca" href="#inicio"><svg aria-hidden="true" style="width:40px;height:40px"><use href="#billete"/></svg><span class="rot">Cuentas<br>Claras</span></a>
+      <p class="chico">Un canal de S &amp; I Castro Consultores. Patrocina TodoConta. Los videos son orientación general: cada caso tiene sus detalles.</p>
+    </div>
+    <div><h4>El canal</h4><ul><li><a href="https://www.youtube.com/@cuentasclaras_mx" target="_blank" rel="noopener">YouTube</a></li><li><a href="#guia">La hoja del año</a></li><li><a href="#colabora">Colaboraciones</a></li></ul></div>
+    <div><h4>La casa</h4><ul><li><a href="https://sicastro.com/?utm_source=cuentas-claras&amp;utm_medium=landing&amp;utm_campaign=cuentas-claras&amp;utm_content=pie" target="_blank" rel="noopener">El despacho</a></li><li><a href="https://todoconta.com/?utm_source=cuentas-claras&amp;utm_medium=landing&amp;utm_campaign=cuentas-claras&amp;utm_content=pie" target="_blank" rel="noopener">La app: TodoConta</a></li><li><a href="https://soycontador.ai/?utm_source=cuentas-claras&amp;utm_medium=landing&amp;utm_campaign=cuentas-claras&amp;utm_content=pie" target="_blank" rel="noopener">IA para contadores</a></li></ul></div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(() => {
+  const barra = document.getElementById('barra');
+  const fondo = () => barra.classList.toggle('fondo', scrollY > 12);
+  addEventListener('scroll', fondo, { passive: true }); fondo();
+
+  const reducido = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const animar = () => window.gsap && !reducido;
+
+  // Calculadora: deducción × tasa marginal. No pide nada.
+  const mxn = (n) => '$' + Math.round(n).toLocaleString('es-MX');
+  const rango = document.getElementById('deduce');
+  const tasas = [...document.querySelectorAll('#tasas button')];
+  const elRegresa = document.getElementById('c-regresa');
+  let tasa = 21.36;
+  const mostrado = { v: 20000 * .2136 };
+  const calcular = () => {
+    const d = +rango.value, r = d * tasa / 100;
+    rango.style.setProperty('--p', ((d - rango.min) / (rango.max - rango.min)) * 100 + '%');
+    document.getElementById('monto').textContent = mxn(d);
+    document.getElementById('c-deduce').textContent = mxn(d);
+    document.getElementById('c-tasa').textContent = tasa + '%';
+    if (animar()) gsap.to(mostrado, { v: r, duration: .5, ease: 'power2.out', overwrite: true, onUpdate: () => { elRegresa.textContent = mxn(mostrado.v); } });
+    else elRegresa.textContent = mxn(r);
+  };
+  rango.addEventListener('input', calcular);
+  tasas.forEach((b) => b.addEventListener('click', () => { tasas.forEach((x) => x.setAttribute('aria-pressed', String(x === b))); tasa = +b.dataset.t; calcular(); }));
+  calcular();
+
+  // Billetes que salen del botón al suscribirse (solo en esa acción)
+  const lluviaDeBilletes = (origen) => {
+    if (!animar()) return;
+    const r = origen.getBoundingClientRect(), x0 = r.left + r.width / 2, y0 = r.top + r.height / 2;
+    for (let i = 0; i < 18; i++) {
+      const b = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      b.setAttribute('class', 'billetito'); b.setAttribute('aria-hidden', 'true');
+      b.innerHTML = '<use href="#billete"/>';
+      document.body.appendChild(b);
+      const ang = gsap.utils.random(-Math.PI * .95, -Math.PI * .05), vel = gsap.utils.random(160, 380);
+      gsap.set(b, { x: x0 - 28, y: y0 - 28, rotate: gsap.utils.random(-40, 40), scale: gsap.utils.random(.6, 1.1) });
+      gsap.timeline({ onComplete: () => b.remove() })
+        .to(b, { x: '+=' + Math.cos(ang) * vel, y: '+=' + Math.sin(ang) * vel, rotate: '+=' + gsap.utils.random(-200, 200), duration: .7, ease: 'power3.out' })
+        .to(b, { y: '+=' + gsap.utils.random(260, 420), rotate: '+=' + gsap.utils.random(-120, 120), opacity: 0, duration: 1.3, ease: 'power1.in' });
+    }
+  };
+
+  // Formulario de boceto: valida, no envía, y muestra la confirmación
+  const form = document.getElementById('form-guia');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const { nombre, correo } = form.elements;
+    const avisar = (campo, msg) => { campo.setCustomValidity(msg); campo.reportValidity(); campo.setCustomValidity(''); };
+    if (nombre.value.trim().length < 2) { avisar(nombre, 'Escribe tu nombre'); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo.value.trim())) { avisar(correo, 'Revisa tu correo'); return; }
+    lluviaDeBilletes(form.querySelector('button[type="submit"]'));
+    const listo = document.getElementById('listo-guia');
+    listo.querySelector('p').textContent = `Gracias, ${nombre.value.trim().split(' ')[0]}. Revisa tu correo: ahí va la hoja del año. Si no la ves, busca en Promociones.`;
+    form.hidden = true;
+    listo.hidden = false;
+    if (animar()) gsap.from('#listo-guia > *', { y: 24, rotate: -4, duration: .6, stagger: .1, ease: 'back.out(2)' });
+  });
+
+  if (!animar()) return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Todo empieza visible; la animación solo añade movimiento encima.
+  const dibujar = (sel, opts = {}) => gsap.fromTo(sel, { strokeDasharray: 1, strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: .7, ease: 'power2.inOut', ...opts });
+
+  // La entrada de la portada va en CSS (@keyframes subir, trazo, pegar)
+
+  // Las notas flotan con el ratón (cada una a su ritmo) y con el scroll
+  const figura = document.getElementById('figura');
+  const notas = [...document.querySelectorAll('[data-flota]')];
+  addEventListener('pointermove', (e) => {
+    const x = e.clientX / innerWidth - .5, y = e.clientY / innerHeight - .5;
+    notas.forEach((n) => { const f = +n.dataset.flota; gsap.to(n, { '--fx': `${x * 30 * f}px`, '--fy': `${y * 24 * f}px`, duration: .9, ease: 'power3.out' }); });
+  });
+  gsap.to('.foto', { yPercent: -6, ease: 'none', scrollTrigger: { trigger: figura, start: 'top top', end: 'bottom top', scrub: true } });
+
+  // La tira se inclina más con la velocidad del scroll
+  const tira = document.querySelector('.tira');
+  ScrollTrigger.create({ onUpdate: (st) => { const v = gsap.utils.clamp(-6, 6, st.getVelocity() / 300); gsap.to(tira, { rotate: -1.2 + v * .25, skewX: v * .8, duration: .4, overwrite: true }); } });
+
+  // Resaltador de maíz que se pasa sobre la frase
+  document.querySelectorAll('[data-resalta]').forEach((el) => {
+    gsap.fromTo(el, { '--r': '0%' }, { '--r': '100%', duration: .9, ease: 'power2.inOut', scrollTrigger: { trigger: el, start: 'top 82%' } });
+  });
+
+  // Las fichas entran como si se acomodaran sobre la mesa
+  gsap.from('.ficha', { y: 40, rotate: (i) => [-3, 2, -1.5][i], duration: .9, stagger: .12, ease: 'back.out(1.6)', scrollTrigger: { trigger: '.fichas', start: 'top 85%' } });
+
+  // Una duda, tres videos: cada renglón se palomea al pasar
+  document.querySelectorAll('.renglon').forEach((r) => {
+    const p = r.querySelector('path');
+    gsap.set(p, { strokeDasharray: 1, strokeDashoffset: 1 });
+    ScrollTrigger.create({ trigger: r, start: 'top 62%', onEnter: () => { dibujar(p, { duration: .5 }); gsap.fromTo(r.querySelector('.cuadro'), { scale: .85 }, { scale: 1, duration: .6, ease: 'back.out(3)' }); }, onLeaveBack: () => gsap.to(p, { strokeDashoffset: 1, duration: .25 }) });
+  });
+
+  // La hoja del año: se encierran los meses clave y la hoja se endereza un poco
+  gsap.set('.meses .circulo path', { strokeDasharray: 1, strokeDashoffset: 1 });
+  ScrollTrigger.create({ trigger: '#hoja-anio', start: 'top 70%', onEnter: () => dibujar('.meses .circulo path', { duration: .6, stagger: .25 }) });
+  gsap.fromTo('#hoja-anio', { rotate: -6 }, { rotate: -2.5, ease: 'none', scrollTrigger: { trigger: '#hoja-anio', start: 'top bottom', end: 'center center', scrub: true } });
+
+  // Botones magnéticos
+  document.querySelectorAll('.magnetico').forEach((b) => {
+    b.addEventListener('pointermove', (e) => { const r = b.getBoundingClientRect(); gsap.to(b, { x: (e.clientX - r.left - r.width / 2) * .25, y: (e.clientY - r.top - r.height / 2) * .35, duration: .4, ease: 'power3.out' }); });
+    b.addEventListener('pointerleave', () => gsap.to(b, { x: 0, y: 0, duration: .6, ease: 'elastic.out(1, .4)' }));
+  });
+
+  // El marco de Israel se inclina al entrar
+  gsap.from('.marco', { rotate: -6, y: 40, duration: 1, ease: 'back.out(1.4)', scrollTrigger: { trigger: '.marco', start: 'top 85%' } });
+})();
+</script>

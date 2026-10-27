@@ -28,7 +28,7 @@ Corporativo" y depende del nombre, que puede estar registrado en el IMPI.
 |---|---|
 | `simbolo.svg` | Versión clara: cacao, crema y el medallón rosa |
 | `simbolo-oscuro.svg` | Versión oscura: crema sobre cacao, medallón maíz. Es la del ícono del canal |
-| `salidas/avatar.png` | Ícono del canal, 800 × 800, oscuro (resalta sobre el blanco de YouTube) |
+| `salidas/avatar.png` | Ícono del canal, 800 × 800, en claro como el banner (libreta y billete). Era oscuro hasta el 2026-10-26; Israel lo quiso del mismo tono que el banner |
 | `salidas/banner.png` | Banner del canal, 2560 × 1440, listo para subir |
 
 **Logotipo** = símbolo + nombre rotulado en Shrikhand cacao, en dos renglones (`.lockup` en
@@ -98,19 +98,22 @@ rosa no se usa para separar la foto del fondo.
 | Pieza | Archivo | Cómo se usa |
 |---|---|---|
 | **Pantalla final** | `salidas/pantalla-final.png` (1920 × 1080) | Los últimos 20 segundos de cada video. La libreta, el logotipo chico, "Sigue con este" y "suscríbete" rotulado; Israel señala hacia el botón. En YouTube Studio se acomodan encima el video sugerido (izquierda, el recuadro grande) y el botón de suscribirse (círculo junto a la mano). Las guías de dónde va cada uno se ven en el tablero y no salen en el PNG |
-| **Tarjeta "te lo hacemos"** | `salidas/tarjeta-te-lo-hacemos.png` (1920 × 1080, fondo transparente) | Se enciman en la edición cuando el trámite se complica: "¿No te salió? te lo hacemos · El enlace está en la descripción". **Sin precio.** Usa el lugar del rótulo del nombre (abajo a la izquierda); nunca salen al mismo tiempo. Las tarjetas de YouTube no sirven para esto: los enlaces externos ahí piden el Programa de Socios |
+| **Tarjeta "déjalo en nuestras manos"** | `salidas/tarjeta-en-nuestras-manos.png` (1920 × 1080, fondo transparente) | Se enciman en la edición cuando el trámite se complica: "¿No te salió? Déjalo en nuestras manos · El enlace está en la descripción". **Sin precio.** Usa el lugar del rótulo del nombre (abajo a la izquierda); nunca salen al mismo tiempo. Las tarjetas de YouTube no sirven para esto: los enlaces externos ahí piden el Programa de Socios |
 | **Marca de agua** | `salidas/marca-de-agua.png` (150 × 150, transparente) | En Studio: Personalización, Imagen de marca, Marca de agua del video. El ícono del canal en chico: el círculo cacao con el billete en maíz |
 
 ## Banner
 
-La libreta, el logotipo y una frase en la caja segura (1546 × 423). **"Hazlo tú, o te lo hacemos"
+La libreta, el logotipo y una frase en la caja segura (1546 × 423). **"Hazlo tú, o déjalo en nuestras manos"
 y "Un canal de S & I Castro Consultores" NO van en la imagen** (decisión de Israel, 2026-10-24):
 van en la descripción del canal y en la de cada video. El dicho de la v1 se quitó porque
 dependía del nombre. La frase:
 
-> TRÁMITES · IMPUESTOS · FINANZAS PERSONALES (etiqueta chica, `.kicker`)
-> SAT, IMSS y tu dinero,
+> IMPUESTOS · CONTABILIDAD · FINANZAS PERSONALES (etiqueta chica, `.kicker`)
+> El SAT y tu dinero,
 > **en orden.** (rosa, con la raya del total)
+
+El IMSS salió de la frase el 2026-10-26: el canal ya no es de seguridad social (ver "El giro" en
+`../docs/estrategia.md`). La etiqueta suma Contabilidad, que es el puente entre SAT y finanzas.
 
 ## Exportar una pieza
 

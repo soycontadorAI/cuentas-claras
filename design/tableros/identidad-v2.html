@@ -51,7 +51,7 @@
 </template>
 
 <template id="t-avatar">
-  <div class="oscuro" style="position:absolute;inset:0;display:grid;place-items:center;background:#3B2418">
+  <div class="libreta" style="position:absolute;inset:0;display:grid;place-items:center">
     <svg viewBox="0 0 200 200" style="width:580px;height:580px"><use href="#simbolo"/></svg>
   </div>
 </template>
@@ -153,8 +153,8 @@
     <div class="abs" style="left:507px;top:508px;width:1546px;height:423px;display:flex;align-items:center;gap:56px;padding:0 44px">
       <span class="lockup" style="font-size:220px;flex:none"><svg class="simb" viewBox="0 0 200 200"><use href="#simbolo"/></svg><span class="rot">Cuentas<br>Claras</span></span>
       <div>
-        <div class="kicker">Trámites · Impuestos · Finanzas personales</div>
-        <div class="disp" style="font-size:72px;color:var(--cacao);white-space:nowrap">SAT, IMSS y tu dinero,</div>
+        <div class="kicker">Impuestos · Contabilidad · Finanzas personales</div>
+        <div class="disp" style="font-size:72px;color:var(--cacao);white-space:nowrap">El SAT y tu dinero,</div>
         <div class="disp total" style="font-size:72px;color:var(--rosa);margin-top:6px;white-space:nowrap;display:inline-block">en orden.</div>
       </div>
     </div>
@@ -163,7 +163,7 @@
 </template>
 
 
-<!-- Piezas de video: pantalla final, tarjeta de "te lo hacemos" y marca de agua. -->
+<!-- Piezas de video: pantalla final, tarjeta de "déjalo en nuestras manos" y marca de agua. -->
 <template id="t-final">
   <div class="libreta" style="position:absolute;inset:0">
     <span class="abs lockup" style="font-size:80px;left:120px;top:70px"><svg class="simb" viewBox="0 0 200 200"><use href="#simbolo"/></svg><span class="rot">Cuentas<br>Claras</span></span>
@@ -181,7 +181,7 @@
       <span class="oscuro" style="width:124px;height:124px;border-radius:50%;background:#3B2418;display:grid;place-items:center;flex:none"><svg viewBox="0 0 200 200" style="width:98px;height:98px"><use href="#simbolo"/></svg></span>
       <div>
         <div class="disp" style="font-size:54px;color:var(--cacao)">¿No te salió?</div>
-        <div class="rot total" style="font-size:60px;color:var(--rosa);display:inline-block;margin-top:4px">te lo hacemos</div>
+        <div class="rot total" style="font-size:54px;color:var(--rosa);display:inline-block;margin-top:4px">déjalo en nuestras manos</div>
         <div style="font-family:var(--font-display);font-weight:600;font-size:26px;color:var(--cacao);margin-top:6px">El enlace está en la descripción ↓</div>
       </div>
     </div>
@@ -195,7 +195,7 @@
       <span class="oscuro" style="width:124px;height:124px;border-radius:50%;background:#3B2418;display:grid;place-items:center;flex:none"><svg viewBox="0 0 200 200" style="width:98px;height:98px"><use href="#simbolo"/></svg></span>
       <div>
         <div class="disp" style="font-size:54px;color:var(--cacao)">¿No te salió?</div>
-        <div class="rot total" style="font-size:60px;color:var(--rosa);display:inline-block;margin-top:4px">te lo hacemos</div>
+        <div class="rot total" style="font-size:54px;color:var(--rosa);display:inline-block;margin-top:4px">déjalo en nuestras manos</div>
         <div style="font-family:var(--font-display);font-weight:600;font-size:26px;color:var(--cacao);margin-top:6px">El enlace está en la descripción ↓</div>
       </div>
     </div>
@@ -233,7 +233,7 @@
     <div class="fila">
       <div class="pieza"><div class="frame" style="--w:1200;--h:600;--s:.38" data-tpl="t-logo"></div><p class="nota">Sobre la libreta.</p></div>
       <div class="pieza"><div class="frame" style="--w:1200;--h:600;--s:.38" data-tpl="t-logo-osc"></div><p class="nota">En oscuro.</p></div>
-      <div class="pieza"><div class="frame redondo" style="--w:800;--h:800;--s:.285" data-tpl="t-avatar"></div><p class="nota">Ícono del canal, en oscuro: resalta sobre el blanco de YouTube (exportado en <code>salidas/avatar.png</code>).</p></div>
+      <div class="pieza"><div class="frame redondo" style="--w:800;--h:800;--s:.285" data-tpl="t-avatar"></div><p class="nota">Ícono del canal, en claro como el banner: la libreta con el billete (exportado en <code>salidas/avatar.png</code>).</p></div>
       <div class="pieza" style="justify-content:flex-end">
         <div class="avatar-com"><div class="frame redondo" style="--w:800;--h:800;--s:.05" data-tpl="t-avatar"></div><span><b>@cuentasclaras_mx</b> · junto a un comentario (40 px)</span></div>
       </div>
@@ -316,7 +316,7 @@
     <h2>Piezas para el video</h2>
     <div class="fila">
       <div class="pieza"><div class="frame" style="--w:1920;--h:1080;--s:.42" data-tpl="t-final"></div><p class="nota"><b>Pantalla final</b> (últimos 20 segundos). Las líneas punteadas son guías: muestran dónde acomodar en YouTube Studio el video sugerido y el botón de suscribirse. No salen en la exportación (<code>salidas/pantalla-final.png</code>).</p></div>
-      <div class="pieza"><div class="frame" style="--w:1920;--h:1080;--s:.42" data-tpl="t-tarjeta-demo"></div><p class="nota"><b>Tarjeta "te lo hacemos"</b>, a media explicación, cuando el trámite se complica. Sin precio. Se exporta con fondo transparente para encimarla en la edición (<code>salidas/tarjeta-te-lo-hacemos.png</code>). Usa el mismo lugar que el rótulo del nombre: nunca salen al mismo tiempo.</p></div>
+      <div class="pieza"><div class="frame" style="--w:1920;--h:1080;--s:.42" data-tpl="t-tarjeta-demo"></div><p class="nota"><b>Tarjeta "déjalo en nuestras manos"</b>, a media explicación, cuando el trámite se complica. Sin precio. Se exporta con fondo transparente para encimarla en la edición (<code>salidas/tarjeta-en-nuestras-manos.png</code>). Usa el mismo lugar que el rótulo del nombre: nunca salen al mismo tiempo.</p></div>
     </div>
     <div class="fila" style="margin-top:24px;align-items:flex-end">
       <div class="pieza"><div class="frame" style="--w:1920;--h:1080;--s:.42" data-tpl="t-marca-demo"></div><p class="nota"><b>Marca de agua</b> de suscripción: así la pinta YouTube en la esquina del video.</p></div>

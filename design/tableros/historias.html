@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Historias destacadas · Cuentas Claras</title>
+<!-- Generado por design/historias/generar.py: los textos se cambian allá, no aquí. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Shrikhand&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../componentes.css">
+<link rel="stylesheet" href="tablero.css">
+<style>
+  /* Una historia: 1080 × 1920 sobre la libreta. Contenido entre y=250 y y=1580. */
+  .h, .portada { position: absolute; inset: 0; color: var(--cacao); font-family: var(--font-display); }
+  .h { padding: 280px 90px 380px; display: flex; flex-direction: column; align-items: flex-start; }
+  .kick { display: inline-flex; gap: 14px; align-items: center; margin-left: -90px; padding: 16px 34px 16px 90px; border-radius: 0 999px 999px 0; background: var(--maiz); font-weight: 800; font-size: 38px; letter-spacing: .08em; text-transform: uppercase; }
+  .kick b { color: var(--rosa-hondo); }
+  .tit { margin: 50px 0 0; font-size: 110px; max-width: 9.5ch; text-wrap: balance; }
+  .tit .rem { font-family: var(--font-rotulo); font-weight: 400; color: var(--rosa); font-size: .82em; letter-spacing: 0; line-height: 1.05; display: inline-block; }
+  .res { background: linear-gradient(transparent 55%, var(--maiz) 55%, var(--maiz) 92%, transparent 92%); padding: 0 .06em; }
+  .txt { margin: 40px 0 0; font-size: 46px; line-height: 1.3; font-weight: 600; color: rgba(59, 36, 24, .78); max-width: 20ch; }
+  .pie-h { margin-top: auto; padding-top: 30px; display: flex; align-items: center; gap: 16px; font-weight: 800; font-size: 36px; }
+  .pie-h svg { width: 70px; height: 70px; }
+
+  /* Con foto: Israel abajo a la derecha, el texto encima a la izquierda */
+  .con-foto .foto { position: absolute; right: -210px; bottom: 0; height: 1360px; width: auto; max-width: none; }
+  .con-foto .sobre { position: relative; z-index: 2; }
+  .con-foto .tit { max-width: 7.5ch; }
+  .con-foto .txt { max-width: 12ch; }
+  .con-foto .pie-h { position: relative; z-index: 4; margin-left: -14px; padding: 10px 26px 10px 14px; border-radius: 999px; background: var(--crema); }
+  .con-foto .pie-h { margin-top: auto; } .con-foto .enlace + .pie-h { margin-top: 20px; }
+
+  /* Enlace: la flecha rotulada y el lugar del sticker */
+  .enlace { position: relative; align-self: stretch; margin-top: auto; display: grid; justify-items: center; gap: 18px; z-index: 3; padding-bottom: 30px; }
+  .enlace + .pie-h { margin-top: 20px; }
+  .enlace .rot { font-size: 64px; color: var(--rosa); transform: rotate(-4deg); }
+  .enlace .rot::after { content: " ↓"; font-family: var(--font-display); font-weight: 800; }
+  .sticker-falso { padding: 26px 44px; border-radius: 22px; background: #fff; color: #1d6ce0; font: 700 42px/1 -apple-system, system-ui, sans-serif; box-shadow: 0 8px 20px rgba(0,0,0,.12); }
+  .caja-sticker { position: absolute; inset: 70px -20px -10px; border: 6px dashed rgba(0,170,255,.9); border-radius: 30px; display: grid; place-items: end center; padding-bottom: 6px; font: 600 26px/1 system-ui; color: rgba(0,120,200,1); }
+  .con-foto .enlace { justify-items: start; }
+
+  /* Fichas, lista, pasos, hojita */
+  .fichas { display: grid; gap: 50px; margin-top: 76px; width: 100%; }
+  .ficha { position: relative; padding: 30px 36px; background: #FFFBF3; border: 5px solid var(--cacao); border-radius: 12px 40px 40px 40px; box-shadow: 12px 12px 0 var(--cacao); font-size: 44px; font-weight: 700; line-height: 1.2; }
+  .pestana { position: absolute; top: -5px; left: -5px; transform: translateY(-100%); padding: 10px 26px; border: 5px solid var(--cacao); border-bottom: 0; border-radius: 20px 20px 0 0; background: var(--c); font-size: 32px; font-weight: 800; }
+  .pestana.osc { color: var(--crema); }
+  .lista { list-style: none; margin: 56px 0 0; padding: 0; display: grid; gap: 30px; }
+  .lista li { display: grid; grid-template-columns: 92px 1fr; gap: 28px; align-items: start; font-size: 46px; line-height: 1.2; }
+  .lista b { display: block; font-weight: 800; }
+  .lista span:not(.bola) { display: block; margin-top: 8px; font-size: 38px; font-weight: 600; color: rgba(59, 36, 24, .72); }
+  .bola { display: grid; place-items: center; width: 92px; height: 92px; border-radius: 50%; background: var(--maiz); font-weight: 800; font-size: 44px; }
+  .pasos { list-style: none; margin: 80px 0 0; padding: 0; display: grid; gap: 46px; }
+  .pasos li { display: flex; align-items: center; gap: 34px; font-size: 54px; font-weight: 800; line-height: 1.1; }
+  .pasos .paso { font-size: 120px; background: var(--cacao); color: var(--crema); }
+  .pasos .paso.actual { background: var(--rosa); }
+  .hojita { margin-top: 50px; width: 100%; padding: 40px 44px 30px; background: #FFFBF3; border-radius: 10px; transform: rotate(-3deg); box-shadow: 0 30px 60px -24px rgba(59,36,24,.5); }
+  .hojita-cab { border-bottom: 5px solid var(--cacao); padding-bottom: 14px; }
+  .hojita-cab .rot { font-size: 64px; color: var(--rosa); }
+  .hojita ol { list-style: none; margin: 18px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 30px; }
+  .hojita li { display: flex; align-items: center; gap: 14px; padding: 16px 0; border-bottom: 3px dashed rgba(59,36,24,.15); font-weight: 800; font-size: 38px; }
+  .hojita li i { width: 30px; height: 30px; border: 4px solid var(--cacao); border-radius: 7px; }
+  .hojita li.k { color: var(--rosa-hondo); }
+  .hojita li.k i { background: var(--maiz); }
+
+  /* Pregunta: el número gigante detrás */
+  .preg .numerote { position: absolute; right: 40px; top: 230px; font-size: 520px; color: var(--maiz); opacity: .9; z-index: 0; }
+  .preg .kick, .preg .tit, .preg .txt, .preg .remite { position: relative; z-index: 1; }
+  .preg .tit { font-size: 112px; max-width: 8.5ch; margin-top: 100px; }
+  .preg .txt { max-width: 19ch; }
+  .remite { margin: 44px 0 0; font-size: 40px; font-weight: 700; }
+
+  /* Portada de destacada: el círculo del centro es lo que se ve en el perfil */
+  .portada .circulo { position: absolute; left: 50%; top: 50%; width: 760px; height: 760px; margin: -380px 0 0 -380px; border-radius: 50%; background: var(--maiz); display: grid; place-items: center; color: var(--cacao); --acento: var(--rosa); box-shadow: inset 0 0 0 14px var(--cacao); }
+  .portada .circulo.osc { background: var(--cacao); color: var(--crema); --acento: var(--maiz); box-shadow: none; }
+  .portada .ico { width: 470px; height: 470px; overflow: visible; }
+  .portada .circulo.osc .ico use { filter: none; }
+  .frame.redondo .portada .circulo { box-shadow: none; }
+
+  .tipo-lista-enlace .lista { gap: 18px; margin-top: 44px; }
+  .tipo-lista-enlace .lista li { font-size: 42px; }
+  .tipo-lista-enlace .bola { width: 76px; height: 76px; font-size: 38px; }
+
+  /* Testimonio */
+  .testi .comillas { margin-top: 40px; font-size: 300px; line-height: .8; color: var(--rosa); height: 170px; }
+  .testi .cita { margin: 0; font-weight: 800; font-size: 72px; line-height: 1.15; font-variation-settings: "wdth" 92; max-width: 15ch; }
+  .testi .quien { margin: 50px 0 0; font-weight: 800; font-size: 44px; }
+  .testi .caso { margin: 12px 0 0; padding: 14px 26px; border-radius: 999px; background: var(--maiz); font-weight: 700; font-size: 38px; }
+
+  /* Foto de perfil (1080 × 1080, se ve en círculo) */
+  .fperfil { position: absolute; inset: 0; }
+  .recorte-p { position: absolute; left: 50%; top: 70px; width: 1010px; max-width: none; height: auto; transform: translateX(-52%); filter: drop-shadow(26px 26px 0 var(--sombra)); }
+
+  /* Guías del tablero (no se exportan) */
+  .zona { position: absolute; left: 0; right: 0; z-index: 40; background: rgba(0,0,0,.12); outline: 3px dashed rgba(0,0,0,.25); pointer-events: none; }
+  .zona.arriba { top: 0; height: 250px; } .zona.abajo { bottom: 0; height: 340px; }
+  .solo .zona { display: none; }
+  .perfil { display: flex; gap: 22px; flex-wrap: wrap; background: #fff; padding: 22px 26px; border-radius: 22px; width: max-content; box-shadow: 0 1px 2px rgba(0,0,0,.08), 0 10px 28px rgba(0,0,0,.08); }
+  .dest { display: grid; justify-items: center; gap: 8px; font: 500 12px system-ui; color: #222; }
+  .dest .frame { box-shadow: 0 0 0 2px #fff, 0 0 0 3.5px #DBDBDB; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="simbolo" viewBox="0 0 200 200">
+    <rect x="14" y="50" width="172" height="100" rx="14" style="fill:var(--crema);stroke:var(--cacao);stroke-width:11"/>
+    <rect x="32" y="66" width="136" height="68" rx="6" style="fill:none;stroke:var(--cacao);stroke-width:4"/>
+    <circle cx="100" cy="100" r="27" style="fill:var(--rosa)"/>
+    <path d="M86 101l10 10 19-21" style="fill:none;stroke:var(--crema);stroke-width:9;stroke-linecap:round;stroke-linejoin:round"/>
+    <circle cx="48" cy="100" r="6" style="fill:var(--cacao)"/><circle cx="152" cy="100" r="6" style="fill:var(--cacao)"/>
+  </symbol>
+</svg>
+
+<template id="t-perfil-maiz"><div class="fperfil libreta"><img class="recorte-p" style="--sombra: var(--maiz)" src="../landing/img/israel-cruzado.webp" alt=""></div></template>
+<template id="t-perfil-maiz-chica"><div class="fperfil libreta"><img class="recorte-p" style="--sombra: var(--maiz)" src="../landing/img/israel-cruzado.webp" alt=""></div></template>
+<template id="t-perfil-rosa"><div class="fperfil libreta"><img class="recorte-p" style="--sombra: var(--rosa)" src="../landing/img/israel-cruzado.webp" alt=""></div></template>
+<template id="t-perfil-rosa-chica"><div class="fperfil libreta"><img class="recorte-p" style="--sombra: var(--rosa)" src="../landing/img/israel-cruzado.webp" alt=""></div></template>
+<template id="t-quien-portada-maiz"><div class="portada libreta"><div class="circulo "><svg viewBox="0 0 200 200" class="ico"><use href="#simbolo"/></svg></div></div></template>
+<template id="t-quien-portada-maiz-perfil"><div class="portada libreta"><div class="circulo "><svg viewBox="0 0 200 200" class="ico"><use href="#simbolo"/></svg></div></div></template>
+<template id="t-quien-01"><div class="h libreta con-foto"><img class="recorte foto" src="../landing/img/israel-cruzado.webp" alt=""><div class="sobre"><span class="kick">Hola</span><h3 class="disp tit">Soy <span class="rem">Israel Castro.</span></h3><p class="txt">Contador público. Te explico el SAT y tu dinero sin rodeos, como en una consulta.</p></div><div class="pie-h"><svg viewBox="0 0 200 200"><use href="#simbolo"/></svg><span>@soyisraelcastro</span></div></div></template>
+<template id="t-quien-02"><div class="h libreta tipo-fichas"><span class="kick">Qué hay aquí</span><h3 class="disp tit">Lo que te preguntas, resuelto.</h3><div class="fichas"><div class="ficha" style="--c: var(--maiz)"><span class="pestana">SAT</span>RFC, e.firma, constancia, buzón y cartas</div><div class="ficha" style="--c: var(--rosa)"><span class="pestana osc">Tu declaración</span>Obligación, deducciones y saldos a favor</div><div class="ficha" style="--c: var(--cacao)"><span class="pestana osc">Tus números</span>Ingresos extra, finanzas sanas y estados financieros</div></div><div class="pie-h"><svg viewBox="0 0 200 200"><use href="#simbolo"/></svg><span>@soyisraelcastro</span></div></div></template>
+<template id="t-quien-03"><div class="h libreta tipo-enlace"><span class="kick">Cada semana</span><h3 class="disp tit">Un video nuevo en <span class="rem">Cuentas Claras.</span></h3><p class="txt">Una duda, una serie. Búscanos en YouTube.</p><div class="enlace"><span class="rot">Toca aquí</span><div class="sticker-falso">youtube.com/@cuentasclaras_mx</div><div class="guia caja-sticker">Aquí va el sticker de enlace</div></div><div class="pie-h"><svg viewBox="0 0 200 200"><use href="#simbolo"/></svg><span>@soyisraelcastro</span></div></div></template>
+<template id="t-servicios-portada-maiz"><div class="portada libreta"><div class="circulo "><svg viewBox="0 0 200 200" class="ico"><rect x="30" y="66" width="140" height="98" rx="16" fill="none" stroke="currentColor" stroke-width="10"/><path d="M76 66V50a10 10 0 0 1 10-10h28a10 10 0 0 1 10 10v16M30 104h140" stroke="currentColor" stroke-width="10" fill="none"/><rect x="86" y="94" width="28" height="22" rx="5" fill="var(--acento)"/></svg></div></div></template>
+<template id="t-servicios-portada-maiz-perfil"><div class="portada libreta"><div class="circulo "><svg viewBox="0 0 200 200" class="ico"><rect x="30" y="66" width="140" height="98" rx="16" fill="none" stroke="currentColor" stroke-width="10"/><path d="M76 66V50a10 10 0 0 1 10-10h28a10 10 0 0 1 10 10v16M30 104h140" stroke="currentColor" stroke-width="10" fill="none"/><rect x="86" y="94" width="28" height="22" rx="5" fill="var(--acento)"/></svg></div></div></template>
+<template id="t-servicios-01"><div class="h libreta tipo-texto"><span class="kick">Servicios</span><h3 class="disp tit">Hazlo tú, o <span class="rem">déjalo en nuestras manos.</span></h3><p class="txt">Con S &amp; I Castro Consultores, el despacho familiar. 100% en línea en todo México.</p><div class="pie-h"><svg viewBox="0 0 200 200"><use href="#simbolo"/></svg><span>@soyisraelcastro</span></div></div></template>
+<template id="t-servicios-02"><div class="h libreta tipo-lista-enlace"><span class="kick">Lo que hacemos</span><h3 class="disp tit">Lo del SAT, de principio a fin.</h3><ol class="lista"><li><span class="bola">1</span><div><b>Consulta 1:1</b></div></li><li><span class="bola">2</span><div><b>Tu declaración anual</b></div></li><li><span class="bola">3</span><div><b>Tu contabilidad cada mes</b></div></li><li><span class="bola">4</span><div><b>Trámites: RFC, e.firma, 32-D</b></div></li><li><span class="bola">5</span><div><b>Ponerte al corriente</b></div></li></ol><div class="enlace"><span class="rot">Toca aquí</span><div class="sticker-falso">Precios en el despacho</div><div class="guia caja-sticker">Aquí va el sticker de enlace</div></div><div class="pie-h"><svg viewBox="0 0 200 200"><use href="#simbolo"/></svg><span>@soyisraelcastro</span></div></div></template>
+<template id="t-servicios-03"><div class="h libreta tipo-texto"><span class="kick">¿Eres contador?</span><h3 class="disp tit">También enseño a contadores a usar <span class="rem">la IA.</span></h3><p class="txt">Talleres y cursos en soycontador.ai.</p><div class="pie-h"><svg viewBox="0 0 200 200"><use href="#simbolo"/></svg><span>@soyisraelcastro</span></div></div></template>
+<template id="t-servicios-04"><div class="h libreta tipo-enlace"><span class="kick">Para tu despacho</span><h3 class="disp tit">Tus CFDI del SAT, <span class="res">sin entrar al portal.</span></h3><p class="txt">Eso hace TodoConta, la app que usamos en el despacho.</p><div class="enlace"><span class="rot">Toca aquí</span><div class="sticker-falso">todoconta.com</div><div class="guia caja-sticker">Aquí va el sticker de enlace</div></div><div class="pie-h"><svg viewBox="0 0 200 200"><use href="#simbolo"/></svg><span>@soyisraelcastro</span></div></div></template>
+<template id="t-testimonios-portada-maiz"><div class="portada libreta"><div class="circulo "><svg viewBox="0 0 200 200" class="ico"><path d="M40 44h120a14 14 0 0 1 14 14v62a14 14 0 0 1-14 14H92l-34 28v-28H40a14 14 0 0 1-14-14V58a14 14 0 0 1 14-14z" fill="none" stroke="currentColor" stroke-width="10" stroke-linejoin="round"/><path d="M100 62l9 18 20 3-14 14 3 20-18-9-18 9 3-20-14-14 20-3z" fill="var(--acento)"/></svg></div></div></template>
+<template id="t-testimonios-portada-maiz-perfil"><div class="portada libreta"><div class="circulo "><svg viewBox="0 0 200 200" class="ico"><path d="M40 44h120a14 14 0 0 1 14 14v62a14 14 0 0 1-14 14H92l-34 28v-28H40a14 14 0 0 1-14-14V58a14 14 0 0 1 14-14z" fill="none" stroke="currentColor" stroke-width="10" stroke-linejoin="round"/><path d="M100 62l9 18 20 3-14 14 3 20-18-9-18 9 3-20-14-14 20-3z" fill="var(--acento)"/></svg></div></div></template>
+<template id="t-testimonios-01"><div class="h libreta testi"><span class="kick">Testimonios</span><span class="comillas rot">“</span><p class="cita">[Lo que dijo el cliente, en sus palabras: una o dos frases]</p><p class="quien">[Nombre], [ciudad o a qué se dedica]</p><p class="caso">[Qué le resolvimos, en una línea]</p><div class="pie-h"><svg viewBox="0 0 200 200"><use href="#simbolo"/></svg><span>@soyisraelcastro</span></div></div></template>
+<template id="t-preguntas-portada-maiz"><div class="portada libreta"><div class="circulo "><svg viewBox="0 0 200 200" class="ico"><text x="100" y="152" text-anchor="middle" font-family="Shrikhand" font-size="150" fill="currentColor">?</text><circle cx="150" cy="52" r="16" fill="var(--acento)"/></svg></div></div></template>
+<template id="t-preguntas-portada-maiz-perfil"><div class="portada libreta"><div class="circulo "><svg viewBox="0 0 200 200" class="ico"><text x="100" y="152" text-anchor="middle" font-family="Shrikhand" font-size="150" fill="currentColor">?</text><circle cx="150" cy="52" r="16" fill="var(--acento)"/></svg></div></div></template>
+<template id="t-preguntas-01"><div class="h libreta preg"><span class="kick">Preguntas <b>1/5</b></span><span class="numerote rot">1</span><h3 class="disp tit">¿Por qué pagamos impuestos?</h3><p class="txt">Porque así se paga lo que es de todos. Y quien gana más, paga más: por eso el ISR sube por escalones.</p><p class="remite">La respuesta completa, en <span class="res">la guía gratis.</span></p><div class="pie-h"><svg viewBox="0 0 200 200"><use href="#simbolo"/></svg><span>@soyisraelcastro</span></div></div></template>
+<template id="t-preguntas-02"><div class="h libreta preg"><span class="kick">Preguntas <b>2/5</b></span><span class="numerote rot">2</span><h3 class="disp tit">¿Por qué me retienen?</h3><p class="txt">Retener es cobrar por adelantado a nombre del SAT. No es un impuesto extra: en tu declaración se resta.</p><p class="remite">La respuesta completa, en <span class="res">la guía gratis.</span></p><div class="pie-h"><svg viewBox="0 0 200 200"><use href="#simbolo"/></svg><span>@soyisraelcastro</span></div></div></template>
+<template id="t-preguntas-03"><div class="h libreta preg"><span class="kick">Preguntas <b>3/5</b></span><span class="numerote rot">3</span><h3 class="disp tit">¿Por qué no lo puedo pagar en efectivo?</h3><p class="txt">Si lo quieres deducir, págalo con tarjeta o transferencia. En efectivo, la factura no te sirve.</p><p class="remite">La respuesta completa, en <span class="res">la guía gratis.</span></p><div class="pie-h"><svg viewBox="0 0 200 200"><use href="#simbolo"/></svg><span>@soyisraelcastro</span></div></div></template>
+<template id="t-preguntas-04"><div class="h libreta preg"><span class="kick">Preguntas <b>4/5</b></span><span class="numerote rot">4</span><h3 class="disp tit">¿Qué pasa si no presento?</h3><p class="txt">Multa, recargos y tu opinión del SAT en negativo. Si te pones al corriente antes de que te busquen, por lo general no hay multa.</p><p class="remite">La respuesta completa, en <span class="res">la guía gratis.</span></p><div class="pie-h"><svg viewBox="0 0 200 200"><use href="#simbolo"/></svg><span>@soyisraelcastro</span></div></div></template>
+<template id="t-preguntas-05"><div class="h libreta preg"><span class="kick">Preguntas <b>5/5</b></span><span class="numerote rot">5</span><h3 class="disp tit">¿Por qué a mi compañero sí le devuelven?</h3><p class="txt">Casi nunca es trampa. Pidió factura y la pagó con tarjeta. La diferencia es saber qué guardar.</p><p class="remite">La respuesta completa, en <span class="res">la guía gratis.</span></p><div class="pie-h"><svg viewBox="0 0 200 200"><use href="#simbolo"/></svg><span>@soyisraelcastro</span></div></div></template>
+<template id="t-preguntas-06"><div class="h libreta tipo-hoja"><span class="kick">Gratis</span><h3 class="disp tit">Las respuestas, <span class="res">en una guía.</span></h3><div class="hojita"><div class="hojita-cab"><span class="rot">La hoja del año</span></div><ol><li><i></i>Ene</li><li class="k"><i></i>Feb</li><li><i></i>Mar</li><li class="k"><i></i>Abr</li><li><i></i>May</li><li><i></i>Jun</li><li><i></i>Jul</li><li><i></i>Ago</li><li><i></i>Sep</li><li><i></i>Oct</li><li class="k"><i></i>Nov</li><li class="k"><i></i>Dic</li></ol></div><p class="txt">Con el calendario y el checklist.</p><div class="pie-h"><svg viewBox="0 0 200 200"><use href="#simbolo"/></svg><span>@soyisraelcastro</span></div></div></template>
+<template id="t-preguntas-07"><div class="h libreta con-foto"><img class="recorte foto" src="../landing/img/israel-senala-abajo.webp" alt=""><div class="sobre"><span class="kick">Pídela</span><h3 class="disp tit">Tu nombre, tu correo <span class="rem">y listo.</span></h3><p class="txt">Te llega en un minuto.</p></div><div class="enlace"><span class="rot">Toca aquí</span><div class="sticker-falso">La guía gratis</div><div class="guia caja-sticker">Aquí va el sticker de enlace</div></div><div class="pie-h"><svg viewBox="0 0 200 200"><use href="#simbolo"/></svg><span>@soyisraelcastro</span></div></div></template>
+<template id="t-agenda-portada-maiz"><div class="portada libreta"><div class="circulo "><svg viewBox="0 0 200 200" class="ico"><rect x="34" y="46" width="132" height="120" rx="16" fill="none" stroke="currentColor" stroke-width="10"/><path d="M34 84h132M70 30v30M130 30v30" stroke="currentColor" stroke-width="10" stroke-linecap="round"/><path d="M76 126l16 16 32-36" fill="none" stroke="var(--acento)" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div></template>
+<template id="t-agenda-portada-maiz-perfil"><div class="portada libreta"><div class="circulo "><svg viewBox="0 0 200 200" class="ico"><rect x="34" y="46" width="132" height="120" rx="16" fill="none" stroke="currentColor" stroke-width="10"/><path d="M34 84h132M70 30v30M130 30v30" stroke="currentColor" stroke-width="10" stroke-linecap="round"/><path d="M76 126l16 16 32-36" fill="none" stroke="var(--acento)" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div></template>
+<template id="t-agenda-01"><div class="h libreta con-foto"><img class="recorte foto" src="../landing/img/israel-duda.webp" alt=""><div class="sobre"><span class="kick">Consulta 1:1</span><h3 class="disp tit">¿Tu caso no es <span class="rem">tan sencillo?</span></h3><p class="txt">Lo revisamos juntos, con tus números. La consulta tiene costo.</p></div><div class="pie-h"><svg viewBox="0 0 200 200"><use href="#simbolo"/></svg><span>@soyisraelcastro</span></div></div></template>
+<template id="t-agenda-02"><div class="h libreta tipo-pasos"><span class="kick">Cómo se agenda</span><h3 class="disp tit">Tres pasos.</h3><ol class="pasos"><li><span class="paso actual"><span>1</span></span>Da clic en agendar</li><li><span class="paso"><span>2</span></span>Pagas en línea</li><li><span class="paso"><span>3</span></span>Te llega el calendario y escoges tu hora</li></ol><div class="pie-h"><svg viewBox="0 0 200 200"><use href="#simbolo"/></svg><span>@soyisraelcastro</span></div></div></template>
+<template id="t-agenda-03"><div class="h libreta tipo-enlace"><span class="kick">¿Transferencia?</span><h3 class="disp tit">Escríbeme por <span class="rem">WhatsApp.</span></h3><p class="txt">Ahí te paso los datos y apartamos tu cita.</p><div class="enlace"><span class="rot">Toca aquí</span><div class="sticker-falso">55 4475 3602</div><div class="guia caja-sticker">Aquí va el sticker de enlace</div></div><div class="pie-h"><svg viewBox="0 0 200 200"><use href="#simbolo"/></svg><span>@soyisraelcastro</span></div></div></template>
+
+<main class="tablero">
+  <header class="cab">
+    <div>
+      <div class="letra">Cuentas Claras · Instagram</div>
+      <h1>Historias destacadas de @soyisraelcastro</h1>
+    </div>
+    <p>Cinco destacadas, como el menú de una landing: quién soy, servicios, testimonios, preguntas y cómo agendar. Las franjas grises son lo que tapa Instagram; las cajas azules, dónde se pone el sticker de enlace en la app. El testimonio es plantilla: se llena con un cliente real y su permiso, y no se exporta mientras tenga corchetes.</p>
+  </header>
+
+  <section>
+    <h2>Así se ven en el perfil</h2>
+    <div class="perfil"><div class="dest"><div class="frame redondo" style="--w:1080;--h:1080;--s:.11" data-tpl="t-quien-portada-maiz-perfil"></div><span>Quién soy</span></div><div class="dest"><div class="frame redondo" style="--w:1080;--h:1080;--s:.11" data-tpl="t-servicios-portada-maiz-perfil"></div><span>Servicios</span></div><div class="dest"><div class="frame redondo" style="--w:1080;--h:1080;--s:.11" data-tpl="t-testimonios-portada-maiz-perfil"></div><span>Testimonios</span></div><div class="dest"><div class="frame redondo" style="--w:1080;--h:1080;--s:.11" data-tpl="t-preguntas-portada-maiz-perfil"></div><span>Preguntas</span></div><div class="dest"><div class="frame redondo" style="--w:1080;--h:1080;--s:.11" data-tpl="t-agenda-portada-maiz-perfil"></div><span>Agenda</span></div></div>
+  </section>
+
+  <section><h2>Foto de perfil</h2><div class="fila"><div class="pieza"><div class="frame redondo" style="--w:1080;--h:1080;--s:.36" data-tpl="t-perfil-maiz"></div><div class="fila" style="gap:14px;align-items:center"><div class="frame redondo" style="--w:1080;--h:1080;--s:.05" data-tpl="t-perfil-maiz-chica"></div><p class="nota">Maíz. Así se ve junto a un comentario (54 px).</p></div></div><div class="pieza"><div class="frame redondo" style="--w:1080;--h:1080;--s:.36" data-tpl="t-perfil-rosa"></div><div class="fila" style="gap:14px;align-items:center"><div class="frame redondo" style="--w:1080;--h:1080;--s:.05" data-tpl="t-perfil-rosa-chica"></div><p class="nota">Rosa. Así se ve junto a un comentario (54 px).</p></div></div></div></section>
+<section><h2>Quién soy</h2><div class="fila"><div class="pieza"><div class="frame" style="--w:1080;--h:1920;--s:.24" data-tpl="t-quien-portada-maiz"></div><p class="nota">Portada Maíz (se recorta al círculo del centro)</p></div><div class="pieza"><div class="frame" style="--w:1080;--h:1920;--s:.24" data-tpl="t-quien-01"><div class="zona arriba"></div><div class="zona abajo"></div></div><p class="nota">1 de 3</p></div><div class="pieza"><div class="frame" style="--w:1080;--h:1920;--s:.24" data-tpl="t-quien-02"><div class="zona arriba"></div><div class="zona abajo"></div></div><p class="nota">2 de 3</p></div><div class="pieza"><div class="frame" style="--w:1080;--h:1920;--s:.24" data-tpl="t-quien-03"><div class="zona arriba"></div><div class="zona abajo"></div></div><p class="nota">3 de 3</p></div></div></section>
+<section><h2>Servicios</h2><div class="fila"><div class="pieza"><div class="frame" style="--w:1080;--h:1920;--s:.24" data-tpl="t-servicios-portada-maiz"></div><p class="nota">Portada Maíz (se recorta al círculo del centro)</p></div><div class="pieza"><div class="frame" style="--w:1080;--h:1920;--s:.24" data-tpl="t-servicios-01"><div class="zona arriba"></div><div class="zona abajo"></div></div><p class="nota">1 de 4</p></div><div class="pieza"><div class="frame" style="--w:1080;--h:1920;--s:.24" data-tpl="t-servicios-02"><div class="zona arriba"></div><div class="zona abajo"></div></div><p class="nota">2 de 4</p></div><div class="pieza"><div class="frame" style="--w:1080;--h:1920;--s:.24" data-tpl="t-servicios-03"><div class="zona arriba"></div><div class="zona abajo"></div></div><p class="nota">3 de 4</p></div><div class="pieza"><div class="frame" style="--w:1080;--h:1920;--s:.24" data-tpl="t-servicios-04"><div class="zona arriba"></div><div class="zona abajo"></div></div><p class="nota">4 de 4</p></div></div></section>
+<section><h2>Testimonios</h2><div class="fila"><div class="pieza"><div class="frame" style="--w:1080;--h:1920;--s:.24" data-tpl="t-testimonios-portada-maiz"></div><p class="nota">Portada Maíz (se recorta al círculo del centro)</p></div><div class="pieza"><div class="frame" style="--w:1080;--h:1920;--s:.24" data-tpl="t-testimonios-01"><div class="zona arriba"></div><div class="zona abajo"></div></div><p class="nota">1 de 1</p></div></div></section>
+<section><h2>Preguntas</h2><div class="fila"><div class="pieza"><div class="frame" style="--w:1080;--h:1920;--s:.24" data-tpl="t-preguntas-portada-maiz"></div><p class="nota">Portada Maíz (se recorta al círculo del centro)</p></div><div class="pieza"><div class="frame" style="--w:1080;--h:1920;--s:.24" data-tpl="t-preguntas-01"><div class="zona arriba"></div><div class="zona abajo"></div></div><p class="nota">1 de 7</p></div><div class="pieza"><div class="frame" style="--w:1080;--h:1920;--s:.24" data-tpl="t-preguntas-02"><div class="zona arriba"></div><div class="zona abajo"></div></div><p class="nota">2 de 7</p></div><div class="pieza"><div class="frame" style="--w:1080;--h:1920;--s:.24" data-tpl="t-preguntas-03"><div class="zona arriba"></div><div class="zona abajo"></div></div><p class="nota">3 de 7</p></div><div class="pieza"><div class="frame" style="--w:1080;--h:1920;--s:.24" data-tpl="t-preguntas-04"><div class="zona arriba"></div><div class="zona abajo"></div></div><p class="nota">4 de 7</p></div><div class="pieza"><div class="frame" style="--w:1080;--h:1920;--s:.24" data-tpl="t-preguntas-05"><div class="zona arriba"></div><div class="zona abajo"></div></div><p class="nota">5 de 7</p></div><div class="pieza"><div class="frame" style="--w:1080;--h:1920;--s:.24" data-tpl="t-preguntas-06"><div class="zona arriba"></div><div class="zona abajo"></div></div><p class="nota">6 de 7</p></div><div class="pieza"><div class="frame" style="--w:1080;--h:1920;--s:.24" data-tpl="t-preguntas-07"><div class="zona arriba"></div><div class="zona abajo"></div></div><p class="nota">7 de 7</p></div></div></section>
+<section><h2>Agenda</h2><div class="fila"><div class="pieza"><div class="frame" style="--w:1080;--h:1920;--s:.24" data-tpl="t-agenda-portada-maiz"></div><p class="nota">Portada Maíz (se recorta al círculo del centro)</p></div><div class="pieza"><div class="frame" style="--w:1080;--h:1920;--s:.24" data-tpl="t-agenda-01"><div class="zona arriba"></div><div class="zona abajo"></div></div><p class="nota">1 de 3</p></div><div class="pieza"><div class="frame" style="--w:1080;--h:1920;--s:.24" data-tpl="t-agenda-02"><div class="zona arriba"></div><div class="zona abajo"></div></div><p class="nota">2 de 3</p></div><div class="pieza"><div class="frame" style="--w:1080;--h:1920;--s:.24" data-tpl="t-agenda-03"><div class="zona arriba"></div><div class="zona abajo"></div></div><p class="nota">3 de 3</p></div></div></section>
+</main>
+<script src="tablero.js"></script>
+</body>
+</html>

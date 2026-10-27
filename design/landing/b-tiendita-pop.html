@@ -1,0 +1,462 @@
+<title>Cuentas Claras · Tiendita pop</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Shrikhand&display=swap">
+<style>
+/* Boceto B · Tiendita pop. Los cuatro colores de la marca en bandas completas, como la papelería
+   de la esquina: maíz, rosa, cacao y crema. ROMPE a propósito la regla de la v2 ("rosa y maíz
+   nunca de fondo") solo para la web, para ver si ahí sí funciona. Detalle propio: el ticket de caja
+   de la guía, con su total en $0.00.
+   Layout: bandas a todo lo ancho; dentro, retícula de 12 con stickers que se salen de la caja. */
+:root {
+  --crema: #FFF6E8;
+  --cacao: #3B2418;
+  --cacao-70: rgba(59, 36, 24, .72);
+  --rosa: #E4007C;
+  --rosa-hondo: #B0005F;
+  --maiz: #F6C343;
+  --maiz-hondo: #E2A91E;
+  --ticket: #FFFDF8;
+  --display: "Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
+  --rotulo: "Shrikhand", "Bricolage Grotesque", cursive;
+  --ancho: 1240px;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--crema); color: var(--cacao); font-family: var(--display); font-size: 18px; line-height: 1.5; font-weight: 500; -webkit-font-smoothing: antialiased; overflow-x: clip; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 60; background: var(--maiz); }
+a { color: inherit; }
+img { max-width: 100%; height: auto; display: block; }
+:focus-visible { outline: 3px solid var(--cacao); outline-offset: 3px; border-radius: 6px; }
+.envoltura { width: 100%; max-width: var(--ancho); margin-inline: auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.disp { font-weight: 800; font-variation-settings: "wdth" 88, "opsz" 96; line-height: .9; letter-spacing: -.02em; text-wrap: balance; }
+.rot { font-family: var(--rotulo); font-weight: 400; line-height: 1; }
+.banda { position: relative; padding-block: clamp(72px, 10vw, 140px); }
+.banda.maiz { background: var(--maiz); }
+.banda.rosa { background: var(--rosa); color: var(--crema); }
+.banda.cacao { background: var(--cacao); color: var(--crema); }
+.banda.crema { background: var(--crema); }
+/* Borde ondulado entre bandas, como orilla de papel picado */
+.picado { position: absolute; left: 0; right: 0; bottom: -1px; height: 22px; background: var(--sig); -webkit-mask: radial-gradient(circle at 12px 0, transparent 12px, #000 12.5px) 0 0 / 24px 22px repeat-x; mask: radial-gradient(circle at 12px 0, transparent 12px, #000 12.5px) 0 0 / 24px 22px repeat-x; z-index: 2; }
+
+.btn { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 56px; padding: 0 28px; border: 3px solid var(--cacao); border-radius: 16px; background: var(--rosa); color: var(--crema); font: 800 17px/1 var(--display); font-variation-settings: "wdth" 92; text-decoration: none; cursor: pointer; box-shadow: 5px 5px 0 var(--cacao); transition: transform .15s, box-shadow .15s, background-color .2s; }
+.btn:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 var(--cacao); }
+.btn:active { transform: translate(4px, 4px); box-shadow: 1px 1px 0 var(--cacao); }
+.btn.crema { background: var(--crema); color: var(--cacao); }
+.btn.maiz { background: var(--maiz); color: var(--cacao); }
+
+/* ---------- Barra flotante ---------- */
+.barra { position: fixed; z-index: 50; top: calc(env(safe-area-inset-top, 0px) + 14px); left: 50%; transform: translateX(-50%); width: min(calc(100% - 2 * max(16px, env(safe-area-inset-left, 0px))), 860px); display: flex; align-items: center; gap: 18px; padding: 8px 8px 8px 16px; border-radius: 999px; background: var(--cacao); color: var(--crema); box-shadow: 0 10px 30px rgba(59, 36, 24, .25); }
+.marca { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; margin-right: auto; }
+.marca svg { width: 40px; height: 40px; }
+.marca .rot { font-size: 18px; color: var(--maiz); line-height: .9; }
+.barra nav { display: flex; gap: 20px; font-weight: 700; font-size: 15.5px; }
+.barra nav a { text-decoration: none; opacity: .85; transition: opacity .2s, color .2s; }
+.barra nav a:hover { opacity: 1; color: var(--maiz); }
+.barra .btn { min-height: 44px; padding: 0 18px; border-radius: 999px; border-width: 2px; box-shadow: none; font-size: 15px; }
+.barra .btn:hover { background: var(--maiz); color: var(--cacao); transform: none; box-shadow: none; }
+@media (max-width: 760px) { .barra nav { display: none; } }
+
+/* ---------- Portada ---------- */
+.portada { padding-top: calc(env(safe-area-inset-top, 0px) + 120px); padding-bottom: clamp(80px, 10vw, 130px); overflow: hidden; }
+.portada .envoltura { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: 24px; align-items: end; }
+.portada h1 { margin: 0; font-size: clamp(3.4rem, 1.4rem + 8vw, 9.4rem); }
+.portada h1 .palabra { display: inline-block; }
+.portada h1 .rosa { color: var(--rosa); }
+.portada h1 .muerde { position: relative; display: inline-block; }
+.portada h1 .muerde::after { content: ""; position: absolute; left: 0; right: 4%; bottom: -.04em; height: .16em; background: radial-gradient(circle at 50% 0, transparent .07em, var(--rosa) .075em, var(--rosa) .12em, transparent .125em) 0 0 / .32em .16em repeat-x; transform: rotate(-2deg); transform-origin: left; }
+.portada .bajada { margin: 28px 0 0; max-width: 32ch; font-size: clamp(1.15rem, 1rem + .6vw, 1.45rem); line-height: 1.4; font-weight: 600; }
+.portada .acciones { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; margin-top: 30px; }
+.portada .yt { font-weight: 800; text-decoration: none; display: inline-flex; gap: 10px; align-items: center; padding: 10px 4px; border-bottom: 3px solid var(--cacao); }
+.retrato { position: relative; justify-self: end; width: min(100%, 420px); }
+.retrato img { position: relative; z-index: 2; filter: drop-shadow(10px 12px 0 var(--cacao)); }
+.provisional { position: absolute; z-index: 5; right: 10px; bottom: 16px; padding: 6px 12px; border-radius: 8px; background: var(--crema); color: var(--cacao); border: 2px solid var(--cacao); font-size: 12.5px; font-weight: 800; transform: rotate(3deg); }
+.sticker { translate: var(--fx, 0) var(--fy, 0); position: absolute; z-index: 4; display: grid; place-items: center; text-align: center; font-weight: 800; font-variation-settings: "wdth" 88; line-height: 1; border: 3px solid var(--cacao); box-shadow: 4px 4px 0 var(--cacao); }
+.sticker.s1 { width: 128px; height: 128px; border-radius: 50%; background: var(--rosa); color: var(--crema); top: 6%; left: -16%; font-size: 20px; transform: rotate(-12deg); }
+.sticker.s1 .rot { display: block; font-size: 30px; margin-top: 2px; }
+.sticker.s2 { padding: 12px 16px; border-radius: 14px; background: var(--crema); top: 46%; right: -8%; font-size: 19px; transform: rotate(8deg); }
+.sticker.s3 { padding: 12px 16px; border-radius: 999px; background: var(--cacao); color: var(--maiz); bottom: 18%; left: -12%; font-size: 17px; transform: rotate(-5deg); }
+@media (max-width: 860px) {
+  .portada .envoltura { grid-template-columns: 1fr; }
+  .retrato { justify-self: center; width: min(78%, 340px); margin-top: 24px; }
+  .sticker.s1 { width: 104px; height: 104px; font-size: 16px; left: -18%; } .sticker.s1 .rot { font-size: 24px; }
+  .sticker.s2 { right: -16%; font-size: 15px; } .sticker.s3 { left: -16%; font-size: 14px; }
+}
+
+/* ---------- Tira ---------- */
+.tira { background: var(--cacao); color: var(--maiz); padding-block: 16px; overflow: hidden; border-block: 3px solid var(--cacao); }
+.tira-pista { display: flex; width: max-content; animation: correr 26s linear infinite; }
+.tira-pista span { display: inline-flex; align-items: center; gap: 28px; padding-right: 28px; font-family: var(--rotulo); font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.4rem); white-space: nowrap; }
+.tira-pista i { width: 16px; height: 16px; border-radius: 50%; background: var(--rosa); display: inline-block; }
+@keyframes correr { to { transform: translateX(-50%); } }
+
+/* ---------- Temas que se encienden ---------- */
+.temas .envoltura { display: grid; grid-template-columns: minmax(0, .7fr) minmax(0, 1.3fr); gap: 40px; align-items: start; }
+.temas .lado { position: sticky; top: 120px; }
+.temas h2 { margin: 0; font-size: clamp(2.4rem, 1.4rem + 3.6vw, 4.6rem); }
+.temas .lado p { margin: 18px 0 0; color: rgba(255, 246, 232, .78); max-width: 34ch; }
+.lista-temas { list-style: none; margin: 0; padding: 0; }
+.lista-temas li { display: flex; align-items: baseline; justify-content: space-between; gap: 18px; padding: 10px 0; border-bottom: 2px solid rgba(255, 246, 232, .14); font-weight: 800; font-variation-settings: "wdth" 85, "opsz" 96; font-size: clamp(2.2rem, 1.2rem + 4vw, 5.2rem); line-height: 1; letter-spacing: -.02em; color: rgba(255, 246, 232, .22); transition: color .35s; }
+.lista-temas li small { flex: none; font-size: 15px; letter-spacing: .1em; text-transform: uppercase; font-variation-settings: "wdth" 100; color: inherit; }
+.lista-temas li.on { color: var(--crema); }
+.lista-temas li.on:nth-child(3n+1) { color: var(--maiz); }
+.lista-temas li.on:nth-child(3n+2) { color: var(--crema); }
+.lista-temas li.on:nth-child(3n) { color: #FF5FB1; }
+@media (max-width: 860px) { .temas .envoltura { grid-template-columns: 1fr; } .temas .lado { position: static; } .lista-temas li { color: var(--crema); } }
+
+/* ---------- Series: riel horizontal ---------- */
+.series { overflow: hidden; }
+.series .cabeza { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 18px; }
+.series h2 { margin: 0; font-size: clamp(2.4rem, 1.4rem + 3.6vw, 4.6rem); max-width: 12ch; }
+.series .cabeza p { margin: 0; max-width: 34ch; font-weight: 600; }
+.riel { display: flex; gap: 24px; margin-top: 44px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); will-change: transform; }
+.tarjeta { flex: none; width: min(78vw, 400px); border: 3px solid var(--cacao); border-radius: 26px; background: var(--crema); box-shadow: 8px 8px 0 var(--cacao); overflow: hidden; transition: transform .3s; }
+.tarjeta:hover { transform: rotate(-1.5deg) translateY(-6px); }
+.miniatura { position: relative; aspect-ratio: 16 / 9; max-width: 100%; background: var(--fondo, var(--maiz)); padding: 18px; display: flex; flex-direction: column; justify-content: space-between; border-bottom: 3px solid var(--cacao); overflow: hidden; }
+.miniatura .t { font-weight: 800; font-variation-settings: "wdth" 85, "opsz" 96; font-size: 2.1rem; line-height: .92; letter-spacing: -.02em; max-width: 9ch; color: var(--tt, var(--cacao)); }
+.miniatura .dur { align-self: flex-end; padding: 4px 8px; border-radius: 6px; background: var(--cacao); color: var(--crema); font-size: 13px; font-weight: 700; }
+.miniatura svg.bill { position: absolute; right: -14px; top: -10px; width: 120px; height: 120px; transform: rotate(14deg); }
+.tarjeta .info { padding: 18px 20px 22px; }
+.tarjeta .serie { font-size: 13px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--rosa-hondo); }
+.tarjeta h3 { margin: 6px 0 6px; font-size: 1.4rem; line-height: 1.12; font-weight: 800; }
+.tarjeta p { margin: 0; color: var(--cacao-70); font-size: 16px; }
+.tarjeta.prox .miniatura::after { content: "Próximamente"; position: absolute; left: 18px; top: 18px; padding: 6px 10px; border-radius: 8px; background: var(--crema); border: 2px solid var(--cacao); font-size: 13px; font-weight: 800; transform: rotate(-4deg); }
+.tarjeta.prox .miniatura .t { margin-top: 40px; }
+@media (max-width: 860px) { .riel { overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 18px; } .tarjeta { scroll-snap-align: start; } }
+
+/* ---------- La guía: ticket de caja ---------- */
+.guia .envoltura { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: center; }
+.guia h2 { margin: 0; font-size: clamp(2.6rem, 1.4rem + 4.4vw, 5.6rem); }
+.guia h2 .rot { color: var(--maiz); font-size: .82em; display: inline-block; transform: rotate(-4deg); }
+.guia .texto > p { margin: 18px 0 0; max-width: 38ch; font-weight: 600; font-size: 1.15rem; }
+.caja { position: relative; display: grid; justify-items: center; }
+.ranura { width: min(100%, 420px); height: 30px; border-radius: 16px; background: var(--cacao); position: relative; z-index: 2; box-shadow: inset 0 -6px 0 rgba(0, 0, 0, .25); }
+.ticket { position: relative; width: min(calc(100% - 40px), 360px); margin-top: -14px; padding: 34px 26px 30px; background: var(--ticket); color: var(--cacao); font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 15px; line-height: 1.5; transform-origin: top center; box-shadow: 0 30px 40px -20px rgba(59, 36, 24, .5);
+  -webkit-mask: radial-gradient(circle at 8px 100%, transparent 7px, #000 7.5px) 0 100% / 16px 12px repeat-x, linear-gradient(#000, #000) 0 0 / 100% calc(100% - 11px) no-repeat;
+  mask: radial-gradient(circle at 8px 100%, transparent 7px, #000 7.5px) 0 100% / 16px 12px repeat-x, linear-gradient(#000, #000) 0 0 / 100% calc(100% - 11px) no-repeat; }
+.ticket .cab { text-align: center; }
+.ticket .cab .rot { font-family: var(--rotulo); font-size: 1.9rem; color: var(--rosa); }
+.ticket .cab small { display: block; margin-top: 6px; font-size: 12.5px; letter-spacing: .08em; }
+.ticket hr { border: 0; border-top: 2px dashed rgba(59, 36, 24, .35); margin: 16px 0; }
+.ticket .fila { display: flex; gap: 8px; align-items: baseline; }
+.ticket .fila i { flex: 1; border-bottom: 2px dotted rgba(59, 36, 24, .4); transform: translateY(-4px); }
+.ticket .total { font-size: 1.25rem; font-weight: 800; }
+.ticket .gracias { margin-top: 16px; text-align: center; font-size: 13px; }
+.ticket .sello { position: absolute; right: 12px; bottom: 74px; padding: 6px 12px; border: 3px solid var(--rosa); border-radius: 8px; color: var(--rosa); font-family: var(--rotulo); font-size: 1.6rem; transform: rotate(-14deg); mix-blend-mode: multiply; }
+.forma { margin-top: 28px; display: grid; gap: 12px; max-width: 460px; }
+.forma .fila-campos { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; }
+.forma label { display: block; margin-bottom: 6px; font-weight: 800; font-size: 14.5px; }
+.forma label small { font-weight: 600; opacity: .85; }
+.forma input { width: 100%; min-height: 56px; padding: 0 16px; border: 3px solid var(--cacao); border-radius: 14px; background: var(--crema); color: var(--cacao); font: 700 17px var(--display); }
+.forma input:focus { outline: none; box-shadow: 0 0 0 4px var(--maiz); }
+.forma .btn { justify-self: start; }
+.forma .fino { margin: 0; font-size: 13.5px; opacity: .85; }
+.listo-b { margin-top: 28px; padding: 22px 24px; border: 3px solid var(--cacao); border-radius: 20px; background: var(--crema); color: var(--cacao); box-shadow: 6px 6px 0 var(--cacao); max-width: 460px; }
+.listo-b .rot { font-size: 2.4rem; color: var(--rosa); }
+@media (max-width: 860px) { .guia .envoltura { grid-template-columns: 1fr; } .caja { order: -1; } }
+@media (max-width: 480px) { .forma .fila-campos { grid-template-columns: 1fr; } }
+
+/* ---------- Quién ---------- */
+.quien .envoltura { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 48px; align-items: center; }
+.polaroid { position: relative; padding: 14px 14px 64px; background: var(--crema); border: 3px solid var(--cacao); box-shadow: 10px 10px 0 var(--cacao); transform: rotate(-4deg); max-width: 380px; justify-self: center; }
+.polaroid .foto { aspect-ratio: 4 / 5; max-width: 100%; background: var(--maiz); overflow: hidden; border: 2px solid var(--cacao); }
+.polaroid .foto img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; }
+.polaroid figcaption { position: absolute; left: 0; right: 0; bottom: 16px; text-align: center; font-family: var(--rotulo); font-size: 1.5rem; color: var(--rosa); }
+.polaroid .provisional { right: -14px; bottom: auto; top: 18px; }
+.quien h2 { margin: 0; font-size: clamp(2.2rem, 1.3rem + 3.2vw, 4.2rem); }
+.quien p { margin: 18px 0 0; max-width: 46ch; font-size: 1.12rem; }
+.hacemos { margin-top: 30px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px 22px; padding: 18px 20px; border-radius: 20px; background: var(--maiz); border: 3px solid var(--cacao); }
+.hacemos p { margin: 0; font-weight: 800; font-size: 1.15rem; }
+@media (max-width: 860px) { .quien .envoltura { grid-template-columns: 1fr; } }
+
+/* ---------- Colabora ---------- */
+.colabora { text-align: center; overflow: hidden; }
+.colabora h2 { margin: 0 auto; font-size: clamp(3rem, 1.2rem + 8vw, 9rem); max-width: 10ch; color: var(--maiz); }
+.colabora h2 .rot { color: var(--crema); font-size: .7em; display: block; margin-bottom: .1em; }
+.colabora p { margin: 22px auto 0; max-width: 46ch; color: rgba(255, 246, 232, .8); }
+.colabora .acciones { margin-top: 30px; display: flex; justify-content: center; flex-wrap: wrap; gap: 14px; }
+
+/* ---------- Pie ---------- */
+.pie { background: var(--maiz); padding-block: 48px 40px; border-top: 3px solid var(--cacao); }
+.pie .envoltura { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px 40px; align-items: start; }
+.pie .marca .rot { color: var(--cacao); }
+.pie p { margin: 10px 0 0; max-width: 38ch; font-size: 15px; color: var(--cacao-70); }
+.pie ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+.pie li a { display: inline-block; padding: 8px 14px; border: 2px solid var(--cacao); border-radius: 999px; text-decoration: none; font-weight: 700; font-size: 15px; background: var(--crema); transition: background-color .2s; }
+.pie li a:hover { background: var(--rosa); color: var(--crema); }
+
+/* Billetes que caen detrás del cursor */
+.rastro { position: fixed; z-index: 70; width: 34px; height: 34px; pointer-events: none; left: 0; top: 0; }
+
+/* Entrada de la portada en CSS (no depende de que cargue GSAP) */
+@keyframes rebote { from { transform: translateY(60px) rotate(var(--g, 0deg)) scale(.6); } }
+@keyframes pegar { from { transform: scale(0) rotate(-40deg); } }
+@keyframes tachar { from { transform: rotate(-2deg) scaleX(0); } }
+.portada h1 .palabra { animation: rebote .9s cubic-bezier(.3, 1.5, .5, 1) both; }
+.portada h1 .palabra:nth-child(2) { animation-delay: .08s; --g: 6deg; } .portada h1 .palabra:nth-child(3) { animation-delay: .16s; --g: -5deg; }
+.portada h1 .palabra:nth-child(4) { animation-delay: .24s; --g: 4deg; } .portada h1 .palabra:nth-child(5) { animation-delay: .32s; --g: -6deg; }
+.portada h1 .muerde::after { animation: tachar .5s cubic-bezier(.6, 0, .2, 1) .9s both; }
+.sticker { animation: pegar .7s cubic-bezier(.3, 1.6, .5, 1) both; }
+.sticker.s1 { animation-delay: .6s; } .sticker.s2 { animation-delay: .75s; } .sticker.s3 { animation-delay: .9s; }
+@media (prefers-reduced-motion: reduce) {
+  .tira-pista, .portada h1 .palabra, .portada h1 .muerde::after, .sticker { animation: none; }
+  * { scroll-behavior: auto !important; }
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="billete" viewBox="0 0 200 200">
+    <rect x="14" y="50" width="172" height="100" rx="14" fill="#FFF6E8" stroke="#3B2418" stroke-width="11"/>
+    <rect x="32" y="66" width="136" height="68" rx="6" fill="none" stroke="#3B2418" stroke-width="4"/>
+    <circle cx="100" cy="100" r="27" fill="#E4007C"/>
+    <path d="M86 101l10 10 19-21" fill="none" stroke="#FFF6E8" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="48" cy="100" r="6" fill="#3B2418"/><circle cx="152" cy="100" r="6" fill="#3B2418"/>
+  </symbol>
+  <symbol id="billete-osc" viewBox="0 0 200 200">
+    <rect x="14" y="50" width="172" height="100" rx="14" fill="#3B2418" stroke="#FFF6E8" stroke-width="11"/>
+    <rect x="32" y="66" width="136" height="68" rx="6" fill="none" stroke="#FFF6E8" stroke-width="4"/>
+    <circle cx="100" cy="100" r="27" fill="#F6C343"/>
+    <path d="M86 101l10 10 19-21" fill="none" stroke="#3B2418" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="48" cy="100" r="6" fill="#FFF6E8"/><circle cx="152" cy="100" r="6" fill="#FFF6E8"/>
+  </symbol>
+</svg>
+
+<header class="barra" id="barra">
+  <a class="marca" href="#inicio" aria-label="Cuentas Claras, inicio"><svg aria-hidden="true"><use href="#billete-osc"/></svg><span class="rot">Cuentas<br>Claras</span></a>
+  <nav aria-label="Secciones"><a href="#temas">Temas</a><a href="#series">Series</a><a href="#quien">Quién</a><a href="#colabora">Colabora</a></nav>
+  <a class="btn" href="#guia">La guía gratis</a>
+</header>
+
+<main id="inicio">
+  <section class="banda maiz portada">
+    <div class="envoltura">
+      <div>
+        <h1 class="disp" id="titular"><span class="palabra">El</span> <span class="palabra">SAT</span> <span class="palabra muerde">no muerde.</span><br><span class="palabra rosa">Te lo</span> <span class="palabra rosa">explicamos.</span></h1>
+        <p class="bajada">Trámites del SAT paso a paso, tu declaración sin sorpresas y tu dinero en orden. Un video nuevo cada semana.</p>
+        <div class="acciones">
+          <a class="btn" href="#guia">Quiero la hoja del año</a>
+          <a class="yt" href="https://www.youtube.com/@cuentasclaras_mx" target="_blank" rel="noopener">Ver el canal en YouTube</a>
+        </div>
+      </div>
+      <div class="retrato" id="retrato">
+        <span class="sticker s1" data-flota="1.3">Paso a<span class="rot">paso</span></span>
+        <span class="sticker s2" data-flota="-1">Sin tecnicismos</span>
+        <span class="sticker s3" data-flota=".8">@cuentasclaras_mx</span>
+        <img src="img/israel-cruzado.webp" alt="Israel Castro, contador público, con los brazos cruzados" width="720" height="961">
+        <span class="provisional">Foto provisional</span>
+      </div>
+    </div>
+    <div class="picado" style="--sig: var(--cacao)"></div>
+  </section>
+
+  <div class="tira" aria-hidden="true">
+    <div class="tira-pista">
+      <span>RFC <i></i> e.firma <i></i> Constancia <i></i> Saldo a favor <i></i> Aguinaldo <i></i> RESICO <i></i> Buzón <i></i> Deducciones <i></i></span>
+      <span>RFC <i></i> e.firma <i></i> Constancia <i></i> Saldo a favor <i></i> Aguinaldo <i></i> RESICO <i></i> Buzón <i></i> Deducciones <i></i></span>
+    </div>
+  </div>
+
+  <section class="banda cacao temas" id="temas">
+    <div class="envoltura">
+      <div class="lado">
+        <h2 class="disp">Lo que <span style="color:var(--maiz)">sí</span> te preguntas.</h2>
+        <p>Las mismas dudas que llegan al despacho, resueltas como en una consulta. Baja y se van prendiendo.</p>
+      </div>
+      <ol class="lista-temas" id="lista-temas">
+        <li>Mi RFC <small>SAT</small></li>
+        <li>La e.firma <small>SAT</small></li>
+        <li>La constancia <small>SAT</small></li>
+        <li>¿Declaro? <small>Tu anual</small></li>
+        <li>Deducciones <small>Tu anual</small></li>
+        <li>Saldo a favor <small>Tu anual</small></li>
+        <li>Aguinaldo <small>Tu dinero</small></li>
+        <li>RESICO <small>Tu dinero</small></li>
+        <li>Mis números <small>Tu dinero</small></li>
+      </ol>
+    </div>
+    <div class="picado" style="--sig: var(--crema)"></div>
+  </section>
+
+  <section class="banda crema series" id="series">
+    <div class="envoltura cabeza">
+      <h2 class="disp">Una duda, tres videos.</h2>
+      <p>Cada serie arranca con la pregunta tal cual llega a consulta, y se resuelve en tres partes que también funcionan solas.</p>
+    </div>
+    <div class="riel" id="riel">
+      <article class="tarjeta">
+        <div class="miniatura" style="--fondo: var(--maiz)"><svg class="bill" aria-hidden="true"><use href="#billete"/></svg><span class="t">¿Tengo que declarar?</span><span class="dur">Serie 1 · 1</span></div>
+        <div class="info"><span class="serie">Si solo tengo sueldo</span><h3>Cuándo sí estás obligado</h3><p>El monto que lo cambia todo y qué pasa si te sale a pagar.</p></div>
+      </article>
+      <article class="tarjeta">
+        <div class="miniatura" style="--fondo: var(--rosa); --tt: var(--crema)"><svg class="bill" aria-hidden="true"><use href="#billete"/></svg><span class="t">¿Cuánto te regresan?</span><span class="dur">Serie 1 · 2</span></div>
+        <div class="info"><span class="serie">Si solo tengo sueldo</span><h3>Deducciones, con números</h3><p>Cada peso que deduces no te regresa un peso. Te enseñamos cuánto sí.</p></div>
+      </article>
+      <article class="tarjeta">
+        <div class="miniatura" style="--fondo: var(--cacao); --tt: var(--maiz)"><svg class="bill" aria-hidden="true"><use href="#billete-osc"/></svg><span class="t">Sueldo y algo más</span><span class="dur">Serie 1 · 3</span></div>
+        <div class="info"><span class="serie">Si solo tengo sueldo</span><h3>Intereses, Sofipo, herencia</h3><p>Cuándo se suman a tu declaración y cuándo no.</p></div>
+      </article>
+      <article class="tarjeta prox">
+        <div class="miniatura" style="--fondo: var(--maiz)"><span class="t">Tu aguinaldo</span><span class="dur">Diciembre</span></div>
+        <div class="info"><span class="serie">Serie 2</span><h3>Cuánto te toca y por qué te retienen</h3><p>Y si tienes negocio, cómo pagarlo bien.</p></div>
+      </article>
+      <article class="tarjeta prox">
+        <div class="miniatura" style="--fondo: var(--rosa); --tt: var(--crema)"><span class="t">Tus inversiones</span><span class="dur">Febrero</span></div>
+        <div class="info"><span class="serie">Serie 4</span><h3>Sofipos, Cetes y casa de bolsa</h3><p>Solo el lado fiscal: nunca dónde invertir.</p></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="banda rosa guia" id="guia">
+    <div class="envoltura">
+      <div class="texto">
+        <h2 class="disp">Tu año con el SAT, en una hoja. <span class="rot">¡Gratis!</span></h2>
+        <p>Qué toca cada mes, qué guardar para deducir y las fechas que no se mueven. Para el refri o el fondo de pantalla.</p>
+        <form class="forma" id="form-guia" novalidate>
+          <div class="fila-campos">
+            <div><label for="correo">Tu correo</label><input id="correo" name="correo" type="email" autocomplete="email" placeholder="tu@correo.com" required></div>
+            <div><label for="whatsapp">WhatsApp <small>(opcional)</small></label><input id="whatsapp" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" placeholder="10 dígitos"></div>
+          </div>
+          <button class="btn maiz" type="submit">Imprime mi ticket</button>
+          <p class="fino">Boceto: no envía nada todavía. Sin spam; te das de baja cuando quieras.</p>
+        </form>
+        <div class="listo-b" id="listo-guia" hidden><span class="rot">¡Cobrado!</span><p>Por $0.00. Revisa tu correo: ahí va la hoja del año.</p></div>
+      </div>
+      <div class="caja" aria-label="Vista previa de lo que incluye la guía">
+        <div class="ranura"></div>
+        <div class="ticket" id="ticket">
+          <div class="cab"><span class="rot">Cuentas Claras</span><small>TICKET DE TU AÑO FISCAL</small></div>
+          <hr>
+          <div class="fila"><span>1 Calendario mes por mes</span><i></i><span>$0.00</span></div>
+          <div class="fila"><span>1 Checklist de deducciones</span><i></i><span>$0.00</span></div>
+          <div class="fila"><span>1 Lista de papeles a guardar</span><i></i><span>$0.00</span></div>
+          <div class="fila"><span>4 Fechas que no se mueven</span><i></i><span>$0.00</span></div>
+          <hr>
+          <div class="fila total"><span>TOTAL</span><i></i><span>$0.00</span></div>
+          <p class="gracias">GRACIAS POR SU VISITA<br>VUELVA CADA SEMANA</p>
+          <span class="sello">Gratis</span>
+        </div>
+      </div>
+    </div>
+    <div class="picado" style="--sig: var(--crema)"></div>
+  </section>
+
+  <section class="banda crema quien" id="quien">
+    <div class="envoltura">
+      <figure class="polaroid" id="polaroid">
+        <div class="foto"><img src="img/israel-duda.webp" alt="Israel Castro pensando, con la mano en la barbilla" width="900" height="1205" loading="lazy"></div>
+        <figcaption>¿Y si…?</figcaption>
+        <span class="provisional">Foto provisional</span>
+      </figure>
+      <div>
+        <h2 class="disp">Hola, soy Israel. Contador, sin corbata.</h2>
+        <p>Contador público y socio de S &amp; I Castro Consultores, el despacho familiar. Aquí resuelvo las dudas que más me traen mis clientes, para que tú las resuelvas sin pagar una consulta.</p>
+        <div class="hacemos">
+          <p>¿No te salió? Te lo hacemos.</p>
+          <a class="btn" href="https://sicastro.com" target="_blank" rel="noopener">Ir a sicastro.com</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="banda cacao colabora" id="colabora">
+    <div class="envoltura">
+      <h2 class="disp"><span class="rot">¿Hacemos un</span>colab?</h2>
+      <p>Videos en colaboración, una charla para tu equipo o tu comunidad, o una entrevista. Si le habla a quien quiere su SAT y su dinero en orden, va.</p>
+      <div class="acciones"><a class="btn maiz" href="#colabora">Escríbenos</a><a class="btn crema" href="https://www.youtube.com/@cuentasclaras_mx" target="_blank" rel="noopener">Conoce el canal</a></div>
+    </div>
+  </section>
+</main>
+
+<footer class="pie">
+  <div class="envoltura">
+    <div>
+      <a class="marca" href="#inicio"><svg aria-hidden="true" style="width:44px;height:44px"><use href="#billete"/></svg><span class="rot">Cuentas<br>Claras</span></a>
+      <p>Un canal de S &amp; I Castro Consultores. Patrocina TodoConta. Los videos son orientación general: cada caso tiene sus detalles.</p>
+    </div>
+    <ul>
+      <li><a href="https://sicastro.com" target="_blank" rel="noopener">El despacho</a></li>
+      <li><a href="https://todoconta.com" target="_blank" rel="noopener">La app</a></li>
+      <li><a href="https://soycontador.ai" target="_blank" rel="noopener">IA para contadores</a></li>
+      <li><a href="https://www.youtube.com/@cuentasclaras_mx" target="_blank" rel="noopener">YouTube</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(() => {
+  const reducido = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const form = document.getElementById('form-guia');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const correo = form.elements.correo;
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo.value.trim())) { correo.setCustomValidity('Revisa tu correo'); correo.reportValidity(); correo.setCustomValidity(''); return; }
+    form.hidden = true;
+    const listo = document.getElementById('listo-guia');
+    listo.hidden = false;
+    if (window.gsap && !reducido) {
+      gsap.fromTo('#ticket', { y: -30 }, { y: 0, duration: .8, ease: 'bounce.out' });
+      gsap.fromTo('.sello', { scale: 2.4, rotate: 10 }, { scale: 1, rotate: -14, duration: .5, ease: 'back.out(3)' });
+      gsap.from(listo, { scale: .8, rotate: -6, duration: .6, ease: 'back.out(2.5)' });
+    }
+  });
+
+  // Los temas se prenden al pasar por el centro (sin JS se ven todos prendidos)
+  const temas = [...document.querySelectorAll('#lista-temas li')];
+  if (!window.gsap || reducido) { temas.forEach((t) => t.classList.add('on')); return; }
+  gsap.registerPlugin(ScrollTrigger);
+  temas.forEach((t) => ScrollTrigger.create({ trigger: t, start: 'top 62%', end: 'bottom 38%', toggleClass: 'on' }));
+  ScrollTrigger.create({ trigger: '#lista-temas', start: 'bottom 38%', onEnter: () => temas.forEach((t) => t.classList.add('on')), onLeaveBack: () => temas.forEach((t) => t.classList.remove('on')) });
+
+  // Stickers: siguen al ratón con su propio peso
+  const pegados = [...document.querySelectorAll('[data-flota]')];
+  addEventListener('pointermove', (e) => {
+    const x = e.clientX / innerWidth - .5, y = e.clientY / innerHeight - .5;
+    pegados.forEach((s) => { const f = +s.dataset.flota; gsap.to(s, { '--fx': `${x * 34 * f}px`, '--fy': `${y * 26 * f}px`, duration: 1, ease: 'power3.out' }); });
+  });
+  gsap.to('#retrato img', { yPercent: 8, ease: 'none', scrollTrigger: { trigger: '.portada', start: 'top top', end: 'bottom top', scrub: true } });
+
+  // Series: en escritorio el riel se desliza de lado mientras la sección se queda fija
+  const mm = gsap.matchMedia();
+  mm.add('(min-width: 861px)', () => {
+    const riel = document.getElementById('riel');
+    const distancia = () => riel.scrollWidth - innerWidth + 32;
+    gsap.to(riel, { x: () => -distancia(), ease: 'none', scrollTrigger: { trigger: '#series', start: 'top top', end: () => '+=' + distancia(), pin: true, scrub: .6, invalidateOnRefresh: true } });
+    gsap.from('.tarjeta', { rotate: (i) => (i % 2 ? 4 : -4), y: 30, stagger: .08, duration: .8, ease: 'back.out(1.6)', scrollTrigger: { trigger: '#series', start: 'top 70%' } });
+  });
+
+  // El ticket sale de la ranura conforme bajas
+  gsap.fromTo('#ticket', { yPercent: -35, scaleY: .92 }, { yPercent: 0, scaleY: 1, ease: 'none', scrollTrigger: { trigger: '#guia', start: 'top 85%', end: 'center 55%', scrub: true } });
+  gsap.from('.ticket .fila', { x: -14, stagger: .08, duration: .4, ease: 'power2.out', scrollTrigger: { trigger: '#ticket', start: 'top 70%' } });
+  gsap.fromTo('.sello', { scale: 2, rotate: 8 }, { scale: 1, rotate: -14, duration: .5, ease: 'back.out(3)', scrollTrigger: { trigger: '.sello', start: 'top 80%' } });
+
+  // La polaroid se acomoda
+  gsap.from('#polaroid', { rotate: 10, y: 60, duration: 1.1, ease: 'elastic.out(1, .55)', scrollTrigger: { trigger: '#polaroid', start: 'top 85%' } });
+
+  // Colab: el titular crece con el scroll
+  gsap.fromTo('.colabora h2', { scale: .86 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: '.colabora', start: 'top bottom', end: 'center center', scrub: true } });
+
+  // Rastro de billetes detrás del cursor (solo con ratón)
+  if (matchMedia('(pointer: fine)').matches) {
+    let ultimo = 0, n = 0;
+    addEventListener('pointermove', (e) => {
+      const ahora = performance.now();
+      if (ahora - ultimo < 90) return;
+      ultimo = ahora;
+      if (n > 14) return;
+      n++;
+      const b = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      b.setAttribute('class', 'rastro'); b.setAttribute('aria-hidden', 'true');
+      b.innerHTML = '<use href="#billete"/>';
+      document.body.appendChild(b);
+      gsap.set(b, { x: e.clientX - 17, y: e.clientY - 17, rotate: gsap.utils.random(-30, 30) });
+      gsap.to(b, { y: '+=' + gsap.utils.random(60, 120), x: '+=' + gsap.utils.random(-30, 30), rotate: '+=' + gsap.utils.random(-120, 120), opacity: 0, scale: .6, duration: 1.1, ease: 'power1.in', onComplete: () => { b.remove(); n--; } });
+    });
+  }
+})();
+</script>
