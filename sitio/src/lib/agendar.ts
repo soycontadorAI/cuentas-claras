@@ -23,7 +23,7 @@ export const TEMA = {
 
 export const SITUACION = {
   sueldo: 'Solo sueldo, de un patrón',
-  'sueldo-mas': 'Sueldo y algo más, o dos patrones en el año',
+  'sueldo-mas': 'Sueldo y algo más, o dos patrones a la vez',
   'cuenta-propia': 'Cobro por mi cuenta (honorarios, RESICO, actividad empresarial)',
   empresa: 'Soy socio o dueño de una empresa',
   'sin-ingresos': 'Por ahora no tengo ingresos',

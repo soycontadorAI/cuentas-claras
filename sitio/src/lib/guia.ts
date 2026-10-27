@@ -17,7 +17,7 @@ export interface Mes {
 }
 
 export const MESES: Mes[] = [
-  { corto: 'Ene', largo: 'Enero', toca: 'Haz la cuenta: ¿te toca presentar?', si: 'Si tuviste dos patrones: sí' },
+  { corto: 'Ene', largo: 'Enero', toca: 'Haz la cuenta: ¿te toca presentar?', si: 'Si tuviste dos patrones a la vez: sí' },
   { corto: 'Feb', largo: 'Febrero', toca: 'Llegan tus constancias', clave: true, si: 'Si tienes inversiones: pídelas' },
   { corto: 'Mar', largo: 'Marzo', toca: 'Revisa tus facturas en el portal' },
   { corto: 'Abr', largo: 'Abril', toca: 'Tu anual: vence el 30', clave: true, si: 'Si estás obligado: presenta' },
@@ -62,7 +62,7 @@ export const PREGUNTAS: Pregunta[] = [
   {
     pregunta: 'Si mi compañero gana lo mismo que yo, ¿por qué a él le devuelven y a mí no?',
     respuesta:
-      'Casi nunca es trampa. Lo más común es que él pidió factura de sus gastos médicos, los pagó con tarjeta y los dedujo. Otras razones: tener dos patrones en el año, otros ingresos como intereses, o dejar el trabajo antes de diciembre.',
+      'Casi nunca es trampa. Lo más común es que él pidió factura de sus gastos médicos, los pagó con tarjeta y los dedujo. Otras razones: tener dos patrones a la vez, otros ingresos como intereses, o dejar el trabajo antes de diciembre.',
   },
 ];
 

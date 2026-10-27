@@ -135,11 +135,11 @@ metió dinero a su Afore. Juan pagó todo en efectivo y no guardó nada.
 | | Juan | Laura |
 |---|---|---|
 | Sueldo del año | $360,000 | $360,000 |
-| Le retuvieron | $56,880 | $56,880 |
+| Le retuvieron | $54,236 | $54,236 |
 | Deducciones personales | $0 | $48,000 |
 | Su declaración | Sale en cero | **Le devuelven $10,253** |
 
-*Ejemplo con la tarifa anual vigente al escribir esta guía; la de tu año puede cambiar.*
+*Ejemplo con la tarifa anual del ejercicio 2026; la de tu año puede cambiar.*
 
 Ojo con un detalle: Laura dedujo $48,000 y le regresaron $10,253, no $48,000. **Cada peso que
 deduces te regresa lo que pagas de impuesto sobre ese peso**, que en su caso es el 21.36%. Por
@@ -147,17 +147,19 @@ eso conviene hacer cuentas antes de gastar "para deducir".
 
 Otras razones por las que dos sueldos iguales terminan distinto:
 
-- **Dos patrones en el año.** Cada uno te retiene como si fuera tu único sueldo, así que al final
+- **Dos patrones a la vez.** Cada uno te retiene como si fuera tu único sueldo, así que al final
   te retuvieron de menos y la anual te sale a pagar.
 - **Prestaciones distintas.** El aguinaldo, la prima vacacional y el reparto de utilidades tienen
   una parte que no paga impuesto (según la UMA vigente). Quien recibe más prestaciones y menos
   sueldo paga menos.
-- **Otros ingresos.** Intereses de tu Sofipo, una renta o unos honorarios se suman al sueldo.
-- **Dejar el trabajo antes de diciembre.** Tu patrón ya no te hace el cálculo anual y te toca a
-  ti presentar.
+- **Otros ingresos.** Una renta o unos honorarios se suman al sueldo y te obligan a presentar. Los
+  intereses de tu banco o tu Sofipo de hasta $20,000 al año no te obligan.
+- **Dejar el trabajo antes de diciembre.** Tu patrón ya no te hace el cálculo anual. Aun así, no te
+  toca presentar si solo tuviste sueldo en México, no pasaste de $400,000 y nunca tuviste dos
+  patrones a la vez.
 
 *Fundamento: LISR artículos 93 (ingresos exentos), 97 (cálculo anual del patrón), 98 (cuándo te
-toca presentar), 151 (deducciones personales) y 152 (tarifa anual).*
+toca presentar), 151 (deducciones personales) y 152 (tarifa anual); RLISR 182; RMF regla 3.17.11.*
 
 ---
 
@@ -191,8 +193,10 @@ tardar el día 17.
 Para palomear. Cada línea empieza con "si": si no te aplica, la saltas.
 
 **Enero**
-- [ ] Si tuviste dos patrones, dejaste tu trabajo antes de diciembre, ganaste más de $400,000 o
-      tuviste otros ingresos: ya sabes que en abril te toca presentar.
+- [ ] Si tuviste dos patrones a la vez, otros ingresos además del sueldo, o te indemnizaron o te
+      jubilaste: ya sabes que en abril te toca presentar.
+- [ ] Si dejaste tu trabajo antes de diciembre o ganaste más de $400,000: haz la cuenta. Hay casos
+      en que no te toca, pero tu patrón ya no hizo el ajuste por ti.
 - [ ] Si tienes sueldo: revisa tu recibo de enero o febrero. Ahí se ve el ajuste anual de tu
       patrón (si te retuvo de más, te lo regresa ahí; si de menos, te lo descuenta).
 
@@ -208,11 +212,12 @@ Para palomear. Cada línea empieza con "si": si no te aplica, la saltas.
 - [ ] Si tienes una empresa (persona moral): su anual vence el 31.
 
 **Abril**
-- [ ] Si estás obligado (ganaste más de $400,000, tuviste dos patrones, dejaste el trabajo antes
-      de diciembre u otros ingresos): presenta antes del 30.
+- [ ] Si estás obligado (dos patrones a la vez, otros ingresos, indemnización o jubilación, o más
+      de $400,000 con impuesto a cargo): presenta antes del 30.
 - [ ] Si no estás obligado pero tienes deducciones: preséntala igual, es la única forma de que te
       devuelvan.
-- [ ] Si te sale a pagar mucho: presentando a tiempo puedes pagar hasta en seis parcialidades.
+- [ ] Si te sale a pagar mucho: presentando a tiempo y pagando la primera en abril, puedes pagar
+      hasta en seis parcialidades.
 
 **Mayo**
 - [ ] Si pediste saldo a favor: revisa el estatus. Si te lo rechazaron, todavía se puede hacer algo.
@@ -255,7 +260,8 @@ Para palomear. Cada línea empieza con "si": si no te aplica, la saltas.
 - [ ] Si vas a pagar algo deducible: hazlo antes del 31 para que cuente este año.
 - [ ] Si tienes trabajadores: el aguinaldo se paga a más tardar el 20.
 
-*Fundamento: LISR 97 (ajuste anual del patrón), 98 y 150 (obligados, fechas y parcialidades),
+*Fundamento: LISR 97 (ajuste anual del patrón), 98 y 150 (obligados y fechas); RLISR 181 y 182;
+RMF reglas 3.17.3 (parcialidades), 3.17.11 (cuándo no presentar) y 2.3.2 (devolución automática);
 151 (deducciones y su tope), 93 fracción XIV (aguinaldo exento); LFT 87 (aguinaldo); CFF 17-K
 (buzón tributario).*
 
@@ -307,8 +313,11 @@ CP Israel Castro · S & I Castro Consultores
   confirmar cuál atiende prospectos".
 - El ejemplo de Juan y Laura sale de la guía de abril de 2026
   (`monetize-projects/declaracion-anual-premium/marketing/02_lead-magnet-pdf-sin-sorpresas.md`),
-  calculado con la tarifa anual del artículo 152 actualizada en 2023 (Anexo 8 de la RMF); se volvió a comprobar el 2026-10-27: $56,880.02 y $10,252.80. Si la tarifa cambia, se
-  recalcula. El audio 2 dice "diez mil quinientos contra doscientos": no coincide con el PDF
+  recalculado el 2026-10-27 con la tarifa anual del ejercicio 2026 (Anexo 8 de la RMF 2026,
+  apartado C, fracción II): retenido $54,235.91 (la mensual del 96 da $54,235.80, ajuste en cero),
+  ISR sobre $312,000 $43,983.11, devolución $10,252.80. La de 2025 daba $56,880.02. Si la tarifa
+  cambia, se recalcula. Las reglas 3.17.3, 3.17.11 y 2.3.2 de la RMF 2026 hablan del ejercicio 2025:
+  para la anual de abril de 2027 se confirman con la RMF 2027 (fin de diciembre). El audio 2 dice "diez mil quinientos contra doscientos": no coincide con el PDF
   ($10,253 contra $0); cuando el audio se vuelva video, usar las cifras del PDF.
 - Fundamentos por verificar contra la ley del año antes de exportar: retención de IVA en
   honorarios y arrendamiento (dos terceras partes, RLIVA 3), requisito de pago no en efectivo de
