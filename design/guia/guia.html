@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<title>La guía · Cuentas Claras</title>
+<style>
+@font-face { font-family: "Bricolage Grotesque"; font-weight: 200 800; font-stretch: 75% 100%; src: url(fuentes/bricolage-grotesque-latin-standard-normal.woff2) format("woff2-variations"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: "Bricolage Grotesque"; font-weight: 200 800; font-stretch: 75% 100%; src: url(fuentes/bricolage-grotesque-latin-ext-standard-normal.woff2) format("woff2-variations"); unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+@font-face { font-family: "Shrikhand"; src: url(fuentes/shrikhand-latin-400-normal.woff2) format("woff2"); }
+:root {
+  --crema: #FFF6E8; --papel: #FFFBF3; --cacao: #3B2418; --cacao-70: rgba(59,36,24,.72);
+  --cacao-12: rgba(59,36,24,.12); --rosa: #E4007C; --rosa-hondo: #B0005F; --maiz: #F6C343;
+  --margen: #F2A3C7;
+  --display: "Bricolage Grotesque", system-ui, sans-serif; --rotulo: "Shrikhand", cursive;
+}
+@page { size: letter; margin: 16mm 16mm 18mm 24mm; background: #FFF6E8;
+  @bottom-left { content: "Cuentas Claras · CP Israel Castro · cc.sicastro.com"; font-family: "Bricolage Grotesque"; font-size: 8pt; font-weight: 600; color: rgba(59,36,24,.72); }
+  @bottom-right { content: counter(page); font-family: "Bricolage Grotesque"; font-size: 8pt; font-weight: 800; color: #B0005F; } }
+@page :first { margin: 0; @bottom-left { content: none; } @bottom-right { content: none; } }
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; background: var(--crema); }
+/* La libreta: fija, así se repite en cada página y cubre también los márgenes */
+.libreta { position: fixed; top: -16mm; left: -24mm; width: 215.9mm; height: 279.4mm; z-index: -1;
+  background-color: var(--crema);
+  background-image: linear-gradient(90deg, transparent 13.5mm, var(--margen) 13.5mm, var(--margen) 14mm, transparent 14mm),
+    linear-gradient(var(--cacao-12) 1px, transparent 1px), linear-gradient(90deg, var(--cacao-12) 1px, transparent 1px);
+  background-size: 100% 100%, 8mm 8mm, 8mm 8mm; }
+body { margin: 0; font-family: var(--display); color: var(--cacao); font-size: 10.4pt; line-height: 1.46; }
+
+/* Portada */
+.portada { position: relative; height: 279.4mm; padding: 26mm 20mm 20mm 30mm; overflow: hidden; break-after: page; background: var(--crema); }
+.portada::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(var(--cacao-12) 1px, transparent 1px), linear-gradient(90deg, var(--cacao-12) 1px, transparent 1px); background-size: 8mm 8mm; }
+.portada::after { content: ""; position: absolute; top: 0; bottom: 0; left: 18mm; border-left: 1.4pt solid var(--margen); }
+.portada > * { position: relative; z-index: 1; }
+.portada .marca { display: flex; align-items: center; gap: 3mm; font-weight: 800; font-size: 12pt; letter-spacing: .02em; }
+.portada .marca .billete { width: 13mm; height: 13mm; }
+.portada .etiqueta { display: inline-block; margin-top: 30mm; background: var(--rosa-hondo); color: var(--crema); font-weight: 800; font-size: 9pt; letter-spacing: .14em; text-transform: uppercase; padding: 1.6mm 3.5mm; border-radius: 99px; }
+.portada h1 { font-family: var(--rotulo); font-weight: 400; color: var(--rosa); font-size: 88pt; line-height: .95; margin: 6mm 0 0; }
+.portada .bajada { font-size: 25pt; font-weight: 800; font-stretch: 92%; line-height: 1.12; max-width: 105mm; margin: 6mm 0 0; }
+.portada .bajada span { background: linear-gradient(transparent 52%, var(--maiz) 52%, var(--maiz) 92%, transparent 92%); }
+.portada .trae { margin: 12mm 0 0; padding: 0; list-style: none; max-width: 92mm; }
+.portada .trae li { display: flex; gap: 3mm; align-items: baseline; font-size: 11pt; font-weight: 600; margin-bottom: 2.6mm; }
+.portada .trae li::before { content: "✓"; color: var(--rosa); font-weight: 800; font-size: 13pt; }
+.portada .foto { position: absolute; right: -6mm; bottom: 0; width: 112mm; filter: drop-shadow(5mm 4mm 0 var(--maiz)); }
+.portada .firma { position: absolute; left: 30mm; bottom: 20mm; font-size: 10pt; font-weight: 700; color: var(--cacao-70); }
+
+/* Texto corrido */
+h2 { font-weight: 800; font-stretch: 92%; font-size: 24pt; line-height: 1.05; margin: 0 0 5mm; }
+h2 .num { display: block; font-size: 9pt; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--rosa-hondo); margin-bottom: 2mm; }
+h3 { font-weight: 800; font-size: 14pt; line-height: 1.2; margin: 7mm 0 2.5mm; break-after: avoid; }
+h3 + p { break-before: avoid; }
+p:has(+ table) { break-after: avoid; }
+p { margin: 0 0 2.6mm; orphans: 3; widows: 3; }
+strong { font-weight: 800; }
+a { color: var(--rosa-hondo); font-weight: 700; }
+.seccion { break-before: page; }
+.antes { background: var(--papel); border: 1.2pt solid var(--cacao); border-radius: 4mm; padding: 6mm 7mm; box-shadow: 2mm 2mm 0 var(--cacao); margin-bottom: 9mm; }
+.antes h2 { font-size: 16pt; margin-bottom: 3mm; }
+.fundamento { font-size: 8.4pt; line-height: 1.4; color: var(--cacao-70); border-top: .8pt dashed var(--cacao-12); padding-top: 1.6mm; margin-top: 3mm; }
+table { width: 100%; border-collapse: collapse; margin: 3mm 0 4mm; font-size: 9.4pt; break-inside: avoid; background: var(--papel); }
+th { text-align: left; font-weight: 800; border-bottom: 1.6pt solid var(--cacao); padding: 1.8mm 2mm; }
+td { border-bottom: .7pt solid var(--cacao-12); padding: 1.6mm 2mm; vertical-align: top; }
+td strong { color: var(--rosa-hondo); }
+ul { padding-left: 5mm; margin: 0 0 3mm; }
+li { margin-bottom: 1.4mm; }
+li::marker { color: var(--rosa); }
+
+/* Parte 2: el calendario, para el refri */
+.meses { list-style: none; padding: 0; margin: 5mm 0; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3mm; }
+.meses li { background: var(--papel); border: 1.1pt solid var(--cacao); border-radius: 3mm; padding: 3.2mm 3.6mm; min-height: 33mm; margin: 0; }
+.meses .mes { display: block; font-weight: 800; font-size: 12pt; margin-bottom: 1.2mm; }
+.meses .que { font-size: 9.6pt; line-height: 1.35; }
+.meses .clave { border: 1.8pt solid var(--rosa); box-shadow: 1.6mm 1.6mm 0 var(--rosa); }
+.meses .clave .mes { color: var(--rosa-hondo); }
+.intro { font-size: 11.4pt; }
+.cada-mes { background: var(--maiz); border-radius: 3mm; padding: 3.6mm 5mm; font-size: 10.4pt; }
+
+/* Parte 3: las casillas */
+.checklist p strong:only-child { display: block; font-size: 12.5pt; margin: 5mm 0 1.4mm; padding-bottom: 1mm; border-bottom: 1.4pt solid var(--cacao); break-after: avoid; }
+.checklist ul { list-style: none; padding: 0; break-before: avoid; break-inside: avoid; }
+.checklist li.casilla { position: relative; padding-left: 7mm; break-inside: avoid; }
+.checklist li.casilla::before { content: ""; position: absolute; left: 0; top: .9mm; width: 3.6mm; height: 3.6mm; border: 1.2pt solid var(--cacao); border-radius: 1mm; background: var(--papel); }
+
+/* Parte 4 y cierre */
+.botones { display: flex; gap: 4mm; margin: 6mm 0 2mm; }
+.btn { display: inline-block; text-decoration: none; background: var(--cacao); color: var(--crema); font-weight: 800; font-size: 11pt; padding: 3mm 6mm; border-radius: 99px; box-shadow: 1.2mm 1.2mm 0 var(--rosa); }
+.btn.claro { background: var(--papel); color: var(--cacao); border: 1.2pt solid var(--cacao); box-shadow: none; }
+.cierre { margin-top: 12mm; background: var(--papel); border: 1.2pt dashed var(--cacao); border-radius: 4mm; padding: 6mm 7mm; }
+.cierre p:last-child { font-weight: 800; margin: 0; }
+</style>
+</head>
+<body>
+<div class="libreta" aria-hidden="true"></div>
+
+<section class="portada">
+  <div class="marca"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" aria-hidden="true" class="billete" aria-label="Billete palomeado">
+  <rect x="14" y="50" width="172" height="100" rx="14" fill="#FFF6E8" stroke="#3B2418" stroke-width="11"/>
+  <rect x="32" y="66" width="136" height="68" rx="6" fill="none" stroke="#3B2418" stroke-width="4"/>
+  <circle cx="100" cy="100" r="27" fill="#E4007C"/>
+  <path d="M86 101l10 10 19-21" fill="none" stroke="#FFF6E8" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="48" cy="100" r="6" fill="#3B2418"/><circle cx="152" cy="100" r="6" fill="#3B2418"/>
+</svg>
+<span>Cuentas Claras</span></div>
+  <span class="etiqueta">Guía gratis</span>
+  <h1>La guía</h1>
+  <p class="bajada"><span>Para no fallar con el SAT, mes por mes.</span></p>
+  <ul class="trae">
+    <li>Los impuestos sin rodeos, en cinco preguntas</li>
+    <li>El calendario de 12 meses, para el refri</li>
+    <li>El checklist del mes: si tienes X, haz Y</li>
+  </ul>
+  <img class="foto" src="file:///Users/isca/Code/projects/cuentas-claras/design/assets/israel-cruzado.webp" alt="Israel Castro">
+  <p class="firma">Por CP Israel Castro · Cuentas Claras</p>
+</section>
+
+<section class="antes"><h2>Antes de empezar</h2><p>Hola, soy Israel. Soy contador público y en el despacho con mi papá (S &amp; I Castro Consultores)
+escucho las mismas preguntas todos los años, de gente con sueldo, con negocio o que cobra por su
+cuenta.</p>
+<p>Esta guía junta lo que más me preguntan: por qué pagamos, por qué nos retienen, qué pasa si no
+cumplimos y qué toca hacer cada mes para que el SAT no te tome por sorpresa.</p>
+<p>No necesitas saber de impuestos para leerla. Si al terminar te quedas con ganas de más
+información, al final te digo dónde seguir.</p></section>
+
+<section class="parte1"><h2><span class="num">Parte 1</span>Los impuestos sin rodeos: cinco preguntas</h2><h3>1. ¿Por qué pagamos impuestos?</h3>
+<p>Porque así se paga lo que es de todos: escuelas, hospitales, carreteras, seguridad. La
+Constitución dice que todos los mexicanos tenemos la obligación de contribuir a ese gasto “de la
+manera proporcional y equitativa que dispongan las leyes”.</p>
+<p>Proporcional quiere decir que quien gana más, paga más. Por eso el ISR de las personas físicas
+sube por escalones: cada peso que ganas arriba de cierto nivel paga una tasa más alta que el
+anterior.</p>
+<p>Ya sé lo que muchos piensan: “¿para qué pago, si se lo roban?”. Es la queja más común, y se
+entiende. Pero son dos cosas distintas. Lo que las autoridades hagan con ese dinero no se arregla
+dejando de pagar: se cobra en las urnas. Tu voto es donde se refleja esa inconformidad, y conviene
+usarlo bien cuando toca.</p>
+<p>Fuera de eso, la obligación es la misma para todos. Lo dice la Constitución: hay que contribuir. Y
+si no lo haces, hay consecuencias (te las cuento en la pregunta 4).</p>
+<p class="fundamento"><em>Fundamento: artículo 31, fracción IV, de la Constitución; tarifa del artículo 152 de la LISR.</em></p>
+<h3>2. ¿Por qué me retienen si yo no le debo nada a nadie?</h3>
+<p>Retener es cobrar por adelantado, a nombre del SAT. Quien te paga separa una parte y la entera al
+SAT por ti. No es un impuesto extra: es un anticipo de tu impuesto, y en tu declaración se resta
+de lo que te toca pagar.</p>
+<p>Quién te retiene, según de dónde venga tu dinero:</p>
+<table>
+<thead>
+<tr>
+<th>Si recibes…</th>
+<th>Te retiene…</th>
+<th>Qué</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sueldo</td>
+<td>Tu patrón</td>
+<td>ISR cada quincena o mes, según la tarifa</td>
+</tr>
+<tr>
+<td>Honorarios que le cobras a una empresa</td>
+<td>La empresa (persona moral)</td>
+<td>10% de ISR y dos terceras partes del IVA</td>
+</tr>
+<tr>
+<td>Renta que le cobras a una empresa</td>
+<td>La empresa</td>
+<td>10% de ISR y dos terceras partes del IVA</td>
+</tr>
+<tr>
+<td>Lo que cobras en RESICO a una empresa</td>
+<td>La empresa</td>
+<td>1.25% de ISR</td>
+</tr>
+<tr>
+<td>Intereses de tu banco, Sofipo o Cetes</td>
+<td>La institución</td>
+<td>ISR a la tasa que fija cada año la Ley de Ingresos</td>
+</tr>
+<tr>
+<td>Ventas o servicios por plataformas (apps)</td>
+<td>La plataforma</td>
+<td>ISR e IVA según el tipo de actividad</td>
+</tr>
+</tbody>
+</table>
+<p>¿Por qué así? Porque al SAT le es más fácil cobrarle a unos cuantos que pagan (patrones,
+empresas, bancos) que a millones que reciben. Y porque así no llegas a abril con una deuda
+gigante.</p>
+<p class="fundamento"><em>Fundamento: LISR artículos 96 (sueldos), 106 y 116 (honorarios y arrendamiento), 113-J (RESICO),
+135 (intereses), 113-A (plataformas); LIVA artículo 1-A.</em></p>
+<h3>3. ¿Por qué hay gastos que no puedo pagar en efectivo?</h3>
+<p>Porque el SAT necesita poder seguir el dinero. Una transferencia o una tarjeta dejan rastro en tu
+banco que coincide con la factura; el efectivo no.</p>
+<ul>
+<li><strong>Tus deducciones personales</strong> (doctor, dentista, hospital, entre otras) solo cuentan si las
+  pagas con transferencia, tarjeta de crédito o débito, o cheque nominativo. Pagadas en efectivo,
+  la factura no te sirve, aunque la tengas.</li>
+<li><strong>Si tienes negocio</strong>, los gastos de más de $2,000 tampoco se deducen si los pagaste en
+  efectivo (y la gasolina, nunca en efectivo, sin importar el monto).</li>
+</ul>
+<p>La regla práctica: si lo quieres deducir, págalo con tarjeta o transferencia y pide factura a tu
+nombre.</p>
+<p class="fundamento"><em>Fundamento: LISR artículo 151 (deducciones personales) y artículo 27, fracción III (gastos del
+negocio).</em></p>
+<h3>4. ¿Qué pasa si tenía que presentar una declaración y no lo hice?</h3>
+<p>No te voy a meter miedo, pero conviene saberlo:</p>
+<ul>
+<li><strong>Multa</strong> por cada declaración que no presentaste. Se actualiza cada año.</li>
+<li><strong>Recargos y actualización</strong> si además había impuesto a pagar: lo que debías crece cada mes.</li>
+<li><strong>Un requerimiento</strong> del SAT, que te llega al buzón tributario aunque no lo abras.</li>
+<li><strong>Tu opinión de cumplimiento (32-D) en negativo</strong>, que te pueden pedir para un crédito, un
+  contrato o un empleo.</li>
+<li><strong>Si facturas</strong>, el SAT puede restringir tu sello para facturar hasta que te pongas al
+  corriente.</li>
+<li><strong>Si tenías saldo a favor</strong>, no se te regresa solo: sin la declaración, ese dinero se queda en
+  el SAT.</li>
+</ul>
+<p>Lo bueno: si te pones al corriente antes de que el SAT te lo pida, por lo general no hay multa.
+A eso se le llama cumplir de forma espontánea, y es la mejor salida.</p>
+<p class="fundamento"><em>Fundamento: CFF artículos 17-A y 21 (actualización y recargos), 73 (cumplimiento espontáneo),
+81 y 82 (multas), 17-H Bis
+(restricción del sello), 32-D (opinión de cumplimiento).</em></p>
+<h3>5. Si mi compañero gana lo mismo que yo, ¿por qué a él le devuelven y a mí no?</h3>
+<p>Es la pregunta que más me hacen en abril. Y casi nunca es porque alguien hizo trampa.</p>
+<p>Juan y Laura ganan $30,000 al mes y a los dos les retienen lo mismo. Laura pidió factura cada
+vez que fue al dentista, pagó su seguro de gastos médicos con tarjeta, hizo un donativo y le
+metió dinero a su Afore. Juan pagó todo en efectivo y no guardó nada.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Juan</th>
+<th>Laura</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sueldo del año</td>
+<td>$360,000</td>
+<td>$360,000</td>
+</tr>
+<tr>
+<td>Le retuvieron</td>
+<td>$56,880</td>
+<td>$56,880</td>
+</tr>
+<tr>
+<td>Deducciones personales</td>
+<td>$0</td>
+<td>$48,000</td>
+</tr>
+<tr>
+<td>Su declaración</td>
+<td>Sale en cero</td>
+<td><strong>Le devuelven $10,253</strong></td>
+</tr>
+</tbody>
+</table>
+<p class="fundamento"><em>Ejemplo con la tarifa anual vigente al escribir esta guía; la de tu año puede cambiar.</em></p>
+<p>Ojo con un detalle: Laura dedujo $48,000 y le regresaron $10,253, no $48,000. <strong>Cada peso que
+deduces te regresa lo que pagas de impuesto sobre ese peso</strong>, que en su caso es el 21.36%. Por
+eso conviene hacer cuentas antes de gastar “para deducir”.</p>
+<p>Otras razones por las que dos sueldos iguales terminan distinto:</p>
+<ul>
+<li><strong>Dos patrones en el año.</strong> Cada uno te retiene como si fuera tu único sueldo, así que al final
+  te retuvieron de menos y la anual te sale a pagar.</li>
+<li><strong>Prestaciones distintas.</strong> El aguinaldo, la prima vacacional y el reparto de utilidades tienen
+  una parte que no paga impuesto (según la UMA vigente). Quien recibe más prestaciones y menos
+  sueldo paga menos.</li>
+<li><strong>Otros ingresos.</strong> Intereses de tu Sofipo, una renta o unos honorarios se suman al sueldo.</li>
+<li><strong>Dejar el trabajo antes de diciembre.</strong> Tu patrón ya no te hace el cálculo anual y te toca a
+  ti presentar.</li>
+</ul>
+<p class="fundamento"><em>Fundamento: LISR artículos 93 (ingresos exentos), 97 (cálculo anual del patrón), 98 (cuándo te
+toca presentar), 151 (deducciones personales) y 152 (tarifa anual).</em></p></section>
+
+<section class="seccion"><h2><span class="num">Parte 2</span>El calendario de 12 meses</h2><p class="intro">Una línea por mes, para pegar en el refri o dejar de fondo de pantalla. Los meses en rosa son
+los que no se mueven.</p><ol class="meses"><li class=""><span class="mes">Enero</span><span class="que">Haz la cuenta de tu año: ¿te toca presentar la anual?</span></li><li class="clave"><span class="mes">Febrero</span><span class="que">Llegan tus constancias: nómina, intereses, Afore. Entra la UMA nueva (el día 1)</span></li><li class=""><span class="mes">Marzo</span><span class="que">Junta tus facturas y revisa que estén a tu nombre</span></li><li class="clave"><span class="mes">Abril</span><span class="que">Tu declaración anual: vence el 30</span></li><li class=""><span class="mes">Mayo</span><span class="que">Si pediste saldo a favor, síguelo en el portal y en tu buzón</span></li><li class=""><span class="mes">Junio</span><span class="que">A medio año: revisa tu opinión de cumplimiento</span></li><li class=""><span class="mes">Julio</span><span class="que">Abre tu buzón tributario (ahí llegan las cartas)</span></li><li class=""><span class="mes">Agosto</span><span class="que">¿Empiezas a cobrar por tu cuenta? Date de alta antes de facturar</span></li><li class=""><span class="mes">Septiembre</span><span class="que">Sale el Paquete Económico: lo que cambia el año que entra</span></li><li class=""><span class="mes">Octubre</span><span class="que">Revisa que tu e.firma siga vigente</span></li><li class="clave"><span class="mes">Noviembre</span><span class="que">Planea tu aguinaldo antes de que llegue: deudas caras primero</span></li><li class="clave"><span class="mes">Diciembre</span><span class="que">Pide las facturas que te falten y paga lo deducible antes del 31</span></li></ol><div class="cada-mes"><strong>Cada mes, si cobras por tu cuenta o tienes negocio:</strong> tu declaración del mes anterior, a más
+tardar el día 17.</div></section>
+
+<section class="seccion checklist"><h2><span class="num">Parte 3</span>El checklist del mes</h2><p>Para palomear. Cada línea empieza con “si”: si no te aplica, la saltas.</p>
+<p><strong>Enero</strong></p>
+<ul>
+<li class="casilla">Si tuviste dos patrones, dejaste tu trabajo antes de diciembre, ganaste más de $400,000 o
+      tuviste otros ingresos: ya sabes que en abril te toca presentar.</li>
+<li class="casilla">Si tienes sueldo: revisa tu recibo de enero o febrero. Ahí se ve el ajuste anual de tu
+      patrón (si te retuvo de más, te lo regresa ahí; si de menos, te lo descuenta).</li>
+</ul>
+<p><strong>Febrero</strong></p>
+<ul>
+<li class="casilla">Si tienes inversiones (banco, Sofipo, Cetes, casa de bolsa): descarga tus constancias de
+      intereses en cuanto estén.</li>
+<li class="casilla">Si tienes sueldo: revisa en el portal que tus recibos de nómina del año estén completos.</li>
+<li class="casilla">Si tienes Afore con aportaciones voluntarias: pide la constancia.</li>
+</ul>
+<p><strong>Marzo</strong></p>
+<ul>
+<li class="casilla">Si vas a deducir: revisa en el portal que tus facturas estén ahí y que el pago no haya sido
+      en efectivo.</li>
+<li class="casilla">Si tienes una empresa (persona moral): su anual vence el 31.</li>
+</ul>
+<p><strong>Abril</strong></p>
+<ul>
+<li class="casilla">Si estás obligado (ganaste más de $400,000, tuviste dos patrones, dejaste el trabajo antes
+      de diciembre u otros ingresos): presenta antes del 30.</li>
+<li class="casilla">Si no estás obligado pero tienes deducciones: preséntala igual, es la única forma de que te
+      devuelvan.</li>
+<li class="casilla">Si te sale a pagar mucho: presentando a tiempo puedes pagar hasta en seis parcialidades.</li>
+</ul>
+<p><strong>Mayo</strong></p>
+<ul>
+<li class="casilla">Si pediste saldo a favor: revisa el estatus. Si te lo rechazaron, todavía se puede hacer algo.</li>
+</ul>
+<p><strong>Junio</strong></p>
+<ul>
+<li class="casilla">Si facturas o te piden la 32-D en tu trabajo: revisa que salga positiva.</li>
+</ul>
+<p><strong>Julio</strong></p>
+<ul>
+<li class="casilla">Si nunca has abierto tu buzón tributario: ábrelo y confirma tu correo y tu celular.</li>
+<li class="casilla">Si te llegó una carta invitación: no es una multa, se contesta. No la ignores.</li>
+</ul>
+<p><strong>Agosto</strong></p>
+<ul>
+<li class="casilla">Si empiezas a cobrar por tu cuenta: date de alta en el régimen correcto antes de tu primera
+      factura.</li>
+</ul>
+<p><strong>Septiembre</strong></p>
+<ul>
+<li class="casilla">Si tienes inversiones o negocio: entérate de lo que cambia en el Paquete Económico.</li>
+</ul>
+<p><strong>Octubre</strong></p>
+<ul>
+<li class="casilla">Si tu e.firma vence en los próximos meses: renuévala ahora (vencida, es una cita en el SAT).</li>
+</ul>
+<p><strong>Noviembre</strong></p>
+<ul>
+<li class="casilla">Si recibes aguinaldo: decide a qué va antes de que llegue. Primero las deudas caras (la
+      tarjeta que no pagas completa), luego tu fondo para emergencias, y lo que sobre, a lo que
+      dure. Un celular nuevo pierde valor el día que lo sacas de la caja; una deuda pagada deja de
+      cobrarte intereses.</li>
+<li class="casilla">Si recibes aguinaldo: una parte no paga impuesto (hasta 30 veces la UMA diaria vigente) y
+      el resto sí. Por eso tu recibo no trae el monto completo.</li>
+<li class="casilla">Si quieres deducir más: haz cuentas ahora que hay tiempo. El total de tus deducciones tiene
+      un tope (el menor entre el 15% de lo que ganas y cinco UMA anuales), y las aportaciones
+      voluntarias a tu Afore tienen el suyo.</li>
+</ul>
+<p><strong>Diciembre</strong></p>
+<ul>
+<li class="casilla"><strong>Si te falta alguna factura de este año (doctor, dentista, colegiatura, seguro): pídela
+      ya.</strong> En enero muchos negocios ya cerraron su contabilidad y te dicen que “su contador ya
+      hizo el cierre”: la factura con fecha del año pasado casi nunca sale.</li>
+<li class="casilla"><strong>Si tienes deducciones personales, asegúrate de que estén bien requisitadas:</strong> factura a
+      tu nombre y RFC, pagada con tarjeta o transferencia, y con fecha de este año. Lo que no
+      cumpla, en abril no cuenta.</li>
+<li class="casilla">Si vas a pagar algo deducible: hazlo antes del 31 para que cuente este año.</li>
+<li class="casilla">Si tienes trabajadores: el aguinaldo se paga a más tardar el 20.</li>
+</ul>
+<p class="fundamento"><em>Fundamento: LISR 97 (ajuste anual del patrón), 98 y 150 (obligados, fechas y parcialidades),
+151 (deducciones y su tope), 93 fracción XIV (aguinaldo exento); LFT 87 (aguinaldo); CFF 17-K
+(buzón tributario).</em></p></section>
+
+<section class="seccion"><h2><span class="num">Parte 4</span>¿Te quedó alguna duda?</h2><p>Si alguna de las cinco preguntas o una casilla del checklist te dejó con la duda (“¿a mí me
+aplica?”, “¿y si no lo hice?”), lo mejor es revisarlo con tus números, no con los de Juan y Laura.</p>
+<p>Para eso está la <strong>consulta 1:1</strong>: la revisamos juntos y sales con qué hacer. La consulta tiene
+costo.</p>
+<p><strong>Cómo se agenda:</strong></p>
+<ol>
+<li>Da clic en <a href="https://cc.sicastro.com/agendar?utm_source=cuentas-claras&utm_medium=guia&utm_campaign=cuentas-claras&utm_content=guia-pdf"><strong>Agendar mi consulta</strong></a> (cc.sicastro.com/agendar) y contesta seis preguntas.</li>
+<li>Escoges el día y la hora que te acomode y pagas en el mismo paso, con tarjeta.</li>
+<li>Te llega la invitación con el enlace de la videollamada.</li>
+</ol>
+<p>¿Prefieres pagar por transferencia? Escríbeme por WhatsApp al <a href="https://wa.me/525544753602?text=Hola%20Israel%2C%20vengo%20de%20la%20gu%C3%ADa%20y%20quiero%20pagar%20mi%20consulta%20por%20transferencia."><strong>55 4475 3602</strong></a> y ahí te paso los
+datos.</p>
+<p>Y si prefieres que nos encarguemos de todo (tu anual, tus declaraciones del mes o tu
+contabilidad), en <a href="https://sicastro.com/?utm_source=cuentas-claras&utm_medium=guia&utm_campaign=cuentas-claras&utm_content=guia-pdf">sicastro.com</a> están los servicios del despacho.</p><p class="botones"><a class="btn" href="https://cc.sicastro.com/agendar?utm_source=cuentas-claras&utm_medium=guia&utm_campaign=cuentas-claras&utm_content=guia-pdf">Agendar mi consulta</a><a class="btn claro" href="https://sicastro.com/?utm_source=cuentas-claras&utm_medium=guia&utm_campaign=cuentas-claras&utm_content=guia-pdf">Ir al despacho</a></p>
+  <div class="cierre"><p>Esta guía te sirve todos los años. Cada temporada tiene su serie en el canal:
+<a href="https://www.youtube.com/@cuentasclaras_mx">youtube.com/@cuentasclaras_mx</a></p>
+<p>Los videos y esta guía son orientación general: cada caso tiene sus detalles.</p>
+<p>CP Israel Castro · S &amp; I Castro Consultores</p></div>
+</section>
+</body>
+</html>

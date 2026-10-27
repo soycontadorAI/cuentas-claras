@@ -25,7 +25,7 @@ con *Root Directory* `sitio`.
 | `docs/agendar-calendario.md` | Cómo configurar la agenda de Google Calendar con cobro por Stripe para la consulta 1:1 |
 | `design/historias/` | Instagram de @soyisraelcastro: `generar.py` arma `tableros/historias.html` (foto de perfil con sombra maíz o rosa, 5 portadas de destacados y sus historias) y `exportar.sh` saca los PNG a `salidas/historias/` |
 | `docs/instagram-destacadas-guiones.md` | Guiones en video de los destacados (Quién soy a cámara; Servicios, Preguntas y Agenda como consulta). Teleprompter en `social-studio/decks/2026-10-26-destacados-cuentas-claras.json`. Las láminas quedan de respaldo |
-| `docs/guia-hoja-del-anio.md` | Contenido de la guía gratis "La guía" (en IG: "Guía gratis para no fallar con el SAT"): cinco preguntas, calendario de 12 meses, checklist "si tienes X, haz Y" y el cierre a la consulta (sin montos). Aprobado el 2026-10-27, falta el PDF |
+| `docs/guia-hoja-del-anio.md` | Contenido de la guía gratis "La guía" (en IG: "Guía gratis para no fallar con el SAT"): cinco preguntas, calendario de 12 meses, checklist "si tienes X, haz Y" y el cierre a la consulta (sin montos). Aprobado el 2026-10-27; el PDF sale con `design/guia/generar.py` |
 
 ## Lo que no se re-discute
 

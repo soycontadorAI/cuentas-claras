@@ -1,6 +1,6 @@
 # La guía (guía gratis de Cuentas Claras)
 
-**Fecha:** 2026-10-26 · **Estado:** contenido aprobado por Israel el 2026-10-27 (antes se llamaba "La hoja del año"); falta el PDF. El diseño
+**Fecha:** 2026-10-26 · **Estado:** contenido aprobado por Israel el 2026-10-27 (antes se llamaba "La hoja del año"). PDF: `python3 design/guia/generar.py` → `design/salidas/guia/cuentas-claras-la-guia.pdf`. El diseño
 del PDF sale del design system (boceto A, libreta viva) cuando esté.
 
 Lo que recibe quien deja su nombre y correo (WhatsApp opcional) en la landing. Cuatro partes:
@@ -307,7 +307,7 @@ CP Israel Castro · S & I Castro Consultores
   confirmar cuál atiende prospectos".
 - El ejemplo de Juan y Laura sale de la guía de abril de 2026
   (`monetize-projects/declaracion-anual-premium/marketing/02_lead-magnet-pdf-sin-sorpresas.md`),
-  calculado con la tarifa del artículo 152 sin cambios desde 2018. Si la tarifa cambia, se
+  calculado con la tarifa anual del artículo 152 actualizada en 2023 (Anexo 8 de la RMF); se volvió a comprobar el 2026-10-27: $56,880.02 y $10,252.80. Si la tarifa cambia, se
   recalcula. El audio 2 dice "diez mil quinientos contra doscientos": no coincide con el PDF
   ($10,253 contra $0); cuando el audio se vuelva video, usar las cifras del PDF.
 - Fundamentos por verificar contra la ley del año antes de exportar: retención de IVA en
