@@ -53,8 +53,9 @@ Lo que lo sostiene, no romperlo:
 1. ~~Repo y proyecto~~: hecho el 2026-10-26. Repo `soycontadorAI/cuentas-claras` (privado), proyecto
    de Vercel `cuentas-claras` (*Root Directory* `sitio`, cada push a `main` despliega). Público en
    https://cuentas-claras-tau-three.vercel.app; la protección de Vercel queda solo en previews.
-2. **Dominio**: en Vercel, `vercel domains add cc.sicastro.com <proyecto>`; en el DNS de
-   sicastro.com, un CNAME `cc` → `cname.vercel-dns.com`.
+2. ~~Dominio~~: hecho el 2026-10-26. CNAME `cc` → `c871661ddde04ea7.vercel-dns-017.com` en
+   Cloudflare, **nube gris**. El certificado no salió solo: se emitió con
+   `vercel certs issue cc.sicastro.com --scope iscasurs-projects` (Let's Encrypt, se renueva solo).
 3. **Variables** (ver `.env.example`): Sendy (API key, `SENDY_GUIA_LIST_ID`,
    `SENDY_DIAGNOSTICO_LIST_ID`) y SES (llave del usuario acotado del despacho, no una nueva: ver el
    inventario de IAM antes).
