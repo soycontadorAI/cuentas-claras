@@ -1,0 +1,169 @@
+---
+/**
+ * /sistema: el design system de Cuentas Claras, vivo. Cada token y componente que usa el sitio,
+ * con su regla. Interno: noindex, fuera del sitemap y bloqueado en robots.txt.
+ * La explicación larga está en DESIGN-SYSTEM.md.
+ */
+import Base from '../layouts/Base.astro';
+
+const COLORES = [
+  { var: '--crema', hex: '#FFF6E8', uso: 'La libreta. Fondo de todo, siempre.' },
+  { var: '--papel', hex: '#FFFBF3', uso: 'Hojas y tarjetas encima de la libreta.' },
+  { var: '--cacao', hex: '#3B2418', uso: 'Texto, trazo, paneles de formulario.' },
+  { var: '--rosa', hex: '#E4007C', uso: 'El plumón: palomitas, subrayados, números grandes. Nunca texto chico.' },
+  { var: '--rosa-hondo', hex: '#B0005F', uso: 'Rosa con texto encima o texto rosa chico (pasa AA).' },
+  { var: '--maiz', hex: '#F6C343', uso: 'El resaltador: fondos de acento, pestañas, foco en paneles.' },
+  { var: '--margen', hex: '#F2A3C7', uso: 'Solo la línea de margen de la libreta.' },
+];
+---
+<Base titulo="Design system" noindex>
+  <main id="contenido" class="envoltura sistema">
+    <header class="cab">
+      <span class="separador">Design system</span>
+      <h1 class="disp">La libreta <span class="resaltado">viva.</span></h1>
+      <p class="intro">Todo pasa sobre la libreta crema. El rosa y el maíz solo marcan: palomean, subrayan, encierran, pegan notas. El movimiento es el de alguien que va llenando la libreta.</p>
+    </header>
+
+    <section>
+      <h2 class="titulo">Color</h2>
+      <div class="muestras">
+        {COLORES.map((c) => (
+          <figure class="muestra">
+            <div style={`background: var(${c.var})`}></div>
+            <figcaption><b>{c.var}</b> <code>{c.hex}</code><span>{c.uso}</span></figcaption>
+          </figure>
+        ))}
+      </div>
+      <p class="regla">Regla: rosa y maíz nunca de fondo de página. Texto chico rosa → <code>--rosa-hondo</code>. Botón rosa con texto crema → 19px (texto grande).</p>
+    </section>
+
+    <section>
+      <h2 class="titulo">Tipografía</h2>
+      <div class="tipos">
+        <p class="disp" style="font-size: var(--t-h1)">El SAT en orden.</p>
+        <p><code>.disp</code> · Bricolage Grotesque 800, ancho 92 · <code>--t-h1 / --t-h2</code></p>
+        <p class="disp" style="font-size: var(--t-h2)">Una duda, una serie.</p>
+        <p class="rot" style="font-size: 3rem; color: var(--rosa)">o déjalo en nuestras manos.</p>
+        <p><code>.rot</code> · Shrikhand · <b>un solo remate por pieza</b></p>
+        <p class="etiqueta">Etiqueta · 13px · 700 · mayúsculas</p>
+        <p class="intro" style="margin:0">Intro · 1.15rem · cacao al 72%. El cuerpo va en 18px con interlínea 1.55.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="titulo">Botones y enlaces</h2>
+      <div class="fila">
+        <a class="btn" href="#" data-magnetico>Primario</a>
+        <a class="btn claro" href="#">Claro</a>
+        <a class="btn rosa" href="#">Rosa (en paneles)</a>
+        <a class="enlace-flecha" href="#"><svg width="28" height="20" aria-hidden="true"><use href="#yt"/></svg><span>Enlace con ícono</span></a>
+      </div>
+      <p class="regla">Primario = cacao con sombra rosa. "Ir al despacho" siempre en claro. <code>data-magnetico</code> solo en CTA principales.</p>
+    </section>
+
+    <section>
+      <h2 class="titulo">Separadores, chips y notas</h2>
+      <div class="fila">
+        <span class="separador">Maíz</span>
+        <span class="separador rosa">Rosa</span>
+        <span class="separador cacao">Cacao</span>
+      </div>
+      <div class="fila" style="margin-top: 24px">
+        <span class="chip"><i></i>Aguinaldo</span>
+        <span class="chip" style="--c: var(--rosa)"><i></i>Inversiones</span>
+        <span class="chip" style="--c: var(--cacao)"><i></i>Tu anual</span>
+      </div>
+      <div class="notas">
+        <span class="nota" style="position:relative">Maíz: la duda.</span>
+        <span class="nota papel" style="position:relative; --giro: 5deg">Papel: la otra duda.</span>
+        <span class="nota rosa" style="position:relative; --giro: 3deg">Rosa: la corta.</span>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="titulo">Fichas, renglones y globo</h2>
+      <div class="dos">
+        <article class="ficha" style="margin-top: 30px">
+          <span class="pestana">SAT</span>
+          <h3>Ficha con pestaña</h3>
+          <p>Sombra dura de 6px. Al pasar el mouse, se levanta y se ladea.</p>
+          <ul class="palomeo"><li>Lista palomeada</li><li>Con plumón rosa</li></ul>
+        </article>
+        <div>
+          <div class="globo"><small>Globo</small>“La duda del cliente, tal cual.”</div>
+          <ol class="renglones" style="margin-top: 18px">
+            <li class="renglon" data-palomea data-entra><span class="casilla"><svg viewBox="0 0 40 40" aria-hidden="true"><path pathLength="1" d="M6 21 L16 31 L35 8"/></svg></span><div><span class="n">Renglón</span><h3>Se palomea al entrar</h3><p><code>data-palomea</code> + <code>data-entra</code></p></div></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="titulo">Formulario (panel cacao)</h2>
+      <div class="dos">
+        <div class="panel">
+          <h3 class="disp">Te la mandamos <span class="rot">gratis</span></h3>
+          <div class="campos">
+            <div class="campo"><label for="s-n">Campo</label><input id="s-n" placeholder="Texto de ejemplo" /></div>
+            <div class="campo"><label for="s-e">Con error <small>(aria-invalid)</small></label><input id="s-e" aria-invalid="true" value="correo@" /></div>
+            <button class="btn rosa ancho" type="button">Botón del panel</button>
+            <p class="error">Mensaje de error, en rosa hondo sobre crema.</p>
+          </div>
+        </div>
+        <div class="panel">
+          <fieldset class="opciones">
+            <legend class="disp" style="margin-bottom: 14px; font-size: 1.8rem">Opciones tipo tarjeta</legend>
+            <label class="opcion"><input type="radio" name="s-o" checked /><span class="marca-op"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M8 21 L17 30 L33 10" /></svg></span><span>Escogida: maíz y se ladea</span></label>
+            <label class="opcion"><input type="radio" name="s-o" /><span class="marca-op"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M8 21 L17 30 L33 10" /></svg></span><span>Sin escoger</span></label>
+          </fieldset>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="titulo">Movimiento</h2>
+      <table class="mov">
+        <thead><tr><th>Qué</th><th>Cómo</th><th>Cuándo</th></tr></thead>
+        <tbody>
+          <tr><td>Titular que sube</td><td>CSS <code>@keyframes subir</code>, 1s, <code>--e-salida</code></td><td>Al cargar</td></tr>
+          <tr><td>Palomita y subrayado del plumón</td><td><code>stroke-dashoffset</code> 1 → 0</td><td>Al cargar / al entrar (<code>data-palomea</code>)</td></tr>
+          <tr><td>Resaltador de maíz</td><td><code>background-size</code> 0 → 100%</td><td>Al entrar (<code>data-resalta</code>)</td></tr>
+          <tr><td>Fichas y marcos que se acomodan</td><td>translate + rotate, <code>--e-rebote</code>, escalonado con <code>--i</code></td><td>Al entrar (<code>data-entra</code>)</td></tr>
+          <tr><td>Hoja que se endereza, foto que flota</td><td>Animación ligada al scroll (<code>animation-timeline: view()</code>)</td><td>Al hacer scroll (si el navegador la soporta)</td></tr>
+          <tr><td>Billetes</td><td>Web Animations, 18 billetes en arco</td><td><b>Solo al suscribirse.</b> Nunca siguen al cursor</td></tr>
+        </tbody>
+      </table>
+      <p class="regla">Con "reducir movimiento" no se mueve nada y todo se ve desde el inicio. Sin JavaScript, también.</p>
+      <div class="fila" style="margin-top: 20px"><button class="btn" type="button" id="probar-billetes">Probar los billetes</button></div>
+    </section>
+  </main>
+</Base>
+
+<script>
+  import { iniciar, lluviaDeBilletes } from '../scripts/movimiento';
+  iniciar();
+  const b = document.getElementById('probar-billetes');
+  b?.addEventListener('click', () => lluviaDeBilletes(b));
+</script>
+
+<style>
+  .sistema { padding-block: 48px 120px; }
+  .cab h1 { margin: 22px 0 0; font-size: var(--t-h2); }
+  section { margin-top: 72px; }
+  .titulo { margin: 0 0 24px; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; font-weight: 800; border-bottom: 2px solid var(--cacao); padding-bottom: 8px; }
+  .muestras { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 18px; }
+  .muestra { margin: 0; background: var(--papel); border-radius: var(--radio-m); box-shadow: inset 0 0 0 2px var(--cacao-12); overflow: hidden; }
+  .muestra div { height: 96px; box-shadow: inset 0 -2px 0 var(--cacao-12); }
+  .muestra figcaption { padding: 12px 14px; display: grid; gap: 4px; font-size: 14px; }
+  .muestra span { color: var(--cacao-70); }
+  code { font-size: .88em; background: var(--papel); padding: 1px 6px; border-radius: 6px; box-shadow: inset 0 0 0 1px var(--cacao-12); }
+  .regla { margin: 18px 0 0; color: var(--cacao-70); max-width: 70ch; }
+  .tipos { display: grid; gap: 10px; }
+  .tipos p { margin: 0; }
+  .fila { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+  .notas { display: flex; flex-wrap: wrap; gap: 28px; margin-top: 40px; }
+  .dos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; align-items: start; }
+  .mov { width: 100%; border-collapse: collapse; font-size: 15px; }
+  .mov th, .mov td { text-align: left; padding: 10px 12px 10px 0; border-bottom: 1.5px dashed var(--cacao-12); vertical-align: top; }
+  @media (max-width: 860px) { .dos { grid-template-columns: 1fr; } .mov { display: block; overflow-x: auto; } }
+</style>

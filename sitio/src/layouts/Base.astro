@@ -1,0 +1,71 @@
+---
+/**
+ * El esqueleto de cada página: meta, fuentes propias precargadas, la libreta de fondo y el
+ * JSON-LD. Sin JavaScript de terceros: el 100 de Lighthouse depende de eso.
+ */
+import '../styles/base.css';
+import '../styles/componentes.css';
+
+// Bricolage recortada con herramientas/fuente.sh (ejes wght 400-800, wdth 88-100; latín y Latin-1)
+import bricolage from '../assets/fuentes/bricolage-cc.woff2?url';
+import shrikhand from '@fontsource/shrikhand/files/shrikhand-latin-400-normal.woff2?url';
+
+import JsonLd from '../components/JsonLd.astro';
+import Simbolos from '../components/Simbolos.astro';
+import { SITIO } from '../lib/sitio';
+
+interface Props {
+  titulo?: string;
+  descripcion?: string;
+  imagen?: string;
+  noindex?: boolean;
+  grafo?: Record<string, unknown>[];
+}
+
+const { titulo, descripcion = SITIO.descripcion, imagen = '/og.png', noindex = false, grafo = [] } = Astro.props;
+const tituloCompleto = titulo ? `${titulo} · ${SITIO.nombre}` : `${SITIO.nombre}: ${SITIO.lema}`;
+const canonica = new URL(Astro.url.pathname, SITIO.url).toString();
+const imagenUrl = new URL(imagen, SITIO.url).toString();
+---
+<!doctype html>
+<html lang={SITIO.lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{tituloCompleto}</title>
+    <meta name="description" content={descripcion} />
+    <link rel="canonical" href={canonica} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <meta name="theme-color" content="#FFF6E8" />
+    <meta name="author" content="Israel Castro" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="Resumen para LLMs" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={tituloCompleto} />
+    <meta property="og:description" content={descripcion} />
+    <meta property="og:url" content={canonica} />
+    <meta property="og:image" content={imagenUrl} />
+    <meta property="og:locale" content={SITIO.locale} />
+    <meta property="og:site_name" content={SITIO.nombre} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="preload" href={bricolage} as="font" type="font/woff2" crossorigin />
+    <style set:html={`
+      @font-face { font-family: "Bricolage Grotesque"; font-style: normal; font-display: swap; font-weight: 400 800; font-stretch: 88% 100%; src: url(${bricolage}) format("woff2-variations"); }
+      @font-face { font-family: "Shrikhand"; font-style: normal; font-display: swap; font-weight: 400; src: url(${shrikhand}) format("woff2"); }
+    `} />
+    <script is:inline>document.documentElement.classList.add('js')</script>
+    {grafo.length > 0 && <JsonLd grafo={grafo} />}
+  </head>
+  <body>
+    <a class="saltar" href="#contenido">Saltar al contenido</a>
+    <div class="hoja-fondo" aria-hidden="true"></div>
+    <Simbolos />
+    <slot />
+  </body>
+</html>

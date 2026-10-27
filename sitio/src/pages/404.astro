@@ -1,0 +1,20 @@
+---
+import Barra from '../components/Barra.astro';
+import Pie from '../components/Pie.astro';
+import Base from '../layouts/Base.astro';
+---
+<Base titulo="Esta hoja no existe" noindex>
+  <Barra />
+  <main id="contenido" class="envoltura nada">
+    <span class="separador">404</span>
+    <h1 class="disp">Esta hoja <span class="resaltado">se arrancó.</span></h1>
+    <p class="intro">La página que buscas no está, o cambió de lugar.</p>
+    <div class="acciones"><a class="btn" href="/">Ir al inicio</a><a class="btn claro" href="/#guia">Pedir la guía</a></div>
+  </main>
+  <Pie />
+</Base>
+<style>
+  .nada { padding-block: clamp(48px, 10vw, 140px) 0; }
+  h1 { margin: 22px 0 0; font-size: var(--t-h2); }
+  .acciones { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px; }
+</style>

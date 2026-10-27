@@ -1,0 +1,53 @@
+---
+/**
+ * Aviso de privacidad (simplificado + integral en una sola página).
+ * PENDIENTE antes de publicar: que Israel confirme el domicilio y el correo para derechos ARCO
+ * (hoy van por WhatsApp porque el correo del despacho está "por confirmar" en sicastro-v2).
+ */
+import Barra from '../components/Barra.astro';
+import Pie from '../components/Pie.astro';
+import Base from '../layouts/Base.astro';
+import { DESPACHO, SITIO } from '../lib/sitio';
+---
+<Base titulo="Aviso de privacidad" descripcion="Qué datos pide Cuentas Claras, para qué los usa y cómo pedir que se borren.">
+  <Barra />
+  <main id="contenido" class="envoltura legal">
+    <span class="separador">Aviso de privacidad</span>
+    <h1 class="disp">Tus datos, en claro.</h1>
+    <p class="intro">{DESPACHO.razonSocial} ("{DESPACHO.nombre}") es responsable de los datos que dejas en {SITIO.url.replace('https://', '')}.</p>
+
+    <h2>Qué datos pedimos</h2>
+    <ul>
+      <li><b>Para mandarte la guía:</b> tu nombre, tu correo y, si quieres, tu WhatsApp.</li>
+      <li><b>Para la consulta 1:1:</b> además, tus respuestas a la precalificación (qué quieres resolver, cómo recibes tu dinero, un rango de ingreso) y lo que nos cuentes de tu caso.</li>
+    </ul>
+    <p>No pedimos tu RFC, tu e.firma ni tu contraseña del SAT en este sitio. El pago de la consulta lo procesa Stripe: los datos de tu tarjeta no pasan por nosotros.</p>
+
+    <h2>Para qué los usamos</h2>
+    <ul>
+      <li>Mandarte la guía y, si te quedas en la lista, avisos de los videos nuevos.</li>
+      <li>Revisar tu caso antes de la consulta, apartar tu cita y mandarte el recordatorio.</li>
+      <li>De forma secundaria, ofrecerte los servicios del despacho que tengan que ver con lo que nos contaste. Si no quieres esto, dínoslo y no te escribimos por eso.</li>
+    </ul>
+
+    <h2>Con quién se comparten</h2>
+    <p>Solo con los servicios que hacen funcionar el sitio y que guardan los datos por nosotros: Amazon Web Services (envío de correo), nuestro servidor de listas de correo, Google (calendario y videollamada), Stripe (cobro) y Vercel (el sitio). No vendemos ni rentamos tus datos.</p>
+
+    <h2>Cómo te das de baja o pides que se borren</h2>
+    <p>Cada correo trae un enlace para darte de baja. Para acceder a tus datos, corregirlos, cancelarlos u oponerte a su uso (derechos ARCO), escríbenos por WhatsApp al {DESPACHO.whatsappVisible} con tu nombre y el correo que usaste. Te contestamos en un máximo de 20 días hábiles.</p>
+
+    <h2>Cambios</h2>
+    <p>Si este aviso cambia, la versión vigente es la que está en esta página.</p>
+    <p class="fecha">Última actualización: 26 de octubre de 2026.</p>
+  </main>
+  <Pie />
+</Base>
+
+<style>
+  .legal { padding-block: clamp(32px, 6vw, 72px) 0; max-width: 820px; }
+  h1 { margin: 22px 0 0; font-size: clamp(2.4rem, 1.6rem + 3vw, 4rem); }
+  h2 { margin: 40px 0 10px; font-size: 1.4rem; font-weight: 800; }
+  p, li { max-width: 68ch; }
+  ul { padding-left: 1.2em; display: grid; gap: 8px; }
+  .fecha { margin-top: 32px; color: var(--cacao-70); font-size: 15px; }
+</style>

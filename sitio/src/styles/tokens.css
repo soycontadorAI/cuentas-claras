@@ -1,0 +1,49 @@
+/* Cuentas Claras · tokens del design system (identidad v2, boceto A "libreta viva").
+   Fuente: cuentas-claras/design/DESIGN.md. Regla de color: el fondo SIEMPRE es la libreta crema;
+   rosa y maíz solo marcan (palomitas, resaltador, estampas, separadores). Nunca de fondo de página. */
+:root {
+  /* Color */
+  --crema: #FFF6E8;      /* la libreta: fondo de todo */
+  --papel: #FFFBF3;      /* hojas y tarjetas encima de la libreta */
+  --cacao: #3B2418;      /* texto y trazo */
+  --cacao-70: rgba(59, 36, 24, .72);   /* texto secundario (4.9:1 sobre crema) */
+  --cacao-40: rgba(59, 36, 24, .4);
+  --cacao-12: rgba(59, 36, 24, .12);   /* cuadrícula y bordes suaves */
+  --rosa: #E4007C;       /* el plumón: palomitas, remates, foco */
+  --rosa-hondo: #B0005F; /* sombra del botón y texto rosa chico (pasa AA sobre crema) */
+  --maiz: #F6C343;       /* el resaltador */
+  --maiz-hondo: #B38716;
+  --margen: #F2A3C7;     /* la línea de margen de la libreta */
+
+  /* Tipografía: Bricolage Grotesque (todo) + Shrikhand (un solo remate por pieza) */
+  --display: "Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
+  --rotulo: "Shrikhand", "Bricolage Grotesque", cursive;
+  --t-cuerpo: 18px;
+  --t-chico: 15px;
+  --t-etiqueta: 13px;
+  --t-h3: clamp(1.35rem, 1.1rem + .8vw, 1.7rem);
+  --t-h2: clamp(2.3rem, 1.4rem + 3.6vw, 4.6rem);
+  --t-h1: clamp(3rem, 1.6rem + 6.4vw, 7.4rem);
+
+  /* Espacio y forma */
+  --ancho: 1180px;
+  --cuadro: 32px;        /* la cuadrícula de la libreta; los espacios grandes caen en múltiplos */
+  --gutter: max(16px, env(safe-area-inset-left, 0px));
+  --gutter-der: max(16px, env(safe-area-inset-right, 0px));
+  --radio-s: 6px;
+  --radio-m: 16px;
+  --radio-l: 28px;
+  --pildora: 999px;
+  --sombra-dura: 6px 6px 0 var(--cacao);   /* la sombra plana de calcomanía */
+  --sombra-hoja: 0 2px 0 var(--cacao-12), 0 28px 50px -18px rgba(59, 36, 24, .35);
+
+  /* Movimiento: lo que hace alguien que va llenando la libreta (palomea, subraya, encierra, pega) */
+  --e-salida: cubic-bezier(.16, 1, .3, 1);   /* entra y frena */
+  --e-rebote: cubic-bezier(.3, 1.6, .5, 1);  /* se pega con un brinquito */
+  --e-trazo: cubic-bezier(.6, 0, .2, 1);     /* el plumón */
+  --d-corta: .25s;
+  --d-media: .6s;
+  --d-larga: .9s;
+
+  color-scheme: light;
+}

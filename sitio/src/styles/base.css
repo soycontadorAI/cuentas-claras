@@ -1,0 +1,55 @@
+/* Base: la libreta, la tipografía y lo que todo el sitio comparte. */
+@import "./tokens.css";
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--crema); color: var(--cacao);
+  font-family: var(--display); font-size: var(--t-cuerpo); line-height: 1.55; font-weight: 450;
+  font-variation-settings: "wdth" 100, "opsz" 16;
+  -webkit-font-smoothing: antialiased; overflow-x: clip;
+}
+/* La franja del notch, del color de la hoja */
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 60; background: var(--crema); }
+
+/* La libreta: cuadrícula tenue y el margen rosa a la izquierda (en el teléfono, sin margen) */
+.hoja-fondo {
+  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    linear-gradient(var(--cacao-12) 1px, transparent 1px) 0 0 / var(--cuadro) var(--cuadro),
+    linear-gradient(90deg, var(--cacao-12) 1px, transparent 1px) 0 0 / var(--cuadro) var(--cuadro),
+    var(--crema);
+}
+@media (min-width: 761px) {
+  .hoja-fondo {
+    background:
+      linear-gradient(90deg, transparent calc(var(--gutter) + 34px), var(--margen) calc(var(--gutter) + 34px), var(--margen) calc(var(--gutter) + 36px), transparent calc(var(--gutter) + 36px)),
+      linear-gradient(var(--cacao-12) 1px, transparent 1px) 0 0 / var(--cuadro) var(--cuadro),
+      linear-gradient(90deg, var(--cacao-12) 1px, transparent 1px) 0 0 / var(--cuadro) var(--cuadro),
+      var(--crema);
+  }
+}
+
+a { color: inherit; }
+img { max-width: 100%; height: auto; display: block; }
+:focus-visible { outline: 3px solid var(--rosa); outline-offset: 3px; border-radius: 4px; }
+::selection { background: var(--maiz); color: var(--cacao); }
+
+.saltar { position: absolute; left: 12px; top: -60px; z-index: 100; padding: 10px 16px; border-radius: var(--pildora); background: var(--cacao); color: var(--crema); font-weight: 700; text-decoration: none; }
+.saltar:focus { top: 12px; }
+.solo-lector { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.envoltura { width: 100%; max-width: var(--ancho); margin-inline: auto; padding-left: var(--gutter); padding-right: var(--gutter-der); }
+
+/* Tipografía */
+.disp { font-weight: 800; font-variation-settings: "wdth" 92, "opsz" 96; line-height: .94; letter-spacing: -.015em; text-wrap: balance; }
+.rot { font-family: var(--rotulo); font-weight: 400; line-height: 1; }
+.etiqueta { font-size: var(--t-etiqueta); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--cacao-70); }
+.intro { margin: 18px 0 0; max-width: 52ch; font-size: 1.15rem; color: var(--cacao-70); }
+
+/* Movimiento: todo empieza visible. Solo con JS (html.js) y sin "reducir movimiento" se esconde
+   lo que va a entrar; scripts/movimiento.ts le pone .visto cuando llega a la pantalla. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-delay: 0s !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; transition-delay: 0s !important; scroll-behavior: auto !important; }
+}

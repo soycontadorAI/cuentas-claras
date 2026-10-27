@@ -1,0 +1,148 @@
+---
+/**
+ * /agendar: precalificación para la consulta 1:1. Seis preguntas cortas; a quien no le toca
+ * consulta se le manda a su salida (trámite, despacho, paquete o lo gratis) en cuanto contesta.
+ * Quien pasa recibe la página de citas de Google Calendar, que cobra con Stripe al reservar.
+ *
+ * Sin precio escrito aquí: el monto vive en sicastro.com/honorarios y Google lo muestra antes
+ * de pagar.
+ */
+import Barra from '../components/Barra.astro';
+import Pie from '../components/Pie.astro';
+import Base from '../layouts/Base.astro';
+import { BUSCA, CUANDO, INGRESO, SITUACION, TEMA } from '../lib/agendar';
+import { consulta, despacho, persona } from '../lib/schema';
+import { PRECIO_CONSULTA_URL, whatsappUrl } from '../lib/sitio';
+
+const PASOS = [
+  { id: 'tema', pregunta: '¿Qué quieres resolver?', opciones: TEMA },
+  { id: 'situacion', pregunta: '¿Cómo recibes tu dinero?', opciones: SITUACION },
+  { id: 'ingreso', pregunta: '¿Cuánto ganas al mes, más o menos?', ayuda: 'Antes de impuestos. Es para saber qué revisar, no se publica.', opciones: INGRESO },
+  { id: 'busca', pregunta: '¿Qué esperas de la consulta?', opciones: BUSCA },
+  { id: 'cuando', pregunta: '¿Para cuándo lo necesitas?', opciones: CUANDO },
+] as const;
+const TOTAL = PASOS.length + 1;
+---
+<Base
+  titulo="Agenda tu consulta 1:1"
+  descripcion="Revisa tu caso con el SAT con un contador público, por videollamada. Primero seis preguntas para saber si la consulta es lo tuyo; si no, te decimos qué sí."
+  grafo={[consulta(), despacho(), persona()]}
+>
+  <Barra />
+  <main id="contenido" class="agendar">
+    <div class="envoltura rejilla">
+      <div class="lado">
+        <span class="separador">Consulta 1:1</span>
+        <h1 class="disp">Tu caso, <span class="resaltado">con tus números.</span></h1>
+        <p class="intro">Media hora por videollamada con Israel Castro, contador público. Sales sabiendo qué te toca y qué hacer. Incluye una llamada de seguimiento.</p>
+        <ol class="como">
+          <li><span class="num">1</span><div><b>Contestas seis preguntas</b><span>Para saber si la consulta es lo tuyo. Si no, te decimos qué sí (a veces es gratis).</span></div></li>
+          <li><span class="num">2</span><div><b>Escoges tu hora y pagas</b><span>En el mismo paso, con tarjeta. El horario se aparta al pagar.</span></div></li>
+          <li><span class="num">3</span><div><b>Te llega la invitación</b><span>Con el enlace de la videollamada y un recordatorio antes.</span></div></li>
+        </ol>
+        <p class="precio">La consulta tiene costo. <a href={PRECIO_CONSULTA_URL} rel="noopener">Ver el precio en el despacho</a>.</p>
+      </div>
+
+      <div class="panel" id="calificador">
+        <div class="progreso" aria-hidden="true">
+          {Array.from({ length: TOTAL }, (_, i) => <i data-punto={i}></i>)}
+        </div>
+        <p class="paso-de" aria-live="polite"><span data-numero>1</span> de {TOTAL}</p>
+
+        <form id="form-agendar" novalidate>
+          {PASOS.map((p, i) => (
+            <fieldset class="paso" data-paso={i} hidden={i !== 0}>
+              <legend class="disp">{p.pregunta}</legend>
+              {'ayuda' in p && <p class="ayuda-paso">{p.ayuda}</p>}
+              <div class="opciones">
+                {Object.entries(p.opciones).map(([valor, etiqueta]) => (
+                  <label class="opcion">
+                    <input type="radio" name={p.id} value={valor} required />
+                    <span class="marca-op"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M8 21 L17 30 L33 10" /></svg></span>
+                    <span>{etiqueta}</span>
+                  </label>
+                ))}
+              </div>
+              {i > 0 && <button type="button" class="atras" data-atras>← Atrás</button>}
+            </fieldset>
+          ))}
+
+          <fieldset class="paso" data-paso={PASOS.length} hidden>
+            <legend class="disp">Cuéntanos tu caso</legend>
+            <div class="campos">
+              <div class="campo"><label for="caso">En dos o tres líneas, qué pasó y qué te preocupa</label><textarea id="caso" name="caso" maxlength="1500" placeholder="Ej.: Tuve dos patrones este año y uno me dio mi constancia con un monto distinto al que veo en el portal." required></textarea></div>
+              <div class="campo"><label for="nombre">Tu nombre</label><input id="nombre" name="nombre" autocomplete="name" maxlength="80" required /></div>
+              <div class="campo"><label for="correo">Tu correo</label><input id="correo" name="correo" type="email" autocomplete="email" maxlength="200" required /></div>
+              <div class="campo"><label for="whatsapp">Tu WhatsApp <small>(para el recordatorio)</small></label><input id="whatsapp" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" placeholder="10 dígitos" maxlength="20" required /></div>
+              <div class="hp" aria-hidden="true"><label for="sitio">No llenar</label><input id="sitio" name="sitio" tabindex="-1" autocomplete="off" /></div>
+              <label class="casilla-acepto"><input type="checkbox" name="acepto" required /><span>Leí el <a href="/privacidad">aviso de privacidad</a> y entiendo que la consulta tiene costo.</span></label>
+              <button class="btn rosa ancho" type="submit">Ver horarios</button>
+              <p class="error" data-error role="alert" hidden></p>
+            </div>
+            <button type="button" class="atras" data-atras>← Atrás</button>
+          </fieldset>
+        </form>
+
+        <section class="resultado" id="salida" tabindex="-1" hidden aria-live="polite">
+          <span class="rot">Mejor así</span>
+          <h2 class="disp" data-titulo></h2>
+          <p data-texto></p>
+          <a class="btn rosa ancho" data-boton href="/"></a>
+          <a class="otra" data-otra href="/" hidden></a>
+          <button type="button" class="atras" data-reiniciar>← Cambiar mis respuestas</button>
+        </section>
+
+        <section class="resultado" id="pasa" tabindex="-1" hidden aria-live="polite">
+          <span class="rot">¡Va!</span>
+          <h2 class="disp">Tu caso es para la consulta.</h2>
+          <p>Escoge el día y la hora que te acomode. El pago es en el mismo paso, con tarjeta, y el horario se aparta en cuanto se confirma.</p>
+          <a class="btn rosa ancho" data-reserva href="/" rel="noopener">Escoger mi hora y pagar</a>
+          <p class="fino">¿Prefieres transferencia? <a data-transferencia href={whatsappUrl()} rel="noopener">Escríbenos por WhatsApp</a> y te pasamos los datos para apartar tu cita.</p>
+        </section>
+      </div>
+    </div>
+  </main>
+  <Pie />
+</Base>
+
+<script>
+  import { iniciar } from '../scripts/movimiento';
+  import { iniciarAgendar } from '../scripts/agendar';
+
+  iniciar();
+  iniciarAgendar();
+</script>
+
+<style>
+  .agendar { padding-block: clamp(32px, 6vw, 72px) 0; }
+  .rejilla { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(28px, 5vw, 64px); align-items: start; }
+  h1 { margin: 22px 0 0; font-size: clamp(2.6rem, 1.6rem + 4vw, 5rem); }
+  .como { list-style: none; margin: 32px 0 0; padding: 0; display: grid; gap: 14px; }
+  .como li { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 12px; }
+  .como .num { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--maiz); font-weight: 800; font-size: 15px; }
+  .como b { display: block; font-weight: 800; line-height: 1.25; }
+  .como span:not(.num) { color: var(--cacao-70); font-size: 16px; }
+  .precio { margin: 28px 0 0; font-weight: 600; }
+  .precio a { font-weight: 700; text-decoration-color: var(--rosa); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+
+  .panel { position: sticky; top: 96px; min-height: 560px; }
+  .progreso { display: flex; gap: 6px; }
+  .progreso i { flex: 1; height: 6px; border-radius: 3px; background: rgba(255, 246, 232, .2); transition: background-color .4s var(--e-salida); }
+  .progreso i:global(.hecho) { background: var(--maiz); }
+  .paso-de { margin: 10px 0 0; font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(255, 246, 232, .7); }
+  .paso { margin: 18px 0 0; padding: 0; border: 0; min-width: 0; }
+  .paso:not([hidden]) { animation: entrar .45s var(--e-salida); }
+  @keyframes entrar { from { opacity: 0; translate: 24px 0; } }
+  legend { padding: 0; margin-bottom: 18px; font-size: clamp(1.7rem, 1.2rem + 1.4vw, 2.3rem); line-height: 1.02; }
+  .ayuda-paso { margin: -8px 0 16px; font-size: 15px; }
+  .atras { margin-top: 18px; padding: 10px 0; border: 0; background: none; color: var(--crema); font: 700 15px var(--display); cursor: pointer; opacity: .8; }
+  .atras:hover { opacity: 1; text-decoration: underline; text-decoration-color: var(--maiz); }
+  .casilla-acepto a { color: var(--crema); }
+  .resultado { outline: none; animation: entrar .5s var(--e-salida); }
+  .resultado .rot { font-size: 2.4rem; color: var(--maiz); }
+  .resultado h2 { margin: 10px 0 0; }
+  .resultado p { margin: 14px 0 22px; }
+  .otra { display: inline-block; margin-top: 14px; color: var(--crema); font-weight: 700; text-decoration-color: var(--maiz); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+  .resultado .fino { margin-top: 18px; }
+  @media (max-width: 900px) { .rejilla { grid-template-columns: 1fr; } .panel { position: static; min-height: 0; } }
+</style>

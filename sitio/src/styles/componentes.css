@@ -1,0 +1,147 @@
+/* Componentes del design system. Cada uno se ve en /sistema. */
+
+/* ---------- Botón ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 52px; padding: 0 24px; border: 0; border-radius: var(--pildora); cursor: pointer;
+  font: 700 16px/1 var(--display); font-variation-settings: "wdth" 95; text-decoration: none;
+  background: var(--cacao); color: var(--crema);
+  box-shadow: 0 4px 0 var(--rosa-hondo); transition: transform .2s, box-shadow .2s, background-color .2s, color .2s;
+  translate: var(--mx, 0) var(--my, 0);
+}
+.btn:hover { background: var(--rosa-hondo); box-shadow: 0 6px 0 var(--cacao); }
+.btn:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--rosa-hondo); }
+.btn.claro { background: var(--papel); color: var(--cacao); box-shadow: inset 0 0 0 2px var(--cacao), 0 4px 0 var(--cacao); }
+.btn.claro:hover { background: var(--maiz); }
+/* El botón rosa va en 19px: rosa con crema solo pasa contraste como texto grande */
+.btn.rosa { background: var(--rosa); font-size: 19px; box-shadow: 0 5px 0 var(--rosa-hondo); }
+.btn.rosa:hover { background: var(--maiz); color: var(--cacao); box-shadow: 0 7px 0 var(--maiz-hondo); }
+.btn[disabled] { opacity: .6; cursor: progress; }
+.btn.ancho { width: 100%; }
+
+.enlace-flecha { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; text-decoration: none; }
+.enlace-flecha span { border-bottom: 2px solid var(--cacao-12); transition: border-color .3s; }
+.enlace-flecha:hover span { border-color: var(--rosa); }
+
+/* ---------- Separador (la pestaña de color que abre cada página de la libreta) ---------- */
+.separador {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 8px 18px 8px var(--gutter); margin-left: calc(-1 * var(--gutter));
+  border-radius: 0 var(--pildora) var(--pildora) 0;
+  background: var(--c, var(--maiz)); color: var(--t, var(--cacao));
+  font-weight: 800; font-size: 14px; letter-spacing: .1em; text-transform: uppercase;
+}
+.separador.rosa { --c: var(--rosa-hondo); --t: var(--crema); }
+.separador.cacao { --c: var(--cacao); --t: var(--crema); }
+
+/* ---------- Resaltador de maíz (se pasa al entrar a la pantalla) ---------- */
+.resaltado { background: linear-gradient(transparent 55%, var(--maiz) 55%, var(--maiz) 92%, transparent 92%) no-repeat 0 0 / 100% 100%; padding-inline: .08em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+
+/* ---------- Ficha con pestaña ---------- */
+.ficha { position: relative; padding: 30px 26px 28px; background: var(--papel); border: 2px solid var(--cacao); border-radius: var(--radio-s) 22px 22px 22px; box-shadow: var(--sombra-dura); transition: transform .35s var(--e-rebote), box-shadow .35s; }
+.ficha:hover { transform: translate(-3px, -6px) rotate(-.6deg); box-shadow: 10px 12px 0 var(--cacao); }
+.ficha .pestana { position: absolute; top: -2px; left: -2px; transform: translateY(-100%); padding: 6px 16px; border: 2px solid var(--cacao); border-bottom: 0; border-radius: 10px 10px 0 0; background: var(--c, var(--maiz)); color: var(--t, var(--cacao)); font-weight: 800; font-size: 14px; }
+.ficha h3 { margin: 6px 0 10px; font-size: var(--t-h3); font-weight: 800; font-variation-settings: "wdth" 92, "opsz" 48; line-height: 1.02; }
+.ficha p { margin: 0; color: var(--cacao-70); }
+
+/* Lista palomeada */
+.palomeo { margin: 18px 0 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+.palomeo li { display: flex; gap: 10px; align-items: baseline; font-weight: 600; }
+.palomeo li::before { content: ""; flex: none; width: 14px; height: 8px; border-left: 3px solid var(--rosa); border-bottom: 3px solid var(--rosa); transform: rotate(-45deg) translate(2px, -2px); }
+
+/* ---------- Nota adhesiva ---------- */
+.nota {
+  position: absolute; z-index: 3; width: 168px; padding: 14px 14px 16px; border-radius: 4px;
+  font-weight: 700; font-size: 15.5px; line-height: 1.25; box-shadow: 0 10px 18px rgba(59, 36, 24, .16);
+  font-variation-settings: "wdth" 92; background: var(--maiz); transform: rotate(var(--giro, -6deg));
+}
+.nota::before { content: ""; position: absolute; top: -10px; left: 50%; width: 64px; height: 20px; margin-left: -32px; background: rgba(255, 255, 255, .55); border-radius: 2px; transform: rotate(-4deg); }
+.nota.papel { background: var(--papel); box-shadow: inset 0 0 0 2px var(--cacao), 0 10px 18px rgba(59, 36, 24, .16); }
+.nota.rosa { background: var(--rosa-hondo); color: var(--crema); }
+
+/* ---------- Chip ---------- */
+.chip { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: var(--pildora); background: var(--papel); box-shadow: inset 0 0 0 2px var(--cacao); font-weight: 700; font-size: 14.5px; }
+.chip i { width: 10px; height: 10px; border-radius: 50%; background: var(--c, var(--maiz)); }
+
+/* ---------- Globo (la duda del cliente) ---------- */
+.globo { position: relative; padding: 26px 28px; background: var(--cacao); color: var(--crema); border-radius: 28px 28px 28px 6px; font-weight: 800; font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.2rem); line-height: 1.12; font-variation-settings: "wdth" 92; }
+.globo small { display: block; margin-bottom: 10px; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--maiz); font-weight: 800; }
+
+/* ---------- Renglón con casilla que se palomea ---------- */
+.renglones { list-style: none; margin: 0; padding: 0; display: grid; gap: 18px; }
+.renglon { display: grid; grid-template-columns: 54px minmax(0, 1fr); gap: 18px; align-items: start; padding: 22px 22px 22px 18px; background: var(--papel); border-radius: var(--radio-m); box-shadow: inset 0 0 0 2px var(--cacao-12); }
+.casilla { width: 54px; height: 54px; border-radius: 12px; border: 3px solid var(--cacao); display: grid; place-items: center; background: var(--crema); }
+.casilla svg { width: 38px; height: 38px; overflow: visible; }
+.casilla path { fill: none; stroke: var(--rosa); stroke-width: 9; stroke-linecap: round; stroke-linejoin: round; }
+.renglon .n { font-size: 13px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--rosa-hondo); }
+.renglon h3 { margin: 4px 0 6px; font-size: 1.35rem; font-weight: 800; line-height: 1.15; font-variation-settings: "wdth" 95, "opsz" 32; }
+.renglon p { margin: 0; color: var(--cacao-70); font-size: 16.5px; }
+
+/* ---------- La hoja (papel pegado con cinta) ---------- */
+.hoja { position: relative; padding: 30px 28px 26px; background: var(--papel); border-radius: var(--radio-s); box-shadow: var(--sombra-hoja); rotate: -2.5deg; }
+.hoja::after { content: ""; position: absolute; top: -12px; left: 50%; width: 96px; height: 26px; margin-left: -48px; background: rgba(246, 195, 67, .7); transform: rotate(3deg); }
+
+/* ---------- Campo de formulario (sobre cacao) ---------- */
+.panel { padding: clamp(24px, 4vw, 40px); background: var(--cacao); color: var(--crema); border-radius: var(--radio-l); }
+.panel h2, .panel h3 { margin: 0; font-size: clamp(1.8rem, 1.3rem + 1.6vw, 2.6rem); font-weight: 800; line-height: 1; font-variation-settings: "wdth" 92, "opsz" 72; }
+.panel .rot { color: var(--maiz); font-size: .9em; }
+.panel p { color: rgba(255, 246, 232, .82); }
+.campos { display: grid; gap: 14px; margin-top: 24px; }
+.campo label, .campo legend { display: block; margin-bottom: 6px; font-weight: 700; font-size: 15px; }
+.campo small { font-weight: 500; opacity: .78; }
+.campo input, .campo textarea, .campo select {
+  width: 100%; min-height: 54px; padding: 0 16px; border: 2px solid transparent; border-radius: 14px;
+  background: var(--crema); color: var(--cacao); font: 600 17px var(--display); transition: border-color .2s, box-shadow .2s;
+}
+.campo textarea { min-height: 112px; padding: 14px 16px; line-height: 1.4; resize: vertical; }
+.campo input:focus, .campo textarea:focus { outline: none; border-color: var(--maiz); box-shadow: 0 0 0 4px rgba(246, 195, 67, .35); }
+.campo [aria-invalid="true"] { border-color: var(--rosa); }
+.fino { margin: 12px 0 0; font-size: 13.5px; color: rgba(255, 246, 232, .78); }
+.fino a { color: var(--crema); }
+.error { margin: 10px 0 0; padding: 10px 14px; border-radius: 12px; background: var(--crema); color: var(--rosa-hondo); font-weight: 700; font-size: 15px; }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+/* Opciones tipo tarjeta (radio) */
+.opciones { display: grid; gap: 10px; margin: 0; padding: 0; border: 0; }
+.opcion { position: relative; display: flex; gap: 12px; align-items: center; min-height: 56px; padding: 12px 16px; border-radius: 14px; background: rgba(255, 246, 232, .08); box-shadow: inset 0 0 0 2px rgba(255, 246, 232, .25); cursor: pointer; font-weight: 600; transition: background-color .2s, box-shadow .2s, transform .2s var(--e-rebote); }
+.opcion:hover { background: rgba(255, 246, 232, .14); }
+.opcion input { position: absolute; opacity: 0; pointer-events: none; }
+.opcion .marca-op { flex: none; width: 26px; height: 26px; border-radius: 8px; border: 2.5px solid var(--crema); display: grid; place-items: center; }
+.opcion .marca-op svg { width: 18px; height: 18px; opacity: 0; transform: scale(.4); transition: opacity .2s, transform .3s var(--e-rebote); }
+.opcion .marca-op path { fill: none; stroke: var(--cacao); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+.opcion:has(input:checked) { background: var(--maiz); color: var(--cacao); box-shadow: none; transform: rotate(-.6deg); }
+.opcion:has(input:checked) .marca-op { border-color: var(--cacao); background: var(--crema); }
+.opcion:has(input:checked) .marca-op svg { opacity: 1; transform: scale(1); }
+.opcion:has(input:focus-visible) { outline: 3px solid var(--maiz); outline-offset: 3px; }
+.casilla-acepto { display: flex; gap: 12px; align-items: flex-start; font-size: 15px; cursor: pointer; }
+.casilla-acepto input { flex: none; width: 22px; height: 22px; margin: 2px 0 0; accent-color: var(--maiz); }
+
+/* ---------- El billete palomeado (símbolo) ---------- */
+.billete { width: 46px; height: 46px; }
+.billetito { position: fixed; z-index: 80; width: 56px; height: 56px; left: 0; top: 0; pointer-events: none; }
+
+/* ---------- Marco de foto ---------- */
+.marco { position: relative; aspect-ratio: 4 / 5; border-radius: 26px; background: var(--maiz); overflow: hidden; box-shadow: inset 0 0 0 3px var(--cacao); }
+.marco img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; }
+
+/* ---------- Pregunta desplegable ---------- */
+.pregunta { border-top: 2px solid var(--cacao); }
+.pregunta:last-child { border-bottom: 2px solid var(--cacao); }
+.pregunta summary { display: flex; gap: 16px; align-items: center; justify-content: space-between; padding: 22px 4px; cursor: pointer; list-style: none; font-weight: 800; font-size: clamp(1.2rem, 1rem + .7vw, 1.55rem); line-height: 1.2; font-variation-settings: "wdth" 95, "opsz" 32; }
+.pregunta summary::-webkit-details-marker { display: none; }
+.pregunta summary .mas { flex: none; width: 40px; height: 40px; border-radius: 50%; background: var(--maiz); display: grid; place-items: center; transition: transform .35s var(--e-rebote), background-color .2s; }
+.pregunta summary .mas::before, .pregunta summary .mas::after { content: ""; grid-area: 1 / 1; width: 16px; height: 3px; border-radius: 2px; background: var(--cacao); }
+.pregunta summary .mas::after { transform: rotate(90deg); transition: transform .35s var(--e-rebote); }
+.pregunta[open] summary .mas { background: var(--papel); box-shadow: inset 0 0 0 2px var(--cacao); }
+.pregunta[open] summary .mas::after { transform: rotate(0); }
+.pregunta p { margin: 0 4px 24px; max-width: 64ch; color: var(--cacao-70); }
+
+/* ---------- Revelado al entrar en pantalla (lo activa scripts/movimiento.ts) ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-entra] { opacity: 0; translate: 0 40px; rotate: var(--entra-giro, 0deg); transition: opacity .7s var(--e-salida), translate .9s var(--e-rebote), rotate .9s var(--e-rebote); transition-delay: calc(var(--i, 0) * 110ms); }
+  .js [data-entra].visto { opacity: 1; translate: 0 0; rotate: 0deg; }
+  .js .resaltado[data-resalta] { background-size: 0% 100%; transition: background-size .9s var(--e-trazo) .15s; }
+  .js .resaltado[data-resalta].visto { background-size: 100% 100%; }
+  .js [data-palomea] path { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset .5s var(--e-trazo) .1s; }
+  .js [data-palomea].visto path { stroke-dashoffset: 0; }
+}

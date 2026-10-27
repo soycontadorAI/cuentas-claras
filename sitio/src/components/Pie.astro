@@ -1,0 +1,42 @@
+---
+import { CANAL, DESPACHO, PERSONA, conUtm } from '../lib/sitio';
+---
+<footer class="pie">
+  <div class="envoltura">
+    <div>
+      <a class="marca" href="/"><svg class="billete" aria-hidden="true"><use href="#billete"/></svg><span class="rot">Cuentas<br />Claras</span></a>
+      <p class="chico">Un canal de {DESPACHO.nombre}. Patrocina TodoConta. Los videos y la guía son orientación general: cada caso tiene sus detalles.</p>
+    </div>
+    <div>
+      <h2>El canal</h2>
+      <ul>
+        <li><a href={CANAL.url} rel="noopener">YouTube</a></li>
+        <li><a href={PERSONA.instagram} rel="noopener">Instagram</a></li>
+        <li><a href="/#guia">La guía gratis</a></li>
+        <li><a href="/agendar">Consulta 1:1</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>La casa</h2>
+      <ul>
+        <li><a href={conUtm(DESPACHO.url, 'landing', 'pie')} rel="noopener">El despacho</a></li>
+        <li><a href={conUtm('https://todoconta.com', 'landing', 'pie')} rel="noopener">La app: TodoConta</a></li>
+        <li><a href={conUtm('https://soycontador.ai', 'landing', 'pie')} rel="noopener">IA para contadores</a></li>
+        <li><a href="/privacidad">Aviso de privacidad</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .pie { padding-block: 56px 40px; margin-top: clamp(64px, 9vw, 120px); border-top: 3px solid var(--cacao); background: rgba(255, 246, 232, .8); }
+  .envoltura { display: grid; grid-template-columns: minmax(0, 1.4fr) repeat(2, minmax(0, 1fr)); gap: 28px; }
+  .marca { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+  .marca .rot { font-size: 21px; line-height: .9; }
+  h2 { margin: 0 0 10px; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; }
+  ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 4px; }
+  a:not(.marca) { display: inline-block; padding-block: 4px; text-decoration: none; border-bottom: 1.5px solid transparent; }
+  a:not(.marca):hover { border-color: var(--rosa); }
+  .chico { color: var(--cacao-70); font-size: 15px; max-width: 40ch; }
+  @media (max-width: 760px) { .envoltura { grid-template-columns: 1fr 1fr; } .envoltura > :first-child { grid-column: 1 / -1; } }
+</style>

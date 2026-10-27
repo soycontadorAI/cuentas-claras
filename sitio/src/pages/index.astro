@@ -1,0 +1,427 @@
+---
+/**
+ * La portada de Cuentas Claras (boceto A, "libreta viva"). Presenta el canal y capta correos a
+ * cambio de la guía gratis ("La hoja del año"). No vende: los servicios mandan a sicastro.com con utm.
+ */
+import { Image, Picture } from 'astro:assets';
+
+import Barra from '../components/Barra.astro';
+import Pie from '../components/Pie.astro';
+import Base from '../layouts/Base.astro';
+import { MESES, PREGUNTAS, TRAE } from '../lib/guia';
+import { canal, despacho, persona, preguntas, sitioWeb } from '../lib/schema';
+import { CANAL, DESPACHO, conUtm, whatsappUrl } from '../lib/sitio';
+
+import israelCruzado from '../assets/israel-cruzado.webp';
+import israelDuda from '../assets/israel-duda.webp';
+
+const TASAS = [10.88, 16, 21.36, 23.52, 30];
+const TIRA = ['¿Qué es la constancia de situación fiscal?', '¿Me toca saldo a favor?', '¿Cómo saco mi e.firma?', 'Me llegó una carta del SAT', '¿Mi inversión en Sofipo cuenta?'];
+---
+<Base grafo={[sitioWeb(), despacho(), persona(), canal(), preguntas()]}>
+  <Barra portada />
+
+  <main id="contenido">
+    <section class="portada">
+      <div class="envoltura">
+        <div>
+          <p class="etiqueta">Impuestos · Contabilidad · Finanzas personales</p>
+          <h1 class="disp">
+            <span class="linea"><span>El SAT</span></span>
+            <span class="linea"><span>y tu <span class="palomeada">dinero,<svg viewBox="0 0 60 60" aria-hidden="true"><path pathLength="1" d="M6 32 L24 50 L56 8"/></svg></span></span></span>
+            <span class="linea"><span>en <span class="orden">orden.<svg viewBox="0 0 300 30" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M4 18 C 60 8, 160 6, 296 14 M 30 26 C 120 20, 210 20, 280 24"/></svg></span></span></span>
+          </h1>
+          <p class="bajada">Tus obligaciones con el SAT explicadas paso a paso, tu declaración sin sorpresas y tus números claros.</p>
+          <div class="acciones">
+            <a class="btn" data-magnetico href="#guia">Quiero la guía</a>
+            <a class="enlace-flecha" href={CANAL.url} rel="noopener"><svg width="28" height="20" aria-hidden="true"><use href="#yt"/></svg><span>Ver el canal</span></a>
+          </div>
+        </div>
+        <div class="figura">
+          <div class="estampa" aria-hidden="true">
+            <svg class="texto-circular" viewBox="0 0 118 118"><defs><path id="circ" d="M59 59 m-48 0 a48 48 0 1 1 96 0 a48 48 0 1 1 -96 0"/></defs><text><textPath href="#circ">un canal · nuevo cada semana · </textPath></text></svg>
+            <div class="disco"><svg aria-hidden="true"><use href="#billete"/></svg></div>
+          </div>
+          <Picture class="foto" src={israelCruzado} formats={['avif', 'webp']} quality={50} alt="Israel Castro, contador público, con los brazos cruzados" widths={[320, 440, 600, 720]} sizes="(max-width: 860px) min(88vw, 380px), 520px" loading="eager" fetchpriority="high" />
+          <span class="nota n1" aria-hidden="true">¿Tengo que declarar si solo tengo sueldo?</span>
+          <span class="nota papel n2" aria-hidden="true">¿Por qué me retuvieron más este año?</span>
+          <span class="nota rosa n3" aria-hidden="true">¿Mi inversión en Sofipo cuenta?</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="tira" role="region" aria-label="Preguntas que se resuelven en el canal">
+      <div class="tira-pista">
+        {[0, 1].map((copia) => (
+          <span aria-hidden={copia === 1 ? 'true' : undefined}>
+            {TIRA.map((t) => (<>{t} <svg aria-hidden="true"><use href="#billete"/></svg> </>))}
+          </span>
+        ))}
+      </div>
+    </div>
+
+    <section class="pagina" id="encuentras">
+      <div class="envoltura">
+        <span class="separador">Qué hay aquí</span>
+        <h2 class="disp">Lo que te preguntas, <span class="resaltado" data-resalta>resuelto en un video.</span></h2>
+        <p class="intro">Tres cajones, los mismos de una libreta de cuentas: lo que le debes al SAT, lo que el SAT te debe a ti y lo que te queda.</p>
+        <div class="fichas">
+          <article class="ficha" data-entra style="--i:0; --entra-giro:-3deg">
+            <span class="pestana">SAT</span>
+            <h3>Tus trámites, sin perderte en el portal</h3>
+            <p>Paso a paso, con la pantalla real.</p>
+            <ul class="palomeo"><li>RFC y e.firma</li><li>Constancia de situación fiscal</li><li>Buzón tributario y cartas</li></ul>
+          </article>
+          <article class="ficha" data-entra style="--i:1; --entra-giro:2deg; --c: var(--rosa-hondo); --t: var(--crema)">
+            <span class="pestana">Tu declaración</span>
+            <h3>La anual, sin sorpresas</h3>
+            <p>Si estás obligado, qué deducir y cuánto te regresan de verdad.</p>
+            <ul class="palomeo"><li>Obligación</li><li>Deducciones personales</li><li>Saldos a favor</li></ul>
+          </article>
+          <article class="ficha" data-entra style="--i:2; --entra-giro:-1.5deg; --c: var(--cacao); --t: var(--crema)">
+            <span class="pestana">Tus números</span>
+            <h3>Tu dinero, en claro</h3>
+            <p>Lo que entra, lo que sale y lo que te queda.</p>
+            <ul class="palomeo"><li>Ingresos extra</li><li>Finanzas sanas</li><li>Estados financieros básicos</li></ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagina" id="calcula">
+      <div class="envoltura">
+        <span class="separador">Pruébalo</span>
+        <h2 class="disp">¿Cuánto te regresa <span class="resaltado" data-resalta>una deducción?</span></h2>
+        <p class="intro">Menos de lo que crees: cada peso que deduces te regresa lo que pagas de impuesto sobre él, no el peso completo. Muévele, no te pedimos nada.</p>
+        <div class="calcu">
+          <div class="mueve">
+            <label for="deduce">Doctor, dentista, seguro de gastos médicos, lentes… lo que deduces en el año</label>
+            <output class="cifra" id="monto" for="deduce">$20,000</output>
+            <input id="deduce" type="range" min="1000" max="80000" step="1000" value="20000" aria-describedby="ayuda-calc" />
+            <p class="rotulo-tasas" id="tasas-t">Tu tasa más alta (sube con lo que ganas)</p>
+            <div class="tasas" role="group" aria-labelledby="tasas-t">
+              {TASAS.map((t) => <button type="button" data-tasa={t} aria-pressed={t === 21.36 ? 'true' : 'false'}>{t}%</button>)}
+            </div>
+            <p class="ayuda" id="ayuda-calc">Tasas de la tarifa anual del artículo 152 de la LISR. Las deducciones tienen topes y requisitos: es un ejemplo, cada caso tiene sus detalles.</p>
+          </div>
+          <div class="cuenta" aria-live="polite">
+            <div class="renglon-c"><span>Lo que deduces</span><i></i><b id="c-deduce">$20,000</b></div>
+            <div class="renglon-c"><span>× tu tasa</span><i></i><b id="c-tasa">21.36%</b></div>
+            <span class="te-regresa">Te regresa, más o menos</span>
+            <span class="total-c" id="c-regresa">$4,272</span>
+            <p class="moraleja">En el canal lo explicamos con calma, y la guía te dice qué guardar.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagina" id="preguntas">
+      <div class="envoltura dos">
+        <div>
+          <span class="separador rosa">Sin rodeos</span>
+          <h2 class="disp">Lo que más <span class="resaltado" data-resalta>me preguntan.</span></h2>
+          <p class="intro">Las cinco preguntas con las que empieza la guía. Aquí, la respuesta corta; allá, la larga con su fundamento.</p>
+        </div>
+        <div class="lista-preguntas">
+          {PREGUNTAS.map((p, i) => (
+            <details class="pregunta" open={i === 0}>
+              <summary>{p.pregunta}<span class="mas" aria-hidden="true"></span></summary>
+              <p>{p.respuesta}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="pagina" id="series">
+      <div class="envoltura">
+        <span class="separador cacao">Las series</span>
+        <h2 class="disp">Una duda, <span class="resaltado" data-resalta>una serie.</span></h2>
+        <p class="intro">Como una consultoría, cada semana y sin costo. Cada serie arranca como empiezan las consultas, con la pregunta tal cual, y se resuelve en los videos que haga falta. Cada uno también funciona solo.</p>
+        <div class="consulta">
+          <div class="duda">
+            <div class="globo"><small>La primera serie</small>“Si solo tengo sueldo, ¿tengo que declarar?”</div>
+            <p>Así llega casi siempre. La respuesta corta es “depende”; la larga cabe en una serie.</p>
+            <div class="temporada" aria-label="Lo que viene">
+              <span class="chip"><i></i>Aguinaldo</span>
+              <span class="chip" style="--c: var(--rosa)"><i></i>Tus inversiones</span>
+              <span class="chip" style="--c: var(--cacao)"><i></i>Tu anual</span>
+            </div>
+          </div>
+          <ol class="renglones">
+            <li class="renglon" data-entra data-palomea>
+              <span class="casilla"><svg viewBox="0 0 40 40" aria-hidden="true"><path pathLength="1" d="M6 21 L16 31 L35 8"/></svg></span>
+              <div><span class="n">Video 1</span><h3>Cuándo sí estás obligado (y cuándo no)</h3><p>El monto que lo cambia todo, dos patrones en el año y qué pasa si te sale a pagar.</p></div>
+            </li>
+            <li class="renglon" data-entra data-palomea>
+              <span class="casilla"><svg viewBox="0 0 40 40" aria-hidden="true"><path pathLength="1" d="M6 21 L16 31 L35 8"/></svg></span>
+              <div><span class="n">Video 2</span><h3>Deducciones: cuánto te regresan de verdad</h3><p>Cada peso que deduces no te regresa un peso. Lo hacemos con números, y qué conviene pagar antes del 31 de diciembre.</p></div>
+            </li>
+            <li class="renglon" data-entra data-palomea>
+              <span class="casilla"><svg viewBox="0 0 40 40" aria-hidden="true"><path pathLength="1" d="M6 21 L16 31 L35 8"/></svg></span>
+              <div><span class="n">Video 3</span><h3>Sueldo y algo más</h3><p>Intereses, Sofipo, casa de bolsa o una herencia: cuándo se suman y cuándo no.</p><a class="mas-yt" href={CANAL.url} rel="noopener">Ver el canal en YouTube</a></div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagina" id="guia">
+      <div class="envoltura">
+        <span class="separador">Gratis</span>
+        <div class="guia-cab">
+          <div>
+            <h2 class="disp">Qué hacer con el SAT, <span class="resaltado" data-resalta>mes por mes.</span></h2>
+            <p class="intro">Una guía gratis para pegar en el refri: qué toca cada mes y qué revisar para que no se te pase nada.</p>
+          </div>
+          <ol class="trae" aria-label="Lo que trae la guía">
+            {TRAE.map((t, i) => <li><span class="num">{i + 1}</span><div><b>{t.titulo}</b><span>{t.texto}</span></div></li>)}
+          </ol>
+        </div>
+        <div class="guia">
+          <div class="hoja hoja-anio" aria-label="Vista previa de la guía: el calendario de 12 meses" role="img">
+            <div class="hoja-cab"><span class="rot">La hoja del año</span><span>Cuentas Claras</span></div>
+            <ol class="meses" data-entra style="--entra-giro:0deg">
+              {MESES.map((m, i) => (
+                <li class:list={{ clave: m.clave }} style={`--i:${i}`}>
+                  <b>{m.corto}</b><i class="caja" aria-hidden="true"></i>{m.toca}
+                  {m.si && m.clave && <span class="si">{m.si}</span>}
+                  {m.clave && <svg class="circulo" viewBox="0 0 100 50" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M62 3 C 90 3, 99 18, 97 30 C 94 47, 24 51, 6 40 C -4 32, -2 6, 34 2 C 50 0, 70 1, 82 7"/></svg>}
+                </li>
+              ))}
+            </ol>
+          </div>
+          <div class="panel">
+            <form id="form-guia" novalidate>
+              <h3 class="disp">Te la mandamos <span class="rot">gratis</span></h3>
+              <p>Llega a tu correo en un minuto. Si dejas tu WhatsApp, te avisamos cuando salga cada serie.</p>
+              <div class="campos">
+                <div class="campo"><label for="nombre">Tu nombre</label><input id="nombre" name="nombre" type="text" autocomplete="given-name" placeholder="¿Cómo te llamas?" required maxlength="80" /></div>
+                <div class="campo"><label for="correo">Tu correo</label><input id="correo" name="correo" type="email" autocomplete="email" placeholder="tu@correo.com" required maxlength="200" /></div>
+                <div class="campo"><label for="whatsapp">WhatsApp <small>(opcional)</small></label><input id="whatsapp" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" placeholder="10 dígitos" maxlength="20" /></div>
+                <div class="hp" aria-hidden="true"><label for="sitio">No llenar</label><input id="sitio" name="sitio" type="text" tabindex="-1" autocomplete="off" /></div>
+                <button class="btn rosa ancho" type="submit">Mándamela</button>
+                <p class="error" data-error role="alert" hidden></p>
+              </div>
+              <p class="fino">Sin spam; te das de baja cuando quieras. <a href="/privacidad">Aviso de privacidad</a>.</p>
+            </form>
+            <div class="listo" id="listo-guia" tabindex="-1" hidden>
+              <span class="rot">¡Listo!</span>
+              <p>Revisa tu correo.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagina" id="quien">
+      <div class="envoltura">
+        <span class="separador cacao">Quién está detrás</span>
+        <div class="detras">
+          <div class="marco" data-entra style="--entra-giro:-6deg">
+            <Image src={israelDuda} alt="Israel Castro pensando, con la mano en la barbilla" widths={[380, 570, 760]} sizes="(max-width: 860px) 90vw, 440px" />
+          </div>
+          <div>
+            <blockquote>Aquí resuelvo las dudas que más me traen mis clientes, para que tú las resuelvas sin pagar una consulta.</blockquote>
+            <p class="firma"><strong>Israel Castro</strong>, contador público y socio de {DESPACHO.nombre}, el despacho familiar.</p>
+            <div class="lo-hacemos">
+              <p>Hazlo tú con el video… <span class="rot">o déjalo en nuestras manos.</span></p>
+              <a class="btn claro" href={conUtm(DESPACHO.url, 'landing', 'quien')} rel="noopener">Ir al despacho</a>
+            </div>
+            <p class="caso-dificil">¿Tu caso no es tan sencillo? <a href="/agendar">Agenda una consulta 1:1</a>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pagina" id="colabora">
+      <div class="envoltura">
+        <div class="colabora">
+          <div>
+            <span class="etiqueta">Marcas y creadores</span>
+            <h2 class="disp">¿Hacemos algo juntos?</h2>
+            <p>Videos en colaboración, una charla para tu equipo o tu comunidad. Si le habla a la gente que quiere su SAT y su dinero en orden, platiquemos.</p>
+          </div>
+          <ul>
+            <li class="chip" style="--c: var(--rosa)"><i></i>Colaboraciones</li>
+            <li class="chip"><i></i>Charlas</li>
+            <li class="chip" style="--c: var(--cacao)"><i></i>Prensa</li>
+            <li><a class="btn" data-magnetico href={whatsappUrl('Hola, vengo de Cuentas Claras por una colaboración.')} rel="noopener">Escríbenos</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Pie />
+</Base>
+
+<script>
+  import { iniciarCalculadora } from '../scripts/calculadora';
+  import { iniciarGuia } from '../scripts/guia';
+  import { iniciar } from '../scripts/movimiento';
+
+  iniciar();
+  iniciarCalculadora();
+  iniciarGuia();
+</script>
+
+<style>
+  /* ---------- Portada ---------- */
+  /* La foto se apoya en la cinta: va anclada abajo y la tira le pasa por encima del borde, justo
+     debajo de los brazos (Israel, 2026-10-26: "que sienta que ahí descanso") */
+  .portada { padding-block: clamp(24px, 4vw, 48px) 0; }
+  .portada .envoltura { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; align-items: end; }
+  .portada .envoltura > div:first-child { align-self: center; padding-bottom: clamp(24px, 4vw, 56px); }
+  h1 { margin: 18px 0 0; font-size: clamp(3rem, 1.8rem + 5vw, 6.4rem); }
+  h1 .linea { display: block; overflow: hidden; padding: .02em .7em .08em 0; margin: -.02em -.7em -.08em 0; }
+  h1 .linea > span { display: inline-block; animation: subir 1s var(--e-salida) both; }
+  h1 .linea:nth-child(2) > span { animation-delay: .12s; }
+  h1 .linea:nth-child(3) > span { animation-delay: .24s; }
+  .palomeada { position: relative; white-space: nowrap; }
+  .palomeada svg { position: absolute; right: -.58em; top: .06em; width: .5em; height: .5em; overflow: visible; }
+  .palomeada path { fill: none; stroke: var(--rosa); stroke-width: 12; stroke-linecap: round; stroke-linejoin: round; }
+  .orden { position: relative; display: inline-block; }
+  .orden svg { position: absolute; left: -4%; bottom: -.12em; width: 108%; height: .3em; overflow: visible; }
+  .orden path { fill: none; stroke: var(--rosa); stroke-width: 7; stroke-linecap: round; }
+  .palomeada path, .orden path { stroke-dasharray: 1; animation: trazo .6s ease-in-out .9s both; }
+  .orden path { animation-duration: .9s; animation-delay: 1.3s; }
+  .bajada { margin: 26px 0 0; max-width: 34ch; font-size: clamp(1.1rem, 1rem + .5vw, 1.4rem); line-height: 1.45; color: var(--cacao-70); }
+  .bajada strong { color: var(--cacao); font-weight: 700; }
+  .acciones { display: flex; flex-wrap: wrap; gap: 14px 22px; align-items: center; margin-top: 32px; }
+  .figura { position: relative; justify-self: center; width: min(100%, 520px); margin-bottom: calc(-1 * var(--hunde)); --hunde: 64px; }
+  .figura :global(.foto) { position: relative; z-index: 2; width: 100%; filter: drop-shadow(0 22px 26px rgba(59, 36, 24, .28)); }
+  .nota { animation: pegar .8s var(--e-rebote) both; }
+  .n1 { top: 8%; left: -10%; --giro: -7deg; animation-delay: .5s; }
+  .n2 { top: 40%; right: -8%; --giro: 6deg; animation-delay: .62s; }
+  .n3 { bottom: 24%; left: -8%; --giro: 4deg; animation-delay: .74s; }
+  .estampa { position: absolute; z-index: 3; top: 2%; right: 0; width: 118px; height: 118px; animation: aparecer .9s var(--e-rebote) .7s both; }
+  .estampa .disco { position: absolute; inset: 14px; border-radius: 50%; background: var(--maiz); display: grid; place-items: center; }
+  .estampa .disco svg { width: 58px; height: 58px; }
+  .texto-circular { position: absolute; inset: 0; animation: girar 18s linear infinite; }
+  .texto-circular text { font: 800 12.5px var(--display); letter-spacing: .18em; fill: var(--cacao); text-transform: uppercase; }
+  @keyframes subir { from { transform: translateY(110%); } }
+  @keyframes trazo { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+  @keyframes pegar { from { translate: 0 30px; scale: .8; } }
+  @keyframes aparecer { from { transform: scale(0) rotate(-90deg); } }
+  @keyframes girar { to { transform: rotate(360deg); } }
+  @media (max-width: 860px) {
+    .portada .envoltura { grid-template-columns: 1fr; }
+    .figura { width: min(88%, 380px); margin-top: 12px; --hunde: 44px; }
+    .portada .envoltura > div:first-child { padding-bottom: 0; }
+    .nota { width: 136px; font-size: 13.5px; }
+    .n1 { left: -14%; } .n2 { right: -14%; } .n3 { left: -12%; }
+  }
+
+  /* ---------- Tira ---------- */
+  .tira { position: relative; z-index: 4; border-block: 2px solid var(--cacao); background: var(--papel); overflow: hidden; padding-block: 18px; transform: rotate(-1.2deg); margin-block: 0 24px; box-shadow: 0 -10px 24px -14px rgba(59, 36, 24, .35); }
+  .tira-pista { display: flex; gap: 38px; width: max-content; animation: correr 40s linear infinite; }
+  .tira:hover .tira-pista { animation-play-state: paused; }
+  .tira-pista > span { display: inline-flex; align-items: center; gap: 38px; font-weight: 800; font-size: clamp(1.25rem, 1rem + 1vw, 1.8rem); font-variation-settings: "wdth" 92; white-space: nowrap; }
+  .tira-pista svg { width: 34px; height: 34px; flex: none; }
+  @keyframes correr { to { transform: translateX(-50%); } }
+
+  /* ---------- Páginas ---------- */
+  .pagina { padding-block: clamp(64px, 9vw, 120px); position: relative; }
+  .pagina h2 { margin: 22px 0 0; font-size: var(--t-h2); max-width: 15ch; }
+  .fichas { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; margin-top: 52px; }
+  @media (max-width: 900px) { .fichas { grid-template-columns: 1fr; gap: 48px; } }
+
+  /* Calculadora */
+  .calcu { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); margin-top: 44px; background: var(--papel); border: 3px solid var(--cacao); border-radius: var(--radio-l); box-shadow: 8px 8px 0 var(--cacao); overflow: hidden; }
+  .mueve { padding: clamp(22px, 4vw, 40px); border-right: 3px dashed var(--cacao-12); }
+  .cuenta { padding: clamp(22px, 4vw, 40px); display: grid; align-content: center; gap: 4px; background: linear-gradient(var(--cacao-12) 1px, transparent 1px) 0 0 / 100% 36px, var(--crema); }
+  .mueve label, .rotulo-tasas { display: block; margin: 0; font-weight: 700; color: var(--cacao-70); }
+  .rotulo-tasas { margin-top: 18px; }
+  .cifra { display: block; margin: 6px 0 10px; font-weight: 800; font-size: clamp(2.2rem, 1.6rem + 2vw, 3.2rem); line-height: 1; font-variant-numeric: tabular-nums; font-variation-settings: "wdth" 92; }
+  input[type="range"] { width: 100%; height: 34px; background: transparent; -webkit-appearance: none; appearance: none; cursor: pointer; }
+  input[type="range"]::-webkit-slider-runnable-track { height: 10px; border-radius: 99px; background: linear-gradient(90deg, var(--rosa) var(--p, 25%), var(--cacao-12) var(--p, 25%)); }
+  input[type="range"]::-moz-range-track { height: 10px; border-radius: 99px; background: var(--cacao-12); }
+  input[type="range"]::-moz-range-progress { height: 10px; border-radius: 99px; background: var(--rosa); }
+  input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 34px; height: 34px; margin-top: -12px; border-radius: 10px; background: var(--maiz); border: 3px solid var(--cacao); box-shadow: 3px 3px 0 var(--cacao); }
+  input[type="range"]::-moz-range-thumb { width: 28px; height: 28px; border-radius: 10px; background: var(--maiz); border: 3px solid var(--cacao); }
+  .tasas { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .tasas button { min-height: 44px; padding: 0 14px; border-radius: var(--pildora); border: 2px solid var(--cacao); background: var(--crema); color: var(--cacao); font: 700 15px var(--display); font-variant-numeric: tabular-nums; cursor: pointer; transition: background-color .2s, transform .2s; }
+  .tasas button:hover { background: var(--maiz); transform: rotate(-2deg); }
+  .tasas button[aria-pressed="true"] { background: var(--cacao); color: var(--crema); }
+  .ayuda { margin: 16px 0 0; font-size: 14px; color: var(--cacao-70); }
+  .renglon-c { display: flex; align-items: baseline; gap: 10px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .renglon-c i { flex: 1; border-bottom: 3px dotted var(--cacao-40); transform: translateY(-6px); }
+  .te-regresa { margin-top: 18px; font-weight: 700; color: var(--cacao-70); }
+  .total-c { justify-self: start; font-weight: 800; font-size: clamp(3.4rem, 2rem + 5vw, 6rem); line-height: .95; color: var(--rosa); font-variant-numeric: tabular-nums; font-variation-settings: "wdth" 88; letter-spacing: -.02em; padding-bottom: .18em;
+    background: linear-gradient(var(--rosa), var(--rosa)) left calc(100% - .02em) / 100% .05em no-repeat, linear-gradient(var(--rosa), var(--rosa)) left calc(100% - .12em) / 100% .05em no-repeat; }
+  .moraleja { margin: 14px 0 0; font-size: 15.5px; color: var(--cacao-70); max-width: 34ch; }
+  @media (max-width: 860px) { .calcu { grid-template-columns: 1fr; } .mueve { border-right: 0; border-bottom: 3px dashed var(--cacao-12); } }
+
+  /* Preguntas */
+  .dos { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: 48px; align-items: start; }
+  .lista-preguntas { margin-top: 8px; }
+  @media (max-width: 900px) { .dos { grid-template-columns: 1fr; gap: 28px; } }
+
+  /* Series */
+  .consulta { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 48px; align-items: start; margin-top: 48px; }
+  .duda { position: sticky; top: 110px; }
+  .duda p { margin: 18px 0 0; color: var(--cacao-70); max-width: 38ch; }
+  .temporada { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 10px; }
+  .mas-yt { display: inline-flex; margin-top: 10px; padding-block: 4px; font-weight: 700; font-size: 15px; text-decoration: none; border-bottom: 2px solid var(--maiz); }
+  @media (max-width: 900px) { .consulta { grid-template-columns: 1fr; } .duda { position: static; } }
+
+  /* Guía */
+  .guia-cab { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: end; }
+  .trae { list-style: none; margin: 22px 0 0; padding: 0; display: grid; gap: 10px; }
+  .trae li { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 12px; align-items: start; }
+  .trae .num { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--maiz); font-weight: 800; font-size: 15px; }
+  .trae b { display: block; font-weight: 800; line-height: 1.2; }
+  .trae span { color: var(--cacao-70); font-size: 16px; }
+  .guia { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: center; margin-top: 44px; }
+  .hoja-cab { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; border-bottom: 3px solid var(--cacao); padding-bottom: 10px; }
+  .hoja-cab .rot { font-size: 1.6rem; color: var(--rosa); }
+  .hoja-cab span:last-child { font-size: 13px; font-weight: 700; color: var(--cacao-70); }
+  .meses { list-style: none; margin: 14px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 18px; }
+  .meses li { position: relative; padding: 10px 0; border-bottom: 1.5px dashed var(--cacao-12); font-size: 14.5px; line-height: 1.25; }
+  .meses b { display: block; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--cacao-70); }
+  .meses .clave b { color: var(--rosa-hondo); }
+  .caja { display: inline-block; width: 13px; height: 13px; margin-right: 6px; border: 2px solid var(--cacao); border-radius: 3px; vertical-align: -1px; }
+  .si { display: block; margin-top: 3px; font-size: 12.5px; color: var(--cacao-70); font-style: italic; }
+  .circulo { position: absolute; left: -10px; top: -6px; width: calc(100% + 16px); height: calc(100% + 10px); overflow: visible; pointer-events: none; }
+  .meses .clave { padding-inline: 2px; }
+  .circulo path { fill: none; stroke: var(--rosa); stroke-width: 2.4; stroke-linecap: round; stroke-dasharray: 1; }
+  /* Los meses clave se encierran con plumón cuando la hoja entra a la pantalla */
+  :global(.js) .meses .circulo path { stroke-dashoffset: 1; transition: stroke-dashoffset .6s var(--e-trazo); }
+  :global(.js) .meses:global(.visto) .circulo path { stroke-dashoffset: 0; }
+  :global(.js) .meses:global(.visto) li:nth-child(4) .circulo path { transition-delay: .25s; }
+  :global(.js) .meses:global(.visto) li:nth-child(11) .circulo path { transition-delay: .5s; }
+  :global(.js) .meses:global(.visto) li:nth-child(12) .circulo path { transition-delay: .75s; }
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .hoja-anio { animation: enderezar linear both; animation-timeline: view(); animation-range: entry 0% cover 50%; }
+      @keyframes enderezar { from { rotate: -7deg; } to { rotate: -2.5deg; } }
+    }
+  }
+  .panel h3 .rot { color: var(--maiz); }
+  .panel > form > p, .listo p { margin: 12px 0 0; }
+  .listo { display: grid; gap: 10px; outline: none; }
+  .listo .rot { font-size: 2.6rem; color: var(--maiz); }
+  @media (max-width: 900px) { .guia-cab, .guia { grid-template-columns: 1fr; } .guia-cab { gap: 0; } }
+  @media (max-width: 460px) { .meses { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+  /* Quién */
+  .detras { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 40px; align-items: center; margin-top: 40px; }
+  blockquote { margin: 0; font-weight: 800; font-size: clamp(1.6rem, 1.1rem + 1.8vw, 2.5rem); line-height: 1.12; font-variation-settings: "wdth" 92, "opsz" 72; text-wrap: balance; }
+  blockquote::before { content: "“"; display: block; font-family: var(--rotulo); color: var(--rosa); font-size: 4rem; line-height: .7; }
+  .firma { margin: 18px 0 0; color: var(--cacao-70); }
+  .firma strong { color: var(--cacao); }
+  .lo-hacemos { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 18px 28px; align-items: center; margin-top: 30px; padding: 22px 24px; border-radius: 20px; background: var(--papel); box-shadow: inset 0 0 0 2px var(--cacao); }
+  .lo-hacemos p { margin: 0; font-weight: 600; }
+  .lo-hacemos .rot { color: var(--rosa-hondo); font-size: 1.35em; }
+  .caso-dificil { margin: 18px 0 0; color: var(--cacao-70); }
+  .caso-dificil a { color: var(--cacao); font-weight: 700; text-decoration-color: var(--rosa); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+  @media (max-width: 860px) { .detras { grid-template-columns: 1fr; } .marco { max-width: 380px; } .lo-hacemos { grid-template-columns: 1fr; } }
+
+  /* Colabora */
+  .colabora { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 36px; align-items: end; padding: clamp(28px, 5vw, 56px); border-radius: 34px; background: var(--papel); border: 3px solid var(--cacao); box-shadow: 10px 10px 0 var(--rosa); }
+  .colabora h2 { margin: 12px 0 0; font-size: clamp(2rem, 1.3rem + 2.4vw, 3.4rem); }
+  .colabora p { margin: 14px 0 0; color: var(--cacao-70); max-width: 46ch; }
+  .colabora ul { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 10px; }
+  @media (max-width: 860px) { .colabora { grid-template-columns: 1fr; box-shadow: 6px 6px 0 var(--rosa); } }
+</style>
