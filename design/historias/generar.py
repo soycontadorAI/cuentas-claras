@@ -69,10 +69,14 @@ DESTACADAS = [
              "items": [("Jueves de ContadorIA", "Clase en vivo y gratis cada jueves"),
                        ("Talleres en vivo", "Usa y construye con IA sin ser programador"),
                        ("Capacitación para despachos", "Con tu equipo y tu operación"),
-                       ("Ebook IA para Contadores", "")],
-             "texto": "Todo en soycontador.ai.", "enlace": True},
-            {"tipo": "enlace", "kicker": "Para tu despacho", "titulo": 'Tus CFDI del SAT, <span class="res">sin entrar al portal.</span>',
-             "texto": "Eso hace TodoConta, la app que usamos en el despacho.", "enlace": True},
+                       ("Ebook IA para Contadores", "La IA explicada con conceptos contables")],
+             "logo": ("logo-soycontador-ai.png", "soycontador.ai"), "enlace": True},
+            # El titular y el texto son los del hero de todoconta.com (2026-10-27), recortados. Los logos se
+            # rasterizaron de los oficiales: TodoConta de todoconta-apps/apps/landing/public/logo-lockup.svg
+            # ("Señal") y soycontador.ai del logotipo "Contrapartida" de su Nav.astro, con sus fuentes
+            {"tipo": "enlace", "clase": "con-logo", "kicker": "Para tu despacho", "titulo": 'Menos portal. <span class="res">Más despacho.</span>',
+             "texto": "Descarga los CFDIs, la constancia y la 32-D de todas tus empresas, desde el navegador o la app. Lo que tardabas horas, ahora corre solo.",
+             "logo": ("logo-todoconta.png", "TodoConta"), "enlace": True},
         ],
     },
     {
@@ -85,7 +89,8 @@ DESTACADAS = [
         ],
     },
     {
-        "id": "preguntas", "nombre": "Preguntas", "icono": "pregunta", "tono": "cacao",
+        # Sin foto de Israel en todo el destacado: #CuentasClaras desde la primera (Israel, 2026-10-27)
+        "id": "preguntas", "nombre": "Preguntas", "icono": "pregunta", "tono": "cacao", "handle": False,
         "historias": [
             {"tipo": "pregunta", "n": 1, "titulo": "¿Por qué pagamos impuestos?",
              "texto": "Porque así se paga lo que es de todos. Y quien gana más, paga más: por eso el ISR sube por escalones."},
@@ -99,7 +104,7 @@ DESTACADAS = [
              "texto": "Casi nunca es trampa. Pidió factura y la pagó con tarjeta. La diferencia es saber qué guardar."},
             {"tipo": "hoja", "kicker": "Gratis", "titulo": 'Las respuestas, <span class="res">en una guía.</span>',
              "texto": "Con el calendario y el checklist."},
-            {"tipo": "foto-enlace", "foto": "israel-senala-abajo.webp", "clase": "grande", "kicker": "Pídela",
+            {"tipo": "foto-enlace", "foto": "israel-senala-abajo-completo.webp", "clase": "grande", "rotulo": False, "kicker": "Pídela",
              "titulo": 'Tu nombre, tu correo <span class="rem">y listo.</span>',
              "texto": "Te llega en un minuto.", "enlace": True},
         ],
@@ -133,33 +138,39 @@ def cabeza(kicker: str, extra: str = "") -> str:
     return f'<span class="kick">{escape(kicker)}{extra}</span>'
 
 
-def zona_enlace() -> str:
+def zona_enlace(rotulo: bool = True) -> str:
     """"Toca aquí" y el hueco donde Israel pone el sticker de enlace de Instagram (la caja azul
-    es guía del tablero, no se exporta). Sin enlace dibujado: el de verdad es el sticker."""
+    es guía del tablero, no se exporta). Sin enlace dibujado: el de verdad es el sticker.
+    Sin rótulo cuando la foto ya señala el lugar (Israel, 2026-10-27: "está de más")."""
+    if not rotulo:
+        return ('<div class="enlace sin-rotulo">'
+                '<div class="hueco"><div class="guia caja-sticker">Aquí va el sticker de enlace</div></div></div>')
     return ('<div class="enlace"><span class="rot">Toca aquí</span>'
             '<div class="hueco"><div class="guia caja-sticker">Aquí va el sticker de enlace</div></div></div>')
 
 
 def historia(h: dict, d: dict, i: int, total: int) -> str:
     t = h["tipo"]
+    # El @ sólo en la primera de cada destacado, salvo los que no llevan foto de Israel
+    i_pie = i if d.get("handle", True) else 2
     num = f' <b>{i}/{total}</b>' if total > 1 else ''
     if t == "pregunta":
         return (f'<div class="h libreta preg">{cabeza("Preguntas", f" <b>{h["n"]}/5</b>")}'
                 f'<span class="numerote rot">{h["n"]}</span>'
                 f'<h3 class="disp tit">{escape(h["titulo"])}</h3><p class="txt">{escape(h["texto"])}</p>'
-                f'<p class="remite">La respuesta completa, en <span class="res">la guía gratis.</span></p>{pie(i)}</div>')
+                f'<p class="remite">La respuesta completa, en <span class="res">la guía gratis.</span></p>{pie(i_pie)}</div>')
     if t == "testimonio":
         return (f'<div class="h libreta testi">{cabeza(h["kicker"])}<span class="comillas rot">“</span>'
                 f'<p class="cita">{escape(h["cita"])}</p><p class="quien">{escape(h["quien"])}</p>'
-                f'<p class="caso">{escape(h["caso"])}</p>{pie(i)}</div>')
+                f'<p class="caso">{escape(h["caso"])}</p>{pie(i_pie)}</div>')
     cuerpo = ""
     if t in ("foto", "foto-enlace"):
         cuerpo = (f'<img class="recorte foto" src="../landing/img/{h["foto"]}" alt="">'
                   f'<div class="sobre">{cabeza(h["kicker"])}<h3 class="disp tit">{h["titulo"]}</h3>'
                   f'<p class="txt">{escape(h["texto"])}</p></div>')
         if t == "foto-enlace":
-            cuerpo += zona_enlace()
-        return f'<div class="h libreta con-foto {h.get("clase", "")}">{cuerpo}{pie(i)}</div>'
+            cuerpo += zona_enlace(h.get("rotulo", True))
+        return f'<div class="h libreta con-foto {h.get("clase", "")}">{cuerpo}{pie(i_pie)}</div>'
     cuerpo = f'{cabeza(h["kicker"])}<h3 class="disp tit">{h["titulo"]}</h3>'
     if t == "fichas":
         cuerpo += '<div class="fichas">' + "".join(
@@ -181,11 +192,15 @@ def historia(h: dict, d: dict, i: int, total: int) -> str:
             for k, p in enumerate(h["pasos"])) + '</ol>'
     if t in ("texto", "enlace", "lista-enlace") and h.get("texto"):
         cuerpo += f'<p class="txt">{escape(h["texto"])}</p>'
+    if h.get("logo"):
+        # El logo de otra marca entra como calcomanía: su logo tal cual, sobre papel de la libreta
+        archivo, nombre = h["logo"]
+        cuerpo += f'<div class="sello-logo"><img src="../landing/img/{archivo}" alt="{escape(nombre)}"></div>'
     if h.get("enlace"):
         cuerpo += zona_enlace()
     # El tipo va con prefijo: sin él, la clase del contenedor ("enlace", "fichas", "pasos") chocaba con
     # la del bloque interno del mismo nombre y la historia dejaba de medir 1920 (2026-10-26)
-    return f'<div class="h libreta tipo-{t} {h.get("clase", "")}">{cuerpo}{pie(i)}</div>'
+    return f'<div class="h libreta tipo-{t} {h.get("clase", "")}">{cuerpo}{pie(i_pie)}</div>'
 
 
 # Las portadas van todas de un solo tono: Instagram reacomoda los destacados cada vez que se
@@ -289,13 +304,16 @@ PLANTILLA = """<!doctype html>
   .pie-h.tag { align-self: center; gap: 14px; font-size: 38px; letter-spacing: .01em; }
   .pie-h.tag span { color: var(--cacao); }
   .con-foto .enlace { justify-items: start; }
-  /* 7/7 de Preguntas: más grande, y el borde izquierdo del recorte (la manga viene cortada en la
-     foto) se desvanece para que no se lea como brazo mocho */
-  .con-foto.grande .foto { height: 1580px; right: -330px; -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 14%); mask-image: linear-gradient(90deg, transparent 0, #000 14%); }
+  /* 7/7 de Preguntas: más grande. La foto es israel-senala-abajo-completo.webp: la original traía
+     la manga cortada a la izquierda y el brazo se reconstruyó (Gemini, con la foto original
+     encima y alineada: la cara y la mano son las de la foto; ver cuentas-claras/design/DESIGN.md) */
+  .con-foto.grande .foto { height: 1580px; right: -330px; }
   .con-foto.grande .pie-h.tag { position: absolute; top: 284px; left: 50%; transform: translateX(-50%); margin: 0; }
   /* "Toca aquí" justo debajo del texto, donde todavía no llega el hombro (abajo se encimaba en el antebrazo) */
   .con-foto.grande .enlace { margin-top: 56px; padding-bottom: 0; }
   .con-foto.grande .enlace .rot { font-size: 54px; }
+  /* Sin rótulo: el hueco del sticker va justo debajo de donde apunta el dedo */
+  .con-foto.grande .enlace.sin-rotulo { position: absolute; left: 470px; top: 1530px; margin: 0; padding: 0; }
   .compacta .tit { font-size: 96px; max-width: 12ch; margin-top: 40px; }
   .compacta .lista { margin-top: 36px; gap: 14px; }
   .compacta .lista li { font-size: 40px; }
@@ -340,6 +358,14 @@ PLANTILLA = """<!doctype html>
   .frame.redondo .portada .circulo { box-shadow: none; }
 
   .tipo-lista-enlace .lista { gap: 18px; margin-top: 44px; }
+
+  /* El logo de otra marca (soycontador.ai, TodoConta): calcomanía de papel con la sombra dura de la
+     libreta. El logo va tal cual, sin recolorear; el marco es lo único de Cuentas Claras. */
+  .sello-logo { margin-top: 40px; margin-bottom: 70px; display: inline-flex; align-items: center; padding: 26px 36px; background: #FFFBF3;
+    border: 5px solid var(--cacao); border-radius: 22px; box-shadow: 10px 10px 0 var(--cacao); transform: rotate(-2deg); }
+  .sello-logo img { display: block; height: 64px; width: auto; }
+  .con-logo .tit { font-size: 100px; max-width: 14ch; }
+  .con-logo .txt { font-size: 42px; max-width: 22ch; }
   .tipo-lista-enlace .lista li { font-size: 42px; }
   .tipo-lista-enlace .bola { width: 76px; height: 76px; font-size: 38px; }
 

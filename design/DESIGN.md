@@ -77,6 +77,15 @@ Las tres van sobre la libreta. Las distingue lo que llevan encima, no el fondo.
 (`.recorte` en `componentes.css`). El círculo rosa de la v1 se descartó (Israel, 2026-10-24), y el
 rosa no se usa para separar la foto del fondo.
 
+**Un recorte nunca deja un brazo mocho.** `israel-senala-abajo.webp` traía la manga cortada en
+vertical; el 2026-10-27 se reconstruyó el brazo (Gemini con la foto original encima y alineada, así
+que la cara y la mano son las de la foto) y quedó `assets/israel-senala-abajo-completo.webp`, que
+es la que se usa. El proceso está en `hyperframes-30-days` (`edicion/destacados-cuentas-claras/brazo/`).
+Desvanecer la orilla se probó y se lee raro (Israel).
+
+**Logos de otras marcas** (soycontador.ai, TodoConta): entran como calcomanía de papel, el logo tal
+cual y sin recolorear. Salen de sus fuentes oficiales (`landing/img/logo-*.png`, ver `generar.py`).
+
 ## Reglas de cada miniatura
 
 1. Título de **cuatro palabras o menos**, lo más grande que quepa.
