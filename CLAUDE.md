@@ -112,6 +112,12 @@ del guion o de Studio, no de memoria.
 
 ## Pendiente (al 2026-10-26)
 
+- **Destacados de Instagram (2026-10-27):** publicados en video los de Quién soy, Servicios, Preguntas y
+  Agenda (hyperframes-30-days, `videos/social/2026-10-27-destacados-cuentas-claras/`; enlaces en
+  `docs/instagram-destacados-enlaces.md`). Falta **Testimonios**: Israel los va juntando; se llena la
+  plantilla de `generar.py` con un cliente real y su permiso, y se anima igual que los demás.
+- Medición GA4 + Meta Pixel en la rama `medicion-ga4-meta` (apagada): faltan los dos IDs y decidir qué pixel.
+
 - Visto bueno de Israel a `docs/estrategia.md` y recorte de `docs/descripciones.md`.
 - Visto bueno al acompañamiento ($2,500) en `sicastro-v2/docs/paquetes.md` (rama
   `feat/paquetes-honorarios`, sin commits). La iguala RESICO en $3,000 ya está aprobada.
