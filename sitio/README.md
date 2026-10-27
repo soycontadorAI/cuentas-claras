@@ -59,9 +59,9 @@ Lo que lo sostiene, no romperlo:
 3. **Variables** (ver `.env.example`): Sendy (API key, `SENDY_GUIA_LIST_ID`,
    `SENDY_DIAGNOSTICO_LIST_ID`) y SES (llave del usuario acotado del despacho, no una nueva: ver el
    inventario de IAM antes).
-4. **Sendy**: el brand "Cuentas Claras" ya existe (id 6, creado el 2026-10-26). Falta crear ahí
-   la lista "La hoja del año" (doble opt-in, campos `Whatsapp` y `Origen`, autoresponder con el
-   PDF) y, en el brand del despacho, la lista de prospectos "diagnostico" (campos `Whatsapp`,
+4. **Sendy**: brand "Cuentas Claras" (id 6) y su lista "La hoja del año" (id 46, doble opt-in,
+   conectada y probada el 2026-10-26; ver `../docs/sendy-guia.md`). Falta el autoresponder con el
+   PDF y, en el brand del despacho, la lista de prospectos "diagnostico" (campos `Whatsapp`,
    `Regimen`, `Interes`, `RangoInterno`, `Origen`).
 5. **Calendario con cobro**: seguir `../docs/agendar-calendario.md` y poner el enlace nuevo en
    `RESERVA_URL`.

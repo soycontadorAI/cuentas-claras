@@ -1,7 +1,10 @@
 # Sendy: la lista de la guía
 
-**Estado (2026-10-26):** el brand "Cuentas Claras" existe (app 6). La lista **no**: escribir en la
-base del VPS lo bloqueó el permiso automático, así que se crea desde el panel (2 minutos).
+**Estado (2026-10-26):** hecho. Lista **id 46** en el brand "Cuentas Claras" (app 6), creada por
+SQL con permiso de Israel copiando los ajustes de la lista 40 (respaldo de `lists` en
+`/root/respaldos/` del VPS). ID cifrado `tC297632eLipw60cFSfC6tDQ`. Las tres variables ya están
+en Vercel (producción) y el formulario se probó con un alta real. Falta el autoresponder con el
+PDF (punto 2). Lo de abajo queda como referencia de cómo está configurada.
 
 ## 1. Crear la lista (sendy.todoconta.com → brand Cuentas Claras → View all lists → Add)
 
