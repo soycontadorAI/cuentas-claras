@@ -61,10 +61,11 @@ DESTACADAS = [
             {"tipo": "texto", "kicker": "Servicios",
              "titulo": 'Aprende con nosotros, o <span class="rem">déjalo en nuestras manos.</span>',
              "texto": "Con S & I Castro Consultores, el despacho familiar. 100% en línea en todo México."},
-            {"tipo": "lista-enlace", "kicker": "Lo que hacemos", "titulo": "Lo del SAT, de principio a fin.",
+            {"tipo": "lista-enlace", "clase": "compacta logo-ancho", "kicker": "Lo que hacemos", "titulo": "Lo del SAT, de principio a fin.",
              "items": [("Consulta 1:1", ""), ("Tu declaración anual", ""), ("Tu contabilidad cada mes", ""),
                        ("Trámites: RFC, e.firma, 32-D", ""), ("Ponerte al corriente", "")],
-             "enlace": True},
+             # Logo del despacho capturado del encabezado de sicastro-v2 (sistema de diseño nuevo)
+             "logo": ("logo-sicastro.png", "S & I Castro Consultores"), "enlace": True},
             {"tipo": "lista-enlace", "clase": "compacta", "kicker": "¿Eres contador?", "titulo": 'Enseño IA <span class="rem">a contadores.</span>',
              "items": [("Jueves de ContadorIA", "Clase en vivo y gratis cada jueves"),
                        ("Talleres en vivo", "Usa y construye con IA sin ser programador"),
@@ -364,6 +365,7 @@ PLANTILLA = """<!doctype html>
   .sello-logo { margin-top: 40px; margin-bottom: 70px; display: inline-flex; align-items: center; padding: 26px 36px; background: #FFFBF3;
     border: 5px solid var(--cacao); border-radius: 22px; box-shadow: 10px 10px 0 var(--cacao); transform: rotate(-2deg); }
   .sello-logo img { display: block; height: 64px; width: auto; }
+  .logo-ancho .sello-logo img { height: 50px; }   /* el del despacho es 10:1 */
   .con-logo .tit { font-size: 100px; max-width: 14ch; }
   .con-logo .txt { font-size: 42px; max-width: 22ch; }
   .tipo-lista-enlace .lista li { font-size: 42px; }

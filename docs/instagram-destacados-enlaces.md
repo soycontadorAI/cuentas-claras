@@ -38,14 +38,12 @@ YouTube ignora los utm: la visita se ve en YouTube Studio → Alcance → Fuente
 
 | Historia | Sticker | Enlace |
 |---|---|---|
-| 2/4 · Lo del SAT, de principio a fin | `Ver precios` | `https://sicastro.com/?utm_source=instagram&utm_medium=social&utm_campaign=cuentas-claras-destacados&utm_content=servicios-02` |
+| 2/4 · Lo del SAT, de principio a fin | `Ver precios` | `https://sicastro.com/honorarios?utm_source=instagram&utm_medium=social&utm_campaign=cuentas-claras-destacados&utm_content=servicios-02` |
 | 3/4 · Enseño IA a contadores | `soycontador.ai` | `https://soycontador.ai/?utm_source=instagram&utm_medium=social&utm_campaign=cuentas-claras-destacados&utm_content=servicios-03` |
 | 4/4 · Menos portal. Más despacho. | `Probar TodoConta` | `https://todoconta.com/?utm_source=instagram&utm_medium=social&utm_campaign=cuentas-claras-destacados&utm_content=servicios-04` |
 
-⚠️ **Servicios 2/4 apunta a la portada de sicastro.com mientras `sicastro.com/honorarios` no esté
-publicada** (al 2026-10-27 da 404: es de `sicastro-v2`, sin publicar). Cuando se publique, cambiar
-el sticker a:
-`https://sicastro.com/honorarios?utm_source=instagram&utm_medium=social&utm_campaign=cuentas-claras-destacados&utm_content=servicios-02`
+⚠️ **`sicastro.com/honorarios` da 404 hasta que se mergeen los PRs #1 y #2 de `soycontadorAI/sicastro`.**
+El sticker ya va a la página definitiva (Israel, 2026-10-27): los montos se ajustan allá, no aquí.
 
 ### Preguntas
 
