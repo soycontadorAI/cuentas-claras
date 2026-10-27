@@ -30,10 +30,19 @@ Asunto: `Confirma tu correo y te mando la guía`
 <p>Israel Castro<br>Contador público · Cuentas Claras</p>
 ```
 
-## 2. El autoresponder (cuando esté el PDF)
+## 2. El correo de bienvenida (autoresponder)
 
-Autoresponders → la lista → "Drip campaign", correo 1 **inmediato** con la guía adjunta. Hasta que
-exista, quien confirme no recibe nada: no promover el formulario antes.
+El PDF vive en **https://cc.sicastro.com/descargas/la-guia.pdf** (noindex, fuera de robots). Se
+liga, no se adjunta: así se actualiza sin tocar el correo. `design/guia/generar.py` lo regenera y
+lo copia a `sitio/public/descargas/`; con el push queda publicado.
+
+**Estado (2026-10-27): por crear.** Escribirlo por SQL lo bloqueó el permiso automático. Dos caminos:
+
+- **Panel:** sendy.todoconta.com → brand Cuentas Claras → Autoresponders → lista "Cuentas Claras -
+  La guía" → Drip campaign "Bienvenida" → correo 1 **inmediato**, desde "Israel Castro · Cuentas
+  Claras" <israel@sicastro.com>, asunto `Aquí está tu guía`, y el HTML de `docs/sendy-bienvenida.sql`.
+- **SQL:** `docs/sendy-bienvenida.sql` crea el autoresponder y su correo ya activado (respaldar
+  antes `ares` y `ares_emails`).
 
 ## 3. Conectar el sitio (Vercel, producción)
 
