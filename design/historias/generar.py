@@ -292,8 +292,10 @@ PLANTILLA = """<!doctype html>
   /* 7/7 de Preguntas: más grande, y el borde izquierdo del recorte (la manga viene cortada en la
      foto) se desvanece para que no se lea como brazo mocho */
   .con-foto.grande .foto { height: 1580px; right: -330px; -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 14%); mask-image: linear-gradient(90deg, transparent 0, #000 14%); }
-  .con-foto.grande .pie-h.tag { position: absolute; top: 290px; left: 50%; transform: translateX(-36%); margin: 0; }
-  .con-foto.grande .enlace { margin-top: auto; padding-bottom: 0; }
+  .con-foto.grande .pie-h.tag { position: absolute; top: 284px; left: 50%; transform: translateX(-50%); margin: 0; }
+  /* "Toca aquí" justo debajo del texto, donde todavía no llega el hombro (abajo se encimaba en el antebrazo) */
+  .con-foto.grande .enlace { margin-top: 56px; padding-bottom: 0; }
+  .con-foto.grande .enlace .rot { font-size: 54px; }
   .compacta .tit { font-size: 96px; max-width: 12ch; margin-top: 40px; }
   .compacta .lista { margin-top: 36px; gap: 14px; }
   .compacta .lista li { font-size: 40px; }

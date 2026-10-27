@@ -45,8 +45,10 @@
   /* 7/7 de Preguntas: más grande, y el borde izquierdo del recorte (la manga viene cortada en la
      foto) se desvanece para que no se lea como brazo mocho */
   .con-foto.grande .foto { height: 1580px; right: -330px; -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 14%); mask-image: linear-gradient(90deg, transparent 0, #000 14%); }
-  .con-foto.grande .pie-h.tag { position: absolute; top: 290px; left: 50%; transform: translateX(-36%); margin: 0; }
-  .con-foto.grande .enlace { margin-top: auto; padding-bottom: 0; }
+  .con-foto.grande .pie-h.tag { position: absolute; top: 284px; left: 50%; transform: translateX(-50%); margin: 0; }
+  /* "Toca aquí" justo debajo del texto, donde todavía no llega el hombro (abajo se encimaba en el antebrazo) */
+  .con-foto.grande .enlace { margin-top: 56px; padding-bottom: 0; }
+  .con-foto.grande .enlace .rot { font-size: 54px; }
   .compacta .tit { font-size: 96px; max-width: 12ch; margin-top: 40px; }
   .compacta .lista { margin-top: 36px; gap: 14px; }
   .compacta .lista li { font-size: 40px; }
@@ -130,7 +132,7 @@
 <template id="t-perfil-rosa-chica"><div class="fperfil libreta"><img class="recorte-p" style="--sombra: var(--rosa)" src="../landing/img/israel-cruzado.webp" alt=""></div></template>
 <template id="t-quien-portada-maiz"><div class="portada libreta"><div class="circulo "><svg viewBox="0 0 200 200" class="ico"><use href="#simbolo"/></svg></div></div></template>
 <template id="t-quien-portada-maiz-perfil"><div class="portada libreta"><div class="circulo "><svg viewBox="0 0 200 200" class="ico"><use href="#simbolo"/></svg></div></div></template>
-<template id="t-quien-01"><div class="h libreta con-foto "><img class="recorte foto" src="../landing/img/israel-cruzado.webp" alt=""><div class="sobre"><span class="kick">Hola</span><h3 class="disp tit">Soy <span class="rem">Israel Castro.</span></h3><p class="txt">Contador público. Te explico el SAT y tu dinero sin rodeos, como en una consulta.</p></div><div class="pie-h"><svg viewBox="0 0 200 200"><use href="#simbolo"/></svg><span>@soyisraelcastro</span></div></div></template>
+<template id="t-quien-01"><div class="h libreta con-foto "><img class="recorte foto" src="../landing/img/israel-cruzado.webp" alt=""><div class="sobre"><span class="kick">Hola</span><h3 class="disp tit">Soy <span class="rem">Israel Castro.</span></h3><p class="txt">Contador público. Creo contenido explicando temas del SAT, contabilidad y lo que afecte tu bolsillo.</p></div><div class="pie-h"><svg viewBox="0 0 200 200"><use href="#simbolo"/></svg><span>@soyisraelcastro</span></div></div></template>
 <template id="t-quien-02"><div class="h libreta tipo-fichas "><span class="kick">Qué hay aquí</span><h3 class="disp tit">Lo que te preguntas, resuelto.</h3><div class="fichas"><div class="ficha" style="--c: var(--maiz)"><span class="pestana">SAT</span>RFC, e.firma, constancia, buzón y cartas</div><div class="ficha" style="--c: var(--rosa)"><span class="pestana osc">Tu declaración</span>Obligación, deducciones y saldos a favor</div><div class="ficha" style="--c: var(--cacao)"><span class="pestana osc">Tus números</span>Ingresos extra, finanzas sanas y estados financieros</div></div><div class="pie-h tag"><svg viewBox="0 0 200 200"><use href="#simbolo"/></svg><span>#CuentasClaras</span></div></div></template>
 <template id="t-quien-03"><div class="h libreta tipo-enlace "><span class="kick">Cada semana</span><h3 class="disp tit">Un video nuevo en <span class="rem">Cuentas Claras.</span></h3><p class="txt">Una duda, una serie. Búscanos en YouTube.</p><div class="enlace"><span class="rot">Toca aquí</span><div class="hueco"><div class="guia caja-sticker">Aquí va el sticker de enlace</div></div></div><div class="pie-h tag"><svg viewBox="0 0 200 200"><use href="#simbolo"/></svg><span>#CuentasClaras</span></div></div></template>
 <template id="t-servicios-portada-maiz"><div class="portada libreta"><div class="circulo "><svg viewBox="0 0 200 200" class="ico"><rect x="30" y="66" width="140" height="98" rx="16" fill="none" stroke="currentColor" stroke-width="10"/><path d="M76 66V50a10 10 0 0 1 10-10h28a10 10 0 0 1 10 10v16M30 104h140" stroke="currentColor" stroke-width="10" fill="none"/><rect x="86" y="94" width="28" height="22" rx="5" fill="var(--acento)"/></svg></div></div></template>
