@@ -1,7 +1,7 @@
 # Sitio de Cuentas Claras (cc.sicastro.com)
 
 Astro 7 estático con dos funciones en Vercel. Es el sitio de presentación del canal: capta
-correos a cambio de "La hoja del año" y precalifica la consulta 1:1. **No vende**: los servicios
+correos a cambio de "La guía" y precalifica la consulta 1:1. **No vende**: los servicios
 y precios viven en sicastro.com (`/honorarios`), y aquí solo se enlazan con utm.
 
 ```sh
@@ -59,7 +59,7 @@ Lo que lo sostiene, no romperlo:
 3. **Variables** (ver `.env.example`): Sendy (API key, `SENDY_GUIA_LIST_ID`,
    `SENDY_DIAGNOSTICO_LIST_ID`) y SES (llave del usuario acotado del despacho, no una nueva: ver el
    inventario de IAM antes).
-4. **Sendy**: brand "Cuentas Claras" (id 6) y su lista "La hoja del año" (id 46, doble opt-in,
+4. **Sendy**: brand "Cuentas Claras" (id 6) y su lista "La guía" (id 46, doble opt-in,
    conectada y probada el 2026-10-26; ver `../docs/sendy-guia.md`). Falta el autoresponder con el
    PDF y, en el brand del despacho, la lista de prospectos "diagnostico" (campos `Whatsapp`,
    `Regimen`, `Interes`, `RangoInterno`, `Origen`).

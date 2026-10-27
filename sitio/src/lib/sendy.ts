@@ -3,7 +3,7 @@
  * Port de sicastro-v2/src/lib/sendy.ts (que a su vez es el de soycontador-ai).
  *
  * Una lista por promesa, sin caer de una a otra: el autoresponder se cuelga de la lista.
- *   guia        → "La hoja del año" (DOBLE opt-in; el autoresponder manda el PDF)
+ *   guia        → "La guía" (DOBLE opt-in; el autoresponder manda el PDF)
  *   diagnostico → prospectos del despacho, la misma lista que usa sicastro.com (opt-in SENCILLO,
  *                 sin autoresponder): ahí cae quien pasa la precalificación de /agendar
  */

@@ -25,7 +25,7 @@ con *Root Directory* `sitio`.
 | `docs/agendar-calendario.md` | Cómo configurar la agenda de Google Calendar con cobro por Stripe para la consulta 1:1 |
 | `design/historias/` | Instagram de @soyisraelcastro: `generar.py` arma `tableros/historias.html` (foto de perfil con sombra maíz o rosa, 5 portadas de destacados y sus historias) y `exportar.sh` saca los PNG a `salidas/historias/` |
 | `docs/instagram-destacadas-guiones.md` | Guiones en video de los destacados (Quién soy a cámara; Servicios, Preguntas y Agenda como consulta). Teleprompter en `social-studio/decks/2026-10-26-destacados-cuentas-claras.json`. Las láminas quedan de respaldo |
-| `docs/guia-hoja-del-anio.md` | Contenido de la guía gratis "La hoja del año": cinco preguntas, calendario de 12 meses, checklist "si tienes X, haz Y" y el cierre a la consulta (sin montos). Borrador |
+| `docs/guia-hoja-del-anio.md` | Contenido de la guía gratis "La guía" (en IG: "Guía gratis para no fallar con el SAT"): cinco preguntas, calendario de 12 meses, checklist "si tienes X, haz Y" y el cierre a la consulta (sin montos). Aprobado el 2026-10-27, falta el PDF |
 
 ## Lo que no se re-discute
 
@@ -97,7 +97,7 @@ con *Root Directory* `sitio`.
   y saldos a favor; Tus números = ingresos extra, finanzas sanas y estados financieros (no
   aguinaldo: no todos lo reciben).
 - **La landing capta, no vende:** nombre y correo obligatorios, WhatsApp opcional, a cambio de "La
-  hoja del año". El botón al despacho dice "Ir al despacho" y toda liga saliente lleva utm:
+  guía" (se llamó "La hoja del año" hasta el 2026-10-27). El botón al despacho dice "Ir al despacho" y toda liga saliente lleva utm:
   `utm_source=cuentas-claras&utm_medium=landing|guia&utm_campaign=cuentas-claras&utm_content=<lugar>`.
 - "Hazlo tú, o déjalo en nuestras manos" y "Un canal de S & I Castro Consultores" van en las descripciones,
   **no** en el banner ni en las miniaturas.

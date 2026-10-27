@@ -1,7 +1,7 @@
 ---
 /**
  * La portada de Cuentas Claras (boceto A, "libreta viva"). Presenta el canal y capta correos a
- * cambio de la guía gratis ("La hoja del año"). No vende: los servicios mandan a sicastro.com con utm.
+ * cambio de la guía gratis ("La guía"). No vende: los servicios mandan a sicastro.com con utm.
  */
 import { Image, Picture } from 'astro:assets';
 
@@ -172,7 +172,7 @@ const TIRA = ['¿Qué es la constancia de situación fiscal?', '¿Me toca saldo 
         <div class="guia-cab">
           <div>
             <h2 class="disp">Qué hacer con el SAT, <span class="resaltado" data-resalta>mes por mes.</span></h2>
-            <p class="intro">Una guía gratis para pegar en el refri: qué toca cada mes y qué revisar para que no se te pase nada.</p>
+            <p class="intro">Una guía gratis para no fallar con el SAT, para pegar en el refri: qué toca cada mes y qué revisar para que no se te pase nada.</p>
           </div>
           <ol class="trae" aria-label="Lo que trae la guía">
             {TRAE.map((t, i) => <li><span class="num">{i + 1}</span><div><b>{t.titulo}</b><span>{t.texto}</span></div></li>)}
@@ -180,7 +180,7 @@ const TIRA = ['¿Qué es la constancia de situación fiscal?', '¿Me toca saldo 
         </div>
         <div class="guia">
           <div class="hoja hoja-anio" aria-label="Vista previa de la guía: el calendario de 12 meses" role="img">
-            <div class="hoja-cab"><span class="rot">La hoja del año</span><span>Cuentas Claras</span></div>
+            <div class="hoja-cab"><span class="rot">La guía</span><span>Cuentas Claras</span></div>
             <ol class="meses" data-entra style="--entra-giro:0deg">
               {MESES.map((m, i) => (
                 <li class:list={{ clave: m.clave }} style={`--i:${i}`}>

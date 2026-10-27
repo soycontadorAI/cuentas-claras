@@ -1,4 +1,4 @@
-/** Formulario de "La hoja del año": valida, manda a /api/guia y celebra con billetes. */
+/** Formulario de "La guía": valida, manda a /api/guia y celebra con billetes. */
 
 import { lluviaDeBilletes } from './movimiento';
 

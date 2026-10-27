@@ -1,5 +1,5 @@
 /**
- * "La hoja del año": lo que el sitio muestra de la guía. El texto completo de la guía (con sus
+ * "La guía": lo que el sitio muestra de la guía. El texto completo de la guía (con sus
  * fundamentos) vive en cuentas-claras/docs/guia-hoja-del-anio.md; si cambia allá, se cambia aquí.
  *
  * Sin año en nada: la guía sirve cualquier ejercicio. Los límites se dicen "según la UMA vigente".

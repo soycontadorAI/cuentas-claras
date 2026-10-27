@@ -61,7 +61,7 @@ de los dos canales grandes de finanzas personales con los que tiene contacto. El
 repartirlo (deudas caras primero, fondo de emergencia, no gastarlo en lo que no dura: un celular
 nuevo contra pagar la tarjeta); Cuentas Claras pone lo fiscal (cuánto llega neto, la parte exenta
 según la UMA vigente, qué conviene pagar antes del 31 para deducir). Va en noviembre, antes de la
-serie, y empata con la línea de noviembre de "La hoja del año". También sirve de pieza corta para
+serie, y empata con la línea de noviembre de "La guía". También sirve de pieza corta para
 Shorts y para el aviso por WhatsApp a quien dejó su número en la guía.
 
 ## 3. La reforma fiscal 2027, para ti

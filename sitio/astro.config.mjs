@@ -27,7 +27,7 @@ export default defineConfig({
   env: {
     schema: {
       // Sendy (sendy.todoconta.com). Una lista por promesa, porque el autoresponder se cuelga de la lista:
-      //   guia        → "La hoja del año" (DOBLE opt-in; el autoresponder manda el PDF)
+      //   guia        → "La guía" (DOBLE opt-in; el autoresponder manda el PDF)
       //   diagnostico → la lista de prospectos del despacho, la misma que usa sicastro.com
       //                 (opt-in SENCILLO): ahí cae quien pasa la precalificación de /agendar
       SENDY_ACTION_URL: envField.string({ context: 'server', access: 'public', optional: true }),

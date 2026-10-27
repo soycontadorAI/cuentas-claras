@@ -10,7 +10,7 @@ PDF (punto 2). Lo de abajo queda como referencia de cómo está configurada.
 
 | Campo | Valor |
 |---|---|
-| List name | `Cuentas Claras - La hoja del año` |
+| List name | `Cuentas Claras - La guía` |
 | Opt-in | **Double opt-in** |
 | Subscribe success page | `https://cc.sicastro.com/listo` |
 | Subscription confirmed page | `https://cc.sicastro.com/listo` |

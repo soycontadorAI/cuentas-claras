@@ -2,7 +2,7 @@
  * POST /api/guia
  *
  * Captura de la portada: alta en la lista "guia" de Sendy (DOBLE opt-in). Sendy manda la
- * confirmación y el autoresponder entrega "La hoja del año".
+ * confirmación y el autoresponder entrega "La guía".
  *
  * Body:      { nombre, correo, whatsapp?, hp? }
  * Respuesta: { ok, status: 'confirm' | 'already' | 'invalido' | 'error', error?, simulado? }

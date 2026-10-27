@@ -1,6 +1,6 @@
-# La hoja del año (guía gratis de Cuentas Claras)
+# La guía (guía gratis de Cuentas Claras)
 
-**Fecha:** 2026-10-26 · **Estado:** borrador de contenido; calendario y checklist ajustados con Israel (enero, noviembre y diciembre). El diseño
+**Fecha:** 2026-10-26 · **Estado:** contenido aprobado por Israel el 2026-10-27 (antes se llamaba "La hoja del año"); falta el PDF. El diseño
 del PDF sale del design system (boceto A, libreta viva) cuando esté.
 
 Lo que recibe quien deja su nombre y correo (WhatsApp opcional) en la landing. Cuatro partes:
@@ -8,7 +8,7 @@ Lo que recibe quien deja su nombre y correo (WhatsApp opcional) en la landing. C
 1. Introducción: los impuestos sin rodeos, en cinco preguntas.
 2. El calendario de 12 meses.
 3. El checklist del mes: "si tienes X, haz Y".
-4. Cierre: si algo de esto te toca, agenda una consulta (sin montos).
+4. Cierre: si te quedó alguna duda, agenda una consulta (sin montos).
 
 **Reglas del texto:** sin año (vale para cualquier ejercicio; los límites se dicen "según la UMA
 vigente"), tuteo, primera persona de Israel, párrafos cortos, sin raya larga, comillas “ ” en el
@@ -20,23 +20,23 @@ contra la ley vigente de ese año (marcados con ✔ los que ya están en la guí
 
 ## Portada
 
-**La hoja del año**
-Tu año con el SAT, en una sola hoja.
+**La guía**
+Para no fallar con el SAT, mes por mes.
 Por CP Israel Castro · Cuentas Claras
 
 ---
 
 ## Antes de empezar
 
-Hola, soy Israel. Soy contador público y en el despacho familiar (S & I Castro Consultores)
+Hola, soy Israel. Soy contador público y en el despacho con mi papá (S & I Castro Consultores)
 escucho las mismas preguntas todos los años, de gente con sueldo, con negocio o que cobra por su
 cuenta.
 
-Esta hoja junta lo que más me preguntan: por qué pagamos, por qué nos retienen, qué pasa si no
+Esta guía junta lo que más me preguntan: por qué pagamos, por qué nos retienen, qué pasa si no
 cumplimos y qué toca hacer cada mes para que el SAT no te tome por sorpresa.
 
-No necesitas saber de impuestos para leerla. Si al terminar algo te queda dando vueltas, al final
-te digo cómo resolverlo conmigo.
+No necesitas saber de impuestos para leerla. Si al terminar te quedas con ganas de más
+información, al final te digo dónde seguir.
 
 ---
 
@@ -51,6 +51,14 @@ manera proporcional y equitativa que dispongan las leyes".
 Proporcional quiere decir que quien gana más, paga más. Por eso el ISR de las personas físicas
 sube por escalones: cada peso que ganas arriba de cierto nivel paga una tasa más alta que el
 anterior.
+
+Ya sé lo que muchos piensan: "¿para qué pago, si se lo roban?". Es la queja más común, y se
+entiende. Pero son dos cosas distintas. Lo que las autoridades hagan con ese dinero no se arregla
+dejando de pagar: se cobra en las urnas. Tu voto es donde se refleja esa inconformidad, y conviene
+usarlo bien cuando toca.
+
+Fuera de eso, la obligación es la misma para todos. Lo dice la Constitución: hay que contribuir. Y
+si no lo haces, hay consecuencias (te las cuento en la pregunta 4).
 
 *Fundamento: artículo 31, fracción IV, de la Constitución; tarifa del artículo 152 de la LISR.*
 
@@ -131,7 +139,7 @@ metió dinero a su Afore. Juan pagó todo en efectivo y no guardó nada.
 | Deducciones personales | $0 | $48,000 |
 | Su declaración | Sale en cero | **Le devuelven $10,253** |
 
-*Ejemplo con la tarifa anual vigente al escribir esta hoja; la de tu año puede cambiar.*
+*Ejemplo con la tarifa anual vigente al escribir esta guía; la de tu año puede cambiar.*
 
 Ojo con un detalle: Laura dedujo $48,000 y le regresaron $10,253, no $48,000. **Cada peso que
 deduces te regresa lo que pagas de impuesto sobre ese peso**, que en su caso es el 21.36%. Por
@@ -253,7 +261,7 @@ Para palomear. Cada línea empieza con "si": si no te aplica, la saltas.
 
 ---
 
-## Parte 4. ¿Algo de esto te tocó?
+## Parte 4. ¿Te quedó alguna duda?
 
 Si alguna de las cinco preguntas o una casilla del checklist te dejó con la duda ("¿a mí me
 aplica?", "¿y si no lo hice?"), lo mejor es revisarlo con tus números, no con los de Juan y Laura.
@@ -277,10 +285,10 @@ contabilidad), en sicastro.com están los servicios del despacho.
 
 ## Cierre
 
-Esta hoja te sirve todos los años. Cada temporada tiene su serie en el canal:
+Esta guía te sirve todos los años. Cada temporada tiene su serie en el canal:
 youtube.com/@cuentasclaras_mx
 
-Los videos y esta hoja son orientación general: cada caso tiene sus detalles.
+Los videos y esta guía son orientación general: cada caso tiene sus detalles.
 
 CP Israel Castro · S & I Castro Consultores
 
@@ -289,11 +297,12 @@ CP Israel Castro · S & I Castro Consultores
 ## Notas internas (no van en el PDF)
 
 - **Ligas con utm** (la convención del canal es `utm_campaign=cuentas-claras`):
-  - Agendar: `https://cc.sicastro.com/agendar?utm_source=cuentas-claras&utm_medium=guia&utm_campaign=cuentas-claras&utm_content=hoja-del-anio`
-  - Despacho: `https://sicastro.com/?utm_source=cuentas-claras&utm_medium=guia&utm_campaign=cuentas-claras&utm_content=hoja-del-anio`
-- **`cc.sicastro.com/agendar` ya está construida** en `sitio/` (sin publicar). El cobro va en la
-  página de citas de Google Calendar con Stripe: configuración en `docs/agendar-calendario.md`.
-  El PDF no sale antes de que el sitio esté publicado.
+  - Agendar: `https://cc.sicastro.com/agendar?utm_source=cuentas-claras&utm_medium=guia&utm_campaign=cuentas-claras&utm_content=guia-pdf`
+  - Despacho: `https://sicastro.com/?utm_source=cuentas-claras&utm_medium=guia&utm_campaign=cuentas-claras&utm_content=guia-pdf`
+- **`cc.sicastro.com/agendar` ya está publicada** (2026-10-26). El cobro va en la página de citas
+  de Google Calendar con Stripe: configuración en `docs/agendar-calendario.md`. Mientras no se
+  configure, el enlace de reserva es el anterior, sin cobro.
+- **Nombre:** "La guía". En Instagram se presenta como "Guía gratis para no fallar con el SAT".
 - El WhatsApp 55 4475 3602 es el del despacho en `sicastro-v2/src/lib/site.ts`, marcado "por
   confirmar cuál atiende prospectos".
 - El ejemplo de Juan y Laura sale de la guía de abril de 2026
