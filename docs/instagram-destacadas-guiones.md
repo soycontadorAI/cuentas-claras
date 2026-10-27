@@ -73,7 +73,7 @@ soy, qué hay aquí y dónde está lo largo.
 >
 > Y casi siempre empieza igual: alguien que no entiende qué le pide el SAT y no sabe a quién preguntarle sin que lo regañen.
 >
-> Para eso es esta cuenta. Te explico el SAT y tu dinero sin rodeos, como si estuviéramos en una consulta.
+> Para eso es esta cuenta. Creo contenido para explicarte, como en una consulta, temas del SAT, de contabilidad y de todo lo que afecta tu bolsillo.
 
 **Inserto:** en "millones de pesos", la palabra sola en rosa, grande, un segundo. Sin número.
 
