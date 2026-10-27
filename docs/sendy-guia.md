@@ -36,7 +36,7 @@ El PDF vive en **https://cc.sicastro.com/descargas/la-guia.pdf** (noindex, fuera
 liga, no se adjunta: así se actualiza sin tocar el correo. `design/guia/generar.py` lo regenera y
 lo copia a `sitio/public/descargas/`; con el push queda publicado.
 
-**Estado (2026-10-27): por crear.** Escribirlo por SQL lo bloqueó el permiso automático. Dos caminos:
+**Estado (2026-10-27): activo.** Autoresponder id 18, correo id 55, creado con `docs/sendy-bienvenida.sql` (lo corrió Israel; respaldo en `/root/respaldos/`). Probado de punta a punta con un alta real. Para recrearlo:
 
 - **Panel:** sendy.todoconta.com → brand Cuentas Claras → Autoresponders → lista "Cuentas Claras -
   La guía" → Drip campaign "Bienvenida" → correo 1 **inmediato**, desde "Israel Castro · Cuentas
