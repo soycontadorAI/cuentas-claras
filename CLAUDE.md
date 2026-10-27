@@ -3,7 +3,7 @@
 Canal de YouTube del despacho S & I Castro Consultores (`youtube.com/@cuentasclaras_mx`, con guion
 bajo; antes `@todoconta`), patrocinado por TodoConta. +4,000 suscriptores, 96% llega por búsqueda y no vuelve.
 El repo es estrategia, copy e identidad visual, y desde el 2026-10-26 también el sitio (`sitio/`,
-Astro, para `cc.sicastro.com`). Repo: github.com/soyisracastro/cuentas-claras (privado); Vercel
+Astro, para `cc.sicastro.com`). Repo: github.com/soycontadorAI/cuentas-claras (privado); Vercel
 con *Root Directory* `sitio`.
 
 ## Dónde está cada cosa
