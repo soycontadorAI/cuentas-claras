@@ -36,8 +36,8 @@ pnpm build      # .vercel/output
 
 ## Rendimiento (Lighthouse 100)
 
-Medido el 2026-10-26 en local (celular simulado): `/agendar`, `/privacidad` 100 en las cuatro;
-`/` 99 de rendimiento (LCP 2.0 s) y 100 en lo demás. Volver a medir con PageSpeed ya en Vercel.
+Medido el 2026-10-26 contra el deploy de Vercel (celular simulado): `/` y `/agendar` **100 en las
+cuatro** (LCP 1.6 s y 1.3 s). En local con un servidor sin CDN la portada daba 99.
 
 Lo que lo sostiene, no romperlo:
 - **Cero JavaScript de terceros** y cero librerías de animación: el movimiento es CSS más
@@ -50,8 +50,9 @@ Lo que lo sostiene, no romperlo:
 
 ## Antes de publicar
 
-1. **Repo**: `cuentas-claras/` no es repo de git todavía. Hacerlo repo (o mover `sitio/` a uno
-   propio) y conectarlo a un proyecto de Vercel con *Root Directory* `sitio`.
+1. ~~Repo y proyecto~~: hecho el 2026-10-26. Repo `soycontadorAI/cuentas-claras` (privado), proyecto
+   de Vercel `cuentas-claras` (*Root Directory* `sitio`, cada push a `main` despliega). Público en
+   https://cuentas-claras-tau-three.vercel.app; la protección de Vercel queda solo en previews.
 2. **Dominio**: en Vercel, `vercel domains add cc.sicastro.com <proyecto>`; en el DNS de
    sicastro.com, un CNAME `cc` → `cname.vercel-dns.com`.
 3. **Variables** (ver `.env.example`): Sendy (API key, `SENDY_GUIA_LIST_ID`,
