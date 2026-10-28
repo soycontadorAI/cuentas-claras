@@ -13,6 +13,7 @@ con *Root Directory* `sitio`.
 | `docs/estrategia.md` | El giro del 2026-10-26, avatar, datos de Studio, pilares, formato de series, la escalera de venta y la serie 1. **Estado: propuesta, falta el visto bueno de Israel** |
 | `docs/series.md` | Banco de 10 series con calendario por temporada (nov 2026 a dic 2027) y la reforma fiscal 2027 |
 | `docs/paquetes.md` | Solo referencia: qué paquete se ofrece en cada serie. Los paquetes y montos viven en `sicastro-v2/docs/paquetes.md` y `src/lib/honorarios.ts` |
+| `docs/prompt-miniaturas.md` | El prompt para pedir una miniatura (identidad del sitio, las tres plantillas, composición, prueba de 168 px) y el de escena sin letras para el modelo de imagen |
 | `docs/descripciones.md` | Descripción del canal, plantilla por video, comentario fijado, ejemplo de la serie 1. Borrador |
 | `design/DESIGN.md` | **La identidad vigente (v2)** y su historia. Leerlo antes de tocar cualquier pieza visual |
 | `design/PROPUESTAS.md` | Registro cerrado de las tres direcciones (A Acuse, B Señalética, C Amistades largas) |
