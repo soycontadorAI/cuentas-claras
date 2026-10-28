@@ -19,8 +19,8 @@ export const GET: APIRoute = () => {
 > despacho contable familiar en México. Lo conduce ${PERSONA.nombre}, contador público.
 > Explica trámites del SAT paso a paso, la declaración anual de personas físicas
 > (obligación, deducciones personales, saldos a favor), ingresos extra como intereses
-> y Sofipos, y finanzas personales desde lo fiscal. Formato: una duda de un cliente,
-> resuelta en una serie de videos.
+> y Sofipos, y finanzas personales desde lo fiscal. Formato: una duda de un cliente
+> por video, resuelta como en una consulta; los de un mismo tema forman una serie.
 
 Idioma: español de México. Contexto fiscal: SAT, LISR, CFF, UMA. El contenido es
 orientación general; cada caso tiene sus detalles. Los límites en pesos dependen de

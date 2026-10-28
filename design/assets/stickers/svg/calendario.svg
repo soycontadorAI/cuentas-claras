@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 210">
+  <rect x="16" y="28" width="168" height="168" rx="18" fill="#FFFBF3" stroke="#3B2418" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M16 46 a18 18 0 0 1 18 -18 H166 a18 18 0 0 1 18 18 V82 H16 Z" fill="#E4007C" stroke="#3B2418" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M58 12 V44 M142 12 V44" stroke="#3B2418" stroke-width="8" stroke-linejoin="round" stroke-linecap="round" stroke-width="10"/>
+  <text x="100" y="70" text-anchor="middle" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="30" fill="#FFF6E8" letter-spacing="4">DIC</text>
+  <text x="100" y="170" text-anchor="middle" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="84" fill="#3B2418" >31</text>
+  </svg>

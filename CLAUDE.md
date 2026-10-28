@@ -19,7 +19,7 @@ con *Root Directory* `sitio`.
 | `design/tokens.css`, `design/componentes.css` | Paleta y componentes (`.lockup`, `.recorte`, `.kicker`) que usan los tableros |
 | `design/tableros/*.html` | Tableros; `identidad-v2.html` es el vigente, los demás son registro |
 | `design/salidas/` | PNG exportados con Chrome sin interfaz (comando en `README.md` y `DESIGN.md`) |
-| `design/assets/` | Recortes de Israel (webp) para miniaturas |
+| `design/assets/` | Recortes de Israel (webp) para miniaturas, y `stickers/` (2026-10-28): las 10 calcomanías de la marca en PNG transparente (video, posts) y SVG (HTML), con sus reglas en su `README.md` |
 | `design/landing/` | Bocetos de la landing (2026-10-26). **Elegido: A, libreta viva** (artifact https://claude.ai/artifact/AFnc6JVxVsnX9rWCgqSeYk), con dos cosas de los otros: la calculadora de deducciones de C y los billetes de B, que solo salen al suscribirse (nunca siguiendo al cursor). B y C quedan de registro. Ya construido en `sitio/` |
 | `sitio/` | El sitio en Astro (`cc.sicastro.com`): portada, `/agendar` (precalificación), `/privacidad`, `/sistema` (design system vivo), `llms.txt`. Leer `sitio/README.md` (publicación) y `sitio/DESIGN-SYSTEM.md` |
 | `docs/agendar-calendario.md` | Cómo configurar la agenda de Google Calendar con cobro por Stripe para la consulta 1:1 |
@@ -43,8 +43,11 @@ con *Root Directory* `sitio`.
 - **Se reorienta sin miedo:** 96% de espectadores nuevos y sin periodicidad previa, no hay
   comunidad que perder. Publicación semanal, un largo con su Short.
 - **Formato: la consulta, una duda por serie.** Cada serie arranca de la duda dicha como la diría
-  un cliente y lleva los videos que pida (casi siempre tres, no siempre: en el copy público se dice
-  "una duda, una serie", nunca "tres videos"). Cada video funciona solo (título = lo que se
+  un cliente y lleva los videos que pida (casi siempre tres, no siempre: nunca se dice "tres videos").
+  **El lema público es "Una duda, un video"** (Israel, 2026-10-28: "llama más la atención"; en el
+  live, "una duda, una sesión, cada semana"). Ya está en el sitio, `/sistema`, `llms.txt` y la guía.
+  Las stories publicadas se quedan con "una duda, una serie" y no se rehacen; lo nuevo va con el
+  lema nuevo. Falta el correo de bienvenida de Sendy (`docs/sendy-bienvenida.sql`). Cada video funciona solo (título = lo que se
   teclea), todos en una lista, la pantalla final al siguiente. Entre series, sueltos de trámite o error del SAT.
 - **Conversión en el mismo video:** "Aprende con nosotros, o déjalo en nuestras manos" (2026-10-27; antes "Hazlo tú", que invitaba a hacerlo solo; y antes "o te lo
   hacemos", cambiado el 2026-10-26) hacia `cc.sicastro.com/agendar`, con

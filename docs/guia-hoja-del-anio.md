@@ -291,7 +291,7 @@ contabilidad), en sicastro.com están los servicios del despacho.
 
 ## Cierre
 
-Esta guía te sirve todos los años. Cada temporada tiene su serie en el canal:
+Esta guía te sirve todos los años. Cada semana, una duda, un video en el canal:
 youtube.com/@cuentasclaras_mx
 
 Los videos y esta guía son orientación general: cada caso tiene sus detalles.
