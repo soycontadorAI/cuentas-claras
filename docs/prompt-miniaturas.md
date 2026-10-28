@@ -126,3 +126,53 @@ Si sale con letras, se descarta: no se parcha.
   palomita rosa en uno.
 - Foto: `design/assets/israel-duda.webp`. Sticker: `recibo` (nómina), abajo a la izquierda de la
   foto, sin tocar la esquina de la duración.
+
+---
+
+## Versión para Gemini (2026-10-28)
+
+Israel genera la miniatura completa en Gemini, letras incluidas. Para que salga bien:
+
+- Instrucciones en inglés y el texto exacto en español entre comillas; Gemini respeta mejor lo que
+  va entre comillas.
+- Se adjuntan tres imágenes:
+  1. la foto de Israel (`design/assets/israel-duda.webp`, o la pose que toque);
+  2. una referencia de estilo: un slide del live (`social-studio/dist/2026-11-05-si-solo-tengo-sueldo/pieza-03.png`);
+  3. el sticker, si lleva (`design/assets/stickers/png/<nombre>.png`).
+- Se revisa letra por letra: la ñ, los acentos y los signos de apertura (¿ ¡). Si una letra sale mal, se
+  regenera; no se parcha.
+- Prueba de 168 px antes de subirla.
+
+```text
+Create a YouTube thumbnail, 16:9, 1280x720.
+
+STYLE: use image 2 as the style reference. A cream notebook page (#FFF6E8) with a faint cocoa grid
+(32 px squares) and one thin light-pink vertical margin line near the left edge. Flat, clean,
+editorial, playful but trustworthy. Colors ONLY: cocoa brown #3B2418 for text, magenta #E4007C and
+corn yellow #F6C343 as small accents. Magenta and yellow never as large background areas. No
+gradients, no glow, no vignette, no 3D, no red YouTube arrows, no emojis.
+
+PERSON: the man in image 1, exactly as he is (same face, same navy hoodie, do not change his
+features), on the right third, close-up from the shoulders up, his head touching the top edge.
+Nothing behind him, only a soft shadow on the paper. Do not crop his arm vertically.
+
+TEXT (Spanish, render exactly, letter by letter, including accents and the opening "¿"):
+- Big title, left side, two lines, heavy condensed grotesque sans serif (like Bricolage Grotesque
+  ExtraBold), cocoa brown, very large: "{{TITULO_SIN_REMATE}}"
+- Under it, one word in a fat retro script (like Shrikhand), magenta, tilted -4 degrees, with a
+  hand-drawn magenta marker underline: "{{REMATE}}"
+- {{OPCIONAL: up to two short rows on a white paper card with a hard flat cocoa shadow, each with a
+  checkbox; one checked with a magenta tick: "{{RENGLON_1}}" / "{{RENGLON_2}}"}}
+No other text anywhere.
+
+STICKER (optional): place image 3 as a die-cut sticker, slightly rotated, near the bottom left of
+the person, not covering the title or his face.
+
+KEEP EMPTY: the bottom-right corner (about 220x90 px), where YouTube shows the duration.
+
+AVOID: anything that looks official or governmental (no seals, no burgundy, no gold, no
+green-white-red, no SAT or IMSS logos), prices, years in the title, scared faces, the word URGENTE.
+```
+
+Ejemplo, el primer live: `{{TITULO_SIN_REMATE}}` = "¿Tengo que", `{{REMATE}}` = "declarar?",
+renglones "Más de $400,000 al año" y "Dos patrones a la vez", sticker `recibo`.
