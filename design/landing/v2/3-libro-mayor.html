@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cuentas Claras · Variante 3 · Libro mayor</title>
+<script>document.documentElement.classList.add('js')</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Shrikhand&display=swap">
+<link rel="stylesheet" href="comun.css">
+<style>
+/* VARIANTE 3 · LIBRO MAYOR
+   Modular y de herramienta. La portada es la calculadora: el visitante hace una cuenta antes de
+   leer nada. Todo vive en celdas de filete fino, como las columnas de un libro de cuentas, con
+   cifras tabulares y renglones con puntos guía. Denso pero ordenado; los bloques oscuros (la duda
+   y la guía) son los únicos que pesan. */
+:root { --linea: 1px solid var(--cacao); --hueco: 14px; }
+.envoltura.ancha { max-width: 1240px; }
+
+/* Barra */
+.barra { position: sticky; top: 0; z-index: 50; background: rgba(255, 246, 232, .94); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: var(--linea); }
+.barra .envoltura { display: flex; align-items: center; gap: 28px; min-height: 64px; }
+.marca { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; margin-right: auto; }
+.marca .billete { width: 32px; height: 32px; }
+.marca .rot { font-size: 18px; line-height: .9; }
+.nav { display: flex; gap: 0; font-size: 14.5px; font-weight: 700; }
+.nav a { text-decoration: none; padding: 22px 16px; border-left: 1px solid var(--cacao-12); transition: background-color .2s; }
+.nav a:last-child { border-right: 1px solid var(--cacao-12); }
+.nav a:hover { background: var(--maiz); }
+.barra .btn { min-height: 40px; padding: 0 18px; font-size: 14px; }
+@media (max-width: 900px) { .nav { display: none; } }
+
+/* Celdas */
+.cel { position: relative; background: var(--papel); border: var(--linea); border-radius: var(--radio-s); padding: clamp(22px, 3vw, 36px); overflow: hidden; }
+.cel.oscura { background: var(--cacao); color: var(--crema); }
+.rotulo { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 0 0 18px; font-size: 12.5px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--cacao-70); }
+.rotulo b { color: var(--rosa-hondo); font-variant-numeric: tabular-nums; }
+.oscura .rotulo { color: rgba(255, 246, 232, .7); }
+.oscura .rotulo b { color: var(--maiz); }
+h2 { margin: 0; font-size: clamp(2rem, 1.3rem + 2.4vw, 3.4rem); letter-spacing: -.02em; max-width: 14ch; }
+h3 { margin: 0; }
+.maiz { color: var(--maiz); }
+.chica { margin: 14px 0 0; color: var(--cacao-70); max-width: 44ch; }
+.oscura .chica { color: rgba(255, 246, 232, .78); }
+
+/* Portada: dos celdas, texto y herramienta */
+.portada { padding-block: clamp(20px, 3vw, 40px) 0; }
+.marco-portada { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); background: var(--papel); border: var(--linea); border-radius: var(--radio-s); overflow: hidden; }
+.marco-portada > div { padding: clamp(24px, 4vw, 52px); }
+.marco-portada > div + div { border-left: var(--linea); background: linear-gradient(var(--cacao-12) 1px, transparent 1px) 0 0 / 100% 36px, var(--crema); display: flex; flex-direction: column; justify-content: center; }
+h1 { margin: 0; font-size: clamp(2.8rem, 1.2rem + 4.8vw, 5.4rem); line-height: .92; letter-spacing: -.03em; }
+.bajada { margin: 26px 0 0; max-width: 32ch; font-size: clamp(1.1rem, 1rem + .4vw, 1.3rem); line-height: 1.45; color: var(--cacao-70); }
+.acciones { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: center; margin-top: 30px; }
+.datos { display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: 0; margin-top: clamp(30px, 5vw, 60px); border-top: 1px solid var(--cacao-12); }
+.datos div { padding: 14px 24px 0 0; margin-right: 24px; border-right: 1px solid var(--cacao-12); }
+.datos div:last-child { border: 0; }
+.datos b { display: block; font-size: 1.25rem; font-weight: 800; font-variation-settings: "wdth" 92; line-height: 1.1; }
+.datos span { font-size: 13px; color: var(--cacao-70); }
+@media (max-width: 900px) { .marco-portada { grid-template-columns: 1fr; } .marco-portada > div + div { border-left: 0; border-top: var(--linea); } }
+@media (max-width: 520px) { .datos { grid-template-columns: 1fr 1fr; } .datos div:nth-child(2) { border: 0; } }
+
+/* Calculadora = el libro */
+.pregunta-calc { margin: 0; font-weight: 800; font-size: clamp(1.4rem, 1.1rem + 1vw, 1.9rem); line-height: 1.1; font-variation-settings: "wdth" 92, "opsz" 48; max-width: 22ch; }
+.cifra { display: block; margin: 20px 0 6px; font-weight: 800; font-size: clamp(2.6rem, 1.8rem + 2.4vw, 3.8rem); line-height: 1; letter-spacing: -.03em; font-variant-numeric: tabular-nums; font-variation-settings: "wdth" 92; }
+.que-es { margin: 0 0 8px; font-size: 14.5px; color: var(--cacao-70); max-width: 40ch; }
+input[type="range"] { width: 100%; height: 30px; background: transparent; -webkit-appearance: none; appearance: none; cursor: pointer; }
+input[type="range"]::-webkit-slider-runnable-track { height: 2px; background: linear-gradient(90deg, var(--cacao) var(--p, 25%), var(--cacao-12) var(--p, 25%)); }
+input[type="range"]::-moz-range-track { height: 2px; background: var(--cacao-12); }
+input[type="range"]::-moz-range-progress { height: 2px; background: var(--cacao); }
+input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; margin-top: -10px; border-radius: 50%; background: var(--maiz); border: 2px solid var(--cacao); }
+input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: var(--maiz); border: 2px solid var(--cacao); }
+.tasas { align-self: flex-start; display: inline-flex; flex-wrap: wrap; margin-top: 8px; border: var(--linea); border-radius: var(--radio-s); overflow: hidden; background: var(--papel); }
+.tasas button { min-height: 42px; padding: 0 14px; border: 0; border-right: 1px solid var(--cacao); background: transparent; color: var(--cacao); font: 700 14.5px var(--display); font-variant-numeric: tabular-nums; cursor: pointer; transition: background-color .2s; }
+.tasas button:last-child { border-right: 0; }
+.tasas button:hover { background: var(--maiz); }
+.tasas button[aria-pressed="true"] { background: var(--cacao); color: var(--crema); }
+.mayor { margin-top: 26px; padding-top: 18px; border-top: var(--linea); }
+.renglon-c { display: flex; align-items: baseline; gap: 10px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.renglon-c i { flex: 1; border-bottom: 2px dotted var(--cacao-40); transform: translateY(-5px); }
+.te-regresa { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; margin-top: 16px; }
+.te-regresa span { font-weight: 700; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--cacao-70); padding-bottom: .8em; }
+.total { font-weight: 800; font-size: clamp(3rem, 2rem + 3.4vw, 5.2rem); line-height: 1; color: var(--rosa); letter-spacing: -.04em; font-variant-numeric: tabular-nums; font-variation-settings: "wdth" 88; padding-bottom: .1em;
+  background: linear-gradient(var(--rosa), var(--rosa)) left calc(100% - .02em) / 100% 2px no-repeat, linear-gradient(var(--rosa), var(--rosa)) left calc(100% - .09em) / 100% 2px no-repeat; }
+.ayuda { margin: 14px 0 0; font-size: 12.5px; color: var(--cacao-70); }
+
+/* Los tres cajones: una fila de tabla */
+.cajones { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: var(--hueco); background: var(--papel); border: var(--linea); border-radius: var(--radio-s); }
+.cajon { padding: clamp(22px, 3vw, 34px); }
+.cajon + .cajon { border-left: var(--linea); }
+.cajon h3 { font-size: var(--t-h3); font-weight: 800; line-height: 1.05; font-variation-settings: "wdth" 92, "opsz" 48; }
+.cajon p { margin: 8px 0 0; color: var(--cacao-70); }
+.cajon .palomeo { margin-top: 14px; gap: 6px; font-size: 15.5px; }
+@media (max-width: 860px) { .cajones { grid-template-columns: 1fr; } .cajon + .cajon { border-left: 0; border-top: var(--linea); } }
+
+/* Bento */
+.bento { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--hueco); margin-top: var(--hueco); }
+.s7 { grid-column: span 7; } .s5 { grid-column: span 5; } .s8 { grid-column: span 8; } .s4 { grid-column: span 4; } .s12 { grid-column: 1 / -1; }
+@media (max-width: 960px) { .s7, .s5, .s8, .s4 { grid-column: 1 / -1; } }
+
+/* Serie */
+.duda { margin: 20px 0 0; font-weight: 800; font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.2rem); line-height: 1.1; font-variation-settings: "wdth" 92, "opsz" 48; }
+.duda small { display: block; margin-bottom: 10px; font-size: 12.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--maiz); font-weight: 800; font-variation-settings: "wdth" 100; }
+.videos { list-style: none; margin: 24px 0 0; padding: 0; border-top: 1px solid rgba(255, 246, 232, .25); }
+.video { display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 14px; padding: 16px 0; border-bottom: 1px solid rgba(255, 246, 232, .25); }
+.video .caja { width: 24px; height: 24px; margin-top: 2px; border: 2px solid var(--crema); border-radius: 6px; display: grid; place-items: center; }
+.video .caja svg { width: 16px; height: 16px; overflow: visible; }
+.video .caja path { fill: none; stroke: var(--maiz); stroke-width: 9; stroke-linecap: round; stroke-linejoin: round; }
+.video h4 { margin: 0; font-size: 1.1rem; font-weight: 800; line-height: 1.2; }
+.video p { margin: 4px 0 0; font-size: 15px; color: rgba(255, 246, 232, .78); }
+.venen { margin-top: 18px; display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 14px; font-weight: 700; color: rgba(255, 246, 232, .78); }
+.venen span::before { content: ""; display: inline-block; width: 8px; height: 8px; margin-right: 8px; border-radius: 50%; background: var(--c, var(--maiz)); }
+
+/* Israel en su celda: sale por abajo */
+.israel { display: grid; grid-template-rows: auto 1fr; padding-bottom: 0; background: var(--papel); }
+blockquote { margin: 0; font-weight: 800; font-size: clamp(1.4rem, 1.1rem + 1vw, 1.9rem); line-height: 1.12; letter-spacing: -.01em; font-variation-settings: "wdth" 92, "opsz" 48; text-wrap: balance; }
+.firma { margin: 14px 0 0; color: var(--cacao-70); font-size: 16px; }
+.firma strong { color: var(--cacao); }
+.israel .pie-celda { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-top: 12px; }
+.israel img { width: min(54%, 250px); margin-bottom: -2px; filter: drop-shadow(0 12px 14px rgba(59, 36, 24, .2)); }
+.israel .manos { padding-bottom: 28px; text-align: right; }
+.israel .manos p { margin: 0 0 14px; font-weight: 700; font-size: 1.05rem; line-height: 1.2; }
+.israel .manos .rot { display: block; color: var(--rosa); font-size: 1.05rem; margin-top: 4px; }
+
+/* Guía: calendario en tabla */
+.meses { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1px solid var(--cacao-12); border-radius: var(--radio-s); overflow: hidden; background: var(--crema); }
+.meses li { padding: 12px 12px 14px; border-right: 1px solid var(--cacao-12); border-bottom: 1px solid var(--cacao-12); font-size: 14px; line-height: 1.25; min-height: 82px; }
+.meses li:nth-child(4n) { border-right: 0; }
+.meses li:nth-last-child(-n+4) { border-bottom: 0; }
+.meses b { display: block; margin-bottom: 4px; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--cacao-70); }
+.meses .clave { background: var(--papel); box-shadow: inset 0 3px 0 var(--rosa); font-weight: 600; }
+.meses .clave b { color: var(--rosa-hondo); }
+.leyenda { margin: 14px 0 0; font-size: 13.5px; color: var(--cacao-70); display: flex; align-items: center; gap: 8px; }
+.leyenda i { width: 22px; height: 3px; background: var(--rosa); display: inline-block; }
+.trae-l { margin: 16px 0 0; padding: 0; list-style: none; display: grid; gap: 6px; font-size: 15.5px; }
+.trae-l li { display: flex; gap: 10px; }
+.trae-l li::before { content: "→"; color: var(--rosa-hondo); font-weight: 800; }
+.cel.oscura .campos { margin-top: 18px; gap: 12px; }
+.cel.oscura h3 { font-size: clamp(1.7rem, 1.3rem + 1.4vw, 2.3rem); font-weight: 800; line-height: 1; font-variation-settings: "wdth" 92, "opsz" 72; }
+.cel.oscura .rot { color: var(--maiz); font-size: .9em; }
+.campo input { border-radius: 8px; min-height: 50px; }
+@media (max-width: 560px) { .meses { grid-template-columns: repeat(2, minmax(0, 1fr)); } .meses li:nth-child(4n) { border-right: 1px solid var(--cacao-12); } .meses li:nth-child(2n) { border-right: 0; } .meses li:nth-last-child(-n+4) { border-bottom: 1px solid var(--cacao-12); } .meses li:nth-last-child(-n+2) { border-bottom: 0; } }
+
+/* Preguntas dentro de su celda */
+.pregunta { border-top: 1px solid var(--cacao-12); }
+.pregunta:last-child { border-bottom: 1px solid var(--cacao-12); }
+.pregunta summary { padding: 16px 0; font-size: 1.12rem; }
+.pregunta summary .mas { width: 22px; height: 22px; background: none; border-radius: 0; }
+.pregunta summary .mas::before, .pregunta summary .mas::after { width: 16px; height: 2px; }
+.pregunta[open] summary .mas { background: none; box-shadow: none; }
+.pregunta p { margin-inline: 0; font-size: 16px; }
+.preguntas { margin-top: 20px; }
+
+/* Colabora */
+.colabora { display: flex; flex-direction: column; justify-content: space-between; gap: 22px; }
+.colabora h2 { font-size: clamp(1.8rem, 1.2rem + 1.6vw, 2.5rem); }
+.colabora ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { box-shadow: inset 0 0 0 1.5px var(--cacao); font-size: 13.5px; padding: 6px 12px; }
+
+/* Pie */
+.pie { margin-top: clamp(40px, 6vw, 80px); border-top: var(--linea); background: var(--papel); }
+.pie .envoltura { display: grid; grid-template-columns: minmax(0, 1.4fr) repeat(2, minmax(0, 1fr)); gap: 0; padding-block: 0; }
+.pie .envoltura > div { padding: 28px 24px 28px 0; }
+.pie .envoltura > div + div { padding-left: 24px; border-left: 1px solid var(--cacao-12); }
+.pie h2 { margin: 0 0 10px; max-width: none; font-size: 12.5px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--cacao-70); font-variation-settings: "wdth" 100; line-height: 1.2; }
+.pie ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 2px; font-weight: 600; font-size: 15px; }
+.pie a { text-decoration: none; }
+.pie a:hover { text-decoration: underline; text-decoration-color: var(--rosa); }
+.pie .chico { margin: 12px 0 0; font-size: 13.5px; color: var(--cacao-70); max-width: 42ch; }
+@media (max-width: 760px) { .pie .envoltura { grid-template-columns: 1fr 1fr; } .pie .envoltura > div:first-child { grid-column: 1 / -1; } .pie .envoltura > div + div { border-left: 0; padding-left: 0; } }
+</style>
+</head>
+<body>
+<div class="hoja-fondo" aria-hidden="true"></div>
+
+<header class="barra">
+  <div class="envoltura ancha">
+    <a class="marca" href="#"><svg class="billete" aria-hidden="true"><use href="#billete"/></svg><span class="rot">Cuentas<br>Claras</span></a>
+    <nav class="nav" aria-label="Secciones"><a href="#calcula">Calcula</a><a href="#encuentras">Qué hay aquí</a><a href="#series">Series</a><a href="#preguntas">Preguntas</a><a href="#quien">Quién</a></nav>
+    <a class="btn" href="#guia">La guía gratis</a>
+  </div>
+</header>
+
+<main>
+  <section class="portada" id="calcula">
+    <div class="envoltura ancha">
+      <div class="marco-portada">
+        <div>
+          <p class="etiqueta">Impuestos · Contabilidad · Finanzas personales</p>
+          <h1 class="disp" style="margin-top:22px">El SAT y tu dinero, <span class="resaltado" data-resalta>en orden.</span></h1>
+          <p class="bajada">Tus obligaciones con el SAT explicadas paso a paso, tu declaración sin sorpresas y tus números claros.</p>
+          <div class="acciones">
+            <a class="btn" href="#guia">Quiero la guía</a>
+            <a class="enlace-flecha" href="#series"><svg width="28" height="20" aria-hidden="true"><use href="#yt"/></svg><span>Ver el canal</span></a>
+          </div>
+          <div class="datos" aria-label="Lo que es el canal">
+            <div><b>Cada semana</b><span>un video nuevo</span></div>
+            <div><b>Una duda</b><span>por video</span></div>
+            <div><b>Gratis</b><span>el canal y la guía</span></div>
+          </div>
+        </div>
+        <div>
+          <p class="rotulo"><span>Pruébalo</span><b>01</b></p>
+          <h2 class="pregunta-calc">¿Cuánto te regresa una deducción?</h2>
+          <label class="que-es" for="deduce" style="margin-top:14px;display:block">Doctor, dentista, seguro de gastos médicos, lentes… lo que deduces en el año</label>
+          <output class="cifra" data-monto>$20,000</output>
+          <input id="deduce" type="range" min="1000" max="80000" step="1000" value="20000">
+          <p class="que-es" id="tasas-t" style="margin-top:14px">Tu tasa más alta (sube con lo que ganas)</p>
+          <div class="tasas" role="group" aria-labelledby="tasas-t">
+            <button type="button" data-tasa="10.88" aria-pressed="false">10.88%</button><button type="button" data-tasa="16" aria-pressed="false">16%</button><button type="button" data-tasa="21.36" aria-pressed="true">21.36%</button><button type="button" data-tasa="23.52" aria-pressed="false">23.52%</button><button type="button" data-tasa="30" aria-pressed="false">30%</button>
+          </div>
+          <div class="mayor" aria-live="polite">
+            <div class="renglon-c"><span>Lo que deduces</span><i></i><b data-monto>$20,000</b></div>
+            <div class="renglon-c"><span>× tu tasa</span><i></i><b data-tasa-txt>21.36%</b></div>
+            <div class="te-regresa"><span>Te regresa, más o menos</span><b class="total" data-regresa>$4,272</b></div>
+          </div>
+          <p class="ayuda">Tasas de la tarifa anual del artículo 152 de la LISR. Tienen topes y requisitos: es un ejemplo, cada caso tiene sus detalles.</p>
+        </div>
+      </div>
+
+      <div class="cajones" id="encuentras">
+        <div class="cajon" data-entra style="--i:0"><p class="rotulo"><span>Cajón 1</span><b>SAT</b></p><h3>Tus trámites, sin perderte en el portal</h3><p>Paso a paso, con la pantalla real.</p><ul class="palomeo"><li>RFC y e.firma</li><li>Constancia de situación fiscal</li><li>Buzón tributario y cartas</li></ul></div>
+        <div class="cajon" data-entra style="--i:1"><p class="rotulo"><span>Cajón 2</span><b>Tu declaración</b></p><h3>La anual, sin sorpresas</h3><p>Si estás obligado, qué deducir y cuánto te regresan de verdad.</p><ul class="palomeo"><li>Obligación</li><li>Deducciones personales</li><li>Saldos a favor</li></ul></div>
+        <div class="cajon" data-entra style="--i:2"><p class="rotulo"><span>Cajón 3</span><b>Tus números</b></p><h3>Tu dinero, en claro</h3><p>Lo que entra, lo que sale y lo que te queda.</p><ul class="palomeo"><li>Ingresos extra</li><li>Finanzas sanas</li><li>Estados financieros básicos</li></ul></div>
+      </div>
+
+      <div class="bento">
+        <div class="cel oscura s7" id="series">
+          <p class="rotulo"><span>Cada semana</span><b>02</b></p>
+          <h2 class="disp">Una duda, <span class="maiz">un video.</span></h2>
+          <p class="chica">Como una consultoría, cada semana y sin costo. Cada video arranca con la pregunta tal cual, y la contesta completa.</p>
+          <p class="duda"><small>La primera serie</small>“Si solo tengo sueldo, ¿tengo que declarar?”</p>
+          <ol class="videos">
+            <li class="video" data-entra data-palomea style="--i:0"><span class="caja"><svg viewBox="0 0 40 40" aria-hidden="true"><path pathLength="1" d="M6 21 L16 31 L35 8"/></svg></span><div><h4>Cuándo sí estás obligado (y cuándo no)</h4><p>El monto que lo cambia todo, dos patrones a la vez y qué pasa si te sale a pagar.</p></div></li>
+            <li class="video" data-entra data-palomea style="--i:1"><span class="caja"><svg viewBox="0 0 40 40" aria-hidden="true"><path pathLength="1" d="M6 21 L16 31 L35 8"/></svg></span><div><h4>Deducciones: cuánto te regresan de verdad</h4><p>Cada peso que deduces no te regresa un peso. Lo hacemos con números.</p></div></li>
+            <li class="video" data-entra data-palomea style="--i:2"><span class="caja"><svg viewBox="0 0 40 40" aria-hidden="true"><path pathLength="1" d="M6 21 L16 31 L35 8"/></svg></span><div><h4>Sueldo y algo más</h4><p>Intereses, Sofipo, casa de bolsa o una herencia: cuándo se suman y cuándo no.</p></div></li>
+          </ol>
+          <div class="venen"><span>Lo que viene:</span><span>Aguinaldo</span><span style="--c: var(--rosa)">Tus inversiones</span><span style="--c: var(--crema)">Tu anual</span></div>
+        </div>
+
+        <div class="cel israel s5" id="quien">
+          <div>
+            <p class="rotulo"><span>Quién está detrás</span><b>03</b></p>
+            <blockquote>Aquí resuelvo las dudas que más me traen mis clientes, para que tú las resuelvas sin pagar una consulta.</blockquote>
+            <p class="firma"><strong>Israel Castro</strong>, contador público y socio de S &amp; I Castro Consultores, el despacho familiar.</p>
+          </div>
+          <div class="pie-celda">
+            <img src="../img/israel-cruzado.webp" alt="Israel Castro, contador público, con los brazos cruzados" width="720" height="961">
+            <div class="manos"><p>Aprende con nosotros… <span class="rot">o déjalo en nuestras manos.</span></p><a class="btn claro" href="#">Ir al despacho</a></div>
+          </div>
+        </div>
+
+        <div class="cel s7" id="guia">
+          <p class="rotulo"><span>Gratis</span><b>04</b></p>
+          <h2 class="disp">Qué hacer con el SAT, <span class="resaltado" data-resalta>mes por mes.</span></h2>
+          <p class="chica">Una guía gratis para no fallar con el SAT, para pegar en el refri.</p>
+          <ol class="meses" style="margin-top:22px" aria-label="Vista previa del calendario de 12 meses">
+            <li><b>Ene</b>Haz la cuenta: ¿te toca presentar?</li>
+            <li class="clave"><b>Feb</b>Llegan tus constancias</li>
+            <li><b>Mar</b>Revisa tus facturas en el portal</li>
+            <li class="clave"><b>Abr</b>Tu anual: vence el 30</li>
+            <li><b>May</b>Sigue tu saldo a favor</li>
+            <li><b>Jun</b>Revisa tu 32-D</li>
+            <li><b>Jul</b>Abre tu buzón tributario</li>
+            <li><b>Ago</b>¿Cobras por tu cuenta? Alta</li>
+            <li><b>Sep</b>Paquete Económico</li>
+            <li><b>Oct</b>Revisa tu e.firma</li>
+            <li class="clave"><b>Nov</b>Planea tu aguinaldo</li>
+            <li class="clave"><b>Dic</b>Pide facturas y paga antes del 31</li>
+          </ol>
+          <p class="leyenda"><i></i>Los meses que no se mueven</p>
+          <ul class="trae-l"><li>Los impuestos sin rodeos</li><li>El calendario de 12 meses</li><li>El checklist para palomear</li></ul>
+        </div>
+
+        <div class="cel oscura s5">
+          <form onsubmit="return false">
+            <h3 class="disp">Te la mandamos <span class="rot">gratis</span></h3>
+            <p class="chica">Llega a tu correo en un minuto. Si dejas tu WhatsApp, te avisamos cuando salga cada serie.</p>
+            <div class="campos">
+              <div class="campo"><label for="nombre">Tu nombre</label><input id="nombre" type="text" placeholder="¿Cómo te llamas?"></div>
+              <div class="campo"><label for="correo">Tu correo</label><input id="correo" type="email" placeholder="tu@correo.com"></div>
+              <div class="campo"><label for="whatsapp">WhatsApp <small>(opcional)</small></label><input id="whatsapp" type="tel" placeholder="10 dígitos"></div>
+              <button class="btn rosa ancho" type="submit">Mándamela</button>
+            </div>
+            <p class="fino">Sin spam; te das de baja cuando quieras. <a href="#">Aviso de privacidad</a>.</p>
+          </form>
+        </div>
+
+        <div class="cel s8" id="preguntas">
+          <p class="rotulo"><span>Sin rodeos</span><b>05</b></p>
+          <h2 class="disp">Lo que más <span class="resaltado" data-resalta>me preguntan.</span></h2>
+          <div class="preguntas">
+            <details class="pregunta" open><summary>¿Por qué pagamos impuestos?<span class="mas" aria-hidden="true"></span></summary><p>Porque así se paga lo que es de todos: escuelas, hospitales, carreteras. La Constitución dice que contribuimos de forma proporcional: quien gana más, paga más. Por eso el ISR sube por escalones, y la parte de tu ingreso que pasa de cierto nivel paga una tasa más alta.</p></details>
+            <details class="pregunta"><summary>¿Por qué me retienen si no le debo nada a nadie?<span class="mas" aria-hidden="true"></span></summary><p>Retener es cobrar por adelantado a nombre del SAT. Tu patrón, tu banco o la empresa a la que le cobras separan una parte y se la mandan al SAT por ti. No es un impuesto extra: es un anticipo, y en tu declaración anual se resta de lo que te toca.</p></details>
+            <details class="pregunta"><summary>¿Por qué hay gastos que no puedo pagar en efectivo?<span class="mas" aria-hidden="true"></span></summary><p>Porque el SAT necesita poder seguir el dinero. Tus deducciones personales (doctor, dentista, hospital, entre otras) solo cuentan si las pagas con tarjeta, transferencia o cheque nominativo. Pagadas en efectivo, la factura no te sirve aunque la tengas.</p></details>
+            <details class="pregunta"><summary>¿Qué pasa si tenía que presentar una declaración y no lo hice?<span class="mas" aria-hidden="true"></span></summary><p>Puede haber multa por cada declaración, recargos si había impuesto a pagar y tu opinión de cumplimiento en negativo. Y si te tocaba saldo a favor, sin la declaración ese dinero se queda en el SAT. Si te pones al corriente antes de que el SAT te lo pida, por lo general no hay multa.</p></details>
+            <details class="pregunta"><summary>Si mi compañero gana lo mismo que yo, ¿por qué a él le devuelven y a mí no?<span class="mas" aria-hidden="true"></span></summary><p>Casi nunca es trampa. Lo más común es que él pidió factura de sus gastos médicos, los pagó con tarjeta y los dedujo. Otras razones: tener dos patrones a la vez, otros ingresos como intereses, o dejar el trabajo antes de diciembre.</p></details>
+          </div>
+        </div>
+
+        <div class="cel colabora s4" id="colabora">
+          <div>
+            <p class="rotulo"><span>Marcas y creadores</span><b>06</b></p>
+            <h2 class="disp">¿Hacemos algo juntos?</h2>
+            <p class="chica">Videos en colaboración, una charla para tu equipo o tu comunidad.</p>
+          </div>
+          <ul><li class="chip"><i style="background:var(--rosa)"></i>Colaboraciones</li><li class="chip"><i></i>Charlas</li><li class="chip"><i style="background:var(--cacao)"></i>Prensa</li></ul>
+          <a class="btn" href="#">Escríbenos</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="pie">
+  <div class="envoltura ancha">
+    <div>
+      <a class="marca" href="#"><svg class="billete" aria-hidden="true"><use href="#billete"/></svg><span class="rot">Cuentas<br>Claras</span></a>
+      <p class="chico">Un canal de S &amp; I Castro Consultores. Patrocina TodoConta. Los videos y la guía son orientación general: cada caso tiene sus detalles.</p>
+    </div>
+    <div><h2>El canal</h2><ul><li><a href="#">YouTube</a></li><li><a href="#">Instagram</a></li><li><a href="#guia">La guía gratis</a></li><li><a href="#">Consulta 1:1</a></li></ul></div>
+    <div><h2>La casa</h2><ul><li><a href="#">El despacho</a></li><li><a href="#">La app: TodoConta</a></li><li><a href="#">IA para contadores</a></li><li><a href="#">Aviso de privacidad</a></li></ul></div>
+  </div>
+</footer>
+
+<script src="comun.js"></script>
+</body>
+</html>

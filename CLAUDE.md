@@ -15,13 +15,13 @@ con *Root Directory* `sitio`.
 | `docs/paquetes.md` | Solo referencia: qué paquete se ofrece en cada serie. Los paquetes y montos viven en `sicastro-v2/docs/paquetes.md` y `src/lib/honorarios.ts` |
 | `docs/prompt-miniaturas.md` | El prompt para pedir una miniatura (identidad del sitio, las tres plantillas, composición, prueba de 168 px) y el de escena sin letras para el modelo de imagen |
 | `docs/descripciones.md` | Descripción del canal, plantilla por video, comentario fijado, ejemplo de la serie 1. Borrador |
-| `design/DESIGN.md` | **La identidad vigente (v2)** y su historia. Leerlo antes de tocar cualquier pieza visual |
+| `design/DESIGN.md` | **La identidad vigente (v2)** y su historia. La línea de diseño del sitio y de los decks es el "libro mayor vivo" (ver `sitio/DESIGN-SYSTEM.md`). Leerlo antes de tocar cualquier pieza visual |
 | `design/PROPUESTAS.md` | Registro cerrado de las tres direcciones (A Acuse, B Señalética, C Amistades largas) |
 | `design/tokens.css`, `design/componentes.css` | Paleta y componentes (`.lockup`, `.recorte`, `.kicker`) que usan los tableros |
 | `design/tableros/*.html` | Tableros; `identidad-v2.html` es el vigente, los demás son registro |
 | `design/salidas/` | PNG exportados con Chrome sin interfaz (comando en `README.md` y `DESIGN.md`) |
 | `design/assets/` | Recortes de Israel (webp) para miniaturas, y `stickers/` (2026-10-28): las 10 calcomanías de la marca en PNG transparente (video, posts) y SVG (HTML), con sus reglas en su `README.md` |
-| `design/landing/` | Bocetos de la landing (2026-10-26). **Elegido: A, libreta viva** (artifact https://claude.ai/artifact/AFnc6JVxVsnX9rWCgqSeYk), con dos cosas de los otros: la calculadora de deducciones de C y los billetes de B, que solo salen al suscribirse (nunca siguiendo al cursor). B y C quedan de registro. Ya construido en `sitio/` |
+| `design/landing/` | Bocetos de la landing. Primera ronda (2026-10-26): A libreta viva, B y C de registro. **Segunda ronda `v2/` (2026-11-02): elegida la 4, "libro mayor vivo"** (`v2/4-libro-mayor-vivo.html`): celdas de filete, pestañas de folder, calcomanías, motion ligado al scroll, Israel en el hero con la guía como único CTA y la calculadora en su propia celda. Ya construida en `sitio/` (portada, `/agendar`, `/listo`, 404, `/privacidad`, `/sistema`). Los billetes solo salen al suscribirse (nunca siguiendo al cursor). 1, 2 y 3 quedan de registro |
 | `sitio/` | El sitio en Astro (`cc.sicastro.com`): portada, `/agendar` (precalificación), `/privacidad`, `/sistema` (design system vivo), `llms.txt`. Leer `sitio/README.md` (publicación) y `sitio/DESIGN-SYSTEM.md` |
 | `docs/agendar-calendario.md` | Cómo configurar la agenda de Google Calendar con cobro por Stripe para la consulta 1:1 |
 | `design/historias/` | Instagram de @soyisraelcastro: `generar.py` arma `tableros/historias.html` (foto de perfil con sombra maíz o rosa, 5 portadas de destacados y sus historias) y `exportar.sh` saca los PNG a `salidas/historias/` |

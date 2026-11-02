@@ -2,7 +2,8 @@
  * El movimiento del sitio, sin librerías: lo que antes hacía GSAP en el boceto se hace con CSS
  * (transiciones y animaciones ligadas al scroll) y este archivo solo decide cuándo.
  *
- * - [data-entra], [data-resalta], [data-palomea]: reciben .visto al entrar a la pantalla.
+ * - [data-entra], [data-resalta], [data-palomea], [data-pega]: reciben .visto al entrar a la pantalla
+ *   (data-pega es la calcomanía que se pega con rebote).
  * - [data-magnetico]: el botón se va un poco hacia el puntero (solo con mouse).
  * - lluviaDeBilletes(): los billetes que salen del botón al suscribirse. Es la ÚNICA vez que hay
  *   billetes en pantalla; nunca siguen al cursor (Israel, 2026-10-26: "eso cansa").
@@ -11,14 +12,7 @@
 export const reducido = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 export function iniciar(): void {
-  const barra = document.getElementById('barra');
-  if (barra) {
-    const fondo = () => barra.classList.toggle('fondo', scrollY > 12);
-    addEventListener('scroll', fondo, { passive: true });
-    fondo();
-  }
-
-  const vigilados = document.querySelectorAll<HTMLElement>('[data-entra], [data-resalta], [data-palomea]');
+  const vigilados = document.querySelectorAll<HTMLElement>('[data-entra], [data-resalta], [data-palomea], [data-pega]');
   if (reducido() || !('IntersectionObserver' in window)) {
     vigilados.forEach((el) => el.classList.add('visto'));
   } else {

@@ -1,20 +1,36 @@
 ---
+import { Image } from 'astro:assets';
+
 import Barra from '../components/Barra.astro';
 import Pie from '../components/Pie.astro';
 import Base from '../layouts/Base.astro';
+
+import stLupa from '../assets/stickers/lupa.png';
 ---
 <Base titulo="Esta hoja no existe" noindex>
   <Barra />
   <main id="contenido" class="envoltura nada">
-    <span class="separador">404</span>
-    <h1 class="disp">Esta hoja <span class="resaltado">se arrancó.</span></h1>
-    <p class="intro">La página que buscas no está, o cambió de lugar.</p>
-    <div class="acciones"><a class="btn" href="/">Ir al inicio</a><a class="btn claro" href="/#guia">Pedir la guía</a></div>
+    <div class="cel hoja-unica">
+      <span class="pestana rosa">404</span>
+      <Image class="sticker" data-pega style="--g: 8deg" src={stLupa} alt="" width={110} height={110} />
+      <h1 class="disp">Esta hoja <span class="resaltado" data-resalta>se arrancó.</span></h1>
+      <p class="chica">La página que buscas no está, o cambió de lugar.</p>
+      <div class="acciones"><a class="btn" data-magnetico href="/">Ir al inicio</a><a class="btn claro" href="/#guia">Pedir la guía</a></div>
+    </div>
   </main>
   <Pie />
 </Base>
+
+<script>
+  import { iniciar } from '../scripts/movimiento';
+  iniciar();
+</script>
+
 <style>
-  .nada { padding-block: clamp(48px, 10vw, 140px) 0; }
-  h1 { margin: 22px 0 0; font-size: var(--t-h2); }
+  .nada { padding-block: clamp(56px, 9vw, 120px) 0; }
+  .hoja-unica { max-width: 880px; margin-inline: auto; padding: clamp(28px, 5vw, 64px); box-shadow: var(--sombra-dura); }
+  h1 { margin: 0; font-size: var(--t-h2); max-width: 12ch; }
+  .chica { font-size: 1.15rem; margin-top: 18px; }
   .acciones { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px; }
+  @media (max-width: 560px) { .hoja-unica :global(.sticker) { width: 70px; top: -26px; } }
 </style>

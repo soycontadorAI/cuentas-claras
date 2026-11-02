@@ -15,7 +15,7 @@ pnpm build      # .vercel/output
 
 | Ruta | Qué es |
 |---|---|
-| `/` | La portada (boceto A, "libreta viva"): qué hay en el canal, calculadora de deducciones, cinco preguntas, las series, la guía y quién está detrás |
+| `/` | La portada ("libro mayor vivo", 2026-11-02): Israel y la guía, marquesina, calculadora de deducciones, tres cajones, las series, quién está detrás, la guía, cinco preguntas y colaboraciones |
 | `/agendar` | Precalificación de la consulta 1:1 (seis pasos). Quien pasa recibe la página de citas de Google Calendar, que cobra con Stripe al reservar. Quien no, su salida: trámite, despacho, paquete o lo gratis |
 | `/privacidad` | Aviso de privacidad |
 | `/sistema` | El design system vivo (noindex, fuera del sitemap) |
