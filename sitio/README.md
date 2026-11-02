@@ -73,12 +73,36 @@ soycontador-ai (`Analytics.astro`, `lib/medir.ts`, `lib/origen.ts`).
 | Evento | Herramienta | Cuándo | Parámetros |
 |---|---|---|---|
 | `page_view` / `PageView` | GA4 / Meta | Cada página | (los de siempre; el PageView con `eventID`) |
+| `scroll_profundidad` | GA4 | Primera vez que se pasa el 25, 50, 75 y 100 % de la página | `porcentaje`, `pagina` |
+| `seccion_vista` | GA4 | Una sección (`main section[id]`) llega a la franja central de la pantalla | `seccion`, `pagina` |
+| `permanencia` | GA4 | A los 15, 30, 60, 120 y 300 s con la pestaña a la vista | `segundos`, `pagina` |
+| `pregunta_abierta` | GA4 | Alguien abre una pregunta de la portada (no cuenta la que viene abierta) | `pregunta`, `pagina` |
+| `calculadora_usada` | GA4 | Al soltar el control o cambiar la tasa; hasta 6 por visita | `uso`, `deduccion`, `tasa`, `regresa` |
+| `formulario_inicio` | GA4 | Primer foco en el formulario de la guía o de la agenda | `formulario` (`guia`/`agendar`), `pagina` |
+| `formulario_error` | GA4 | Falla de validación o de servidor | `formulario`, `campo` (nombre del campo o `servidor`) |
+| `formulario_abandonado` | GA4 | Se oculta la página con el formulario empezado y sin terminar | `formulario`, `ultimo_campo`, `pagina` |
 | `guia_enviada` / `Lead` | GA4 / Meta | Alta exitosa a la guía (no si ya estaba en la lista) | `con_whatsapp` + origen / `content_name: guia` |
+| `guia_repetida` | GA4 | Se registró alguien que ya estaba en la lista | `pagina` |
 | `guia_confirmada` | GA4 | Llegada a `/listo` (Sendy regresa ahí al confirmar el correo) | origen |
 | `agendar_paso` | GA4 | Cada paso de `/agendar` mostrado, una vez por visita | `paso` (1 a 6), `de` |
-| `agendar_resultado` | GA4 | Sale la salida o pasa la precalificación | `resultado` (`pasa`/`salida`), `salida` (`tramite`, `empresa`, `paquete-anual`, `paquete-mes`, `no-obligado`, `sin-ingresos`) + origen |
-| `agenda_abierta` / `Schedule` | GA4 / Meta | Clic a la agenda de Google Calendar | origen / `content_name: consulta` |
-| `clic_saliente` / `Contact` | GA4 / Meta (solo WhatsApp) | Clic a sicastro.com, YouTube, WhatsApp, soycontador.ai, todoconta.com, Instagram o Facebook | `destino`, `pagina` (WhatsApp lleva además el origen) / `content_name: whatsapp` |
+| `agendar_atras` | GA4 | Clic en "Atrás" | `desde_paso` |
+| `agendar_resultado` | GA4 | Sale la salida o pasa la precalificación | `resultado` (`pasa`/`salida`), `salida` (`tramite`, `empresa`, `paquete-anual`, `paquete-mes`, `no-obligado`, `sin-ingresos`), `r_tema`, `r_situacion`, `r_ingreso`, `r_busca`, `r_cuando` + origen |
+| `agenda_abierta` / `Schedule` | GA4 / Meta | Clic a la agenda de Google Calendar | origen, `seccion`, `texto` / `content_name: consulta` |
+| `clic_interno` | GA4 | Clic a otra página o ancla del sitio | `destino` (ruta + ancla), `seccion`, `texto`, `pagina` |
+| `clic_saliente` / `Contact` | GA4 / Meta (solo WhatsApp) | Clic a sicastro.com, YouTube, WhatsApp, soycontador.ai, todoconta.com, Instagram, Facebook, correo, teléfono u otro dominio | `destino` (u `otro` con `dominio`), `lugar` (el `utm_content` de la liga), `seccion`, `texto`, `pagina` (WhatsApp lleva además el origen) / `content_name: whatsapp` |
+| `descarga` | GA4 | Clic a un PDF, ZIP, Excel o Word del sitio | `archivo`, `seccion`, `texto`, `pagina` |
+| `pagina_no_encontrada` | GA4 | Se carga el 404 | `ruta`, `desde` (la página nuestra que tenía la liga rota, o el dominio externo) |
+| `error_js` | GA4 | Error de JavaScript en el navegador (hasta 3 por página) | `mensaje`, `archivo`, `linea`, `pagina` |
+
+**Qué datos son:** nombres de campo, rutas, categorías de listas cerradas y cifras del ejemplo de
+la calculadora. `r_*` (las opciones marcadas en la precalificación) van solo a GA4, nunca al
+pixel, y se declaran en `/privacidad`. Nunca texto libre ni datos de contacto.
+
+**Para ver en GA4:** Administrar, Definiciones personalizadas, y registrar como dimensiones de
+evento `seccion`, `porcentaje`, `formulario`, `campo`, `ultimo_campo`, `destino`, `dominio`,
+`lugar`, `texto`, `pregunta`, `r_tema`, `r_situacion`, `r_ingreso`, `r_busca`, `r_cuando`, y como
+métricas `deduccion`, `regresa`. Marcar como evento clave: `guia_enviada`, `agendar_resultado`,
+`agenda_abierta` y el `clic_saliente` a WhatsApp.
 
 "Origen" son `origen_fuente` (utm_source, o el dominio de origen, o `directo`), `origen_medio`,
 `origen_campana`, `origen_contenido`, `origen_referente`, `aterrizaje` y `pagina`. Para verlos como

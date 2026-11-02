@@ -13,6 +13,18 @@ import Base from '../layouts/Base.astro';
   </main>
   <Pie />
 </Base>
+<script>
+  import { medir } from '../lib/medir';
+
+  // Ligas rotas: qué ruta buscaron y, si el clic salió de una página nuestra, cuál es (así se
+  // arregla la liga). Si vino de fuera, solo el dominio.
+  let desde: string | undefined;
+  try {
+    const ref = new URL(document.referrer);
+    desde = ref.hostname === location.hostname ? ref.pathname.slice(0, 120) : ref.hostname;
+  } catch { /* sin referente */ }
+  medir('pagina_no_encontrada', { ruta: location.pathname.slice(0, 120), desde });
+</script>
 <style>
   .nada { padding-block: clamp(48px, 10vw, 140px) 0; }
   h1 { margin: 22px 0 0; font-size: var(--t-h2); }

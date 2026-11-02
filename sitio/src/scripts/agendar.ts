@@ -5,6 +5,7 @@
  */
 
 import { DESTINOS, salida, type Respuestas } from '../lib/agendar';
+import { formularioCompleto, formularioError } from '../lib/comportamiento';
 import { medir } from '../lib/medir';
 import { paraMedicion } from '../lib/origen';
 import { whatsappUrl } from '../lib/sitio';
@@ -42,6 +43,14 @@ export function iniciarAgendar(): void {
     return r as Respuestas;
   };
 
+  // Quién es la gente que llega a la consulta: las cinco opciones que ya trae el formulario (son
+  // categorías de una lista, no texto libre). Solo a GA4; jamás al pixel de Meta. Nada de lo que
+  // se escribe (caso, nombre, correo, WhatsApp) sale de aquí.
+  const perfil = () => {
+    const r = respuestas() as unknown as Record<string, string>;
+    return { r_tema: r.tema, r_situacion: r.situacion, r_ingreso: r.ingreso, r_busca: r.busca, r_cuando: r.cuando };
+  };
+
   const ir = (n: number, enfocar = true) => {
     actual = n;
     pasos.forEach((p, i) => (p.hidden = i !== n));
@@ -60,7 +69,8 @@ export function iniciarAgendar(): void {
 
   const mostrarSalida = (s: NonNullable<ReturnType<typeof salida>>) => {
     // Solo la categoría de la salida (tramite, empresa, paquete-anual...), no las respuestas.
-    medir('agendar_resultado', { resultado: 'salida', salida: s, ...paraMedicion() });
+    medir('agendar_resultado', { resultado: 'salida', salida: s, ...paraMedicion(), ...perfil() });
+    formularioCompleto('agendar');
     const d = DESTINOS[s];
     panelSalida.querySelector('[data-titulo]')!.textContent = d.titulo;
     panelSalida.querySelector('[data-texto]')!.textContent = d.texto;
@@ -85,7 +95,10 @@ export function iniciarAgendar(): void {
   });
 
   form.addEventListener('click', (e) => {
-    if ((e.target as HTMLElement).closest('[data-atras]')) ir(Math.max(0, actual - 1));
+    if ((e.target as HTMLElement).closest('[data-atras]')) {
+      medir('agendar_atras', { desde_paso: actual + 1 });
+      ir(Math.max(0, actual - 1));
+    }
   });
   panelSalida.querySelector('[data-reiniciar]')!.addEventListener('click', () => ir(0));
 
@@ -95,6 +108,7 @@ export function iniciarAgendar(): void {
     form.querySelectorAll('[aria-invalid]').forEach((c) => c.removeAttribute('aria-invalid'));
     const el = (n: string) => form.elements.namedItem(n) as HTMLInputElement;
     const falta = (campo: HTMLInputElement, msg: string) => {
+      formularioError('agendar', campo.name);
       campo.setAttribute('aria-invalid', 'true');
       error.textContent = msg;
       error.hidden = false;
@@ -130,12 +144,14 @@ export function iniciarAgendar(): void {
       panelPasa.querySelector<HTMLAnchorElement>('[data-transferencia]')!.href = whatsappUrl(
         `Hola, soy ${nombre}. Pasé la precalificación de la consulta 1:1 y quiero pagar por transferencia.`,
       );
-      medir('agendar_resultado', { resultado: 'pasa', ...paraMedicion() });
+      medir('agendar_resultado', { resultado: 'pasa', ...paraMedicion(), ...perfil() });
+      formularioCompleto('agendar');
       form.hidden = true;
       panelPasa.hidden = false;
       puntos.forEach((p) => p.classList.add('hecho'));
       panelPasa.focus();
     } catch (err) {
+      formularioError('agendar', 'servidor');
       error.textContent = `${(err as Error).message} Inténtalo de nuevo o escríbenos por WhatsApp.`;
       error.hidden = false;
     } finally {

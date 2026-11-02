@@ -1,5 +1,6 @@
 /** Formulario de "La guía": valida, manda a /api/guia y celebra con billetes. */
 
+import { formularioCompleto, formularioError } from '../lib/comportamiento';
 import { medir, medirMeta } from '../lib/medir';
 import { paraMedicion } from '../lib/origen';
 import { lluviaDeBilletes } from './movimiento';
@@ -14,6 +15,7 @@ export function iniciarGuia(): void {
   const boton = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
 
   const marcar = (campo: HTMLInputElement, msg: string) => {
+    formularioError('guia', campo.name);
     campo.setAttribute('aria-invalid', 'true');
     error.textContent = msg;
     error.hidden = false;
@@ -48,7 +50,10 @@ export function iniciarGuia(): void {
       if (datos.status !== 'already') {
         medir('guia_enviada', { con_whatsapp: Boolean(wa), ...paraMedicion() });
         medirMeta('Lead', { content_name: 'guia' });
+      } else {
+        medir('guia_repetida', { pagina: location.pathname });
       }
+      formularioCompleto('guia');
       lluviaDeBilletes(boton);
       const pila = nombre.value.trim().split(/\s+/)[0];
       listo.querySelector('p')!.textContent =
@@ -59,6 +64,7 @@ export function iniciarGuia(): void {
       listo.hidden = false;
       listo.focus();
     } catch (err) {
+      formularioError('guia', 'servidor');
       error.textContent = (err as Error).message;
       error.hidden = false;
       boton.disabled = false;

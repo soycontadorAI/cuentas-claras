@@ -75,11 +75,13 @@ const activo = Boolean(ga || pixel);
 {activo && (
   <script>
     import { capturarOrigen, paraMedicion } from '../lib/origen';
+    import { iniciarComportamiento } from '../lib/comportamiento';
     import { hayPixel, medir, medirMeta, type EventoMeta } from '../lib/medir';
 
     // El origen se guarda antes que cualquier evento: es lo que liga un alta o un clic a la
     // agenda con la historia, el video o el sitio que trajo a la persona. Ver lib/origen.ts.
     capturarOrigen();
+    iniciarComportamiento();
 
     // /listo es a donde regresa Sendy cuando la persona confirma su correo: el alta quedó firme.
     if (location.pathname.replace(/\/$/, '') === '/listo') medir('guia_confirmada', paraMedicion());
@@ -97,6 +99,11 @@ const activo = Boolean(ga || pixel);
       return null;
     };
 
+    /** Dónde de la página está el enlace: el id de su sección, o nav/header/footer. */
+    const dondeEsta = (el: Element): string =>
+      el.closest('section[id]')?.id || el.closest('nav,header,footer')?.tagName.toLowerCase() || 'cuerpo';
+    const textoDe = (el: Element): string => (el.textContent ?? '').replace(/\s+/g, ' ').trim().slice(0, 40);
+
     // Delegado en el documento: cubre toda liga de toda página (incluidas las que /agendar
     // arma después de la precalificación) sin tocar cada una.
     document.addEventListener('click', (e) => {
@@ -108,17 +115,39 @@ const activo = Boolean(ga || pixel);
       } catch {
         return;
       }
-      if (url.hostname === location.hostname) return;
+      // Dónde estaba y qué decía: el "lugar" es el utm_content que ya lleva la liga saliente.
+      const donde = { seccion: dondeEsta(enlace), texto: textoDe(enlace), pagina: location.pathname };
+
+      if (url.protocol === 'mailto:' || url.protocol === 'tel:') {
+        medir('clic_saliente', { destino: url.protocol === 'mailto:' ? 'correo' : 'telefono', ...donde });
+        return;
+      }
+      if (url.hostname === location.hostname) {
+        // Interno: a dónde sigue después de esta página (inicio a agenda, ancla a ancla, etc.).
+        const archivo = /\.(pdf|zip|xlsx?|docx?)$/i.test(url.pathname);
+        if (archivo) medir('descarga', { archivo: url.pathname.split('/').pop(), ...donde });
+        else medir('clic_interno', { destino: url.pathname + url.hash, ...donde });
+        return;
+      }
       const destino = destinoDe(url.hostname);
-      if (!destino) return;
+      const lugar = url.searchParams.get('utm_content') ?? undefined;
+      if (!destino) {
+        if (url.protocol === 'http:' || url.protocol === 'https:') {
+          medir('clic_saliente', { destino: 'otro', dominio: url.hostname.replace(/^www\./, ''), ...donde });
+        }
+        return;
+      }
 
       // A GA solo el destino y de qué página salió, más el origen en los dos de intención alta.
       let meta: EventoMeta | null = null;
       if (destino === 'agenda') {
-        medir('agenda_abierta', paraMedicion());
+        medir('agenda_abierta', { ...paraMedicion(), seccion: donde.seccion, texto: donde.texto });
         meta = 'Schedule';
       } else {
-        medir('clic_saliente', destino === 'whatsapp' ? { destino, ...paraMedicion() } : { destino, pagina: location.pathname });
+        medir(
+          'clic_saliente',
+          destino === 'whatsapp' ? { destino, lugar, ...donde, ...paraMedicion() } : { destino, lugar, ...donde },
+        );
         if (destino === 'whatsapp') meta = 'Contact';
       }
       if (!meta) return;

@@ -85,7 +85,7 @@ export const whatsappUrl = (texto?: string) =>
  */
 export const MEDICION = {
   /** GA4, la "ID de medición" del flujo web: "G-XXXXXXXXXX". */
-  ga: null as string | null,
+  ga: 'G-JZPW624DB5' as string | null,
   /** Pixel de Meta (ID del conjunto de datos, solo dígitos). Coincidencia avanzada APAGADA en el panel. */
   metaPixel: null as string | null,
 };
