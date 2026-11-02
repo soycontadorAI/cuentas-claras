@@ -23,6 +23,7 @@ con *Root Directory* `sitio`.
 | `design/assets/` | Recortes de Israel (webp) para miniaturas, y `stickers/` (2026-10-28): las 10 calcomanías de la marca en PNG transparente (video, posts) y SVG (HTML), con sus reglas en su `README.md` |
 | `design/landing/` | Bocetos de la landing. Primera ronda (2026-10-26): A libreta viva, B y C de registro. **Segunda ronda `v2/` (2026-11-02): elegida la 4, "libro mayor vivo"** (`v2/4-libro-mayor-vivo.html`): celdas de filete, pestañas de folder, calcomanías, motion ligado al scroll, Israel en el hero con la guía como único CTA y la calculadora en su propia celda. Ya construida en `sitio/` (portada, `/agendar`, `/listo`, 404, `/privacidad`, `/sistema`). Los billetes solo salen al suscribirse (nunca siguiendo al cursor). 1, 2 y 3 quedan de registro |
 | `sitio/` | El sitio en Astro (`cc.sicastro.com`): portada, `/agendar` (precalificación), `/privacidad`, `/sistema` (design system vivo), `llms.txt`. Leer `sitio/README.md` (publicación) y `sitio/DESIGN-SYSTEM.md` |
+| `sitio/src/lib/sitio.ts` (`MEDICION`) | Los IDs de GA4 (puesto) y del pixel de Meta (en `null`): en `null` no se mide nada; con ID, solo en producción. Eventos y cómo probar en `sitio/README.md`, "Medición" |
 | `docs/agendar-calendario.md` | Cómo configurar la agenda de Google Calendar con cobro por Stripe para la consulta 1:1 |
 | `design/historias/` | Instagram de @soyisraelcastro: `generar.py` arma `tableros/historias.html` (foto de perfil con sombra maíz o rosa, 5 portadas de destacados y sus historias) y `exportar.sh` saca los PNG a `salidas/historias/` |
 | `docs/instagram-destacadas-guiones.md` | Guiones en video de los destacados (Quién soy a cámara; Servicios, Preguntas y Agenda como consulta). Teleprompter en `social-studio/decks/2026-10-26-destacados-cuentas-claras.json`. Las láminas quedan de respaldo |
@@ -121,7 +122,7 @@ del guion o de Studio, no de memoria.
   Agenda (hyperframes-30-days, `videos/social/2026-10-27-destacados-cuentas-claras/`; enlaces en
   `docs/instagram-destacados-enlaces.md`). Falta **Testimonios**: Israel los va juntando; se llena la
   plantilla de `generar.py` con un cliente real y su permiso, y se anima igual que los demás.
-- Medición GA4 + Meta Pixel en la rama `medicion-ga4-meta` (apagada): faltan los dos IDs y decidir qué pixel.
+- Medición: GA4 puesto (`G-JZPW624DB5`, 2026-11-02) y activo solo en producción. Falta el Meta Pixel (`MEDICION.metaPixel`, en `null`: cuenta publicitaria y píxel por crear, coincidencia avanzada apagada) y, en GA4, registrar las dimensiones personalizadas y marcar los eventos clave (lista en `sitio/README.md`, "Medición").
 
 - Visto bueno de Israel a `docs/estrategia.md` y recorte de `docs/descripciones.md`.
 - Visto bueno al acompañamiento ($2,500) en `sicastro-v2/docs/paquetes.md` (rama

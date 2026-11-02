@@ -1,7 +1,8 @@
 ---
 /**
  * El esqueleto de cada página: meta, fuentes propias precargadas, la libreta de fondo y el
- * JSON-LD. Sin JavaScript de terceros: el 100 de Lighthouse depende de eso.
+ * JSON-LD. Sin JavaScript de terceros en el render: el 100 de Lighthouse depende de eso. La
+ * medición (Analytics.astro) solo existe en producción con IDs puestos, y carga después del load.
  */
 import '../styles/base.css';
 import '../styles/componentes.css';
@@ -10,6 +11,7 @@ import '../styles/componentes.css';
 import bricolage from '../assets/fuentes/bricolage-cc.woff2?url';
 import shrikhand from '@fontsource/shrikhand/files/shrikhand-latin-400-normal.woff2?url';
 
+import Analytics from '../components/Analytics.astro';
 import JsonLd from '../components/JsonLd.astro';
 import Simbolos from '../components/Simbolos.astro';
 import { SITIO } from '../lib/sitio';
@@ -61,6 +63,7 @@ const imagenUrl = new URL(imagen, SITIO.url).toString();
     `} />
     <script is:inline>document.documentElement.classList.add('js')</script>
     {grafo.length > 0 && <JsonLd grafo={grafo} />}
+    <Analytics />
   </head>
   <body>
     <a class="saltar" href="#contenido">Saltar al contenido</a>

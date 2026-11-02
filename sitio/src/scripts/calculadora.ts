@@ -1,5 +1,7 @@
 /** Calculadora de la portada: deducción × tasa marginal. No pide nada ni manda nada. */
 
+import { medir } from '../lib/medir';
+
 const mxn = (n: number) => '$' + Math.round(n).toLocaleString('es-MX');
 
 export function iniciarCalculadora(): void {
@@ -49,13 +51,24 @@ export function iniciarCalculadora(): void {
     contar((d * tasa) / 100);
   };
 
+  // Quién juega con la calculadora y con qué rango de deducción. Hasta 6 por visita, y solo al
+  // soltar el control: el arrastre no inunda GA. Son números del ejemplo, no de la persona.
+  let usos = 0;
+  const reportar = () => {
+    if (usos >= 6) return;
+    usos += 1;
+    medir('calculadora_usada', { uso: usos, deduccion: Number(rango.value), tasa, regresa: Math.round((Number(rango.value) * tasa) / 100) });
+  };
+
   rango.addEventListener('input', () => { calcular(); brinca(); });
+  rango.addEventListener('change', reportar);
   botones.forEach((b) =>
     b.addEventListener('click', () => {
       botones.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
       tasa = Number(b.dataset.tasa);
       calcular();
       brinca();
+      reportar();
     }),
   );
   calcular();
