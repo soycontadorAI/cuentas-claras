@@ -89,6 +89,7 @@ def parte4(texto: str) -> str:
     h += (
         f'<p class="botones"><a class="btn" href="{AGENDAR}">Agendar mi consulta</a>'
         f'<a class="btn claro" href="{DESPACHO}">Ir al despacho</a></p>'
+        '<p class="alterna">Si el botón no abre en tu lector de PDF, escribe <strong>cc.sicastro.com/agendar</strong> en tu navegador.</p>'
     )
     return h
 
@@ -217,6 +218,7 @@ li::marker {{ color: var(--rosa); }}
 /* Parte 4 y cierre */
 .botones {{ display: flex; gap: 4mm; margin: 6mm 0 2mm; }}
 .btn {{ display: inline-block; text-decoration: none; background: var(--cacao); color: var(--crema); font-weight: 800; font-size: 11pt; padding: 3mm 6mm; border-radius: 99px; box-shadow: 0 1mm 0 var(--rosa); }}
+.alterna {{ font-size: 9pt; color: var(--cacao-70); margin: 1mm 0 0; }}
 .btn.claro {{ background: var(--papel); color: var(--cacao); border: 1.2pt solid var(--cacao); box-shadow: none; }}
 .cierre {{ margin-top: 12mm; background: var(--papel); border: .9pt solid var(--cacao); border-radius: 1.6mm; padding: 6mm 7mm; }}
 .cierre p:last-child {{ font-weight: 800; margin: 0; }}
