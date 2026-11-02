@@ -29,14 +29,17 @@ import { CANAL, DESPACHO, PERSONA, conUtm } from '../lib/sitio';
 </footer>
 
 <style>
-  .pie { padding-block: 56px 40px; margin-top: clamp(64px, 9vw, 120px); border-top: 3px solid var(--cacao); background: rgba(255, 246, 232, .8); }
-  .envoltura { display: grid; grid-template-columns: minmax(0, 1.4fr) repeat(2, minmax(0, 1fr)); gap: 28px; }
+  .pie { margin-top: clamp(40px, 6vw, 80px); border-top: var(--linea); background: var(--papel); }
+  .envoltura { display: grid; grid-template-columns: minmax(0, 1.4fr) repeat(2, minmax(0, 1fr)); gap: 0; }
+  .envoltura > div { padding: 28px 24px 28px 0; }
+  .envoltura > div + div { padding-left: 24px; border-left: 1px solid var(--cacao-12); }
   .marca { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
-  .marca .rot { font-size: 21px; line-height: .9; }
-  h2 { margin: 0 0 10px; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; }
-  ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 4px; }
-  a:not(.marca) { display: inline-block; padding-block: 4px; text-decoration: none; border-bottom: 1.5px solid transparent; }
-  a:not(.marca):hover { border-color: var(--rosa); }
-  .chico { color: var(--cacao-70); font-size: 15px; max-width: 40ch; }
-  @media (max-width: 760px) { .envoltura { grid-template-columns: 1fr 1fr; } .envoltura > :first-child { grid-column: 1 / -1; } }
+  .marca .billete { width: 32px; height: 32px; }
+  .marca .rot { font-size: 18px; line-height: .9; }
+  h2 { margin: 0 0 10px; font-size: 12.5px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--cacao-70); line-height: 1.2; }
+  ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 2px; font-weight: 600; font-size: 15px; }
+  a:not(.marca) { display: inline-block; padding-block: 4px; text-decoration: none; }
+  a:not(.marca):hover { text-decoration: underline; text-decoration-color: var(--rosa); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+  .chico { margin: 12px 0 0; color: var(--cacao-70); font-size: 13.5px; max-width: 42ch; }
+  @media (max-width: 760px) { .envoltura { grid-template-columns: 1fr 1fr; } .envoltura > :first-child { grid-column: 1 / -1; } .envoltura > div + div { border-left: 0; padding-left: 0; } }
 </style>

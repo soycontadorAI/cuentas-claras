@@ -1,4 +1,4 @@
-/* Cuentas Claras · tokens del design system (identidad v2, boceto A "libreta viva").
+/* Cuentas Claras · tokens del design system (identidad v2; landing "libro mayor vivo", 2026-11-02).
    Fuente: cuentas-claras/design/DESIGN.md. Regla de color: el fondo SIEMPRE es la libreta crema;
    rosa y maíz solo marcan (palomitas, resaltador, estampas, separadores). Nunca de fondo de página. */
 :root {
@@ -26,10 +26,12 @@
   --t-h1: clamp(3rem, 1.6rem + 6.4vw, 7.4rem);
 
   /* Espacio y forma */
-  --ancho: 1180px;
+  --ancho: 1240px;
   --cuadro: 32px;        /* la cuadrícula de la libreta; los espacios grandes caen en múltiplos */
   --gutter: max(16px, env(safe-area-inset-left, 0px));
   --gutter-der: max(16px, env(safe-area-inset-right, 0px));
+  --linea: 1px solid var(--cacao);   /* el filete de las celdas, como las columnas de un libro de cuentas */
+  --hueco: 14px;
   --radio-s: 6px;
   --radio-m: 16px;
   --radio-l: 28px;

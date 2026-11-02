@@ -17,6 +17,26 @@ maíz quedan como acentos.
 | Símbolo: cuatro opciones sin letras | `tableros/logo-exploracion.html`. Ganó el billete palomeado (Israel) |
 | Qué va detrás del recorte en las miniaturas | `tableros/exploracion-recorte.html`. Ganó la 1: nada, el recorte con sombra (Israel). El círculo rosa se descartó |
 | El texto del banner | `tableros/exploracion-banner.html`. Ganó la 5: la frase con los temas arriba (Israel) |
+| Landing "libro mayor vivo" (2026-11-02) | `landing/v2/`. Ganó la 4. Cambia la estructura del sitio, los lives, la guía en PDF y la imagen para compartir, no la identidad. Ver abajo |
+
+## Línea de diseño de las superficies propias: "libro mayor vivo" (2026-11-02)
+
+La identidad (paleta, tipografía, símbolo, reglas de color) no cambia. Lo que cambia es **cómo se arma
+una superficie propia** (sitio, decks de los lives, la guía en PDF, la imagen para compartir): antes
+era "libreta viva" (separadores en píldora, fichas con sombra dura, hojas giradas); ahora es un libro de cuentas.
+
+- **Estructura quieta:** celdas de papel con filete fino de cacao (1px en pantalla, ~2px en 1920, 0.9pt
+  en PDF), radio chico (6px) y cifras tabulares. Sin rayado en los fondos de las celdas.
+- **El juego vive en los bordes:** la **pestaña de folder** (maíz, rosa hondo o cacao) que sobresale de la
+  celda y se rellena al pasar el mouse; calcomanías (`assets/stickers/`); notas adhesivas; el plumón que
+  encierra; el remate en Shrikhand, uno por pieza.
+- **Foto de Israel** en el hero, apoyada en la base de su celda; un solo CTA por bloque.
+- **Dónde vive cada una:** sitio → `sitio/DESIGN-SYSTEM.md` y `/sistema`; lives → `social-studio/
+  brands/cuentas-claras` (desde el segundo live, "Deducciones", `decks/cuentas-claras/2026-11-12-…`); guía →
+  `guia/generar.py`; imagen para compartir → `tableros/og.html` (exporta `salidas/og.png` y
+  `sitio/public/og.png`, 1200 × 630).
+- **No se rehace** lo ya publicado (miniaturas, historias y destacados de Instagram, el primer live):
+  lo nuevo sale con la línea nueva. Las miniaturas, banner, avatar y Short siguen con lo de arriba.
 
 ## El símbolo: billete palomeado
 

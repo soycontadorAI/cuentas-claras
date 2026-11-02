@@ -13,19 +13,22 @@ con *Root Directory* `sitio`.
 | `docs/estrategia.md` | El giro del 2026-10-26, avatar, datos de Studio, pilares, formato de series, la escalera de venta y la serie 1. **Estado: propuesta, falta el visto bueno de Israel** |
 | `docs/series.md` | Banco de 10 series con calendario por temporada (nov 2026 a dic 2027) y la reforma fiscal 2027 |
 | `docs/paquetes.md` | Solo referencia: qué paquete se ofrece en cada serie. Los paquetes y montos viven en `sicastro-v2/docs/paquetes.md` y `src/lib/honorarios.ts` |
+| `docs/prompt-miniaturas.md` | El prompt para pedir una miniatura (identidad del sitio, las tres plantillas, composición, prueba de 168 px) y el de escena sin letras para el modelo de imagen |
 | `docs/descripciones.md` | Descripción del canal, plantilla por video, comentario fijado, ejemplo de la serie 1. Borrador |
-| `design/DESIGN.md` | **La identidad vigente (v2)** y su historia. Leerlo antes de tocar cualquier pieza visual |
+| `design/DESIGN.md` | **La identidad vigente (v2)** y su historia. La línea de diseño del sitio y de los decks es el "libro mayor vivo" (ver `sitio/DESIGN-SYSTEM.md`). Leerlo antes de tocar cualquier pieza visual |
 | `design/PROPUESTAS.md` | Registro cerrado de las tres direcciones (A Acuse, B Señalética, C Amistades largas) |
 | `design/tokens.css`, `design/componentes.css` | Paleta y componentes (`.lockup`, `.recorte`, `.kicker`) que usan los tableros |
 | `design/tableros/*.html` | Tableros; `identidad-v2.html` es el vigente, los demás son registro |
 | `design/salidas/` | PNG exportados con Chrome sin interfaz (comando en `README.md` y `DESIGN.md`) |
-| `design/assets/` | Recortes de Israel (webp) para miniaturas |
-| `design/landing/` | Bocetos de la landing (2026-10-26). **Elegido: A, libreta viva** (artifact https://claude.ai/artifact/AFnc6JVxVsnX9rWCgqSeYk), con dos cosas de los otros: la calculadora de deducciones de C y los billetes de B, que solo salen al suscribirse (nunca siguiendo al cursor). B y C quedan de registro. Ya construido en `sitio/` |
+| `design/assets/` | Recortes de Israel (webp) para miniaturas, y `stickers/` (2026-10-28): las 10 calcomanías de la marca en PNG transparente (video, posts) y SVG (HTML), con sus reglas en su `README.md` |
+| `design/landing/` | Bocetos de la landing. Primera ronda (2026-10-26): A libreta viva, B y C de registro. **Segunda ronda `v2/` (2026-11-02): elegida la 4, "libro mayor vivo"** (`v2/4-libro-mayor-vivo.html`): celdas de filete, pestañas de folder, calcomanías, motion ligado al scroll, Israel en el hero con la guía como único CTA y la calculadora en su propia celda. Ya construida en `sitio/` (portada, `/agendar`, `/listo`, 404, `/privacidad`, `/sistema`). Los billetes solo salen al suscribirse (nunca siguiendo al cursor). 1, 2 y 3 quedan de registro |
 | `sitio/` | El sitio en Astro (`cc.sicastro.com`): portada, `/agendar` (precalificación), `/privacidad`, `/sistema` (design system vivo), `llms.txt`. Leer `sitio/README.md` (publicación) y `sitio/DESIGN-SYSTEM.md` |
-| `sitio/src/lib/sitio.ts` (`MEDICION`) | Los IDs de GA4 y del pixel de Meta: en `null` no se mide nada; con ID, solo en producción. Eventos y cómo probar en `sitio/README.md`, "Medición" |
+| `sitio/src/lib/sitio.ts` (`MEDICION`) | Los IDs de GA4 (puesto) y del pixel de Meta (en `null`): en `null` no se mide nada; con ID, solo en producción. Eventos y cómo probar en `sitio/README.md`, "Medición" |
 | `docs/agendar-calendario.md` | Cómo configurar la agenda de Google Calendar con cobro por Stripe para la consulta 1:1 |
 | `design/historias/` | Instagram de @soyisraelcastro: `generar.py` arma `tableros/historias.html` (foto de perfil con sombra maíz o rosa, 5 portadas de destacados y sus historias) y `exportar.sh` saca los PNG a `salidas/historias/` |
 | `docs/instagram-destacadas-guiones.md` | Guiones en video de los destacados (Quién soy a cámara; Servicios, Preguntas y Agenda como consulta). Teleprompter en `social-studio/decks/2026-10-26-destacados-cuentas-claras.json`. Las láminas quedan de respaldo |
+| `docs/instagram-destacados-enlaces.md` | Los enlaces con utm de los stickers de cada destacado y de la bio (`utm_campaign=cuentas-claras-destacados`, `utm_content=<id de la story>`) |
+| `docs/video-bienvenida-guion.md` | Guion del tráiler del canal (2026-10-28): un minuto a cámara, una sola grabación en 4K para 16:9 (YouTube) y 9:16 (Meta), con dos cierres. Borrador |
 | `docs/guia-hoja-del-anio.md` | Contenido de la guía gratis "La guía" (en IG: "Guía gratis para no fallar con el SAT"): cinco preguntas, calendario de 12 meses, checklist "si tienes X, haz Y" y el cierre a la consulta (sin montos). Aprobado el 2026-10-27; el PDF sale con `design/guia/generar.py` |
 
 ## Lo que no se re-discute
@@ -43,8 +46,11 @@ con *Root Directory* `sitio`.
 - **Se reorienta sin miedo:** 96% de espectadores nuevos y sin periodicidad previa, no hay
   comunidad que perder. Publicación semanal, un largo con su Short.
 - **Formato: la consulta, una duda por serie.** Cada serie arranca de la duda dicha como la diría
-  un cliente y lleva los videos que pida (casi siempre tres, no siempre: en el copy público se dice
-  "una duda, una serie", nunca "tres videos"). Cada video funciona solo (título = lo que se
+  un cliente y lleva los videos que pida (casi siempre tres, no siempre: nunca se dice "tres videos").
+  **El lema público es "Una duda, un video"** (Israel, 2026-10-28: "llama más la atención"; en el
+  live, "una duda, una sesión, cada semana"). Ya está en el sitio, `/sistema`, `llms.txt` y la guía.
+  Las stories publicadas se quedan con "una duda, una serie" y no se rehacen; lo nuevo va con el
+  lema nuevo. Falta el correo de bienvenida de Sendy (`docs/sendy-bienvenida.sql`). Cada video funciona solo (título = lo que se
   teclea), todos en una lista, la pantalla final al siguiente. Entre series, sueltos de trámite o error del SAT.
 - **Conversión en el mismo video:** "Aprende con nosotros, o déjalo en nuestras manos" (2026-10-27; antes "Hazlo tú", que invitaba a hacerlo solo; y antes "o te lo
   hacemos", cambiado el 2026-10-26) hacia `cc.sicastro.com/agendar`, con
@@ -111,6 +117,12 @@ pasa la prueba de 168 px, esquina inferior derecha libre. Las cifras, tiempos y 
 del guion o de Studio, no de memoria.
 
 ## Pendiente (al 2026-10-26)
+
+- **Destacados de Instagram (2026-10-27):** publicados en video los de Quién soy, Servicios, Preguntas y
+  Agenda (hyperframes-30-days, `videos/social/2026-10-27-destacados-cuentas-claras/`; enlaces en
+  `docs/instagram-destacados-enlaces.md`). Falta **Testimonios**: Israel los va juntando; se llena la
+  plantilla de `generar.py` con un cliente real y su permiso, y se anima igual que los demás.
+- Medición: GA4 puesto (`G-JZPW624DB5`, 2026-11-02) y activo solo en producción. Falta el Meta Pixel (`MEDICION.metaPixel`, en `null`: cuenta publicitaria y píxel por crear, coincidencia avanzada apagada) y, en GA4, registrar las dimensiones personalizadas y marcar los eventos clave (lista en `sitio/README.md`, "Medición").
 
 - Visto bueno de Israel a `docs/estrategia.md` y recorte de `docs/descripciones.md`.
 - Visto bueno al acompañamiento ($2,500) en `sicastro-v2/docs/paquetes.md` (rama

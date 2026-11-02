@@ -17,6 +17,9 @@ const primera = (clave: string): boolean => {
   return true;
 };
 
+/** Los bloques con id de la portada (celdas y cajones) y las secciones sueltas; no los paneles de resultado. */
+export const SECCIONES = 'main :is(.cel, .cajones, section):not(.resultado)[id]';
+
 const pagina = () => location.pathname;
 
 /** Cuánto de la página ya pasó por la pantalla: 25, 50, 75 y 100 %. */
@@ -49,7 +52,7 @@ function profundidad(): void {
 
 /** Qué secciones de la página llegaron a la parte media de la pantalla. */
 function secciones(): void {
-  const lista = document.querySelectorAll<HTMLElement>('main section[id]');
+  const lista = document.querySelectorAll<HTMLElement>(SECCIONES);
   if (!lista.length || !('IntersectionObserver' in window)) return;
   const io = new IntersectionObserver(
     (entradas) => {

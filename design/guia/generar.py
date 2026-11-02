@@ -89,6 +89,7 @@ def parte4(texto: str) -> str:
     h += (
         f'<p class="botones"><a class="btn" href="{AGENDAR}">Agendar mi consulta</a>'
         f'<a class="btn claro" href="{DESPACHO}">Ir al despacho</a></p>'
+        '<p class="alterna">Si el botón no abre en tu lector de PDF, escribe <strong>cc.sicastro.com/agendar</strong> en tu navegador.</p>'
     )
     return h
 
@@ -163,7 +164,7 @@ body {{ margin: 0; font-family: var(--display); color: var(--cacao); font-size: 
 .portada > * {{ position: relative; z-index: 1; }}
 .portada .marca {{ display: flex; align-items: center; gap: 3mm; font-weight: 800; font-size: 12pt; letter-spacing: .02em; }}
 .portada .marca .billete {{ width: 13mm; height: 13mm; }}
-.portada .etiqueta {{ display: inline-block; margin-top: 30mm; background: var(--rosa-hondo); color: var(--crema); font-weight: 800; font-size: 9pt; letter-spacing: .14em; text-transform: uppercase; padding: 1.6mm 3.5mm; border-radius: 99px; }}
+.portada .etiqueta {{ display: inline-block; margin-top: 30mm; background: var(--maiz); color: var(--cacao); border: .9pt solid var(--cacao); border-bottom: 0; font-weight: 800; font-size: 9pt; letter-spacing: .1em; text-transform: uppercase; padding: 1.8mm 4.5mm 1.4mm; border-radius: 2.4mm 2.4mm 0 0; }}
 .portada h1 {{ font-family: var(--rotulo); font-weight: 400; color: var(--rosa); font-size: 88pt; line-height: .95; margin: 6mm 0 0; }}
 .portada .bajada {{ font-size: 25pt; font-weight: 800; font-stretch: 92%; line-height: 1.12; max-width: 105mm; margin: 6mm 0 0; }}
 .portada .bajada span {{ background: linear-gradient(transparent 52%, var(--maiz) 52%, var(--maiz) 92%, transparent 92%); }}
@@ -174,8 +175,12 @@ body {{ margin: 0; font-family: var(--display); color: var(--cacao); font-size: 
 .portada .firma {{ position: absolute; left: 30mm; bottom: 20mm; font-size: 10pt; font-weight: 700; color: var(--cacao-70); }}
 
 /* Texto corrido */
-h2 {{ font-weight: 800; font-stretch: 92%; font-size: 24pt; line-height: 1.05; margin: 0 0 5mm; }}
-h2 .num {{ display: block; font-size: 9pt; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--rosa-hondo); margin-bottom: 2mm; }}
+/* Libro mayor vivo (2026-11-02): cada parte abre con una pestaña de folder sobre un filete */
+h2 {{ position: relative; font-weight: 800; font-stretch: 92%; font-size: 24pt; line-height: 1.05; margin: 0 0 5mm; padding-top: 5mm; border-top: .9pt solid var(--cacao); }}
+h2 .num {{ position: absolute; top: 0; left: 4mm; transform: translateY(-100%); display: block; background: var(--maiz); color: var(--cacao); border: .9pt solid var(--cacao); border-bottom: 0; border-radius: 2.4mm 2.4mm 0 0; padding: 1.3mm 4.5mm .9mm; font-size: 8.6pt; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }}
+.seccion, .parte1 {{ padding-top: 7mm; }}
+.checklist li {{ margin-bottom: 1.1mm; }}
+.antes {{ margin-top: 9mm; }}
 h3 {{ font-weight: 800; font-size: 14pt; line-height: 1.2; margin: 7mm 0 2.5mm; break-after: avoid; }}
 h3 + p {{ break-before: avoid; }}
 p:has(+ table) {{ break-after: avoid; }}
@@ -183,9 +188,9 @@ p {{ margin: 0 0 2.6mm; orphans: 3; widows: 3; }}
 strong {{ font-weight: 800; }}
 a {{ color: var(--rosa-hondo); font-weight: 700; }}
 .seccion {{ break-before: page; }}
-.antes {{ background: var(--papel); border: 1.2pt solid var(--cacao); border-radius: 4mm; padding: 6mm 7mm; box-shadow: 2mm 2mm 0 var(--cacao); margin-bottom: 9mm; }}
-.antes h2 {{ font-size: 16pt; margin-bottom: 3mm; }}
-.fundamento {{ font-size: 8.4pt; line-height: 1.4; color: var(--cacao-70); border-top: .8pt dashed var(--cacao-12); padding-top: 1.6mm; margin-top: 3mm; }}
+.antes {{ background: var(--papel); border: .9pt solid var(--cacao); border-radius: 1.6mm; padding: 6mm 7mm; margin-bottom: 9mm; }}
+.antes h2 {{ font-size: 16pt; margin-bottom: 3mm; padding-top: 0; border-top: 0; }}
+.fundamento {{ font-size: 8.4pt; line-height: 1.4; color: var(--cacao-70); border-top: .7pt solid var(--cacao-12); padding-top: 1.6mm; margin-top: 3mm; }}
 table {{ width: 100%; border-collapse: collapse; margin: 3mm 0 4mm; font-size: 9.4pt; break-inside: avoid; background: var(--papel); }}
 th {{ text-align: left; font-weight: 800; border-bottom: 1.6pt solid var(--cacao); padding: 1.8mm 2mm; }}
 td {{ border-bottom: .7pt solid var(--cacao-12); padding: 1.6mm 2mm; vertical-align: top; }}
@@ -196,13 +201,13 @@ li::marker {{ color: var(--rosa); }}
 
 /* Parte 2: el calendario, para el refri */
 .meses {{ list-style: none; padding: 0; margin: 5mm 0; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3mm; }}
-.meses li {{ background: var(--papel); border: 1.1pt solid var(--cacao); border-radius: 3mm; padding: 3.2mm 3.6mm; min-height: 33mm; margin: 0; }}
+.meses li {{ background: var(--papel); border: .9pt solid var(--cacao); border-radius: 1.6mm; padding: 3.2mm 3.6mm; min-height: 33mm; margin: 0; }}
 .meses .mes {{ display: block; font-weight: 800; font-size: 12pt; margin-bottom: 1.2mm; }}
 .meses .que {{ font-size: 9.6pt; line-height: 1.35; }}
-.meses .clave {{ border: 1.8pt solid var(--rosa); box-shadow: 1.6mm 1.6mm 0 var(--rosa); }}
+.meses .clave {{ border: 1.8pt solid var(--rosa); }}
 .meses .clave .mes {{ color: var(--rosa-hondo); }}
 .intro {{ font-size: 11.4pt; }}
-.cada-mes {{ background: var(--maiz); border-radius: 3mm; padding: 3.6mm 5mm; font-size: 10.4pt; }}
+.cada-mes {{ background: var(--maiz); border: .9pt solid var(--cacao); border-radius: 1.6mm; padding: 3.6mm 5mm; font-size: 10.4pt; }}
 
 /* Parte 3: las casillas */
 .checklist p strong:only-child {{ display: block; font-size: 12.5pt; margin: 5mm 0 1.4mm; padding-bottom: 1mm; border-bottom: 1.4pt solid var(--cacao); break-after: avoid; }}
@@ -212,9 +217,10 @@ li::marker {{ color: var(--rosa); }}
 
 /* Parte 4 y cierre */
 .botones {{ display: flex; gap: 4mm; margin: 6mm 0 2mm; }}
-.btn {{ display: inline-block; text-decoration: none; background: var(--cacao); color: var(--crema); font-weight: 800; font-size: 11pt; padding: 3mm 6mm; border-radius: 99px; box-shadow: 1.2mm 1.2mm 0 var(--rosa); }}
+.btn {{ display: inline-block; text-decoration: none; background: var(--cacao); color: var(--crema); font-weight: 800; font-size: 11pt; padding: 3mm 6mm; border-radius: 99px; box-shadow: 0 1mm 0 var(--rosa); }}
+.alterna {{ font-size: 9pt; color: var(--cacao-70); margin: 1mm 0 0; }}
 .btn.claro {{ background: var(--papel); color: var(--cacao); border: 1.2pt solid var(--cacao); box-shadow: none; }}
-.cierre {{ margin-top: 12mm; background: var(--papel); border: 1.2pt dashed var(--cacao); border-radius: 4mm; padding: 6mm 7mm; }}
+.cierre {{ margin-top: 12mm; background: var(--papel); border: .9pt solid var(--cacao); border-radius: 1.6mm; padding: 6mm 7mm; }}
 .cierre p:last-child {{ font-weight: 800; margin: 0; }}
 </style>
 </head>

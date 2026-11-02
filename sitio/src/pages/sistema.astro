@@ -4,7 +4,11 @@
  * con su regla. Interno: noindex, fuera del sitemap y bloqueado en robots.txt.
  * La explicación larga está en DESIGN-SYSTEM.md.
  */
+import { Image } from 'astro:assets';
+
 import Base from '../layouts/Base.astro';
+
+import stCalculadora from '../assets/stickers/calculadora.png';
 
 const COLORES = [
   { var: '--crema', hex: '#FFF6E8', uso: 'La libreta. Fondo de todo, siempre.' },
@@ -19,9 +23,9 @@ const COLORES = [
 <Base titulo="Design system" noindex>
   <main id="contenido" class="envoltura sistema">
     <header class="cab">
-      <span class="separador">Design system</span>
-      <h1 class="disp">La libreta <span class="resaltado">viva.</span></h1>
-      <p class="intro">Todo pasa sobre la libreta crema. El rosa y el maíz solo marcan: palomean, subrayan, encierran, pegan notas. El movimiento es el de alguien que va llenando la libreta.</p>
+      <p class="etiqueta">Design system · libro mayor vivo</p>
+      <h1 class="disp">La libreta <span class="resaltado" data-resalta>viva.</span></h1>
+      <p class="intro">Todo pasa sobre la libreta crema. La estructura es de libro de cuentas: celdas de filete fino, cifras tabulares, pestañas de folder. El rosa y el maíz solo marcan: palomean, subrayan, encierran, pegan notas y calcomanías. El movimiento es el de alguien que va llenando la libreta.</p>
     </header>
 
     <section>
@@ -42,7 +46,7 @@ const COLORES = [
       <div class="tipos">
         <p class="disp" style="font-size: var(--t-h1)">El SAT en orden.</p>
         <p><code>.disp</code> · Bricolage Grotesque 800, ancho 92 · <code>--t-h1 / --t-h2</code></p>
-        <p class="disp" style="font-size: var(--t-h2)">Una duda, una serie.</p>
+        <p class="disp" style="font-size: var(--t-h2)">Una duda, un video.</p>
         <p class="rot" style="font-size: 3rem; color: var(--rosa)">o déjalo en nuestras manos.</p>
         <p><code>.rot</code> · Shrikhand · <b>un solo remate por pieza</b></p>
         <p class="etiqueta">Etiqueta · 13px · 700 · mayúsculas</p>
@@ -62,46 +66,54 @@ const COLORES = [
     </section>
 
     <section>
-      <h2 class="titulo">Separadores, chips y notas</h2>
-      <div class="fila">
-        <span class="separador">Maíz</span>
-        <span class="separador rosa">Rosa</span>
-        <span class="separador cacao">Cacao</span>
+      <h2 class="titulo">Celdas y pestañas</h2>
+      <div class="tres">
+        <div class="cel" style="margin-top: 30px"><span class="pestana">Maíz</span><h3>La celda</h3><p class="chica">Papel con filete de 1px, radio de 6px, sin sombra. Es la unidad de todo el sitio.</p></div>
+        <div class="cel" style="margin-top: 30px"><span class="pestana rosa">Rosa</span><h3>La pestaña</h3><p class="chica">Pasa el mouse: sube con su texto y se rellena hasta la celda. Sale del expediente, nunca flota.</p></div>
+        <div class="cel oscura" style="margin-top: 30px"><span class="pestana cacao">Cacao</span><h3 class="disp">La que pesa</h3><p class="chica">La celda oscura es para lo que pesa: la duda y el formulario.</p></div>
+      </div>
+      <p class="regla">Maíz para lo general, rosa hondo para "tu declaración" y "sin rodeos", cacao para lo que cierra. Las celdas se acomodan en un bento de 12 columnas con 54px entre filas (la pestaña ocupa ese espacio).</p>
+    </section>
+
+    <section>
+      <h2 class="titulo">Calcomanías, notas y chips</h2>
+      <div class="cel" style="margin-top: 30px; min-height: 180px"><span class="pestana">Calcomanía</span><Image class="sticker" data-pega style="--g: 7deg" src={stCalculadora} alt="" width={76} height={94} /><p class="chica" style="margin-top: 0">Una o dos por celda, en la esquina de arriba, giradas entre -10° y 10°. Llegan grandes y giradas, se pegan con rebote y derivan un poco con el scroll. Nunca tapan texto ni cifras. Los PNG viven en <code>design/assets/stickers/</code>.</p></div>
+      <div class="notas">
+        <span class="nota" style="position:relative">Maíz: la duda.</span>
+        <span class="nota papel" style="position:relative; --giro: 5deg">Papel: la otra duda.</span>
+        <span class="nota rosa" style="position:relative; --giro: 3deg">Rosa: la corta.</span>
       </div>
       <div class="fila" style="margin-top: 24px">
         <span class="chip"><i></i>Aguinaldo</span>
         <span class="chip" style="--c: var(--rosa)"><i></i>Inversiones</span>
         <span class="chip" style="--c: var(--cacao)"><i></i>Tu anual</span>
       </div>
-      <div class="notas">
-        <span class="nota" style="position:relative">Maíz: la duda.</span>
-        <span class="nota papel" style="position:relative; --giro: 5deg">Papel: la otra duda.</span>
-        <span class="nota rosa" style="position:relative; --giro: 3deg">Rosa: la corta.</span>
-      </div>
+      <p class="regla">Las notas solo salen en pantallas de 1240px o más, junto a la foto del hero. El sello giratorio "un canal · nuevo cada semana" es uno por página.</p>
     </section>
 
     <section>
-      <h2 class="titulo">Fichas, renglones y globo</h2>
+      <h2 class="titulo">Globo, videos, hoja con cinta y plumón</h2>
       <div class="dos">
-        <article class="ficha" style="margin-top: 30px">
-          <span class="pestana">SAT</span>
-          <h3>Ficha con pestaña</h3>
-          <p>Sombra dura de 6px. Al pasar el mouse, se levanta y se ladea.</p>
-          <ul class="palomeo"><li>Lista palomeada</li><li>Con plumón rosa</li></ul>
-        </article>
-        <div>
-          <div class="globo"><small>Globo</small>“La duda del cliente, tal cual.”</div>
-          <ol class="renglones" style="margin-top: 18px">
-            <li class="renglon" data-palomea data-entra><span class="casilla"><svg viewBox="0 0 40 40" aria-hidden="true"><path pathLength="1" d="M6 21 L16 31 L35 8"/></svg></span><div><span class="n">Renglón</span><h3>Se palomea al entrar</h3><p><code>data-palomea</code> + <code>data-entra</code></p></div></li>
+        <div class="cel oscura" style="margin-top: 30px">
+          <span class="pestana">Sobre cacao</span>
+          <p class="globo" style="margin-top: 0"><small>Globo</small>“La duda del cliente, tal cual.”</p>
+          <ol class="videos">
+            <li class="video" data-palomea data-entra><span class="caja"><svg viewBox="0 0 40 40" aria-hidden="true"><path pathLength="1" d="M6 21 L16 31 L35 8"/></svg></span><div><h4>Video: se palomea al entrar</h4><p><code>data-palomea</code> + <code>data-entra</code></p></div></li>
           </ol>
+        </div>
+        <div class="cel" style="margin-top: 30px">
+          <span class="pestana rosa">Hoja</span>
+          <div class="hoja"><p class="chica" style="margin: 0; padding: 14px 16px; background: var(--crema); border: 1px solid var(--cacao-12)">La hoja pegada con cinta de maíz: se endereza con el scroll. El plumón rosa encierra solo los meses que no se mueven.</p></div>
+          <ul class="palomeo"><li>Lista palomeada</li><li>Con plumón rosa</li></ul>
         </div>
       </div>
     </section>
 
     <section>
-      <h2 class="titulo">Formulario (panel cacao)</h2>
+      <h2 class="titulo">Formulario (celda oscura)</h2>
       <div class="dos">
-        <div class="panel">
+        <div class="cel oscura" style="margin-top: 30px">
+          <span class="pestana">Formulario</span>
           <h3 class="disp">Te la mandamos <span class="rot">gratis</span></h3>
           <div class="campos">
             <div class="campo"><label for="s-n">Campo</label><input id="s-n" placeholder="Texto de ejemplo" /></div>
@@ -110,7 +122,8 @@ const COLORES = [
             <p class="error">Mensaje de error, en rosa hondo sobre crema.</p>
           </div>
         </div>
-        <div class="panel">
+        <div class="cel oscura" style="margin-top: 30px">
+          <span class="pestana rosa">Opciones</span>
           <fieldset class="opciones">
             <legend class="disp" style="margin-bottom: 14px; font-size: 1.8rem">Opciones tipo tarjeta</legend>
             <label class="opcion"><input type="radio" name="s-o" checked /><span class="marca-op"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M8 21 L17 30 L33 10" /></svg></span><span>Escogida: maíz y se ladea</span></label>
@@ -128,8 +141,12 @@ const COLORES = [
           <tr><td>Titular que sube</td><td>CSS <code>@keyframes subir</code>, 1s, <code>--e-salida</code></td><td>Al cargar</td></tr>
           <tr><td>Palomita y subrayado del plumón</td><td><code>stroke-dashoffset</code> 1 → 0</td><td>Al cargar / al entrar (<code>data-palomea</code>)</td></tr>
           <tr><td>Resaltador de maíz</td><td><code>background-size</code> 0 → 100%</td><td>Al entrar (<code>data-resalta</code>)</td></tr>
-          <tr><td>Fichas y marcos que se acomodan</td><td>translate + rotate, <code>--e-rebote</code>, escalonado con <code>--i</code></td><td>Al entrar (<code>data-entra</code>)</td></tr>
-          <tr><td>Hoja que se endereza, foto que flota</td><td>Animación ligada al scroll (<code>animation-timeline: view()</code>)</td><td>Al hacer scroll (si el navegador la soporta)</td></tr>
+          <tr><td>Cajones y renglones que entran</td><td>Suben 18px y frenan (<code>--e-salida</code>), escalonados con <code>--i</code>. Sin giro ni rebote</td><td>Al entrar (<code>data-entra</code>)</td></tr>
+          <tr><td>Calcomanías</td><td>Llegan grandes y giradas y se pegan con <code>--e-rebote</code></td><td>Al entrar (<code>data-pega</code>)</td></tr>
+          <tr><td>Pestaña</td><td><code>translate</code> de -8px más una extensión del mismo color que rellena el hueco</td><td>Al pasar el mouse</td></tr>
+          <tr><td>Celdas que se asientan, hoja que se endereza, calcomanías que derivan, sello que gira, barra rosa de lectura</td><td>Animación ligada al scroll (<code>animation-timeline: view() / scroll(root)</code>)</td><td>Al hacer scroll (si el navegador la soporta)</td></tr>
+          <tr><td>Marquesina de preguntas</td><td>CSS <code>@keyframes correr</code>, 46s, en pausa con el mouse encima</td><td>Siempre</td></tr>
+          <tr><td>Total de la calculadora</td><td>Cuenta hasta la cifra y "brinca" con <code>--e-rebote</code></td><td>Al mover el control</td></tr>
           <tr><td>Billetes</td><td>Web Animations, 18 billetes en arco</td><td><b>Solo al suscribirse.</b> Nunca siguen al cursor</td></tr>
         </tbody>
       </table>
@@ -148,22 +165,24 @@ const COLORES = [
 
 <style>
   .sistema { padding-block: 48px 120px; }
-  .cab h1 { margin: 22px 0 0; font-size: var(--t-h2); }
+  .cab h1 { margin: 18px 0 0; font-size: var(--t-h2); }
   section { margin-top: 72px; }
-  .titulo { margin: 0 0 24px; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; font-weight: 800; border-bottom: 2px solid var(--cacao); padding-bottom: 8px; }
+  .titulo { margin: 0 0 24px; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; font-weight: 800; border-bottom: var(--linea); padding-bottom: 8px; max-width: none; }
   .muestras { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 18px; }
-  .muestra { margin: 0; background: var(--papel); border-radius: var(--radio-m); box-shadow: inset 0 0 0 2px var(--cacao-12); overflow: hidden; }
-  .muestra div { height: 96px; box-shadow: inset 0 -2px 0 var(--cacao-12); }
+  .muestra { margin: 0; background: var(--papel); border: var(--linea); border-radius: var(--radio-s); overflow: hidden; }
+  .muestra div { height: 96px; border-bottom: var(--linea); }
   .muestra figcaption { padding: 12px 14px; display: grid; gap: 4px; font-size: 14px; }
   .muestra span { color: var(--cacao-70); }
   code { font-size: .88em; background: var(--papel); padding: 1px 6px; border-radius: 6px; box-shadow: inset 0 0 0 1px var(--cacao-12); }
+  .oscura code { color: var(--cacao); }
   .regla { margin: 18px 0 0; color: var(--cacao-70); max-width: 70ch; }
   .tipos { display: grid; gap: 10px; }
   .tipos p { margin: 0; }
   .fila { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
   .notas { display: flex; flex-wrap: wrap; gap: 28px; margin-top: 40px; }
-  .dos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; align-items: start; }
+  .dos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 54px 32px; align-items: start; }
+  .tres { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 54px 22px; }
   .mov { width: 100%; border-collapse: collapse; font-size: 15px; }
   .mov th, .mov td { text-align: left; padding: 10px 12px 10px 0; border-bottom: 1.5px dashed var(--cacao-12); vertical-align: top; }
-  @media (max-width: 860px) { .dos { grid-template-columns: 1fr; } .mov { display: block; overflow-x: auto; } }
+  @media (max-width: 860px) { .dos, .tres { grid-template-columns: 1fr; } .mov { display: block; overflow-x: auto; } }
 </style>

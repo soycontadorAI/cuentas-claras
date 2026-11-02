@@ -7,12 +7,16 @@
  * Sin precio escrito aquí: el monto vive en sicastro.com/honorarios y Google lo muestra antes
  * de pagar.
  */
+import { Image } from 'astro:assets';
+
 import Barra from '../components/Barra.astro';
 import Pie from '../components/Pie.astro';
 import Base from '../layouts/Base.astro';
 import { BUSCA, CUANDO, INGRESO, SITUACION, TEMA } from '../lib/agendar';
 import { consulta, despacho, persona } from '../lib/schema';
 import { PRECIO_CONSULTA_URL, whatsappUrl } from '../lib/sitio';
+
+import stCalendario from '../assets/stickers/calendario.png';
 
 const PASOS = [
   { id: 'tema', pregunta: '¿Qué quieres resolver?', opciones: TEMA },
@@ -31,9 +35,9 @@ const TOTAL = PASOS.length + 1;
   <Barra />
   <main id="contenido" class="agendar">
     <div class="envoltura rejilla">
-      <div class="lado">
-        <span class="separador">Consulta 1:1</span>
-        <h1 class="disp">Tu caso, <span class="resaltado">con tus números.</span></h1>
+      <div class="cel lado">
+        <span class="pestana">Consulta 1:1</span>
+        <h1 class="disp">Tu caso, <span class="resaltado" data-resalta>con tus números.</span></h1>
         <p class="intro">Media hora por videollamada con Israel Castro, contador público. Sales sabiendo qué te toca y qué hacer. Incluye una llamada de seguimiento.</p>
         <ol class="como">
           <li><span class="num">1</span><div><b>Contestas seis preguntas</b><span>Para saber si la consulta es lo tuyo. Si no, te decimos qué sí (a veces es gratis).</span></div></li>
@@ -43,7 +47,9 @@ const TOTAL = PASOS.length + 1;
         <p class="precio">La consulta tiene costo. <a href={PRECIO_CONSULTA_URL} rel="noopener">Ver el precio en el despacho</a>.</p>
       </div>
 
-      <div class="panel" id="calificador">
+      <div class="cel oscura panel" id="calificador">
+        <span class="pestana rosa">Seis preguntas</span>
+        <Image class="sticker" data-pega style="--g: 7deg" src={stCalendario} alt="" width={80} height={83} />
         <div class="progreso" aria-hidden="true">
           {Array.from({ length: TOTAL }, (_, i) => <i data-punto={i}></i>)}
         </div>
@@ -114,35 +120,38 @@ const TOTAL = PASOS.length + 1;
 </script>
 
 <style>
-  .agendar { padding-block: clamp(32px, 6vw, 72px) 0; }
-  .rejilla { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(28px, 5vw, 64px); align-items: start; }
-  h1 { margin: 22px 0 0; font-size: clamp(2.6rem, 1.6rem + 4vw, 5rem); }
-  .como { list-style: none; margin: 32px 0 0; padding: 0; display: grid; gap: 14px; }
-  .como li { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 12px; }
-  .como .num { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--maiz); font-weight: 800; font-size: 15px; }
+  .agendar { padding-block: clamp(40px, 6vw, 72px) 0; }
+  .rejilla { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 54px clamp(20px, 3vw, 40px); align-items: start; }
+  .lado { padding: clamp(26px, 4vw, 48px); }
+  h1 { margin: 0; font-size: clamp(2.6rem, 1.6rem + 3.6vw, 4.6rem); max-width: 11ch; }
+  .lado :global(.intro) { margin-top: 18px; }
+  .como { list-style: none; margin: 28px 0 0; padding: 0; border-top: 1px solid var(--cacao-12); }
+  .como li { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--cacao-12); }
+  .como .num { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--maiz); box-shadow: inset 0 0 0 1px var(--cacao); font-weight: 800; font-size: 14px; }
   .como b { display: block; font-weight: 800; line-height: 1.25; }
   .como span:not(.num) { color: var(--cacao-70); font-size: 16px; }
-  .precio { margin: 28px 0 0; font-weight: 600; }
+  .precio { margin: 24px 0 0; font-weight: 600; }
   .precio a { font-weight: 700; text-decoration-color: var(--rosa); text-decoration-thickness: 2px; text-underline-offset: 3px; }
 
-  .panel { position: sticky; top: 96px; min-height: 560px; }
+  .panel { position: sticky; top: 96px; min-height: 560px; padding: clamp(24px, 4vw, 40px); }
+  .panel :global(.sticker) { right: 24px; top: -34px; width: 80px; }
   .progreso { display: flex; gap: 6px; }
-  .progreso i { flex: 1; height: 6px; border-radius: 3px; background: rgba(255, 246, 232, .2); transition: background-color .4s var(--e-salida); }
+  .progreso i { flex: 1; height: 4px; border-radius: 2px; background: rgba(255, 246, 232, .2); transition: background-color .4s var(--e-salida); }
   .progreso i:global(.hecho) { background: var(--maiz); }
-  .paso-de { margin: 10px 0 0; font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(255, 246, 232, .7); }
+  .paso-de { margin: 10px 0 0; font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(255, 246, 232, .7); font-variant-numeric: tabular-nums; }
   .paso { margin: 18px 0 0; padding: 0; border: 0; min-width: 0; }
   .paso:not([hidden]) { animation: entrar .45s var(--e-salida); }
   @keyframes entrar { from { opacity: 0; translate: 24px 0; } }
-  legend { padding: 0; margin-bottom: 18px; font-size: clamp(1.7rem, 1.2rem + 1.4vw, 2.3rem); line-height: 1.02; }
+  legend { padding: 0; margin-bottom: 18px; font-size: clamp(1.7rem, 1.2rem + 1.4vw, 2.3rem); line-height: 1.02; font-weight: 800; font-variation-settings: "wdth" 92, "opsz" 72; }
   .ayuda-paso { margin: -8px 0 16px; font-size: 15px; }
   .atras { margin-top: 18px; padding: 10px 0; border: 0; background: none; color: var(--crema); font: 700 15px var(--display); cursor: pointer; opacity: .8; }
   .atras:hover { opacity: 1; text-decoration: underline; text-decoration-color: var(--maiz); }
   .casilla-acepto a { color: var(--crema); }
   .resultado { outline: none; animation: entrar .5s var(--e-salida); }
   .resultado .rot { font-size: 2.4rem; color: var(--maiz); }
-  .resultado h2 { margin: 10px 0 0; }
+  .resultado h2 { margin: 10px 0 0; max-width: none; font-size: clamp(1.8rem, 1.3rem + 1.6vw, 2.6rem); }
   .resultado p { margin: 14px 0 22px; }
   .otra { display: inline-block; margin-top: 14px; color: var(--crema); font-weight: 700; text-decoration-color: var(--maiz); text-decoration-thickness: 2px; text-underline-offset: 3px; }
   .resultado .fino { margin-top: 18px; }
-  @media (max-width: 900px) { .rejilla { grid-template-columns: 1fr; } .panel { position: static; min-height: 0; } }
+  @media (max-width: 900px) { .rejilla { grid-template-columns: 1fr; } .panel { position: relative; min-height: 0; } }
 </style>

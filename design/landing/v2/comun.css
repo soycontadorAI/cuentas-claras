@@ -1,0 +1,15 @@
+/* Variantes v2 de la landing (2026-11-01). Las tres usan los tokens, la tipografía y los
+   componentes REALES del sitio (sitio/src/styles), sin copiarlos: si el DS cambia, cambian ellas.
+   Aquí vive solo lo que las tres comparten: un movimiento más quieto y el sprite del billete. */
+@import "../../../sitio/src/styles/base.css";
+@import "../../../sitio/src/styles/componentes.css";
+
+/* Revelado más calmado que el del sitio: sube poco y frena, sin giro ni rebote */
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-entra] { translate: 0 18px; rotate: 0deg; transition: opacity .9s var(--e-salida), translate 1.1s var(--e-salida); transition-delay: calc(var(--i, 0) * 90ms); }
+  .js [data-entra].visto { translate: 0 0; }
+}
+.js .nada { display: none; }
+a { text-underline-offset: 4px; }
+.btn { box-shadow: 0 3px 0 var(--rosa-hondo); }
+.tabular { font-variant-numeric: tabular-nums; }

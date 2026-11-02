@@ -75,7 +75,7 @@ const activo = Boolean(ga || pixel);
 {activo && (
   <script>
     import { capturarOrigen, paraMedicion } from '../lib/origen';
-    import { iniciarComportamiento } from '../lib/comportamiento';
+    import { SECCIONES, iniciarComportamiento } from '../lib/comportamiento';
     import { hayPixel, medir, medirMeta, type EventoMeta } from '../lib/medir';
 
     // El origen se guarda antes que cualquier evento: es lo que liga un alta o un clic a la
@@ -101,7 +101,7 @@ const activo = Boolean(ga || pixel);
 
     /** Dónde de la página está el enlace: el id de su sección, o nav/header/footer. */
     const dondeEsta = (el: Element): string =>
-      el.closest('section[id]')?.id || el.closest('nav,header,footer')?.tagName.toLowerCase() || 'cuerpo';
+      el.closest(SECCIONES)?.id || el.closest('nav,header,footer')?.tagName.toLowerCase() || 'cuerpo';
     const textoDe = (el: Element): string => (el.textContent ?? '').replace(/\s+/g, ' ').trim().slice(0, 40);
 
     // Delegado en el documento: cubre toda liga de toda página (incluidas las que /agendar

@@ -18,6 +18,9 @@ export default defineConfig({
   ],
   // El CSS va incrustado: con un solo archivo externo Lighthouse ya marca "render-blocking"
   build: { inlineStylesheets: 'always' },
+  // esbuild y no lightningcss: este último funde `animation-timeline` dentro del shorthand `animation`
+  // y los Chrome que aún no lo entienden tiran la declaración entera (se perdía todo el movimiento ligado al scroll)
+  vite: { build: { cssMinify: 'esbuild' } },
   prefetch: { prefetchAll: true, defaultStrategy: 'hover' },
   redirects: {
     // Alias que se dicen en video. 302 para poder repuntarlos sin pelear con la caché del navegador

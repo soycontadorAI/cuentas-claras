@@ -15,7 +15,7 @@ pnpm build      # .vercel/output
 
 | Ruta | Qué es |
 |---|---|
-| `/` | La portada (boceto A, "libreta viva"): qué hay en el canal, calculadora de deducciones, cinco preguntas, las series, la guía y quién está detrás |
+| `/` | La portada ("libro mayor vivo", 2026-11-02): Israel y la guía, marquesina, calculadora de deducciones, tres cajones, las series, quién está detrás, la guía, cinco preguntas y colaboraciones |
 | `/agendar` | Precalificación de la consulta 1:1 (seis pasos). Quien pasa recibe la página de citas de Google Calendar, que cobra con Stripe al reservar. Quien no, su salida: trámite, despacho, paquete o lo gratis |
 | `/privacidad` | Aviso de privacidad |
 | `/sistema` | El design system vivo (noindex, fuera del sitemap) |
@@ -74,7 +74,7 @@ soycontador-ai (`Analytics.astro`, `lib/medir.ts`, `lib/origen.ts`).
 |---|---|---|---|
 | `page_view` / `PageView` | GA4 / Meta | Cada página | (los de siempre; el PageView con `eventID`) |
 | `scroll_profundidad` | GA4 | Primera vez que se pasa el 25, 50, 75 y 100 % de la página | `porcentaje`, `pagina` |
-| `seccion_vista` | GA4 | Una sección (`main section[id]`) llega a la franja central de la pantalla | `seccion`, `pagina` |
+| `seccion_vista` | GA4 | Un bloque con id (celda `.cel`, `.cajones` o `section`, sin los paneles de resultado) llega a la franja central de la pantalla | `seccion`, `pagina` |
 | `permanencia` | GA4 | A los 15, 30, 60, 120 y 300 s con la pestaña a la vista | `segundos`, `pagina` |
 | `pregunta_abierta` | GA4 | Alguien abre una pregunta de la portada (no cuenta la que viene abierta) | `pregunta`, `pagina` |
 | `calculadora_usada` | GA4 | Al soltar el control o cambiar la tasa; hasta 6 por visita | `uso`, `deduccion`, `tasa`, `regresa` |

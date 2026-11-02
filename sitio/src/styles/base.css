@@ -31,6 +31,9 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   }
 }
 
+/* Las calcomanías y notas sobresalen de sus celdas; en el teléfono no deben ensanchar la página */
+main { overflow-x: clip; }
+
 a { color: inherit; }
 img { max-width: 100%; height: auto; display: block; }
 :focus-visible { outline: 3px solid var(--rosa); outline-offset: 3px; border-radius: 4px; }

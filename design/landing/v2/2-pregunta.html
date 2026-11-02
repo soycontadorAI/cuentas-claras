@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cuentas Claras · Variante 2 · La pregunta</title>
+<script>document.documentElement.classList.add('js')</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Shrikhand&display=swap">
+<link rel="stylesheet" href="comun.css">
+<style>
+/* VARIANTE 2 · LA PREGUNTA
+   Conversacional y centrada. Una sola columna angosta, una idea por pantalla y silencio entre
+   idea e idea. La portada no es un eslogan: es la duda tal como llega, con su "Depende." como
+   único remate. La calculadora se lee como una frase. Sin cacao de bloque: todo sobre la libreta. */
+:root { --col: 680px; --aire: clamp(88px, 12vw, 168px); }
+.col { width: 100%; max-width: var(--col); margin-inline: auto; padding-inline: var(--gutter); text-align: center; }
+.col.ancha { max-width: 880px; }
+section { padding-block: var(--aire) 0; }
+h2 { margin: 0; font-size: clamp(2.1rem, 1.3rem + 3vw, 3.8rem); letter-spacing: -.02em; text-wrap: balance; }
+.etiqueta { display: block; margin-bottom: 22px; }
+.intro { margin: 20px auto 0; max-width: 44ch; }
+
+/* Barra: tres partes, la marca al centro */
+.barra { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; max-width: var(--ancho); margin-inline: auto; padding: 22px var(--gutter-der) 0 var(--gutter); }
+.barra a { text-decoration: none; font-weight: 600; font-size: 15px; color: var(--cacao-70); transition: color .2s; }
+.barra a:hover { color: var(--cacao); }
+.barra .marca { display: flex; flex-direction: column; align-items: center; gap: 6px; color: var(--cacao); }
+.barra .marca .billete { width: 40px; height: 40px; }
+.barra .marca .rot { font-size: 18px; line-height: 1; white-space: nowrap; }
+.barra .der { justify-self: end; }
+@media (max-width: 560px) { .barra .izq { display: none; } .barra { grid-template-columns: auto 1fr; } .barra .marca { align-items: flex-start; flex-direction: row; } }
+
+/* Portada */
+.portada { padding-top: clamp(48px, 8vw, 104px); text-align: center; }
+.portada .etiqueta { margin-bottom: clamp(28px, 4vw, 44px); }
+h1 { margin: 0 auto; max-width: 15ch; font-size: clamp(2.7rem, 1.2rem + 6.2vw, 6rem); line-height: .96; letter-spacing: -.025em; text-wrap: balance; }
+.depende { display: block; margin-top: clamp(18px, 2.4vw, 30px); font-size: clamp(2.4rem, 1.4rem + 4vw, 4.6rem); color: var(--rosa); transform: rotate(-2deg); }
+.bajada { margin: clamp(24px, 3vw, 36px) auto 0; max-width: 34ch; font-size: clamp(1.1rem, 1rem + .5vw, 1.35rem); color: var(--cacao-70); line-height: 1.45; }
+.acciones { display: flex; flex-wrap: wrap; gap: 14px 26px; align-items: center; justify-content: center; margin-top: 32px; }
+/* Israel descansa sobre un filete: la figura se corta justo abajo de los brazos y el filete es el suelo */
+.suelo { margin-top: clamp(40px, 6vw, 72px); border-bottom: 1px solid var(--cacao); }
+.fig { position: relative; width: clamp(250px, 28vw, 340px); margin-inline: auto; aspect-ratio: 720 / 800; clip-path: inset(-60px -60px 0 -60px); }
+.fig img { width: 100%; height: auto; filter: drop-shadow(0 18px 22px rgba(59, 36, 24, .2)); }
+
+/* Lo que hay aquí: tres palabras */
+.tres { margin-top: clamp(36px, 5vw, 64px); }
+.tres .uno { padding-block: clamp(26px, 3.4vw, 40px); border-top: 1px solid var(--cacao-12); }
+.tres .uno:last-child { border-bottom: 1px solid var(--cacao-12); }
+.tres h3 { margin: 0; font-size: clamp(2.4rem, 1.4rem + 4.4vw, 4.8rem); font-weight: 800; line-height: .98; letter-spacing: -.03em; font-variation-settings: "wdth" 92, "opsz" 96; transition: color .3s; }
+.tres .uno:hover h3 { color: var(--rosa-hondo); }
+.tres p { margin: 12px auto 0; color: var(--cacao-70); max-width: 40ch; }
+.tres small { display: block; margin-top: 8px; font-size: 14.5px; font-weight: 600; letter-spacing: .02em; color: var(--cacao); }
+
+/* La calculadora como frase */
+.frase { margin: clamp(32px, 4vw, 52px) auto 0; max-width: 20em; font-weight: 700; font-size: clamp(1.6rem, 1.1rem + 2.2vw, 2.7rem); line-height: 1.42; letter-spacing: -.012em; font-variation-settings: "wdth" 94, "opsz" 48; text-wrap: balance; }
+.frase input, .frase select { font: inherit; font-weight: 800; color: var(--cacao); background: transparent; border: 0; border-bottom: 3px dotted var(--rosa); border-radius: 0; padding: 0 .1em; text-align: center; font-variant-numeric: tabular-nums; letter-spacing: inherit; font-variation-settings: inherit; cursor: pointer; -webkit-appearance: none; appearance: none; transition: background-color .2s; }
+.frase input { width: 4.3em; line-height: 1.1; padding-bottom: .02em; }
+.frase select { padding-right: .1em; }
+.frase input:hover, .frase select:hover { background: rgba(246, 195, 67, .35); }
+.frase input:focus-visible, .frase select:focus-visible { outline: 3px solid var(--rosa); outline-offset: 4px; background: rgba(246, 195, 67, .35); }
+.frase .total { color: var(--rosa); font-weight: 800; font-variant-numeric: tabular-nums; white-space: nowrap;
+  background: linear-gradient(var(--rosa), var(--rosa)) left calc(100% - 2px) / 100% 2px no-repeat; padding-bottom: 2px; }
+.deslizar { width: min(100%, 420px); margin: clamp(26px, 3vw, 40px) auto 0; display: block; }
+input[type="range"] { height: 30px; background: transparent; -webkit-appearance: none; appearance: none; cursor: pointer; }
+input[type="range"]::-webkit-slider-runnable-track { height: 2px; background: linear-gradient(90deg, var(--cacao) var(--p, 25%), var(--cacao-12) var(--p, 25%)); }
+input[type="range"]::-moz-range-track { height: 2px; background: var(--cacao-12); }
+input[type="range"]::-moz-range-progress { height: 2px; background: var(--cacao); }
+input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; margin-top: -10px; border-radius: 50%; background: var(--maiz); border: 2px solid var(--cacao); }
+input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: var(--maiz); border: 2px solid var(--cacao); }
+.nota-calc { margin: 18px auto 0; max-width: 50ch; font-size: 14px; color: var(--cacao-70); }
+
+/* Cada semana */
+.semana { margin: clamp(30px, 4vw, 52px) auto 0; padding: 0; list-style: none; max-width: 560px; text-align: left; }
+.semana li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 16px; align-items: baseline; padding: 18px 0; border-top: 1px solid var(--cacao-12); font-weight: 700; font-size: clamp(1.1rem, 1rem + .5vw, 1.3rem); line-height: 1.3; }
+.semana li:last-child { border-bottom: 1px solid var(--cacao-12); }
+.semana svg { width: 20px; height: 20px; overflow: visible; translate: 0 4px; }
+.semana path { fill: none; stroke: var(--rosa); stroke-width: 8; stroke-linecap: round; stroke-linejoin: round; }
+.semana span { display: block; margin-top: 4px; font-weight: 450; font-size: 16px; color: var(--cacao-70); }
+.viene { margin: 22px 0 0; font-size: 14.5px; font-weight: 600; color: var(--cacao-70); }
+
+/* Preguntas: el componente del DS, a una columna */
+.preguntas { margin-top: clamp(30px, 4vw, 52px); text-align: left; }
+.pregunta { border-top: 1px solid var(--cacao-12); }
+.pregunta:last-child { border-bottom: 1px solid var(--cacao-12); }
+.pregunta summary { padding: 22px 0; font-size: clamp(1.1rem, 1rem + .5vw, 1.35rem); }
+.pregunta summary .mas { width: 22px; height: 22px; background: none; border-radius: 0; }
+.pregunta summary .mas::before, .pregunta summary .mas::after { width: 16px; height: 2px; }
+.pregunta[open] summary .mas { background: none; box-shadow: none; }
+.pregunta p { margin-inline: 0; }
+
+/* Guía: una hoja, campos de renglón */
+.hoja-guia { margin: clamp(30px, 4vw, 52px) auto 0; max-width: 520px; padding: clamp(28px, 4vw, 44px); background: var(--papel); border: 1px solid var(--cacao); border-radius: var(--radio-s); text-align: left; box-shadow: 0 30px 50px -34px rgba(59, 36, 24, .45); }
+.hoja-guia .campo { margin-top: 22px; }
+.hoja-guia label { display: block; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; color: var(--cacao-70); }
+.hoja-guia label small { text-transform: none; letter-spacing: 0; font-weight: 500; }
+.hoja-guia input { width: 100%; min-height: 48px; padding: 0; border: 0; border-bottom: 2px solid var(--cacao-12); border-radius: 0; background: transparent; font: 600 19px var(--display); color: var(--cacao); transition: border-color .25s; }
+.hoja-guia input::placeholder { color: var(--cacao-40); font-weight: 500; }
+.hoja-guia input:focus { outline: none; border-color: var(--rosa); }
+.hoja-guia .btn { margin-top: 32px; width: 100%; }
+.hoja-guia .fino { margin: 16px 0 0; font-size: 13.5px; color: var(--cacao-70); text-align: center; }
+.hoja-guia .fino a { color: var(--cacao); }
+.trae-linea { margin: 22px auto 0; max-width: 46ch; font-size: 15.5px; color: var(--cacao-70); }
+.trae-linea b { color: var(--cacao); font-weight: 700; }
+
+/* Quién */
+.quien .suelo { margin: 0 auto 34px; max-width: 460px; }
+.quien .fig { width: 210px; aspect-ratio: 900 / 1040; }
+blockquote { margin: 0 auto; max-width: 20em; font-weight: 800; font-size: clamp(1.7rem, 1.1rem + 2.2vw, 2.8rem); line-height: 1.08; letter-spacing: -.02em; font-variation-settings: "wdth" 92, "opsz" 72; text-wrap: balance; }
+.firma { margin: 22px auto 0; max-width: 42ch; color: var(--cacao-70); }
+.firma strong { color: var(--cacao); }
+.manos { margin-top: clamp(56px, 8vw, 96px); }
+.manos p { margin: 0 auto; max-width: 14em; font-weight: 800; font-size: clamp(1.8rem, 1.1rem + 2.6vw, 3.2rem); line-height: 1.08; letter-spacing: -.02em; font-variation-settings: "wdth" 92, "opsz" 72; text-wrap: balance; }
+.manos .rot { display: block; margin-top: 10px; color: var(--rosa); font-size: .92em; letter-spacing: 0; }
+.manos .btn { margin-top: 30px; }
+
+/* Pie */
+.pie { margin-top: var(--aire); padding: 36px var(--gutter) 48px; border-top: 1px solid var(--cacao-12); text-align: center; font-size: 14.5px; color: var(--cacao-70); }
+.pie nav { display: flex; flex-wrap: wrap; gap: 6px 24px; justify-content: center; font-weight: 600; }
+.pie a { text-decoration: none; color: var(--cacao); }
+.pie a:hover { text-decoration: underline; text-decoration-color: var(--rosa); }
+.pie p { margin: 18px auto 0; max-width: 62ch; }
+</style>
+</head>
+<body>
+<div class="hoja-fondo" aria-hidden="true"></div>
+
+<header class="barra">
+  <a class="izq" href="#series">El canal</a>
+  <a class="marca" href="#"><svg class="billete" aria-hidden="true"><use href="#billete"/></svg><span class="rot">Cuentas Claras</span></a>
+  <a class="der" href="#guia">La guía gratis</a>
+</header>
+
+<main>
+  <section class="portada">
+    <div class="col ancha">
+      <span class="etiqueta">El SAT y tu dinero, en orden.</span>
+      <h1 class="disp">“Si solo tengo sueldo, ¿tengo que declarar?”<span class="rot depende">Depende.</span></h1>
+      <p class="bajada">Así llega casi siempre la duda. Aquí te decimos de qué depende, con números: una duda, un video, cada semana.</p>
+      <div class="acciones">
+        <a class="btn" href="#guia">Quiero la guía</a>
+        <a class="enlace-flecha" href="#series"><svg width="28" height="20" aria-hidden="true"><use href="#yt"/></svg><span>Ver el canal</span></a>
+      </div>
+    </div>
+    <div class="col ancha"><div class="suelo"><div class="fig"><img src="../img/israel-cruzado.webp" alt="Israel Castro, contador público, con los brazos cruzados" width="720" height="961"></div></div></div>
+  </section>
+
+  <section id="encuentras">
+    <div class="col">
+      <span class="etiqueta">Qué hay aquí</span>
+      <h2 class="disp" data-entra>Lo que te preguntas, <span class="resaltado" data-resalta>resuelto en un video.</span></h2>
+      <div class="tres">
+        <div class="uno" data-entra><h3>SAT</h3><p>Tus trámites, sin perderte en el portal.</p><small>RFC y e.firma · Constancia de situación fiscal · Buzón tributario y cartas</small></div>
+        <div class="uno" data-entra><h3>Tu declaración</h3><p>La anual, sin sorpresas.</p><small>Obligación · Deducciones personales · Saldos a favor</small></div>
+        <div class="uno" data-entra><h3>Tus números</h3><p>Lo que entra, lo que sale y lo que te queda.</p><small>Ingresos extra · Finanzas sanas · Estados financieros básicos</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="calcula">
+    <div class="col ancha">
+      <span class="etiqueta">Pruébalo</span>
+      <h2 class="disp" data-entra>¿Cuánto te regresa <span class="resaltado" data-resalta>una deducción?</span></h2>
+      <p class="intro">Menos de lo que crees. Muévele, no te pedimos nada.</p>
+      <p class="frase" aria-live="polite">Si deduces <input id="monto" type="text" inputmode="numeric" value="$20,000" aria-label="Lo que deduces en el año (doctor, dentista, seguro de gastos médicos, lentes)"> al año y tu tasa más alta es <select id="tasa" aria-label="Tu tasa más alta (sube con lo que ganas)"><option value="10.88">10.88%</option><option value="16">16%</option><option value="21.36" selected>21.36%</option><option value="23.52">23.52%</option><option value="30">30%</option></select>, te regresan, más o menos, <span class="total" id="regresa">$4,272</span>.</p>
+      <input class="deslizar" id="rango" type="range" min="1000" max="80000" step="1000" value="20000" aria-label="Lo que deduces en el año">
+      <p class="nota-calc">Doctor, dentista, seguro de gastos médicos, lentes. Tasas de la tarifa anual del artículo 152 de la LISR; las deducciones tienen topes y requisitos: es un ejemplo, cada caso tiene sus detalles.</p>
+    </div>
+  </section>
+
+  <section id="series">
+    <div class="col">
+      <span class="etiqueta">Cada semana</span>
+      <h2 class="disp" data-entra>Una duda, <span class="resaltado" data-resalta>un video.</span></h2>
+      <p class="intro">Como una consultoría, cada semana y sin costo. Cada video arranca con la pregunta tal cual y la contesta completa.</p>
+      <ol class="semana">
+        <li data-entra data-palomea style="--i:0"><svg viewBox="0 0 40 40" aria-hidden="true"><path pathLength="1" d="M6 21 L16 31 L35 8"/></svg><div>Cuándo sí estás obligado (y cuándo no)<span>El monto que lo cambia todo, dos patrones a la vez y qué pasa si te sale a pagar.</span></div></li>
+        <li data-entra data-palomea style="--i:1"><svg viewBox="0 0 40 40" aria-hidden="true"><path pathLength="1" d="M6 21 L16 31 L35 8"/></svg><div>Deducciones: cuánto te regresan de verdad<span>Cada peso que deduces no te regresa un peso. Lo hacemos con números.</span></div></li>
+        <li data-entra data-palomea style="--i:2"><svg viewBox="0 0 40 40" aria-hidden="true"><path pathLength="1" d="M6 21 L16 31 L35 8"/></svg><div>Sueldo y algo más<span>Intereses, Sofipo, casa de bolsa o una herencia: cuándo se suman y cuándo no.</span></div></li>
+      </ol>
+      <p class="viene">Lo que viene: aguinaldo, tus inversiones, tu anual.</p>
+    </div>
+  </section>
+
+  <section id="preguntas">
+    <div class="col">
+      <span class="etiqueta">Sin rodeos</span>
+      <h2 class="disp" data-entra>Lo que más <span class="resaltado" data-resalta>me preguntan.</span></h2>
+      <div class="preguntas">
+        <details class="pregunta" open><summary>¿Por qué pagamos impuestos?<span class="mas" aria-hidden="true"></span></summary><p>Porque así se paga lo que es de todos: escuelas, hospitales, carreteras. La Constitución dice que contribuimos de forma proporcional: quien gana más, paga más. Por eso el ISR sube por escalones, y la parte de tu ingreso que pasa de cierto nivel paga una tasa más alta.</p></details>
+        <details class="pregunta"><summary>¿Por qué me retienen si no le debo nada a nadie?<span class="mas" aria-hidden="true"></span></summary><p>Retener es cobrar por adelantado a nombre del SAT. Tu patrón, tu banco o la empresa a la que le cobras separan una parte y se la mandan al SAT por ti. No es un impuesto extra: es un anticipo, y en tu declaración anual se resta de lo que te toca.</p></details>
+        <details class="pregunta"><summary>¿Por qué hay gastos que no puedo pagar en efectivo?<span class="mas" aria-hidden="true"></span></summary><p>Porque el SAT necesita poder seguir el dinero. Tus deducciones personales (doctor, dentista, hospital, entre otras) solo cuentan si las pagas con tarjeta, transferencia o cheque nominativo. Pagadas en efectivo, la factura no te sirve aunque la tengas.</p></details>
+        <details class="pregunta"><summary>¿Qué pasa si tenía que presentar una declaración y no lo hice?<span class="mas" aria-hidden="true"></span></summary><p>Puede haber multa por cada declaración, recargos si había impuesto a pagar y tu opinión de cumplimiento en negativo. Y si te tocaba saldo a favor, sin la declaración ese dinero se queda en el SAT. Si te pones al corriente antes de que el SAT te lo pida, por lo general no hay multa.</p></details>
+        <details class="pregunta"><summary>Si mi compañero gana lo mismo que yo, ¿por qué a él le devuelven y a mí no?<span class="mas" aria-hidden="true"></span></summary><p>Casi nunca es trampa. Lo más común es que él pidió factura de sus gastos médicos, los pagó con tarjeta y los dedujo. Otras razones: tener dos patrones a la vez, otros ingresos como intereses, o dejar el trabajo antes de diciembre.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section id="guia">
+    <div class="col">
+      <span class="etiqueta">Gratis</span>
+      <h2 class="disp" data-entra>Qué hacer con el SAT, <span class="resaltado" data-resalta>mes por mes.</span></h2>
+      <p class="intro">Una guía gratis para no fallar con el SAT, para pegar en el refri.</p>
+      <p class="trae-linea"><b>Trae:</b> los impuestos sin rodeos, el calendario de 12 meses y el checklist para palomear.</p>
+      <form class="hoja-guia" onsubmit="return false">
+        <div class="campo" style="margin-top:0"><label for="nombre">Tu nombre</label><input id="nombre" type="text" placeholder="¿Cómo te llamas?"></div>
+        <div class="campo"><label for="correo">Tu correo</label><input id="correo" type="email" placeholder="tu@correo.com"></div>
+        <div class="campo"><label for="whatsapp">WhatsApp <small>(opcional)</small></label><input id="whatsapp" type="tel" placeholder="10 dígitos"></div>
+        <button class="btn" type="submit">Mándamela</button>
+        <p class="fino">Llega en un minuto. Sin spam; te das de baja cuando quieras. <a href="#">Aviso de privacidad</a>.</p>
+      </form>
+    </div>
+  </section>
+
+  <section class="quien" id="quien">
+    <div class="col">
+      <div class="suelo" data-entra><div class="fig"><img src="../img/israel-duda.webp" alt="Israel Castro pensando, con la mano en la barbilla" width="900" height="1205"></div></div>
+      <blockquote data-entra>Aquí resuelvo las dudas que más me traen mis clientes, para que tú las resuelvas sin pagar una consulta.</blockquote>
+      <p class="firma"><strong>Israel Castro</strong>, contador público y socio de S &amp; I Castro Consultores, el despacho familiar.</p>
+      <div class="manos">
+        <p data-entra>Aprende con nosotros… <span class="rot">o déjalo en nuestras manos.</span></p>
+        <a class="btn" href="#">Ir al despacho</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="pie">
+  <nav aria-label="Pie"><a href="#">YouTube</a><a href="#">Instagram</a><a href="#guia">La guía gratis</a><a href="#">Consulta 1:1</a><a href="#">Colaboraciones</a><a href="#">Aviso de privacidad</a></nav>
+  <p>Un canal de S &amp; I Castro Consultores. Patrocina TodoConta. Los videos y la guía son orientación general: cada caso tiene sus detalles.</p>
+</footer>
+
+<script src="comun.js"></script>
+<script>
+  /* La frase: el monto se teclea o se desliza, la tasa se escoge; el total se recalcula */
+  const mxn = (n) => '$' + Math.round(n).toLocaleString('es-MX');
+  const monto = document.getElementById('monto'), tasa = document.getElementById('tasa'), rango = document.getElementById('rango'), regresa = document.getElementById('regresa');
+  const leer = () => Math.min(2000000, Number(monto.value.replace(/[^\d]/g, '')) || 0);
+  const pintar = () => { regresa.textContent = mxn(leer() * Number(tasa.value) / 100); rango.style.setProperty('--p', `${Math.min(100, ((leer() - rango.min) / (rango.max - rango.min)) * 100)}%`); };
+  monto.addEventListener('input', () => { rango.value = leer(); pintar(); });
+  monto.addEventListener('blur', () => { monto.value = mxn(leer()); });
+  monto.addEventListener('focus', () => monto.select());
+  rango.addEventListener('input', () => { monto.value = mxn(rango.value); pintar(); });
+  tasa.addEventListener('change', pintar);
+  pintar();
+</script>
+</body>
+</html>

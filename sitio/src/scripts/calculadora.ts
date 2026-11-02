@@ -33,6 +33,13 @@ export function iniciarCalculadora(): void {
     cuadro = requestAnimationFrame(paso);
   };
 
+  const brinca = () => {
+    if (quieto) return;
+    cRegresa.classList.remove('pop');
+    void (cRegresa as HTMLElement).offsetWidth;
+    cRegresa.classList.add('pop');
+  };
+
   const calcular = () => {
     const d = Number(rango.value);
     const min = Number(rango.min), max = Number(rango.max);
@@ -53,13 +60,14 @@ export function iniciarCalculadora(): void {
     medir('calculadora_usada', { uso: usos, deduccion: Number(rango.value), tasa, regresa: Math.round((Number(rango.value) * tasa) / 100) });
   };
 
-  rango.addEventListener('input', calcular);
+  rango.addEventListener('input', () => { calcular(); brinca(); });
   rango.addEventListener('change', reportar);
   botones.forEach((b) =>
     b.addEventListener('click', () => {
       botones.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
       tasa = Number(b.dataset.tasa);
       calcular();
+      brinca();
       reportar();
     }),
   );

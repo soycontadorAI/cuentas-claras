@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 240">
+  <path d="M30 14 H170 V214 l-14 12 -14 -12 -14 12 -14 -12 -14 12 -14 -12 -14 12 -14 -12 -14 12 -14 -12 -14 12 Z" fill="#FFFBF3" stroke="#3B2418" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+  <rect x="30" y="14" width="140" height="44" fill="#F6C343" stroke="#3B2418" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+  <text x="100" y="46" text-anchor="middle" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="26" fill="#3B2418" >NÓMINA</text>
+  <path d="M50 88 H120 M50 116 H104 M50 144 H128" stroke="#3B2418" stroke-width="8" stroke-linejoin="round" stroke-linecap="round" stroke-width="7"/>
+  <path d="M136 88 H150 M128 116 H150 M140 144 H150" stroke="#3B2418" stroke-width="8" stroke-linejoin="round" stroke-linecap="round" stroke-width="7"/>
+  <path d="M50 180 H150" stroke="#3B2418" stroke-width="8" stroke-linejoin="round" stroke-linecap="round" stroke-width="6" stroke-dasharray="2 12"/>
+  <text x="100" y="208" text-anchor="middle" font-family="Bricolage Grotesque, sans-serif" font-weight="800" font-size="28" fill="#E4007C" >$</text>
+  </svg>

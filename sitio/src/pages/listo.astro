@@ -3,26 +3,42 @@
  * /listo: a donde regresa Sendy después de que la persona confirma su correo (confirm_url y
  * subscribed_url de la lista "La guía"). noindex: sin el correo no tiene sentido.
  */
+import { Image } from 'astro:assets';
+
 import Barra from '../components/Barra.astro';
 import Pie from '../components/Pie.astro';
 import Base from '../layouts/Base.astro';
 import { CANAL } from '../lib/sitio';
+
+import stSobre from '../assets/stickers/sobre.png';
 ---
 <Base titulo="Confirmado" noindex>
   <Barra />
   <main id="contenido" class="envoltura listo">
-    <span class="separador">Confirmado</span>
-    <h1 class="disp">Listo, <span class="resaltado">ya va en camino.</span></h1>
-    <p class="intro">Tu guía te llega en otro correo en unos minutos. Si no la ves, busca en Promociones o en Spam y márcala como "no es spam" para que te lleguen las siguientes.</p>
-    <div class="acciones">
-      <a class="btn" href={CANAL.url} rel="noopener">Mientras, ve el canal</a>
-      <a class="btn claro" href="/agendar">¿Tu caso no es tan sencillo?</a>
+    <div class="cel hoja-unica">
+      <span class="pestana">Confirmado</span>
+      <Image class="sticker" data-pega style="--g: -7deg" src={stSobre} alt="" width={120} height={95} />
+      <h1 class="disp">Listo, <span class="resaltado" data-resalta>ya va en camino.</span></h1>
+      <p class="chica">Tu guía te llega en otro correo en unos minutos. Si no la ves, busca en Promociones o en Spam y márcala como "no es spam" para que te lleguen las siguientes.</p>
+      <div class="acciones">
+        <a class="btn" data-magnetico href={CANAL.url} rel="noopener">Mientras, ve el canal</a>
+        <a class="btn claro" href="/agendar">¿Tu caso no es tan sencillo?</a>
+      </div>
     </div>
   </main>
   <Pie />
 </Base>
+
+<script>
+  import { iniciar } from '../scripts/movimiento';
+  iniciar();
+</script>
+
 <style>
-  .listo { padding-block: clamp(48px, 10vw, 140px) 0; }
-  h1 { margin: 22px 0 0; font-size: var(--t-h2); }
+  .listo { padding-block: clamp(56px, 9vw, 120px) 0; }
+  .hoja-unica { max-width: 880px; margin-inline: auto; padding: clamp(28px, 5vw, 64px); box-shadow: var(--sombra-dura); }
+  h1 { margin: 0; font-size: var(--t-h2); max-width: 12ch; }
+  .chica { font-size: 1.15rem; margin-top: 18px; max-width: 52ch; }
   .acciones { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px; }
+  @media (max-width: 560px) { .hoja-unica :global(.sticker) { width: 80px; top: -26px; } }
 </style>
