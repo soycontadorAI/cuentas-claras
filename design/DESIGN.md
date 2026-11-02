@@ -31,6 +31,7 @@ era "libreta viva" (separadores en píldora, fichas con sombra dura, hojas girad
   celda y se rellena al pasar el mouse; calcomanías (`assets/stickers/`); notas adhesivas; el plumón que
   encierra; el remate en Shrikhand, uno por pieza.
 - **Foto de Israel** en el hero, apoyada en la base de su celda; un solo CTA por bloque.
+- **En los decks de los lives el folio sigue siendo la cinta maíz que sale del margen:** la pestaña de folder sobre un filete se probó el 2026-11-02 y no gustó en pantalla.
 - **Dónde vive cada una:** sitio → `sitio/DESIGN-SYSTEM.md` y `/sistema`; lives → `social-studio/
   brands/cuentas-claras` (desde el segundo live, "Deducciones", `decks/cuentas-claras/2026-11-12-…`); guía →
   `guia/generar.py`; imagen para compartir → `tableros/og.html` (exporta `salidas/og.png` y
