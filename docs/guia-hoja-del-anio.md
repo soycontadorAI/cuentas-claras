@@ -88,11 +88,13 @@ gigante.
 
 ### 3. ¿Qué gastos puedo deducir (y por qué no en efectivo)?
 
-Deducir es restar un gasto tuyo de lo que ganaste, para que tu impuesto del año salga más bajo.
-Si tienes sueldo, estas son las deducciones personales más comunes:
+El Estado debe cubrir ciertas necesidades básicas, como la salud y la educación. Cuando no alcanza,
+te permite acudir con un particular y, a cambio, **te baja la carga de impuestos**: resta ese gasto
+de lo que ganaste. No te devuelve lo que gastaste. Si tienes sueldo, estas son las deducciones
+personales más comunes:
 
 - **Médico, dentista, psicólogo, nutriólogo y hospital:** tuyos, de tu pareja, de tus papás y de
-  tus hijos (siempre que esa persona no haya ganado más de una UMA al año). Lo que te reembolsó el
+  tus hijos (siempre que esa persona no haya ganado más de un salario mínimo al año). Lo que te reembolsó el
   seguro no cuenta.
 - **La prima de tu seguro de gastos médicos.**
 - **Colegiaturas** de preescolar a bachillerato, en escuelas con validez oficial. La universidad
@@ -101,8 +103,10 @@ Si tienes sueldo, estas son las deducciones personales más comunes:
 - **Intereses reales de tu crédito hipotecario** (casa habitación). Tu banco te da una constancia
   cada año.
 - **Aportaciones complementarias de retiro y donativos** a instituciones autorizadas.
-- **Otras, menos comunes:** lentes graduados, gastos funerarios y transporte escolar cuando es
-  obligatorio. Las dos primeras tienen tope.
+- **Otras, menos comunes, pero existen:** gastos funerales (hasta un salario mínimo al año),
+  transporte escolar (solo si es obligatorio o viene incluido en la colegiatura de todos), lentes
+  graduados (con tope) y el impuesto local sobre sueldos, si tu estado lo cobra y su tasa no pasa
+  de 5%.
 
 Para todas, los requisitos son los mismos:
 
@@ -113,7 +117,8 @@ Para todas, los requisitos son los mismos:
 - **Pagada dentro del año** que declaras.
 
 Todas juntas tienen un tope (el menor entre el 15% de lo que ganas y cinco UMA anuales; el retiro
-y los donativos tienen su propio tratamiento). **No tienes que calcularlo tú.** Tu parte es pedir
+y los gastos por incapacidad o discapacidad certificada quedan fuera de ese tope, y los donativos
+tienen además su propio límite). **No tienes que calcularlo tú.** Tu parte es pedir
 la factura, revisar que salga a tu nombre y pagar sin efectivo. **Ante la duda, pide factura:** es
 mejor llegar a tu declaración con deducciones de sobra que con faltantes. Eso sí, **no gastes solo
 para deducir**: ya ibas a ir al dentista, aprovéchalo; comprar algo que no necesitabas solo por la
@@ -123,7 +128,7 @@ Si tienes negocio, los gastos de más de $2,000 tampoco se deducen si los pagast
 gasolina, nunca en efectivo, sin importar el monto).
 
 *Fundamento: LISR artículo 151 (deducciones personales y su tope) y artículo 27, fracción III
-(gastos del negocio); decreto de estímulos fiscales en materia de colegiaturas.*
+(gastos del negocio); RLISR artículo 264 (lentes); decreto de estímulos fiscales en materia de colegiaturas.*
 
 ### 4. ¿Qué pasa si tenía que presentar una declaración y no lo hice?
 
