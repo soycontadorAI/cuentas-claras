@@ -86,22 +86,44 @@ gigante.
 *Fundamento: LISR artículos 96 (sueldos), 106 y 116 (honorarios y arrendamiento), 113-J (RESICO),
 135 (intereses), 113-A (plataformas); LIVA artículo 1-A.*
 
-### 3. ¿Por qué hay gastos que no puedo pagar en efectivo?
+### 3. ¿Qué gastos puedo deducir (y por qué no en efectivo)?
 
-Porque el SAT necesita poder seguir el dinero. Una transferencia o una tarjeta dejan rastro en tu
-banco que coincide con la factura; el efectivo no.
+Deducir es restar un gasto tuyo de lo que ganaste, para que tu impuesto del año salga más bajo.
+Si tienes sueldo, estas son las deducciones personales más comunes:
 
-- **Tus deducciones personales** (doctor, dentista, hospital, entre otras) solo cuentan si las
-  pagas con transferencia, tarjeta de crédito o débito, o cheque nominativo. Pagadas en efectivo,
-  la factura no te sirve, aunque la tengas.
-- **Si tienes negocio**, los gastos de más de $2,000 tampoco se deducen si los pagaste en
-  efectivo (y la gasolina, nunca en efectivo, sin importar el monto).
+- **Médico, dentista, psicólogo, nutriólogo y hospital:** tuyos, de tu pareja, de tus papás y de
+  tus hijos (siempre que esa persona no haya ganado más de una UMA al año). Lo que te reembolsó el
+  seguro no cuenta.
+- **La prima de tu seguro de gastos médicos.**
+- **Colegiaturas** de preescolar a bachillerato, en escuelas con validez oficial. La universidad
+  no. Tienen un tope por nivel, y ese tope **no viene en la ley**: está en un decreto de
+  estímulos fiscales.
+- **Intereses reales de tu crédito hipotecario** (casa habitación). Tu banco te da una constancia
+  cada año.
+- **Aportaciones complementarias de retiro y donativos** a instituciones autorizadas.
+- **Otras, menos comunes:** lentes graduados, gastos funerarios y transporte escolar cuando es
+  obligatorio. Las dos primeras tienen tope.
 
-La regla práctica: si lo quieres deducir, págalo con tarjeta o transferencia y pide factura a tu
-nombre.
+Para todas, los requisitos son los mismos:
 
-*Fundamento: LISR artículo 151 (deducciones personales) y artículo 27, fracción III (gastos del
-negocio).*
+- **Factura a tu nombre y con tu RFC.**
+- **Pagada con transferencia, tarjeta de crédito o débito, o cheque nominativo.** Pagada en
+  efectivo, la factura no te sirve, aunque la tengas: el SAT necesita poder seguir el dinero, y
+  una transferencia o una tarjeta dejan rastro en tu banco que coincide con la factura.
+- **Pagada dentro del año** que declaras.
+
+Todas juntas tienen un tope (el menor entre el 15% de lo que ganas y cinco UMA anuales; el retiro
+y los donativos tienen su propio tratamiento). **No tienes que calcularlo tú.** Tu parte es pedir
+la factura, revisar que salga a tu nombre y pagar sin efectivo. **Ante la duda, pide factura:** es
+mejor llegar a tu declaración con deducciones de sobra que con faltantes. Eso sí, **no gastes solo
+para deducir**: ya ibas a ir al dentista, aprovéchalo; comprar algo que no necesitabas solo por la
+factura te cuesta más de lo que te regresa.
+
+Si tienes negocio, los gastos de más de $2,000 tampoco se deducen si los pagaste en efectivo (y la
+gasolina, nunca en efectivo, sin importar el monto).
+
+*Fundamento: LISR artículo 151 (deducciones personales y su tope) y artículo 27, fracción III
+(gastos del negocio); decreto de estímulos fiscales en materia de colegiaturas.*
 
 ### 4. ¿Qué pasa si tenía que presentar una declaración y no lo hice?
 
@@ -143,7 +165,7 @@ metió dinero a su Afore. Juan pagó todo en efectivo y no guardó nada.
 
 Ojo con un detalle: Laura dedujo $48,000 y le regresaron $10,253, no $48,000. **Cada peso que
 deduces te regresa lo que pagas de impuesto sobre ese peso**, que en su caso es el 21.36%. Por
-eso conviene hacer cuentas antes de gastar "para deducir".
+eso no se gasta solo para deducir: lo que ya ibas a pagar, pide factura; lo demás, no.
 
 Otras razones por las que dos sueldos iguales terminan distinto:
 
@@ -246,9 +268,9 @@ Para palomear. Cada línea empieza con "si": si no te aplica, la saltas.
       cobrarte intereses.
 - [ ] Si recibes aguinaldo: una parte no paga impuesto (hasta 30 veces la UMA diaria vigente) y
       el resto sí. Por eso tu recibo no trae el monto completo.
-- [ ] Si quieres deducir más: haz cuentas ahora que hay tiempo. El total de tus deducciones tiene
-      un tope (el menor entre el 15% de lo que ganas y cinco UMA anuales), y las aportaciones
-      voluntarias a tu Afore tienen el suyo.
+- [ ] Si tienes algún gasto deducible pendiente (dentista, lentes, seguro, colegiaturas): resuélvelo
+      ahora que hay tiempo, y pide factura. No calcules el tope: es mejor que sobren deducciones a
+      que falten.
 
 **Diciembre**
 - [ ] **Si te falta alguna factura de este año (doctor, dentista, colegiatura, seguro): pídela

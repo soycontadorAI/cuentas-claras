@@ -175,10 +175,9 @@ body {{ margin: 0; font-family: var(--display); color: var(--cacao); font-size: 
 .portada .firma {{ position: absolute; left: 30mm; bottom: 20mm; font-size: 10pt; font-weight: 700; color: var(--cacao-70); }}
 
 /* Texto corrido */
-/* Libro mayor vivo (2026-11-02): cada parte abre con una pestaña de folder sobre un filete */
-h2 {{ position: relative; font-weight: 800; font-stretch: 92%; font-size: 24pt; line-height: 1.05; margin: 0 0 5mm; padding-top: 5mm; border-top: .9pt solid var(--cacao); }}
-h2 .num {{ position: absolute; top: 0; left: 4mm; transform: translateY(-100%); display: block; background: var(--maiz); color: var(--cacao); border: .9pt solid var(--cacao); border-bottom: 0; border-radius: 2.4mm 2.4mm 0 0; padding: 1.3mm 4.5mm .9mm; font-size: 8.6pt; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }}
-.seccion, .parte1 {{ padding-top: 7mm; }}
+/* Sin pestañas de folder (2026-11-03): las pestañas son solo de la web. Cada parte abre con un kicker y un filete. */
+h2 {{ font-weight: 800; font-stretch: 92%; font-size: 24pt; line-height: 1.05; margin: 0 0 5mm; padding-top: 4mm; border-top: .9pt solid var(--cacao); }}
+h2 .num {{ display: block; color: var(--rosa-hondo); font-size: 8.6pt; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 2mm; }}
 .checklist li {{ margin-bottom: 1.1mm; }}
 .antes {{ margin-top: 9mm; }}
 h3 {{ font-weight: 800; font-size: 14pt; line-height: 1.2; margin: 7mm 0 2.5mm; break-after: avoid; }}
