@@ -149,22 +149,18 @@ PLANTILLA = """<!doctype html>
 @page :first {{ margin: 0; @bottom-left {{ content: none; }} @bottom-right {{ content: none; }} }}
 * {{ box-sizing: border-box; }}
 html {{ -webkit-print-color-adjust: exact; print-color-adjust: exact; background: var(--crema); }}
-/* La libreta: fija, así se repite en cada página y cubre también los márgenes */
+/* Fondo crema sólido (2026-11-03): sin cuadrícula ni margen, la imagen se veía borrosa. Fijo, para cubrir también los márgenes */
 .libreta {{ position: fixed; top: -16mm; left: -24mm; width: 215.9mm; height: 279.4mm; z-index: -1;
   background-color: var(--crema);
-  background-image: linear-gradient(90deg, transparent 13.5mm, var(--margen) 13.5mm, var(--margen) 14mm, transparent 14mm),
-    linear-gradient(var(--cacao-12) 1px, transparent 1px), linear-gradient(90deg, var(--cacao-12) 1px, transparent 1px);
-  background-size: 100% 100%, 8mm 8mm, 8mm 8mm; }}
+  }}
 body {{ margin: 0; font-family: var(--display); color: var(--cacao); font-size: 10.4pt; line-height: 1.46; }}
 
 /* Portada */
 .portada {{ position: relative; height: 279.4mm; padding: 26mm 20mm 20mm 30mm; overflow: hidden; break-after: page; background: var(--crema); }}
-.portada::before {{ content: ""; position: absolute; inset: 0; background-image: linear-gradient(var(--cacao-12) 1px, transparent 1px), linear-gradient(90deg, var(--cacao-12) 1px, transparent 1px); background-size: 8mm 8mm; }}
-.portada::after {{ content: ""; position: absolute; top: 0; bottom: 0; left: 18mm; border-left: 1.4pt solid var(--margen); }}
 .portada > * {{ position: relative; z-index: 1; }}
 .portada .marca {{ display: flex; align-items: center; gap: 3mm; font-weight: 800; font-size: 12pt; letter-spacing: .02em; }}
 .portada .marca .billete {{ width: 13mm; height: 13mm; }}
-.portada .etiqueta {{ display: inline-block; margin-top: 30mm; background: var(--maiz); color: var(--cacao); border: .9pt solid var(--cacao); border-bottom: 0; font-weight: 800; font-size: 9pt; letter-spacing: .1em; text-transform: uppercase; padding: 1.8mm 4.5mm 1.4mm; border-radius: 2.4mm 2.4mm 0 0; }}
+.portada .etiqueta {{ display: inline-block; margin-top: 30mm; background: var(--maiz); color: var(--cacao); border: .9pt solid var(--cacao); font-weight: 800; font-size: 9pt; letter-spacing: .1em; text-transform: uppercase; padding: 1.6mm 4.5mm; border-radius: 99px; }}
 .portada h1 {{ font-family: var(--rotulo); font-weight: 400; color: var(--rosa); font-size: 88pt; line-height: .95; margin: 6mm 0 0; }}
 .portada .bajada {{ font-size: 25pt; font-weight: 800; font-stretch: 92%; line-height: 1.12; max-width: 105mm; margin: 6mm 0 0; }}
 .portada .bajada span {{ background: linear-gradient(transparent 52%, var(--maiz) 52%, var(--maiz) 92%, transparent 92%); }}
